@@ -1,0 +1,26 @@
+.card-body-top-div{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+.dp-div{
+    background-color: aqua;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dp-div img{
+    height: 100%;
+}
+
+.post{
+    background-color: var(--dark);
+    padding: 0 3%;
+    padding-top: 1%;
+    margin: 5% 0;
+}
+
+

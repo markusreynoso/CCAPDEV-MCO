@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+h2.card-title {
+    color: var(--light) !important;
+    font-family: 'Roboto';
+    font-weight: 900;
+    margin-bottom: 3%;
+}
+
+h3 {
+    color: var(--light) !important;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+p {
+    color: var(--light);
+    font-family: 'Roboto';
+}
+
+body{
+    background-color: var(--vdark);
+}
+
+.post-icon{
+    height: 30px;
+    margin: 0 0;
+    margin-right: 30px;
+}
+
+.post-actions{
+    padding: 0;
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
