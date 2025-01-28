@@ -1,6 +1,6 @@
 /* Font */
 
-@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Colors */
 
@@ -15,8 +15,9 @@
 /* General */
 
 p {
+    margin: 0;
     color: var(--light);
-    font-family: 'Roboto';
+    font-family: 'Poppins';
 }
 
 body{
@@ -25,6 +26,9 @@ body{
 }
 
 /* Navbar */
+.bi-book-half{
+    margin-right: 5px;
+}
 
 .navbar-dark{
     color: var(--light);
@@ -35,7 +39,7 @@ body{
 }
 
 .nav-link{
-    font-family: 'Roboto';
+    font-family: 'Poppins';
     font-weight: 200;
 }
 
@@ -51,15 +55,16 @@ form.d-flex{
 
 /* Posts */
 .post-username {
+    margin-bottom: 0;
     color: var(--light) !important;
-    font-family: 'Roboto';
+    font-family: 'Poppins';
     font-weight: 500;
     font-size: 1.2rem;
 }
 
 .post-title {
     color: var(--light) !important;
-    font-family: 'Roboto';
+    font-family: 'Poppins';
     font-weight: 900;
     margin-bottom: 3%;
 }
@@ -127,7 +132,15 @@ form.d-flex{
 
 .post-actions-div{
     padding: 0;
+    margin-top: 20px;
     min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.score-count-div{
+    margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
