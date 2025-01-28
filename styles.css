@@ -22,7 +22,7 @@ p {
 
 body{
     background-color: var(--vdark);
-    padding-top: 56px;
+    padding-top: 80px;
 }
 
 /* Navbar */
@@ -36,6 +36,7 @@ body{
 
 .navbar-brand{
     margin-right: 15%;
+    user-select: none;
 }
 
 .nav-link{
@@ -54,8 +55,53 @@ form.d-flex{
 }
 
 /* Posts */
+.write-box-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.write-box{
+    background-color: var(--purple);
+    height: 260px;
+    padding: 15px;
+}
+
+.write-textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 10px;
+    background-color: var(--light);
+}
+
+.write-textarea:focus{
+    outline: none;
+}
+
+.write-box-container-footer{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.btn-primary, .btn-outline-light{
+    font-family: 'Poppins';
+    background-color: var(--vdark);
+    border-color: var(--blue);
+}
+
+.btn-primary:hover, .btn-primary:active:focus, .btn-outline-light:hover, .btn-outline-light:active:focus{
+    color: var(--vdark);
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
 .post-username {
     margin-bottom: 0;
+    user-select: none;
     color: var(--light) !important;
     font-family: 'Poppins';
     font-weight: 500;
@@ -98,6 +144,7 @@ form.d-flex{
 }
 
 .dp-div img{
+    user-select: none;
     height: 40px;
     width: 40px;
     object-fit: cover;
@@ -144,4 +191,8 @@ form.d-flex{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.active {
+    color: var(--blue);
 }

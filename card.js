@@ -36,7 +36,7 @@ function createHeader(author) {
     let header = document.createElement('div');
     addClass(header, 'container post-body-top-div');
 
-    let img_source = 'https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84';
+    let img_source = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s';
     header.appendChild(createDpDiv(img_source));
 
     header.appendChild(createLinkToProfile(author));
@@ -159,6 +159,58 @@ function createVoteArea(){
     return container;
 }
 
+function updateScores(clicked, voteType){
+    let parent = clicked.parentElement;
+    let upvoteIconElement = parent.querySelector(".bi-arrow-up-short");
+    let downvoteIconElement = parent.querySelector(".bi-arrow-down-short");
+    let upvoteCountElement = parent.querySelector(".upvote-count");
+    let downvoteCountElement = parent.querySelector(".downvote-count");
 
-
-
+    console.log(voteType)
+    if (voteType === "upvote"){
+        // Upvoting an upvoted post
+        if (upvoteIconElement.classList.contains("active")){
+            upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) - 1);
+            upvoteIconElement.classList.remove("active");
+            upvoteCountElement.classList.remove("active");
+        }
+        // Upvoting a downvoted post
+        else if (downvoteIconElement.classList.contains("active")){
+            upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) + 1);
+            downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) - 1);
+            upvoteIconElement.classList.add("active");
+            upvoteCountElement.classList.add("active");
+            downvoteIconElement.classList.remove("active");
+            downvoteCountElement.classList.remove("active");
+        }
+        // User has not voted for the post yet
+        else{
+            upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) + 1);
+            upvoteIconElement.classList.add("active");
+            upvoteCountElement.classList.add("active");
+        }
+    }
+    else if (voteType === "downvote"){
+        // Downvoting a downvoted post
+        if (downvoteIconElement.classList.contains("active")){
+            downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) - 1);
+            downvoteIconElement.classList.remove("active");
+            downvoteCountElement.classList.remove("active");
+        }
+        // Downvoting an upvoted post
+        else if (upvoteIconElement.classList.contains("active")){
+            upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) - 1);
+            downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) + 1);
+            downvoteIconElement.classList.add("active");
+            downvoteCountElement.classList.add("active");
+            upvoteIconElement.classList.remove("active");
+            upvoteCountElement.classList.remove("active");
+        }
+        // User has not voted for the post yet
+        else{
+            downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) + 1);
+            downvoteIconElement.classList.add("active");
+            downvoteCountElement.classList.add("active");
+        }
+    }
+}
