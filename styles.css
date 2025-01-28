@@ -1,18 +1,18 @@
+/* Font */
+
 @import url('https://fonts.googleapis.com/css2?family=Gloock&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-h2.card-title {
-    color: var(--light) !important;
-    font-family: 'Roboto';
-    font-weight: 900;
-    margin-bottom: 3%;
+/* Colors */
+
+:root{
+    --vdark: #0E0A17;
+    --dark: #241b2b;
+    --light: #D4C8C8;
+    --blue: #4da1a9;
+    --purple: #8367C7;
 }
 
-h3 {
-    color: var(--light) !important;
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 1.2rem;
-}
+/* General */
 
 p {
     color: var(--light);
@@ -21,8 +21,73 @@ p {
 
 body{
     background-color: var(--vdark);
+    padding-top: 56px;
 }
 
+/* Navbar */
+
+.navbar-dark{
+    color: var(--light);
+}
+
+.navbar-brand{
+    margin-right: 15%;
+}
+
+.nav-link{
+    font-family: 'Roboto';
+    font-weight: 200;
+}
+
+form.d-flex{
+    width: 50%;
+    height: 10%;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Posts */
+.post-username {
+    color: var(--light) !important;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.post-title {
+    color: var(--light) !important;
+    font-family: 'Roboto';
+    font-weight: 900;
+    margin-bottom: 3%;
+}
+
+.post-body-top-div{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+.dp-div{
+    background-color: aqua;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dp-div img{
+    height: 100%;
+}
+
+.post{
+    background-color: var(--dark);
+    padding: 0 3%;
+    padding-top: 1%;
+    margin: 5% 0;
+}
 
 .post-body-text{
     display: -webkit-box;
@@ -50,27 +115,4 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-.navbar-dark{
-    color: var(--light);
-}
-
-.navbar-brand{
-    margin-right: 15%;
-}
-
-.nav-link{
-    font-family: 'Roboto';
-    font-weight: 200;
-}
-
-form.d-flex{
-    width: 50%;
-    height: 10%;
-}
-
-.form-control:focus {
-    outline: none;
-    box-shadow: none;
 }
