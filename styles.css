@@ -52,11 +52,25 @@ body{
     align-items: center;
 }
 
-.navbar{
-    position: sticky;
-    background-color: red;
+.navbar-dark{
+    color: var(--light);
 }
 
 .navbar-brand{
-    background-color: yellow;
+    margin-right: 15%;
+}
+
+.nav-link{
+    font-family: 'Roboto';
+    font-weight: 200;
+}
+
+form.d-flex{
+    width: 50%;
+    height: 10%;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
 }
