@@ -23,10 +23,25 @@ body{
     background-color: var(--vdark);
 }
 
+
+.post-body-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .post-icon{
     color: var(--light);
     margin: 0 0;
     margin-right: 30px;
+    transition: color 0.3s ease;
+}
+
+.post-icon:hover{
+    cursor: pointer;
+    color: var(--blue);
 }
 
 .post-actions-div{
@@ -35,4 +50,13 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.navbar{
+    position: sticky;
+    background-color: red;
+}
+
+.navbar-brand{
+    background-color: yellow;
 }
