@@ -49,7 +49,15 @@ a::selection{
 
 .nav-link{
     font-family: 'Poppins';
-    font-weight: 200;
+    font-weight: 300;
+}
+
+.sign-up-button:hover{
+    color: var(--blue);
+}
+
+.login-button:hover{
+    color: var(--purple);
 }
 
 form.d-flex{
