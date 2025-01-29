@@ -20,17 +20,18 @@ p {
     font-family: 'Poppins';
 }
 
-p::selection{
+p::selection, a::selection{
     background-color: var(--purple);
+}
+
+.post-title a:active {
+    color: var(--blue) !important;
+    transition: color 0.3s ease;
 }
 
 body{
     background-color: var(--vdark);
     padding-top: 80px;
-}
-
-a::selection{
-    background-color: var(--blue);
 }
 
 .bi, .btn{
