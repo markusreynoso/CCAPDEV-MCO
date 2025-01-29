@@ -156,6 +156,7 @@ form.d-flex{
 }
 
 .edit-indicator{
+    user-select: none;
     font-family: 'Poppins';
     font-weight: 300;
     color: var(--light);
