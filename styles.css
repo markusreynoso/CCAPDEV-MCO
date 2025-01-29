@@ -121,7 +121,7 @@ form.d-flex{
     outline: none;
 }
 
-.write-textarea::selection{
+.write-textarea::selection, .write-titlearea::selection{
     background-color: var(--blue);
 }
 
@@ -147,11 +147,19 @@ form.d-flex{
 
 .post-username {
     margin-bottom: 0;
+    margin-right: 20px;
     user-select: none;
     color: var(--light) !important;
     font-family: 'Poppins';
     font-weight: 500;
     font-size: 1.2rem;
+}
+
+.edit-indicator{
+    font-family: 'Poppins';
+    font-weight: 300;
+    color: var(--light);
+    opacity: 50%;
 }
 
 .post-title {
