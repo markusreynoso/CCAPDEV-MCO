@@ -254,3 +254,89 @@ form.d-flex{
 .active-down {
     color: var(--purple);
 }
+
+/* Profile-Posts/Comments Div*/
+
+
+
+#post-comments-div {
+    text-align: center;
+    display: flex;
+
+}
+
+/* Profile-Posts */
+#profileposts-posts-div{
+    float: left;
+    color: var(--light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 30px;
+    
+}
+
+#profileposts-comments-div{
+    color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+    font-family: 'Poppins';
+    font-size: 30px;
+}
+
+/* Profile-Comments */
+
+#profilecomments-posts-div{
+    float: left;
+    color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+
+    font-family: 'Poppins';
+    font-size: 30px;
+    
+}
+
+#profilecomments-comments-div{
+    color: var(--light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 30px;
+}
+
+#profile-username {
+    margin-bottom: 0;
+    user-select: none;
+    color: var(--light) !important;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.user-profile-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
