@@ -70,6 +70,8 @@ form.d-flex{
 
 .form-control{
     background-color: var(--light);
+    font-family: 'Poppins';
+    color: var(--vdark);
 }
 
 .form-control:focus {
