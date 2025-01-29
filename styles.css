@@ -57,9 +57,15 @@ form.d-flex{
     height: 10%;
 }
 
+.form-control{
+    background-color: var(--light);
+}
+
 .form-control:focus {
+    background-color: var(--light);
     outline: none;
     box-shadow: none;
+    border: 3px var(--purple) solid;
 }
 
 /* Posts */
