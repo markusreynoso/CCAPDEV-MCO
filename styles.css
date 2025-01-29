@@ -20,9 +20,17 @@ p {
     font-family: 'Poppins';
 }
 
+p::selection{
+    background-color: var(--purple);
+}
+
 body{
     background-color: var(--vdark);
     padding-top: 80px;
+}
+
+a::selection{
+    background-color: var(--blue);
 }
 
 /* Navbar */
@@ -77,6 +85,10 @@ form.d-flex{
 
 .write-textarea:focus{
     outline: none;
+}
+
+.write-textarea::selection{
+    background-color: var(--blue);
 }
 
 .write-box-container-footer{
@@ -172,9 +184,14 @@ form.d-flex{
     transition: color 0.3s ease;
 }
 
-.post-icon:hover{
+.bi-arrow-up-short:hover{
     cursor: pointer;
     color: var(--blue);
+}
+
+.bi-arrow-down-short:hover{
+    cursor: pointer;
+    color: var(--purple);
 }
 
 .post-actions-div{
@@ -193,6 +210,14 @@ form.d-flex{
     align-items: center;
 }
 
-.active {
+.score-count{
+    user-select: none;;
+}
+
+.active-up {
     color: var(--blue);
+}
+
+.active-down {
+    color: var(--purple);
 }

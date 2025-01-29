@@ -169,48 +169,48 @@ function updateScores(clicked, voteType){
     console.log(voteType)
     if (voteType === "upvote"){
         // Upvoting an upvoted post
-        if (upvoteIconElement.classList.contains("active")){
+        if (upvoteIconElement.classList.contains("active-up")){
             upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) - 1);
-            upvoteIconElement.classList.remove("active");
-            upvoteCountElement.classList.remove("active");
+            upvoteIconElement.classList.remove("active-up");
+            upvoteCountElement.classList.remove("active-up");
         }
         // Upvoting a downvoted post
-        else if (downvoteIconElement.classList.contains("active")){
+        else if (downvoteIconElement.classList.contains("active-down")){
             upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) + 1);
             downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) - 1);
-            upvoteIconElement.classList.add("active");
-            upvoteCountElement.classList.add("active");
-            downvoteIconElement.classList.remove("active");
-            downvoteCountElement.classList.remove("active");
+            upvoteIconElement.classList.add("active-up");
+            upvoteCountElement.classList.add("active-up");
+            downvoteIconElement.classList.remove("active-down");
+            downvoteCountElement.classList.remove("active-down");
         }
         // User has not voted for the post yet
         else{
             upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) + 1);
-            upvoteIconElement.classList.add("active");
-            upvoteCountElement.classList.add("active");
+            upvoteIconElement.classList.add("active-up");
+            upvoteCountElement.classList.add("active-up");
         }
     }
     else if (voteType === "downvote"){
         // Downvoting a downvoted post
-        if (downvoteIconElement.classList.contains("active")){
+        if (downvoteIconElement.classList.contains("active-down")){
             downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) - 1);
-            downvoteIconElement.classList.remove("active");
-            downvoteCountElement.classList.remove("active");
+            downvoteIconElement.classList.remove("active-down");
+            downvoteCountElement.classList.remove("active-down");
         }
         // Downvoting an upvoted post
-        else if (upvoteIconElement.classList.contains("active")){
+        else if (upvoteIconElement.classList.contains("active-up")){
             upvoteCountElement.textContent = String(parseInt(upvoteCountElement.textContent) - 1);
             downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) + 1);
-            downvoteIconElement.classList.add("active");
-            downvoteCountElement.classList.add("active");
-            upvoteIconElement.classList.remove("active");
-            upvoteCountElement.classList.remove("active");
+            downvoteIconElement.classList.add("active-down");
+            downvoteCountElement.classList.add("active-down");
+            upvoteIconElement.classList.remove("active-up");
+            upvoteCountElement.classList.remove("active-up");
         }
         // User has not voted for the post yet
         else{
             downvoteCountElement.textContent = String(parseInt(downvoteCountElement.textContent) + 1);
-            downvoteIconElement.classList.add("active");
-            downvoteCountElement.classList.add("active");
+            downvoteIconElement.classList.add("active-down");
+            downvoteCountElement.classList.add("active-down");
         }
     }
 }
