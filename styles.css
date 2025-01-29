@@ -31,7 +31,7 @@ p::selection, a::selection{
 
 body{
     background-color: var(--vdark);
-    padding-top: 80px;
+    padding-top: 100px;
 }
 
 .bi, .btn{
@@ -90,7 +90,7 @@ form.d-flex{
 }
 
 .write-box{
-    background-color: var(--purple);
+    background: linear-gradient(45deg, var(--blue), var(--purple));
     height: 270px;
     padding: 20px;
 }
@@ -138,6 +138,7 @@ form.d-flex{
     font-family: 'Poppins';
     background-color: var(--vdark);
     border-color: var(--blue);
+    transition: background-color 0.5s ease;
 }
 
 .btn-primary:hover, .btn-primary:active:focus, .btn-outline-light:hover, .btn-outline-light:active:focus{
