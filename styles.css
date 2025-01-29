@@ -91,7 +91,7 @@ form.d-flex{
 .write-box{
     background-color: var(--purple);
     height: 270px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .write-textarea, .write-titlearea{
