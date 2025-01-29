@@ -206,7 +206,7 @@ form.d-flex{
     object-fit: cover;
 }
 
-.post{
+.post, .user-bio-div{
     background-color: var(--dark);
     padding: 0 3%;
     padding-top: 1%;
@@ -219,6 +219,7 @@ form.d-flex{
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 20px;
 }
 
 .post-icon{
@@ -240,7 +241,6 @@ form.d-flex{
 
 .post-actions-div{
     padding: 0;
-    margin-top: 20px;
     min-height: 60px;
     display: flex;
     flex-direction: row;
@@ -268,7 +268,19 @@ form.d-flex{
 
 /* Profile-Posts/Comments Div*/
 
+.user-bio-div{
+    padding-bottom: 1%;
+}
 
+.user-bio-bottom-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.user-bio-button{
+    width: auto;
+}
 
 #post-comments-div {
     text-align: center;
