@@ -1,3 +1,9 @@
+function clearTextAreas(elementIdList) {
+    for (let i = 0; i < elementIdList.length; i++){
+        let elementId = elementIdList[i];
+        document.getElementById(elementId).value = '';
+    }
+}
 
 function addClass(element, str) {
     let arr = str.split(" ");
@@ -7,6 +13,7 @@ function addClass(element, str) {
 }
 
 function createCard(author, title, body) {
+    author = 'LuisDaBeast'; //Hardcoded for now; delete later on
     let card = document.createElement('div');
 
     addClass(card, "card post");
@@ -14,7 +21,23 @@ function createCard(author, title, body) {
     card.appendChild(createCardBody(author, title, body));
 
     let posts = document.getElementById('posts');
-    posts.appendChild(card);
+    posts.insertBefore(card, posts.firstChild);
+}
+
+function hardcodedCreateCard() {
+    let author = 'LuisDaBeast'; //Hardcoded for now; delete later on
+    let title = document.getElementById('write-title-area').value;
+    let body = document.getElementById('write-text-area').value;
+    let card = document.createElement('div');
+
+    addClass(card, "card post");
+
+    card.appendChild(createCardBody(author, title, body));
+
+    let posts = document.getElementById('posts');
+    posts.insertBefore(card, posts.firstChild);
+
+    clearTextAreas(['write-title-area', 'write-text-area']);
 }
 
 function createCardBody(author, title, body) {
@@ -118,12 +141,14 @@ function createVoteArea(){
 
     let upvoteCount = document.createElement('p');
     addClass(upvoteCount, "score-count");
-    upvoteCount.innerHTML = 420;
+    upvoteCount.innerHTML = 0;
 
     let i = document.createElement('i');
+    i.setAttribute("onclick", "updateScores(this, 'upvote')")
     addClass(i, "bi bi-arrow-up-short post-icon h1");
 
     let i2 = document.createElement('i');
+    i2.setAttribute("onclick", "updateScores(this, 'downvote')")
     addClass(i2, "bi bi-arrow-down-short post-icon h1");
 
     let downvoteDiv = document.createElement('div');
@@ -131,7 +156,7 @@ function createVoteArea(){
 
     let downvoteCount = document.createElement('p');
     addClass(downvoteCount, "score-count");
-    downvoteCount.innerHTML = 69;
+    downvoteCount.innerHTML = 0;
 
     
 /* 
