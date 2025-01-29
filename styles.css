@@ -20,17 +20,18 @@ p {
     font-family: 'Poppins';
 }
 
-p::selection{
+p::selection, a::selection{
     background-color: var(--purple);
+}
+
+.post-title a:active {
+    color: var(--blue) !important;
+    transition: color 0.3s ease;
 }
 
 body{
     background-color: var(--vdark);
-    padding-top: 80px;
-}
-
-a::selection{
-    background-color: var(--blue);
+    padding-top: 100px;
 }
 
 .bi, .btn{
@@ -89,7 +90,7 @@ form.d-flex{
 }
 
 .write-box{
-    background-color: var(--purple);
+    background: linear-gradient(45deg, var(--blue), var(--purple));
     height: 270px;
     padding: 20px;
 }
@@ -121,7 +122,7 @@ form.d-flex{
     outline: none;
 }
 
-.write-textarea::selection{
+.write-textarea::selection, .write-titlearea::selection{
     background-color: var(--blue);
 }
 
@@ -137,6 +138,7 @@ form.d-flex{
     font-family: 'Poppins';
     background-color: var(--vdark);
     border-color: var(--blue);
+    transition: background-color 0.5s ease;
 }
 
 .btn-primary:hover, .btn-primary:active:focus, .btn-outline-light:hover, .btn-outline-light:active:focus{
@@ -147,11 +149,20 @@ form.d-flex{
 
 .post-username {
     margin-bottom: 0;
+    margin-right: 20px;
     user-select: none;
     color: var(--light) !important;
     font-family: 'Poppins';
     font-weight: 500;
     font-size: 1.2rem;
+}
+
+.edit-indicator{
+    user-select: none;
+    font-family: 'Poppins';
+    font-weight: 300;
+    color: var(--light);
+    opacity: 50%;
 }
 
 .post-title {

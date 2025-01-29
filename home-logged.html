@@ -44,13 +44,13 @@
 
     <div class="container write-box-container">
         <div class="col-md-8 col-10 write-box">
-            <textarea name="" id="write-title-area" class="write-titlearea" placeholder="Give your post a title"></textarea>
-            <textarea name="" id="write-text-area" class="write-textarea" placeholder="What's on your mind?"></textarea>
+            <textarea name="title-field" id="write-title-area" class="write-titlearea" placeholder="Give your post a title"></textarea>
+            <textarea name="text-field" id="write-text-area" class="write-textarea" placeholder="What's on your mind?"></textarea>
         </div>
 
         <div class="col-md-8 col-10 write-box-container-footer">
             <input class="btn btn-primary mx-3" type="reset" value="Cancel" onclick="clearTextAreas(['write-title-area', 'write-text-area'])">
-            <input class="btn btn-primary" type="submit" value="Post">
+            <input class="btn btn-primary" type="submit" value="Post" onclick="hardcodedCreateCard('LuisDaBeast', 'write-title-area', 'write-text-area')">
         </div>
     </div>
 
@@ -118,6 +118,7 @@
                         <a href="https://youtube.com" class="text-decoration-none" target="_blank">
                             <h3 class="post-username">Wendellicious</h3>
                         </a>
+                        <p class="edit-indicator">Edited</p>
                     </div>
                     <h2 class="post-title">
                         <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
