@@ -33,6 +33,9 @@ a::selection{
     background-color: var(--blue);
 }
 
+.bi, .btn{
+    color: var(--light);
+}
 /* Navbar */
 .bi-book-half{
     margin-right: 5px;
@@ -85,19 +88,34 @@ form.d-flex{
 
 .write-box{
     background-color: var(--purple);
-    height: 260px;
-    padding: 15px;
+    height: 270px;
+    padding: 10px;
 }
+
+.write-textarea, .write-titlearea{
+    border-radius: 15px;
+    width: 100%;
+    resize: none;
+    padding: 10px 15px;
+    resize: none;
+    background-color: var(--light);
+    outline: none;
+    font-family: 'Poppins';
+    color: var(--dark);
+}
+
+.write-titlearea{
+    height: 20%;
+    font-weight: 700;
+}
+
 
 .write-textarea{
-    width: 100%;
-    height: 100%;
-    resize: none;
-    padding: 10px;
-    background-color: var(--light);
+    height: 80%;
 }
 
-.write-textarea:focus{
+
+.write-textarea:focus, .write-titlearea:focus{
     outline: none;
 }
 
@@ -137,7 +155,7 @@ form.d-flex{
 .post-title {
     color: var(--light) !important;
     font-family: 'Poppins';
-    font-weight: 900;
+    font-weight: 700;
     margin-bottom: 3%;
 }
 

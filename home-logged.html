@@ -44,11 +44,12 @@
 
     <div class="container write-box-container">
         <div class="col-md-8 col-10 write-box">
-            <textarea name="" id="write-textarea" class="write-textarea" placeholder="What's on your mind?"></textarea>
+            <textarea name="" id="write-title-area" class="write-titlearea" placeholder="Give your post a title"></textarea>
+            <textarea name="" id="write-text-area" class="write-textarea" placeholder="What's on your mind?"></textarea>
         </div>
 
         <div class="col-md-8 col-10 write-box-container-footer">
-            <input class="btn btn-primary mx-3" type="reset" value="Cancel" onclick="clearTextArea('write-textarea')">
+            <input class="btn btn-primary mx-3" type="reset" value="Cancel" onclick="clearTextAreas(['write-title-area', 'write-text-area'])">
             <input class="btn btn-primary" type="submit" value="Post">
         </div>
     </div>
