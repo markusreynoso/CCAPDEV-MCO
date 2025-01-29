@@ -8,13 +8,18 @@ function addClass(element, str) {
 
 function createCard(author, title, body) {
     let card = document.createElement('div');
-
     addClass(card, "card post");
-
     card.appendChild(createCardBody(author, title, body));
+    return card
+}
 
+function postToFeed(username, inputtedTitleId, inputtedBodyId){
+    let inputtedTitle = document.getElementById(inputtedTitleId).value;
+    let inputtedBody = document.getElementById(inputtedBodyId).value;
+    let card = createCard(username, inputtedTitle, inputtedBody);
     let posts = document.getElementById('posts');
     posts.appendChild(card);
+    posts.insertBefore(card, posts.firstChild);
 }
 
 function createCardBody(author, title, body) {
@@ -118,7 +123,7 @@ function createVoteArea(){
 
     let upvoteCount = document.createElement('p');
     addClass(upvoteCount, "score-count");
-    upvoteCount.innerHTML = 420;
+    upvoteCount.innerHTML = 0;
 
     let i = document.createElement('i');
     addClass(i, "bi bi-arrow-up-short post-icon h1");
@@ -131,7 +136,7 @@ function createVoteArea(){
 
     let downvoteCount = document.createElement('p');
     addClass(downvoteCount, "score-count");
-    downvoteCount.innerHTML = 69;
+    downvoteCount.innerHTML = 0;
 
     
 /* 

@@ -90,7 +90,7 @@ form.d-flex{
 }
 
 .write-box{
-    background: linear-gradient(45deg, var(--blue), var(--purple));
+    background-color: var(--dark);
     height: 270px;
     padding: 20px;
 }
