@@ -122,20 +122,26 @@ function createVoteArea(){
     addClass(upvoteDiv, "score-count-div");
 
     let upvoteCount = document.createElement('p');
-    addClass(upvoteCount, "score-count");
+    addClass(upvoteCount, "score-count upvote-count");
     upvoteCount.innerHTML = 0;
 
     let i = document.createElement('i');
     addClass(i, "bi bi-arrow-up-short post-icon h1");
+    i.onclick = function() {
+        updateScores(i, "upvote");
+    };
 
     let i2 = document.createElement('i');
     addClass(i2, "bi bi-arrow-down-short post-icon h1");
+    i2.onclick = function() {
+        updateScores(i2, "downvote");
+    };
 
     let downvoteDiv = document.createElement('div');
     addClass(downvoteDiv, "score-count-div");
 
     let downvoteCount = document.createElement('p');
-    addClass(downvoteCount, "score-count");
+    addClass(downvoteCount, "score-count downvote-count");
     downvoteCount.innerHTML = 0;
 
     
