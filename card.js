@@ -1,4 +1,3 @@
-
 function addClass(element, str) {
     let arr = str.split(" ");
     for (let i = 0; i < arr.length; i++) {
@@ -20,6 +19,7 @@ function postToFeed(username, inputtedTitleId, inputtedBodyId){
     let posts = document.getElementById('posts');
     posts.appendChild(card);
     posts.insertBefore(card, posts.firstChild);
+    clearTextAreas([inputtedTitleId, inputtedBodyId]);
 }
 
 function createCardBody(author, title, body) {
