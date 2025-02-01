@@ -367,3 +367,6 @@ form.d-flex{
     
 }
 
+#bio-text-area{
+    resize: none;
+}
