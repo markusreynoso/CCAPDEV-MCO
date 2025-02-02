@@ -24,6 +24,9 @@ function createCard(author, title, body) {
     posts.insertBefore(card, posts.firstChild);
 }
 
+
+
+
 function hardcodedCreateCard() {
     let author = 'LuisDaBeast'; //Hardcoded for now; delete later on
     let title = document.getElementById('write-title-area').value;
@@ -35,10 +38,14 @@ function hardcodedCreateCard() {
     card.appendChild(createCardBody(author, title, body));
 
     let posts = document.getElementById('posts');
+     
+
     posts.insertBefore(card, posts.firstChild);
 
     clearTextAreas(['write-title-area', 'write-text-area']);
 }
+
+
 
 function createCardBody(author, title, body) {
     let cardBody = document.createElement('div');
@@ -54,6 +61,8 @@ function createCardBody(author, title, body) {
 
     return cardBody;
 }
+
+
 
 function createHeader(author) {
     let header = document.createElement('div');
