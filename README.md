@@ -2,7 +2,7 @@
 
 Flow of how the website goes and how each html file is used:
 
-1. Upon opening the website, "home-unlogged.html" should be the first thing to show.
+1. To start, load home-unlogged.html as starting point
     - home-unlogged.html is the interface for a "guest" or a user that has no account yet in the website.
     - The "guest" can view posts but cannot do any interactions with other users.
     - The "guest" may visit a post, and a profile of another user but no interaction is allowed.
