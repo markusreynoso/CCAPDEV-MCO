@@ -80,7 +80,7 @@ form.d-flex{
     color: var(--vdark);
 }
 
-.form-control:focus {
+.form-control:focus, .write-textarea:focus, .write-titlearea:focus{
     background-color: var(--light);
     outline: none;
     box-shadow: none;
