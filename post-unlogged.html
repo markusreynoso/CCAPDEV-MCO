@@ -18,9 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 fixed-top">
         <div class="container">
             <i class="bi bi-book-half"></i>
-            <a href="landing-unlogged.html me-5" class="navbar-brand">
-                <p>AskAway</p>
-            </a>
+            <a href="landing-unlogged.html me-5" class="navbar-brand">AskAway</a>
 
             <form class="d-flex flex-nowrap">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -29,16 +27,20 @@
                 </button>
             </form>
 
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <div class="dp-div dp-nav">
-                        <a href="https://youtube.com">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                alt="">
-                        </a>
-                    </div>
-                </li>
-            </ul>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav-links"
+                aria-controls="#nav-links">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav-links">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="https://youtube.com" class="nav-link login-button">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://youtube.com" class="nav-link sign-up-button">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -106,17 +108,7 @@
         <div class="col-12"> 
             <div class="comment-section"> 
                 <h1 class="comment-section">Comments</h1>
-                <div class="container comment-section write-box-container">
-                    
-                    <div class="col-md-12 col-10 comment-section write-box">
-                        <textarea name="text-field" id="write-text-area" class="write-textarea" placeholder="What's on your mind?"></textarea>
-                    </div>
-
-                    <div class="col-md-11 col-10 write-box-container-footer">
-                        <input class="btn btn-primary mx-3" type="reset" value="Cancel" onclick="clearTextAreas(['write-text-area'])">
-                        <input class="btn btn-primary" type="submit" value="Post" onclick="hardcodedCreateCommentCard('LuisDaBeast', 'write-title-area', 'write-text-area')">
-                    </div>
-                </div>
+ 
           
                 <div id="comments">
                     <div class="card post">
@@ -170,10 +162,6 @@
                                             <p class="score-count downvote-count">69</p>
                                         </div>
                                         <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-                                        <div>
-                                            <p class="score-count downvote-count">Edit &nbsp;&nbsp;</p>
-                                        </div>
-                                        <i class="bi bi-pencil edit-icon" onclick="//editComment(this)"></i>
                                     </div>                        
                                 </div>
                             </div>

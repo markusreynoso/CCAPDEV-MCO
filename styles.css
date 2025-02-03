@@ -265,13 +265,15 @@ form.d-flex{
 }
 
 .comment-section{
-    color: #FFF;
-     
+    color: var(--light);
     background-color: var(--vdark);
-     
 }
 
 .comment-section .write-box {
     margin-bottom: -50px;
 }
  
+.replies {
+    color: var(--light);
+    background-color: var(--dark);
+}
