@@ -22,6 +22,8 @@ function postToFeed(username, inputtedTitleId, inputtedBodyId){
     clearTextAreas([inputtedTitleId, inputtedBodyId]);
 }
 
+
+
 function createCardBody(author, title, body) {
     let cardBody = document.createElement('div');
     addClass(cardBody, "card-body");
@@ -36,6 +38,8 @@ function createCardBody(author, title, body) {
 
     return cardBody;
 }
+
+
 
 function createHeader(author) {
     let header = document.createElement('div');
@@ -126,12 +130,14 @@ function createVoteArea(){
     upvoteCount.innerHTML = 0;
 
     let i = document.createElement('i');
+    i.setAttribute("onclick", "updateScores(this, 'upvote')")
     addClass(i, "bi bi-arrow-up-short post-icon h1");
     i.onclick = function() {
         updateScores(i, "upvote");
     };
 
     let i2 = document.createElement('i');
+    i2.setAttribute("onclick", "updateScores(this, 'downvote')")
     addClass(i2, "bi bi-arrow-down-short post-icon h1");
     i2.onclick = function() {
         updateScores(i2, "downvote");

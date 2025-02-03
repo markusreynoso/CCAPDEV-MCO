@@ -416,3 +416,17 @@ form.d-flex{
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.comment-section{
+    color: var(--light);
+    background-color: var(--vdark);
+}
+
+.comment-section .write-box {
+    margin-bottom: -50px;
+}
+ 
+.replies {
+    color: var(--light);
+    background-color: var(--dark);
+}
