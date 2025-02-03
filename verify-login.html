@@ -13,23 +13,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <div class="login-register-div">
-        <div class="login-register-title">
-            <h1>Login</h1><br/>
-        </div>
-        <div class="login-register-text">
-            <div class="login-register-label">
-                <p>Username:</p> <br/>
-                <p>Password:</p> 
+<body style="padding: 0;">
+    <div class="login-container">
+        <div class="login-register-div">
+            <div class="login-register-title">
+                <h1>Login</h1><br />
             </div>
-            <div class="login-register-textbox">
-                <input class="login-register-textfield"></input><br/><br/>
-                <input class="login-register-textfield"></input>
+            <form>
+                <label for="username-field">
+                    <p>Username:</p>
+                </label><br>
+                <input type="text" class="registration-field" id="username-field" name="fname"><br>
+                <label for="username-field">
+                    <p>Password:</p>
+                </label><br>
+                <input type="password" class="registration-field" id="password-field" name="fname"><br>
+            </form>
+            <div class="registration-bottom-div">
+                <button type="button" class="btn btn-primary btn-sm"
+                    onclick="window.location.href='home-logged.html';">Login</button>
             </div>
-        </div>
-        <div class="login-bottom-div">
-            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='home-logged.html';">Login</button>
         </div>
     </div>
+
 </body>

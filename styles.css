@@ -372,35 +372,21 @@ form.d-flex{
 }
 
 /* Login-Register */
-.login-register-div {
-    background-color: var(--purple);
-    margin: 150px 400px;
-    padding: 50px;
-    align-items: center; 
+.login-container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.login-register-title {
-    color:var(--light)
-}
-
-.login-register-text {
-    display: flex;
-}
-
-.login-register-label {
-    display: flexbox;
-    padding-right: 20px;
-    padding-bottom: 10px;
-}
-
-.login-register-textbox {
-    display: flexbox;
-    padding-bottom: 10px;
-}
-
-.login-register-textfield {
-    width: 400px;
+.login-register-div {
+    background-color: var(--purple);
+    width: 50%;
+    padding: 50px;
+    align-items: center; 
+    justify-content: center;
 }
 
 .confirm-button {
@@ -411,7 +397,14 @@ form.d-flex{
     border-radius: 10px; 
     margin-left: 550px;
 }
-.login-bottom-div{
+
+.registration-field{
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
+
+.login-bottom-div, .registration-bottom-div{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
