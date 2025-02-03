@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 fixed-top">
         <div class="container">
             <i class="bi bi-book-half"></i>
-            <a href="landing-unlogged.html me-5" class="navbar-brand">
+            <a href="home-logged.html" class="navbar-brand">
                 <p>AskAway</p>
             </a>
 
@@ -32,7 +32,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <div class="dp-div dp-nav">
-                        <a href="https://youtube.com">
+                        <a href="profile-posts.html">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                 alt="">
                         </a>
@@ -52,7 +52,7 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                 alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
                             <h3 class="post-username">LuisDaBeast</h3>
                         </a>
                     </div>
@@ -65,7 +65,7 @@
                     </p>
 
                     <div class="container user-bio-bottom-div">
-                        <button type="button" class="btn btn-primary btn-sm mx-3" 
+                        <button type="button" class="btn btn-primary btn-sm mx-3"
                         data-bs-toggle="modal" data-bs-target="#editBioModal" onclick="updateBio()">
                             Edit Bio</button>
                         <button type="button" class="btn btn-primary btn-sm"
@@ -74,46 +74,51 @@
                 </div>
             </div>
 
-            <div class="posts-comments-div">
-
-                <div id="profilecomments-posts-div">
-                    <a href="profile-posts.html" class="text-decoration-none text-reset">
+            <div id="posts-comments-div">
+                <div id="profileposts-posts-div">
+                    <a href="profile-posts.html" class="text-decoration-none text-reset" target="_blank">
                         Posts
                     </a>
 
                 </div>
 
-                <div id="profilecomments-comments-div">
-                    <a href="profile-comments.html" class="text-decoration-none text-reset">
+                <div id="profileposts-comments-div">
+                    <a href="profile-comments-logged.html" class="text-decoration-none text-reset">
                         Comments
                     </a>
                 </div>
-
             </div>
-
-
-
-
         </div>
+
+
     </div>
 
     <div class="container user-profile-posts">
 
-        <!--Comments-->
-        <div class="col-10" id="comments">
+        <!--Posts-->
+        <div class="col-10" id="posts">
 
-            <!-- Comment 1 -->
+            <!-- Post 1 -->
             <div class="profile card post">
                 <div class="card-body">
-
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
-                            Post 1
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            My experiences in living as a beast
                         </a>
                     </h2>
 
                     <p class="card-text post-body-text">
-                        Hello po
+                        I’ve always believed that if you’re going to do something, you should aim to be the best at it no matter what!
+
                     </p>
 
 
@@ -131,105 +136,127 @@
 
             </div>
 
-            <!-- Comment 2-->
+            <!-- Post 2-->
 
             <div class="profile card post">
                 <div class="card-body">
-
-                    <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
-                            Post 2
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
                         </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        Congratulations!
-                    </p>
-
-
-                    <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">420</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">69</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
                     </div>
-                </div>
-
-            </div>
-
-            <!-- Comment 3 -->
-
-            <div class="profile card post">
-                <div class="card-body">
-
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
-                            Jasdasd
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        Momma!
-                    </p>
-
-
-                    <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">420</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">69</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="profile card post">
-                <div class="card-body">
-
-                    <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
-                            Help Understanding Eigenvalues in Real-Life Contexts
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        Sorry, I can't help you!
-                    </p>
-
-
-                    <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">420</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">69</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="profile card post">
-                <div class="card-body">
-
-                    <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
                             Marilag lyrics
                         </a>
                     </h2>
 
                     <p class="card-text post-body-text">
-                        Asan na ang Marilag ko
+                        Hotshot running in mind nonstop vertigo
+                        Curled plot whiskey in a teapot ethanol
+                        Burnin' like KELT-9b bright heavenly body
+                        Only music can define you and it sounds like ah
+                        You're like a
+                        D'amalfi in a bar Au in a goose
+                        A photo of me knocked Chuck point black smooth
+                        Ikaw ang minsan sa mga palagi
+                        Ang mitolohiya sa'yo'y maaari (hey)
+                        Shawty you don't need no makeup (ah)
+                        Brown-eyed chick northside beauty stand out
+                        Pretty pretty lady Big Bang doesn't make sense
+                        I see God in your face girl I mean it
+                        Marilag
+                        Ang himala'y sa'yo ibibintang
+                        Haven't felt so divine 'til I looked in your eyes
+                        I see my future
+                        Baby loving you saved me
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Post 3 -->
+
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Haha!
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+
+                        Hello world!
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            About a week ago
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+
+                        It’s crazy how much can change in just a week. Seven days may seem short, but when you look back, it often feels like a lifetime. 
+                        One moment, everything is normal, and then suddenly, everything shifts.
+                        A week ago, you might have been in a completely different mindset—excited, stressed, indifferent, or hopeful. 
+                        Maybe something unexpected happened that turned your world upside down. Perhaps it was a conversation, a decision, or just a feeling that crept 
+                        in and refused to leave. Whatever it was, it shaped where you are today.
+                        It’s funny how time works. Some weeks drag on endlessly, while others blur past in an instant. But no matter how it feels, each week leaves its mark.
+                        So take a second and think—where were you about a week ago? How have things changed? What did you learn? And most importantly, where do you want to be in another week?
+                        Time moves fast, but reflection keeps us grounded. Let’s make the next seven days count.
                     </p>
 
 
@@ -248,10 +275,49 @@
             </div>
 
 
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Please someone drop JJ's socials here 
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+
+                        Asking for my friend wolfram, or neko, "i miss ccdsalg so much!".
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+
+
         </div>
     </div>
 
-    <!-- Modal -->
+        <!-- Modal -->
     <div class="modal fade" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
