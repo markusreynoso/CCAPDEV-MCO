@@ -410,3 +410,8 @@ form.d-flex{
     border-radius: 10px; 
     margin-left: 550px;
 }
+.login-bottom-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
