@@ -121,7 +121,6 @@ form.d-flex{
     height: 80%;
 }
 
-
 .write-textarea:focus, .write-titlearea:focus{
     outline: none;
 }
@@ -369,4 +368,45 @@ form.d-flex{
 
 #bio-text-area{
     resize: none;
+}
+
+/* Login-Register */
+.login-register-div {
+    background-color: var(--purple);
+    margin: 150px 400px;
+    padding: 50px;
+    align-items: center; 
+    justify-content: center;
+}
+
+.login-register-title {
+    color:var(--light)
+}
+
+.login-register-text {
+    display: flex;
+}
+
+.login-register-label {
+    display: flexbox;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+.login-register-textbox {
+    display: flexbox;
+    padding-bottom: 10px;
+}
+
+.login-register-textfield {
+    width: 400px;
+}
+
+.confirm-button {
+    background-color: rgb(0, 181, 181); 
+    color: var(--light); 
+    align-items: right; 
+    justify-content: right; 
+    border-radius: 10px; 
+    margin-left: 550px;
 }
