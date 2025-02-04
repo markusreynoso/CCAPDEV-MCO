@@ -233,7 +233,7 @@ form.d-flex{
     transition: color 0.3s ease;
 }
 
-.bi-arrow-up-short:hover, .bi-pencil:hover{
+.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover{
     cursor: pointer;
     color: var(--blue);
 }
@@ -243,6 +243,9 @@ form.d-flex{
     color: var(--purple);
 }
 
+.bi-pencil{
+    margin-left: 2%;
+}
 .post-actions-div{
     padding: 0;
     min-height: 60px;
