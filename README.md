@@ -3,7 +3,7 @@
 The website is intuitive since it uses a similar layout to Reddit and Facebook, and the features are standard. But in any case, this is the flow of how the website goes and how each html file is used:
 
   
-## 1. To start, load home-unlogged.html as starting point
+## 1. Start with load home-unlogged.html as starting point
 
 - home-unlogged.html is the interface for a "guest" or a user that has no account yet in the website.
 
@@ -15,14 +15,9 @@ The website is intuitive since it uses a similar layout to Reddit and Facebook, 
 
 ## 2. The "guest" can either click login or sign up, then it will redirect to verify-login.html pr verify-register.html
 
-  
-
 ## 3. After finishing the login or sign up, it will redirect to "home-logged.html"
 
-  
-
 - The user can now interact with other users through posts and comments.
-
 - The user can also now create posts.
 
 ## 4. Either the user clicks on
