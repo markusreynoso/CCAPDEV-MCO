@@ -25,6 +25,11 @@ p, h1 {
     font-family: 'Poppins';
 }
 
+.reply-tag{
+    display: inline;
+    color: var(--blue);
+}
+
 p::selection, a::selection{
     background-color: var(--purple);
 }
