@@ -115,6 +115,7 @@ form.d-flex{
 .write-titlearea{
     height: 20%;
     font-weight: 700;
+    overflow-y: hidden;
 }
 
 
