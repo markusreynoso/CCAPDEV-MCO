@@ -381,6 +381,11 @@ form.d-flex{
 }
 
 /* Login-Register */
+
+a.login-redirect{
+    color: var(--vdark);    
+}
+
 .login-container{
     height: 100vh;
     width: 100vw;
