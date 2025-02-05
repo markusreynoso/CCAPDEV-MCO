@@ -240,7 +240,7 @@ form.d-flex{
     transition: color 0.3s ease;
 }
 
-.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover{
+.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover, .bi-trash:hover{
     cursor: pointer;
     color: var(--blue);
 }
@@ -250,7 +250,7 @@ form.d-flex{
     color: var(--purple);
 }
 
-.bi-pencil{
+.bi-pencil, .bi-trash{
     margin-left: 2%;
 }
 .post-actions-div{
