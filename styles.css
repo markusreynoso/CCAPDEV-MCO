@@ -450,7 +450,7 @@ a.login-redirect{
 }
 
 .modal-header, .modal-footer {
-    border: none !important; /* Remove borders */
+    border: none !important;
     padding: 20px;
 }
 
@@ -465,6 +465,11 @@ a.login-redirect{
 .modal-body{
     padding: 20px;
 }
+
+div.modal-body{
+    padding: 10px 20px;
+}
+
 .limit-text-10{
     -webkit-line-clamp: 10;
 }
