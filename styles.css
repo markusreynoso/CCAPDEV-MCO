@@ -249,9 +249,6 @@ form.d-flex{
     color: var(--purple);
 }
 
-.bi-pencil, .bi-trash{
-    margin-left: 1.5%;
-}
 .post-actions-div{
     padding: 0;
     min-height: 60px;
@@ -462,8 +459,4 @@ a.login-redirect{
 }
 .limit-text-10{
     -webkit-line-clamp: 10;
-}
-
-a i{
-    margin: 0 30px;
 }
