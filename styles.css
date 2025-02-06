@@ -226,7 +226,6 @@ form.d-flex{
 
 .post-body-text{
     display: -webkit-box;
-    -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -240,18 +239,18 @@ form.d-flex{
     transition: color 0.3s ease;
 }
 
-.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover, .bi-trash:hover{
+.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover{
     cursor: pointer;
     color: var(--blue);
 }
 
-.bi-arrow-down-short:hover{
+.bi-arrow-down-short:hover, .bi-trash:hover{
     cursor: pointer;
     color: var(--purple);
 }
 
 .bi-pencil, .bi-trash{
-    margin-left: 2%;
+    margin-left: 1.5%;
 }
 .post-actions-div{
     padding: 0;
@@ -443,4 +442,12 @@ a.login-redirect{
 
 .reply{
     margin: 0  0;
+}
+
+#edit-post-text-area{
+    resize: none;
+}
+
+.limit-text-10{
+    -webkit-line-clamp: 10;
 }
