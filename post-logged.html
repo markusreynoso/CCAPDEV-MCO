@@ -229,8 +229,9 @@
                                         <div>
                                         </div>
                                         <i class="bi bi-reply post-icon h3"></i>
-                                        <i class="bi bi-pencil edit-icon post-icon h5"
-                                            onclick="//editComment(this)"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
+                                            <i class="bi bi-pencil edit-icon post-icon h5"></i>
+                                        </a>
                                         <i class="bi bi-trash post-icon h5"></i>
                                     </div>
                                 </div>
@@ -345,8 +346,9 @@
                                         <div>
                                         </div>
                                         <i class="bi bi-reply post-icon h3"></i>
-                                        <i class="bi bi-pencil edit-icon post-icon h5"
-                                            onclick="//editComment(this)"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
+                                            <i class="bi bi-pencil edit-icon post-icon h5"></i>
+                                        </a>
                                         <i class="bi bi-trash post-icon h5"></i>
                                     </div>
                                 </div>
@@ -454,7 +456,9 @@
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
                                 <i class="bi bi-reply post-icon h3"></i>
-                                <i class="bi bi-pencil edit-icon post-icon h5" onclick="//editComment(this)"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
+                                    <i class="bi bi-pencil edit-icon post-icon h5"></i>
+                                </a>
                                 <i class="bi bi-trash post-icon h5"></i>
                             </div>
                         </div>
@@ -594,6 +598,26 @@
                         </div>
                         <div class="modal-body">
                             <textarea name="text-field" id="edit-post-text-area" class="form-control" rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment/reply edit modal -->
+            <div class="modal fade modal-xl" id="edit-reply-comment-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control" rows="10"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
