@@ -454,6 +454,14 @@ a.login-redirect{
     padding: 20px;
 }
 
+.modal-header{
+    padding-bottom: 0;
+}
+
+.modal-footer{
+    padding-top: 0;
+}
+
 .modal-body{
     padding: 20px;
 }
