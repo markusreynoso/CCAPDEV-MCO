@@ -96,8 +96,9 @@
                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit-post-modal" onclick="editPost()">
                             <i class="bi bi-pencil edit-icon post-icon h5"></i>
                         </a>
-
-                        <i class="bi bi-trash post-icon h5"></i>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                            <i class="bi bi-trash post-icon h5"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -232,7 +233,9 @@
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
                                             <i class="bi bi-pencil edit-icon post-icon h5"></i>
                                         </a>
-                                        <i class="bi bi-trash post-icon h5"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                            <i class="bi bi-trash post-icon h5"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +352,9 @@
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
                                             <i class="bi bi-pencil edit-icon post-icon h5"></i>
                                         </a>
-                                        <i class="bi bi-trash post-icon h5"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                            <i class="bi bi-trash post-icon h5"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -459,7 +464,9 @@
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal" onclick="editReplyComment(this)">
                                     <i class="bi bi-pencil edit-icon post-icon h5"></i>
                                 </a>
-                                <i class="bi bi-trash post-icon h5"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                    <i class="bi bi-trash post-icon h5"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -597,6 +604,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <textarea name="text-field" id="edit-post-title-area" class="form-control" rows="1"></textarea>
+                        </div>
+                        <div class="modal-body">
                             <textarea name="text-field" id="edit-post-text-area" class="form-control" rows="10"></textarea>
                         </div>
                         <div class="modal-footer">
@@ -622,6 +632,46 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post delete modal -->
+            <div class="modal fade modal-md" id="delete-post-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Delete Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment and reply delete modal -->
+            <div class="modal fade modal-md" id="delete-reply-comment-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Delete Comment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Confirm</button>
                         </div>
                     </div>
                 </div>

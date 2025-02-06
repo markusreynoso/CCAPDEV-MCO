@@ -444,10 +444,26 @@ a.login-redirect{
     margin: 0  0;
 }
 
-#edit-post-text-area{
+#edit-post-text-area, #edit-post-title-area{
     resize: none;
 }
 
+#edit-post-title-area {
+    font-weight: 700;
+}
+
+.modal-header, .modal-footer {
+    border: none !important; /* Remove borders */
+    padding: 20px;
+}
+
+.modal-body{
+    padding: 20px;
+}
 .limit-text-10{
     -webkit-line-clamp: 10;
+}
+
+a i{
+    margin: 0 30px;
 }
