@@ -153,7 +153,9 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
-                                <i class="bi bi-reply post-icon h3"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                    <i class="bi bi-reply post-icon h3"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -192,7 +194,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
 
                                     </div>
                                 </div>
@@ -229,7 +233,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal"
                                             onclick="editReplyComment(this)">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4"></i>
@@ -271,7 +277,9 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
-                                <i class="bi bi-reply post-icon h3"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                    <i class="bi bi-reply post-icon h3"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -312,7 +320,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
 
                                     </div>
                                 </div>
@@ -349,7 +359,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal"
                                             onclick="editReplyComment(this)">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4"></i>
@@ -387,7 +399,9 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
-                                <i class="bi bi-reply post-icon h3"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                    <i class="bi bi-reply post-icon h3"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -427,7 +441,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
 
                                     </div>
                                 </div>
@@ -462,7 +478,9 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
-                                <i class="bi bi-reply post-icon h3"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                    <i class="bi bi-reply post-icon h3"></i>
+                                </a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#edit-reply-comment-modal"
                                     onclick="editReplyComment(this)">
                                     <i class="bi bi-pencil edit-icon post-icon h5 ms-4"></i>
@@ -509,7 +527,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -543,7 +563,9 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"
                                     onclick="updateScores(this, 'downvote')"></i>
-                                <i class="bi bi-reply post-icon h3"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                    <i class="bi bi-reply post-icon h3"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -582,7 +604,9 @@
                                             onclick="updateScores(this, 'downvote')"></i>
                                         <div>
                                         </div>
-                                        <i class="bi bi-reply post-icon h3"></i>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -623,6 +647,29 @@
                 </div>
             </form>
 
+            <!-- Marker Reply modal -->
+            <form action="">
+                <div class="modal fade modal-xl" id="reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control"
+                                    rows="10"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
             <!-- Marker Comment/reply edit modal -->
             <form action="">
