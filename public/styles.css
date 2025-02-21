@@ -13,6 +13,10 @@
 }
 
 /* General */
+.home-wrapper{
+    margin-top: 150px;
+}
+
 .modal-content {
     background-color: var(--dark);
     color: var(--light);
@@ -42,13 +46,16 @@ p::selection, a::selection{
 
 body{
     background-color: var(--vdark);
-    padding-top: 100px;
 }
 
 .bi, .btn{
     color: var(--light);
 }
 /* Navbar */
+.navbar{
+    margin-bottom: 100px;
+}
+
 .bi-book-half{
     margin-right: 5px;
 }
