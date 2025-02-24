@@ -183,7 +183,6 @@ function updateScores(clicked, voteType){
     let upvoteCountElement = parent.querySelector(".upvote-count");
     let downvoteCountElement = parent.querySelector(".downvote-count");
 
-    console.log(voteType)
     if (voteType === "upvote"){
         // Upvoting an upvoted post
         if (upvoteIconElement.classList.contains("active-up")){
