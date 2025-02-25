@@ -1,0 +1,62 @@
+[
+  {
+    "_id": {
+      "$oid": "67bc7f5f16350e278a7a092d"
+    },
+    "user": "LuisDaBeast",
+    "postContent": "I’ve always believed that if you’re going to do something, you should aim to be the best at\nit—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered\nthe details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or\nluck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.\n\nIt hasn’t been easy. There were times when I doubted myself or felt like I wasn’t making\nprogress, but I kept pushing through. I learned that success isn’t about talent alone; it’s\nabout staying committed when others quit. Whether it’s refining my skills, staying up-to-date\nwith trends, or analyzing where I can improve, I never stop grinding.\n\nNow, I’m at a point where I can confidently say I’m at the top of my game. It’s not just the\nresults that prove it, but the respect I’ve earned from others in my field. It’s an amazing\nfeeling knowing the effort I’ve put in has paid off, but I’m not stopping here.\n\nIf there’s one thing I’ve learned, it’s that there’s always room to grow. Excellence isn’t a\ndestination; it’s a mindset. What about you? How do you keep striving to be the best in what you\ndo? Let’s share ideas and push each other even further.",
+    "upCount": 420,
+    "downCount": 69,
+    "isEdited": false,
+    "title": "My experiences in living as a beast",
+    "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+  },
+  {
+    "_id": {
+      "$oid": "67bc853f16350e278a7a0932"
+    },
+    "user": "LuisDaBeast",
+    "postContent": "Why do snacks taste better at midnight, but as soon as I finish eating while in the bed laying, the regret hits hard?",
+    "downCount": 69,
+    "isEdited": false,
+    "title": "Midnight Snack Regrets",
+    "upCount": 420,
+    "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+  },
+  {
+    "_id": {
+      "$oid": "67bc864716350e278a7a0933"
+    },
+    "user": "LuisDaBeast",
+    "postContent": "I was supposed to clean my room. Instead, I spent two hours watching videos on how to organize a room, and I still haven't started cleaning it. Productivity? Debatable.",
+    "downCount": 69,
+    "isEdited": false,
+    "title": "The Art of Procrastination",
+    "upCount": 420,
+    "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+  },
+  {
+    "_id": {
+      "$oid": "67bc867a16350e278a7a0935"
+    },
+    "user": "therockobama",
+    "postContent": "Hey everyone! I’m a university math student, and I’m trying to grasp the real-life applications of eigenvalues and eigenvectors. I understand the calculations, but I’m struggling to connect them to practical uses. Could someone share examples or intuitive explanations from physics, computer science, or other fields? Thanks!\n\n\n\n",
+    "downCount": 69,
+    "isEdited": true,
+    "title": "Help Understanding Eigenvalues in Real-Life Contexts",
+    "upCount": 420,
+    "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png"
+  },
+  {
+    "_id": {
+      "$oid": "67bc86ac16350e278a7a0936"
+    },
+    "user": "scaredofwomen3000",
+    "postContent": "Hey everyone, I'm new to this forum and I could really use some advice. I struggle with confidence in social situations, and it's something I want to work on. I feel like I often doubt myself and hold back, especially around people I don’t know well. Does anyone have tips or personal experiences on how to gradually build confidence? I’m looking for practical suggestions on how to feel more comfortable and assertive. Thanks in advance for your help!",
+    "downCount": 69,
+    "isEdited": false,
+    "title": "How to Build Confidence: Advice Needed",
+    "upCount": 420,
+    "dpUrl": "https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg"
+  }
+]
