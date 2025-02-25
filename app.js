@@ -1,3 +1,5 @@
+// Express boilerplates
+
 const express = require('express');
 const server = express();
 
@@ -13,19 +15,43 @@ server.engine('hbs', handlebars.engine({
 
 server.use(express.static('public'));
 
-server.get('/', function(req, resp){
+// MongoDB boilerplates
+
+const { MongoClient } = require('mongodb');
+const databaseURL = "mongodb://127.0.0.1:27017/";
+const mongoClient = new MongoClient(databaseURL);
+
+// Main
+const databaseName = "MCO";
+
+async function initialConnection(){
+    let con = await mongoClient.connect();
+    // console.log("Attempt to create!");
+    const dbo = mongoClient.db(databaseName);
+    /* Will create a collection if it has not yet been made */
+    // dbo.createCollection(collectionName);
+  }
+initialConnection();
+
+server.get('/', async function(req, resp){
+    const dbo = mongoClient.db(databaseName);
+    const postsCollection = await dbo.collection("posts").find().toArray();
     resp.render('home', {
         layout: 'index',
         title: 'AskAway - Home',
-        logged: false
+        logged: false,
+        posts: postsCollection
     })
 })
 
-server.get('/home-logged', function(req, resp){
+server.get('/home-logged', async function(req, resp){
+    const dbo = mongoClient.db(databaseName);
+    const postsCollection = await dbo.collection("posts").find().toArray();
     resp.render('home', {
         layout: 'index',
         title: 'AskAway - Home',
-        logged: true
+        logged: true,
+        posts: postsCollection
     })
 })
 
@@ -33,6 +59,22 @@ server.get('/login', function(req, resp){
     resp.render('login', {
         layout: 'index',
         title: 'AskAway - Login',
+    })
+})
+
+server.get('/register', function(req, resp){
+    resp.render('register', {
+        layout: 'index',
+        title: 'AskAway - Register',
+    })
+})
+
+server.get('/post/:isLogged', function(req, resp){
+    let isLogged = (req.params.isLogged === "logged");
+    resp.render('login', {
+        layout: 'index',
+        title: 'View Post',
+        logged: isLogged
     })
 })
 

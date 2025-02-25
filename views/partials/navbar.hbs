@@ -1,9 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 fixed-top">
     <div class="container">
         <i class="bi bi-book-half"></i>
-        <a href="home-logged.html" class="navbar-brand">
+        {{#if logged}}
+        <a href="/home-logged" class="navbar-brand">
             <p>AskAway</p>
         </a>
+        {{else}}
+        <a href="/" class="navbar-brand">
+            <p>AskAway</p>
+        </a>
+        {{/if}}
 
         <form class="d-flex flex-nowrap">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -31,7 +37,7 @@
                     <a href="/login" class="nav-link login-button" id="login-button">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a href="verify-register.html" class="nav-link sign-up-button">Sign Up</a>
+                    <a href="/register" class="nav-link sign-up-button">Sign Up</a>
                 </li>
                 {{/if}}
             </ul>
