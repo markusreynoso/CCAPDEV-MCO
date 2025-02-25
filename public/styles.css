@@ -13,11 +13,26 @@
 }
 
 /* General */
+.home-wrapper{
+    margin-top: 150px;
+}
 
-p {
+.modal-content {
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: 'Poppins';
+}
+
+p, h1 {
     margin: 0;
     color: var(--light);
     font-family: 'Poppins';
+}
+
+.reply-tag a{
+    text-decoration: none;
+    display: inline;
+    color: var(--blue);
 }
 
 p::selection, a::selection{
@@ -31,13 +46,16 @@ p::selection, a::selection{
 
 body{
     background-color: var(--vdark);
-    padding-top: 100px;
 }
 
 .bi, .btn{
     color: var(--light);
 }
 /* Navbar */
+.navbar{
+    margin-bottom: 100px;
+}
+
 .bi-book-half{
     margin-right: 5px;
 }
@@ -75,7 +93,7 @@ form.d-flex{
     color: var(--vdark);
 }
 
-.form-control:focus {
+.form-control:focus, .write-textarea:focus, .write-titlearea:focus{
     background-color: var(--light);
     outline: none;
     box-shadow: none;
@@ -110,6 +128,7 @@ form.d-flex{
 .write-titlearea{
     height: 20%;
     font-weight: 700;
+    overflow-y: hidden;
 }
 
 
@@ -214,7 +233,6 @@ form.d-flex{
 
 .post-body-text{
     display: -webkit-box;
-    -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -228,12 +246,12 @@ form.d-flex{
     transition: color 0.3s ease;
 }
 
-.bi-arrow-up-short:hover{
+.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover{
     cursor: pointer;
     color: var(--blue);
 }
 
-.bi-arrow-down-short:hover{
+.bi-arrow-down-short:hover, .bi-trash:hover{
     cursor: pointer;
     color: var(--purple);
 }
@@ -362,36 +380,31 @@ form.d-flex{
     
 }
 
+#bio-text-area{
+    resize: none;
+}
+
 /* Login-Register */
-.login-register-div {
-    background-color: var(--purple);
-    margin: 150px 400px;
-    padding: 50px;
-    align-items: center; 
+
+a.login-redirect{
+    color: var(--vdark);    
+}
+
+.login-container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
-.login-register-title {
-    color:var(--light)
-}
-
-.login-register-text {
-    display: flex;
-}
-
-.login-register-label {
-    display: flexbox;
-    padding-right: 20px;
-    padding-bottom: 10px;
-}
-
-.login-register-textbox {
-    display: flexbox;
-    padding-bottom: 10px;
-}
-
-.login-register-textfield {
-    width: 400px;
+.login-register-div {
+    background-color: var(--purple);
+    width: 45%;
+    padding: 50px;
+    align-items: center; 
+    justify-content: center;
 }
 
 .confirm-button {
@@ -401,4 +414,69 @@ form.d-flex{
     justify-content: right; 
     border-radius: 10px; 
     margin-left: 550px;
+}
+
+.registration-field{
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
+
+.login-bottom-div, .registration-bottom-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.comment-section{
+    color: var(--light);
+    background-color: var(--vdark);
+}
+
+.comment-section .write-box {
+    margin-bottom: -50px;
+}
+ 
+.replies {
+    padding: 0 0;
+    margin-bottom: 50px;
+    color: var(--light);
+    outline: 1px var(--vdark) solid;
+}
+
+.reply{
+    margin: 0  0;
+}
+
+#edit-post-text-area, #edit-post-title-area{
+    resize: none;
+}
+
+#edit-post-title-area {
+    font-weight: 700;
+}
+
+.modal-header, .modal-footer {
+    border: none !important;
+    padding: 20px;
+}
+
+.modal-header{
+    padding-bottom: 0;
+}
+
+.modal-footer{
+    padding-top: 0;
+}
+
+.modal-body{
+    padding: 20px;
+}
+
+div.modal-body{
+    padding: 10px 20px;
+}
+
+.limit-text-10{
+    -webkit-line-clamp: 10;
 }

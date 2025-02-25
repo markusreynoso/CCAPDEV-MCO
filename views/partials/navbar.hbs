@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 fixed-top">
+    <div class="container">
+        <i class="bi bi-book-half"></i>
+        <a href="home-logged.html" class="navbar-brand">
+            <p>AskAway</p>
+        </a>
+
+        <form class="d-flex flex-nowrap">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav-links" aria-controls="#nav-links">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav-links">
+            <ul class="navbar-nav ms-auto">
+                {{#if logged}}
+                <li class="nav-item">
+                    <div class="dp-div dp-nav">
+                        <a href="profile-posts-logged.html">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </a>
+                    </div>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a href="/login" class="nav-link login-button" id="login-button">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="verify-register.html" class="nav-link sign-up-button">Sign Up</a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>

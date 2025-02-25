@@ -1,4 +1,3 @@
-
 function addClass(element, str) {
     let arr = str.split(" ");
     for (let i = 0; i < arr.length; i++) {
@@ -20,7 +19,10 @@ function postToFeed(username, inputtedTitleId, inputtedBodyId){
     let posts = document.getElementById('posts');
     posts.appendChild(card);
     posts.insertBefore(card, posts.firstChild);
+    clearTextAreas([inputtedTitleId, inputtedBodyId]);
 }
+
+
 
 function createCardBody(author, title, body) {
     let cardBody = document.createElement('div');
@@ -36,6 +38,8 @@ function createCardBody(author, title, body) {
 
     return cardBody;
 }
+
+
 
 function createHeader(author) {
     let header = document.createElement('div');
@@ -122,20 +126,28 @@ function createVoteArea(){
     addClass(upvoteDiv, "score-count-div");
 
     let upvoteCount = document.createElement('p');
-    addClass(upvoteCount, "score-count");
+    addClass(upvoteCount, "score-count upvote-count");
     upvoteCount.innerHTML = 0;
 
     let i = document.createElement('i');
+    i.setAttribute("onclick", "updateScores(this, 'upvote')")
     addClass(i, "bi bi-arrow-up-short post-icon h1");
+    i.onclick = function() {
+        updateScores(i, "upvote");
+    };
 
     let i2 = document.createElement('i');
+    i2.setAttribute("onclick", "updateScores(this, 'downvote')")
     addClass(i2, "bi bi-arrow-down-short post-icon h1");
+    i2.onclick = function() {
+        updateScores(i2, "downvote");
+    };
 
     let downvoteDiv = document.createElement('div');
     addClass(downvoteDiv, "score-count-div");
 
     let downvoteCount = document.createElement('p');
-    addClass(downvoteCount, "score-count");
+    addClass(downvoteCount, "score-count downvote-count");
     downvoteCount.innerHTML = 0;
 
     
@@ -171,7 +183,6 @@ function updateScores(clicked, voteType){
     let upvoteCountElement = parent.querySelector(".upvote-count");
     let downvoteCountElement = parent.querySelector(".downvote-count");
 
-    console.log(voteType)
     if (voteType === "upvote"){
         // Upvoting an upvoted post
         if (upvoteIconElement.classList.contains("active-up")){

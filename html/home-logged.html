@@ -10,7 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../public/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../public/index.js"></script>
     <script src="votes.js"></script>
 </head>
 
@@ -18,7 +20,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5 fixed-top">
         <div class="container">
             <i class="bi bi-book-half"></i>
-            <a href="landing-unlogged.html me-5" class="navbar-brand">
+            <a href="home-logged.html" class="navbar-brand">
                 <p>AskAway</p>
             </a>
 
@@ -37,7 +39,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <div class="dp-div dp-nav">
-                            <a href="profile-posts.html">
+                            <a href="profile-posts-logged.html">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                     alt="">
                             </a>
@@ -48,26 +50,29 @@
         </div>
     </nav>
 
-    <!-- Remus copy paste this -->
-    <div class="container write-box-container">
-        <div class="col-md-8 col-10 write-box">
-            <textarea name="title-field" id="write-title-area" class="write-titlearea"
-                placeholder="Give your post a title"></textarea>
-            <textarea name="text-field" id="write-text-area" class="write-textarea"
-                placeholder="What's on your mind?"></textarea>
-        </div>
+    <form action="">
+        <div class="container write-box-container">
+            <div class="col-md-8 col-10 write-box">
+                <textarea name="title-field" id="write-title-area" class="write-titlearea"
+                    placeholder="Give your post a title"></textarea>
+                <textarea name="text-field" id="write-text-area" class="write-textarea"
+                    placeholder="What's on your mind?"></textarea>
+            </div>
 
-        <div class="col-md-8 col-10 write-box-container-footer">
-            <input class="btn btn-primary mx-3" type="reset" value="Cancel"
-                onclick="clearTextAreas(['write-title-area', 'write-text-area'])">
-            <input class="btn btn-primary" type="submit" value="Post"
-                onclick="postToFeed('LuisDaBeast', 'write-title-area', 'write-text-area')">
+            <div class="col-md-8 col-10 write-box-container-footer">
+                <input class="btn btn-primary mx-3" type="reset" value="Cancel">
+                <input class="btn btn-primary" type="submit" value="Post"
+                    onclick="postToFeed('LuisDaBeast', 'write-title-area', 'write-text-area')">
+            </div>
         </div>
-    </div>
-    <!-- Up to here -->
+    </form>
+
 
     <div class="container">
         <div class="col-12" id="posts">
+
+            <!-- Posts of Beast-->
+
             <div class="card post">
                 <div class="card-body">
                     <div class="container post-body-top-div">
@@ -75,17 +80,17 @@
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                 alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
                             <h3 class="post-username">LuisDaBeast</h3>
                         </a>
                     </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
                             My experiences in living as a beast
                         </a>
                     </h2>
 
-                    <p class="card-text post-body-text">
+                    <p class="card-text post-body-text limit-text-10">
                         I’ve always believed that if you’re going to do something, you should aim to be the best at
                         it—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered
                         the details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or
@@ -103,6 +108,45 @@
                         If there’s one thing I’ve learned, it’s that there’s always room to grow. Excellence isn’t a
                         destination; it’s a mindset. What about you? How do you keep striving to be the best in what you
                         do? Let’s share ideas and push each other even further.
+
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Midnight Snack Regrets
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        Why do snacks taste better at midnight,
+                        but as soon as I finish eating while in the bed laying, the regret hits hard?
+
                     </p>
 
 
@@ -124,16 +168,137 @@
                 <div class="card-body">
                     <div class="container post-body-top-div">
                         <div class="dp-div">
-                            <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/family-guy/d/d2/Bruce.jpg"
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                 alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
-                            <h3 class="post-username">Wendellicious</h3>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            The Art of Procrastination
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        I was supposed to clean my room. Instead,
+                        I spent two hours watching videos on how to organize a room, and I still haven't started
+                        cleaning it.
+                        Productivity? Debatable.
+
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Caffeine: My Toxic Relationship
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        I wanna drink less coffee because it harms me, but I get migraines when I don't. Hmmmmmmmmmmmm
+
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
+                    </div>
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Shower Thoughts at 2 AM
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        Why is it that when I’m trying to sleep, my brain suddenly decides to hit me with the most
+                        random thoughts? Like, who invented the first clock?
+                        How did they know what time it was to set it? What if our concept of time is just slightly off
+                        because some guy 500 years ago miscounted?
+                        And don’t even get me started on the fact that every odd number has an ‘e’ in it. Think about
+                        it. One, three, five, seven, nine… You’re welcome.
+
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">420</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">69</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!---->
+
+            <div class="card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="dp-div">
+                            <img src="https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">therockobama</h3>
                         </a>
                         <p class="edit-indicator">Edited</p>
                     </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
                             Help Understanding Eigenvalues in Real-Life Contexts
                         </a>
                     </h2>
@@ -163,14 +328,14 @@
                 <div class="card-body">
                     <div class="container post-body-top-div">
                         <div class="dp-div">
-                            <img src="https://media.tenor.com/cI1t4CvrgogAAAAe/crying-under-mask-feels.png" alt="">
+                            <img src="https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg" alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
                             <h3 class="post-username">scaredofwomen3000</h3>
                         </a>
                     </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
                             How to Build Confidence: Advice Needed
                         </a>
                     </h2>
@@ -203,12 +368,12 @@
                         <div class="dp-div">
                             <img src="https://i.imgflip.com/2/2hojbr.jpg" alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
-                            <h3 class="post-username">stephen_gawking</h3>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">Thomas_morato</h3>
                         </a>
                     </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
                             Exploring the Mysteries of Quantum Mechanics: What's Next?
                         </a>
                     </h2>
@@ -243,18 +408,21 @@
                         <div class="dp-div">
                             <img src="https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84" alt="">
                         </div>
-                        <a href="https://youtube.com" class="text-decoration-none" target="_blank">
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
                             <h3 class="post-username">dantesssss</h3>
                         </a>
                     </div>
                     <h2 class="post-title">
-                        <a href="https://youtube.com" class="text-decoration-none text-reset" target="_blank">
-                            Ano favorite na chichirya niyo?
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            Luka Doncic trade, W or stupid?
                         </a>
                     </h2>
 
                     <p class="card-text post-body-text">
-                        Nagugutom ako e
+                        I honestly don't know why this trade went through. Not in a million years I'd think Mavs would
+                        trade their franchise player who has just gotten them to the Finals last season. LBJ and Luka on
+                        the same team will not work. AD has glass knees. I think both took an L at present. But Lakers
+                        defo got a pink diamond dropped from the sky assuming Luka stays in the future.
                     </p>
 
 
@@ -270,6 +438,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
