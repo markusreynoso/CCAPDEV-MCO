@@ -59,6 +59,7 @@ $(document).ready(function () {
         })
     };
 
+    // Post editing logic
     $(".bi-pencil").click(function(){
         let parent = $(this).closest(".post");
         let postContent = parent.find("p.post-body-text").text().trim();
@@ -69,5 +70,12 @@ $(document).ready(function () {
             $("#edit-post-title-area").val(postTitle);
         }
     });
-    
+
+    // Replying logic
+    $(".bi-reply").click(function(){
+        let parent = $(this).closest(".card-body");
+        let replyingTo = parent.find("h3.post-username").text();
+        
+        $("#edit-reply-comment-text-area").val(`@${replyingTo} `)
+    });
 })
