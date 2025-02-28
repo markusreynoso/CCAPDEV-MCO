@@ -158,7 +158,6 @@ form.d-flex {
 }
 
 .write-box-container-footer {
-    width: 95%;
     height: 50px;
     display: flex;
     flex-direction: row;
