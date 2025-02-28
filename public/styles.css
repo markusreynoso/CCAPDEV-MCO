@@ -4,7 +4,7 @@
 
 /* Colors */
 
-:root{
+:root {
     --vdark: #0E0A17;
     --dark: #241b2b;
     --light: #D4C8C8;
@@ -13,7 +13,7 @@
 }
 
 /* General */
-.margin-top-wrapper{
+.margin-top-wrapper {
     margin-top: 150px;
 }
 
@@ -23,23 +23,25 @@
     font-family: 'Poppins';
 }
 
-p, h1 {
+p,
+h1 {
     margin: 0;
     color: var(--light);
     font-family: 'Poppins';
 }
 
-h1.comment-section{
+h1.comment-section {
     user-select: none;
 }
 
-.reply-tag a{
+.reply-tag a {
     text-decoration: none;
     display: inline;
     color: var(--blue);
 }
 
-p::selection, a::selection{
+p::selection,
+a::selection {
     background-color: var(--purple);
 }
 
@@ -48,56 +50,60 @@ p::selection, a::selection{
     transition: color 0.3s ease;
 }
 
-body{
+body {
     background-color: var(--vdark);
 }
 
-.bi, .btn{
+.bi,
+.btn {
     color: var(--light);
 }
+
 /* Navbar */
-.navbar{
+.navbar {
     margin-bottom: 100px;
 }
 
-.bi-book-half{
+.bi-book-half {
     margin-right: 5px;
 }
 
-.navbar-dark{
+.navbar-dark {
     color: var(--light);
 }
 
-.navbar-brand{
+.navbar-brand {
     margin-right: 15%;
     user-select: none;
 }
 
-.nav-link{
+.nav-link {
     font-family: 'Poppins';
     font-weight: 300;
 }
 
-.sign-up-button:hover{
+.sign-up-button:hover {
     color: var(--blue);
 }
 
-.login-button:hover{
+.login-button:hover {
     color: var(--purple);
 }
 
-form.d-flex{
+form.d-flex {
     width: 48%;
     height: 10%;
 }
 
-.form-control{
+.form-control {
     background-color: var(--light);
     font-family: 'Poppins';
     color: var(--vdark);
 }
 
-.form-control:focus, .write-textarea:focus, .write-titlearea:focus{
+.form-control:focus,
+.write-textarea:focus,
+.write-titlearea:focus {
     background-color: var(--light);
     outline: none;
     box-shadow: none;
@@ -105,19 +111,20 @@ form.d-flex{
 }
 
 /* Posts */
-.write-box-container{
+.write-box-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.write-box{
+.write-box {
     background-color: var(--dark);
     height: 270px;
     padding: 20px;
 }
 
-.write-textarea, .write-titlearea{
+.write-textarea,
+.write-titlearea {
     border-radius: 15px;
     width: 100%;
     resize: none;
@@ -129,26 +136,29 @@ form.d-flex{
     color: var(--dark);
 }
 
-.write-titlearea{
+.write-titlearea {
     height: 20%;
     font-weight: 700;
     overflow-y: hidden;
 }
 
 
-.write-textarea{
+.write-textarea {
     height: 80%;
 }
 
-.write-textarea:focus, .write-titlearea:focus{
+.write-textarea:focus,
+.write-titlearea:focus {
     outline: none;
 }
 
-.write-textarea::selection, .write-titlearea::selection{
+.write-textarea::selection,
+.write-titlearea::selection {
     background-color: var(--blue);
 }
 
-.write-box-container-footer{
+.write-box-container-footer {
+    width: 95%;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -156,14 +166,21 @@ form.d-flex{
     justify-content: flex-end;
 }
 
-.btn-primary, .btn-outline-light{
+.btn-primary,
+.btn-secondary,
+.btn-outline-light {
     font-family: 'Poppins';
     background-color: var(--vdark);
     border-color: var(--blue);
     transition: background-color 0.5s ease;
 }
 
-.btn-primary:hover, .btn-primary:active:focus, .btn-outline-light:hover, .btn-outline-light:active:focus{
+.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-secondary:hover,
+.btn-secondary:active:focus,
+.btn-outline-light:hover,
+.btn-outline-light:active:focus {
     color: var(--vdark);
     background-color: var(--blue);
     border-color: var(--blue);
@@ -179,7 +196,7 @@ form.d-flex{
     font-size: 1.2rem;
 }
 
-.edit-indicator{
+.edit-indicator {
     user-select: none;
     font-family: 'Poppins';
     font-weight: 300;
@@ -204,23 +221,23 @@ form.d-flex{
     margin-bottom: 1%;
 }
 
-.post-body-top-div .group{
+.post-body-top-div .group {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-div.tag{
+div.tag {
     background-color: tomato;
     padding: 0 8px;
     border-radius: 12px;
 }
 
-div.tag p{
+div.tag p {
     user-select: none;
 }
 
-.dp-div{
+.dp-div {
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -231,26 +248,27 @@ div.tag p{
     align-items: center;
 }
 
-.dp-nav{
+.dp-nav {
     height: 40px;
     width: 40px;
 }
 
-.dp-div img{
+.dp-div img {
     user-select: none;
     height: 40px;
     width: 40px;
     object-fit: cover;
 }
 
-.post, .user-bio-div{
+.post,
+.user-bio-div {
     background-color: var(--dark);
     padding: 0 3%;
     padding-top: 1%;
     margin: 5% 0;
 }
 
-.post-body-text{
+.post-body-text {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -258,24 +276,27 @@ div.tag p{
     margin-bottom: 20px;
 }
 
-.post-icon{
+.post-icon {
     color: var(--light);
     margin: 0 0;
     margin-right: 30px;
     transition: color 0.3s ease;
 }
 
-.bi-arrow-up-short:hover, .bi-pencil:hover, .bi-reply:hover{
+.bi-arrow-up-short:hover,
+.bi-pencil:hover,
+.bi-reply:hover {
     cursor: pointer;
     color: var(--blue);
 }
 
-.bi-arrow-down-short:hover, .bi-trash:hover{
+.bi-arrow-down-short:hover,
+.bi-trash:hover {
     cursor: pointer;
     color: var(--purple);
 }
 
-.post-actions-div{
+.post-actions-div {
     padding: 0;
     min-height: 60px;
     display: flex;
@@ -283,15 +304,16 @@ div.tag p{
     align-items: center;
 }
 
-.score-count-div{
+.score-count-div {
     margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.score-count{
-    user-select: none;;
+.score-count {
+    user-select: none;
+    ;
 }
 
 .active-up {
@@ -304,17 +326,17 @@ div.tag p{
 
 /* Profile-Posts/Comments Div*/
 
-.user-bio-div{
+.user-bio-div {
     padding-bottom: 1%;
 }
 
-.user-bio-bottom-div{
+.user-bio-bottom-div {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.user-bio-button{
+.user-bio-button {
     width: auto;
 }
 
@@ -325,7 +347,7 @@ div.tag p{
 }
 
 /* Profile-Posts */
-#profileposts-posts-div{
+#profileposts-posts-div {
     float: left;
     color: var(--light);
     display: flex;
@@ -338,10 +360,10 @@ div.tag p{
     font-family: 'Poppins';
     font-weight: 700;
     font-size: 30px;
-    
+
 }
 
-#profileposts-comments-div{
+#profileposts-comments-div {
     color: var(--dark);
     display: flex;
     justify-content: center;
@@ -355,7 +377,7 @@ div.tag p{
 
 /* Profile-Comments */
 
-#profilecomments-posts-div{
+#profilecomments-posts-div {
     float: left;
     color: var(--dark);
     display: flex;
@@ -367,10 +389,10 @@ div.tag p{
 
     font-family: 'Poppins';
     font-size: 30px;
-    
+
 }
 
-#profilecomments-comments-div{
+#profilecomments-comments-div {
     color: var(--light);
     display: flex;
     justify-content: center;
@@ -396,20 +418,20 @@ div.tag p{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
-#bio-text-area{
+#bio-text-area {
     resize: none;
 }
 
 /* Login-Register */
 
-a.login-redirect{
-    color: var(--vdark);    
+a.login-redirect {
+    color: var(--vdark);
 }
 
-.login-container{
+.login-container {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -422,32 +444,33 @@ a.login-redirect{
     background-color: var(--purple);
     width: 45%;
     padding: 50px;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
 }
 
 .confirm-button {
-    background-color: rgb(0, 181, 181); 
-    color: var(--light); 
-    align-items: right; 
-    justify-content: right; 
-    border-radius: 10px; 
+    background-color: rgb(0, 181, 181);
+    color: var(--light);
+    align-items: right;
+    justify-content: right;
+    border-radius: 10px;
     margin-left: 550px;
 }
 
-.registration-field{
+.registration-field {
     width: 80%;
     margin-bottom: 10px;
     padding: 0 5px;
 }
 
-.login-bottom-div, .registration-bottom-div{
+.login-bottom-div,
+.registration-bottom-div {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.comment-section{
+.comment-section {
     color: var(--light);
     background-color: var(--vdark);
 }
@@ -455,7 +478,7 @@ a.login-redirect{
 .comment-section .write-box {
     margin-bottom: -50px;
 }
- 
+
 .replies {
     padding: 0 0;
     margin-bottom: 50px;
@@ -463,39 +486,41 @@ a.login-redirect{
     outline: 1px var(--vdark) solid;
 }
 
-.reply{
-    margin: 0  0;
+.reply {
+    margin: 0 0;
 }
 
-#edit-post-text-area, #edit-post-title-area{
-    resize: none;
+#edit-post-text-area,
+#edit-post-title-area {
+    resize: none !important;
 }
 
 #edit-post-title-area {
     font-weight: 700;
 }
 
-.modal-header, .modal-footer {
+.modal-header,
+.modal-footer {
     border: none !important;
     padding: 20px;
 }
 
-.modal-header{
+.modal-header {
     padding-bottom: 0;
 }
 
-.modal-footer{
+.modal-footer {
     padding-top: 0;
 }
 
-.modal-body{
+.modal-body {
     padding: 20px;
 }
 
-div.modal-body{
+div.modal-body {
     padding: 10px 20px;
 }
 
-.limit-text-10{
+.limit-text-10 {
     -webkit-line-clamp: 10;
 }
