@@ -7,16 +7,15 @@
                 <div class="card-body">
                     <div class="container post-body-top-div">
                         <div class="dp-div">
-                            <img src="{{commentsCollection.dpUrl}}"
-                                alt="">
+                            <img src="{{commentsCollection.dpUrl}}" alt="">
                         </div>
-                        <a href="" class="text-decoration-none" target="_blank">
+                        <a href="" class="text-decoration-none">
                             <h3 class="post-username">{{{commentsCollection.postUser}}}</h3>
                         </a>
                     </div>
                     <h2 class="post-title">
-                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
-                            {{commentsCollection.postTitle}}
+                        <a href="post-logged.html" class="text-decoration-none text-reset">
+                            {{commentsCollection.title}}
                         </a>
                     </h2>
 
@@ -29,15 +28,15 @@
                         <div class="score-count-div">
                             <p class="score-count upvote-count">{{commentsCollection.postUpCount}}</p>
                         </div>
-                        <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                        <i class="bi bi-arrow-up-short post-icon h1" ></i>
                         <div class="score-count-div">
                             <p class="score-count downvote-count">{{commentsCollection.postDownCount}}</p>
                         </div>
-                        <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-                        <a  data-bs-toggle="modal" data-bs-target="#edit-post-modal" onclick="editPost()">
-                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4"></i>
+                        <i class="bi bi-arrow-down-short post-icon h1" ></i>
+                        <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
                         </a>
-                        <a  data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                        <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
                             <i class="bi bi-trash post-icon h5 ms-4"></i>
                         </a>
                     </div>
@@ -66,7 +65,7 @@
                                 <div class="dp-div">
                                     <img src="{{dpUrl}}" alt="">
                                 </div>
-                                <a href="" class="text-decoration-none" target="_blank">
+                                <a href="" class="text-decoration-none">
                                     <h3 class="post-username">{{user}}</h3>
                                 </a>
                                 {{#if isEdited}}
@@ -85,7 +84,7 @@
                                     <p class="score-count downvote-count">{{downCount}}</p>
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"></i>
-                                <a  data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
                             </div>
@@ -98,11 +97,9 @@
                                 <div class="card-body">
                                     <div class="container post-body-top-div">
                                         <div class="dp-div">
-                                            <img src="{{dpUrl}}"
-                                                alt="">
+                                            <img src="{{dpUrl}}" alt="">
                                         </div>
-                                        <a href="" class="text-decoration-none"
-                                            target="_blank">
+                                        <a href="" class="text-decoration-none">
                                             <h3 class="post-username">{{user}}</h3>
                                         </a>
                                     </div>
@@ -118,16 +115,14 @@
                                         <div class="score-count-div">
                                             <p class="score-count upvote-count">{{upCount}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-up-short post-icon h1"
-                                            onclick="updateScores(this, 'upvote')"></i>
+                                        <i class="bi bi-arrow-up-short post-icon h1"></i>
                                         <div class="score-count-div">
                                             <p class="score-count downvote-count">{{downCount}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-down-short post-icon h1"
-                                            onclick="updateScores(this, 'downvote')"></i>
+                                        <i class="bi bi-arrow-down-short post-icon h1"></i>
                                         <div>
                                         </div>
-                                        <a  data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
                                     </div>
