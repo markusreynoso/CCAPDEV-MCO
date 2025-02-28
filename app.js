@@ -67,6 +67,7 @@ server.get('/post-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     let isLogged = (req.params.isLogged === "logged");
     const commentsCollection = await dbo.collection("comments").find().toArray();
+    console.log(commentsCollection[0])
     resp.render('post', {
         layout: 'index',
         title: 'View Post',

@@ -27,11 +27,11 @@
 
                     <div class="col post-actions-div">
                         <div class="score-count-div">
-                            <p class="score-count upvote-count">{{commentsCollection.upCount}}</p>
+                            <p class="score-count upvote-count">{{commentsCollection.postUpCount}}</p>
                         </div>
                         <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
                         <div class="score-count-div">
-                            <p class="score-count downvote-count">{{commentsCollection.downCount}}</p>
+                            <p class="score-count downvote-count">{{commentsCollection.postDownCount}}</p>
                         </div>
                         <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
                         <a  data-bs-toggle="modal" data-bs-target="#edit-post-modal" onclick="editPost()">
