@@ -6,12 +6,20 @@
             <div class="card post">
                 <div class="card-body">
                     <div class="container post-body-top-div">
-                        <div class="dp-div">
-                            <img src="{{commentsCollection.dpUrl}}" alt="">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="{{commentsCollection.dpUrl}}" alt="">
+                            </div>
+                            <a href="/profile-logged" class="text-decoration-none">
+                                <h3 class="post-username">{{{commentsCollection.postUser}}}</h3>
+                            </a>
+                            {{#if isEdited}}
+                            <p class="edit-indicator">Edited</p>
+                            {{/if}}
                         </div>
-                        <a href="/profile-logged" class="text-decoration-none">
-                            <h3 class="post-username">{{{commentsCollection.postUser}}}</h3>
-                        </a>
+                        <div class="tag">
+                            <p>General</p>
+                        </div>
                     </div>
                     <h2 class="post-title">
                         <a href="post-logged.html" class="text-decoration-none text-reset">
@@ -28,11 +36,11 @@
                         <div class="score-count-div">
                             <p class="score-count upvote-count">{{commentsCollection.postUpCount}}</p>
                         </div>
-                        <i class="bi bi-arrow-up-short post-icon h1" ></i>
+                        <i class="bi bi-arrow-up-short post-icon h1"></i>
                         <div class="score-count-div">
                             <p class="score-count downvote-count">{{commentsCollection.postDownCount}}</p>
                         </div>
-                        <i class="bi bi-arrow-down-short post-icon h1" ></i>
+                        <i class="bi bi-arrow-down-short post-icon h1"></i>
                         <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
                         </a>
@@ -62,15 +70,18 @@
                     <div class="card post">
                         <div class="card-body">
                             <div class="container post-body-top-div">
-                                <div class="dp-div">
-                                    <img src="{{dpUrl}}" alt="">
+                                <div class="group">
+                                    <div class="dp-div">
+                                        <img src="{{dpUrl}}" alt="">
+                                    </div>
+                                    <a href="/profile-logged" class="text-decoration-none">
+                                        <h3 class="post-username">{{user}}</h3>
+                                    </a>
+                                    {{#if isEdited}}
+                                    <p class="edit-indicator">Edited</p>
+                                    {{/if}}
                                 </div>
-                                <a href="/profile-logged" class="text-decoration-none">
-                                    <h3 class="post-username">{{user}}</h3>
-                                </a>
-                                {{#if isEdited}}
-                                <p class="edit-indicator">Edited</p>
-                                {{/if}}
+
                             </div>
                             <p class="card-text post-body-text">
                                 {{commentContent}}
@@ -96,12 +107,15 @@
                                 {{#each replies}}
                                 <div class="card-body">
                                     <div class="container post-body-top-div">
-                                        <div class="dp-div">
-                                            <img src="{{dpUrl}}" alt="">
+                                        <div class="group">
+                                            <div class="dp-div">
+                                                <img src="{{dpUrl}}" alt="">
+                                            </div>
+                                            <a href="/profile-logged" class="text-decoration-none">
+                                                <h3 class="post-username">{{user}}</h3>
+                                            </a>
                                         </div>
-                                        <a href="/profile-logged" class="text-decoration-none">
-                                            <h3 class="post-username">{{user}}</h3>
-                                        </a>
+
                                     </div>
                                     <p class="card-text post-body-text">
                                         <span class="reply-tag">

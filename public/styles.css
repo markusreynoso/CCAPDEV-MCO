@@ -29,6 +29,10 @@ p, h1 {
     font-family: 'Poppins';
 }
 
+h1.comment-section{
+    user-select: none;
+}
+
 .reply-tag a{
     text-decoration: none;
     display: inline;
@@ -196,10 +200,25 @@ form.d-flex{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-bottom: 1%;
 }
 
+.post-body-top-div .group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.tag{
+    background-color: tomato;
+    padding: 0 8px;
+    border-radius: 12px;
+}
+
+div.tag p{
+    user-select: none;
+}
 
 .dp-div{
     height: 40px;
