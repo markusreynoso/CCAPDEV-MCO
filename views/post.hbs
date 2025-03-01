@@ -98,10 +98,20 @@
                                 <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
+                                {{#if showPencil}}
+                                <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                                    <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                                </a>
+                                {{/if}}
+                                {{#if showTrash}}
+                                <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                                    <i class="bi bi-trash post-icon h5 ms-4"></i>
+                                </a>
+                                {{/if}}
                             </div>
                         </div>
 
-                        {{#if replies.length}}
+                        {{#if hasReplies}}
                         <div class="replies">
                             <div class="card post reply">
                                 {{#each replies}}
@@ -139,6 +149,16 @@
                                         <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
+                                        {{#if showPencil}}
+                                        <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                                        </a>
+                                        {{/if}}
+                                        {{#if showTrash}}
+                                        <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                                            <i class="bi bi-trash post-icon h5 ms-4"></i>
+                                        </a>
+                                        {{/if}}
                                     </div>
                                 </div>
                                 {{/each}}
