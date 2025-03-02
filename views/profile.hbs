@@ -6,13 +6,16 @@
         <div class="card user-bio-div">
             <div class="card-body">
                 <div class="container post-body-top-div">
-                    <div class="dp-div">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                            alt="">
+                    <div class="group">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">LuisDaBeast</h3>
+                        </a>
                     </div>
-                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
-                        <h3 class="post-username">LuisDaBeast</h3>
-                    </a>
+
                 </div>
 
                 <p class="card-text post-body-text" id="bioContent">
@@ -26,11 +29,12 @@
                     <button type="button" class="btn btn-primary btn-sm">
                         Change picture
                     </button>
-                    <button type="button" class="btn btn-primary btn-sm mx-3"
-                    data-bs-toggle="modal" data-bs-target="#editBioModal" onclick="updateBio()">
+                    <button type="button" class="btn btn-primary btn-sm mx-3" data-bs-toggle="modal"
+                        data-bs-target="#editBioModal" onclick="updateBio()">
                         Edit Bio
                     </button>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='home-unlogged.html';">
+                    <button type="button" class="btn btn-primary btn-sm"
+                        onclick="window.location.href='home-unlogged.html';">
                         Logout
                     </button>
                 </div>
@@ -67,13 +71,16 @@
         <div class="profile card post">
             <div class="card-body">
                 <div class="container post-body-top-div">
-                    <div class="dp-div">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                            alt="">
+                    <div class="group">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                alt="">
+                        </div>
+                        <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                            <h3 class="post-username">{{user}}</h3>
+                        </a>
                     </div>
-                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
-                        <h3 class="post-username">{{user}}</h3>
-                    </a>
+
                 </div>
                 <h2 class="post-title">
                     <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
@@ -124,9 +131,9 @@
                 </h2>
 
                 <p class="card-text post-body-text">
-                    Why do snacks taste better at midnight, 
+                    Why do snacks taste better at midnight,
                     but as soon as I finish eating while in the bed laying, the regret hits hard?
-                    
+
                 </p>
 
 
@@ -164,8 +171,9 @@
                 </h2>
 
                 <p class="card-text post-body-text">
-                    I was supposed to clean my room. Instead, 
-                    I spent two hours watching videos on how to organize a room, and I still haven't started cleaning it.
+                    I was supposed to clean my room. Instead,
+                    I spent two hours watching videos on how to organize a room, and I still haven't started cleaning
+                    it.
                     Productivity? Debatable.
                 </p>
 
@@ -183,7 +191,7 @@
             </div>
 
         </div> --}}
-        
+
         <!-- Post 4 -->
 
         {{!-- <div class="profile card post">
@@ -206,7 +214,7 @@
                 <p class="card-text post-body-text">
 
                     I wanna drink less coffee because it harms me, but I get migraines when I don't. Hmmmmmmmmmmmm
-                    
+
                 </p>
 
 
@@ -244,10 +252,13 @@
 
                 <p class="card-text post-body-text">
 
-                    Why is it that when I’m trying to sleep, my brain suddenly decides to hit me with the most random thoughts? Like, who invented the first clock? 
-                    How did they know what time it was to set it? What if our concept of time is just slightly off because some guy 500 years ago miscounted?
-                    And don’t even get me started on the fact that every odd number has an ‘e’ in it. Think about it. One, three, five, seven, nine… You’re welcome.
-                    
+                    Why is it that when I’m trying to sleep, my brain suddenly decides to hit me with the most random
+                    thoughts? Like, who invented the first clock?
+                    How did they know what time it was to set it? What if our concept of time is just slightly off
+                    because some guy 500 years ago miscounted?
+                    And don’t even get me started on the fact that every odd number has an ‘e’ in it. Think about it.
+                    One, three, five, seven, nine… You’re welcome.
+
                 </p>
 
 
@@ -270,25 +281,25 @@
     </div>
 </div>
 
-    <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
-            placeholder="Describe yourself"></textarea>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
+                    placeholder="Describe yourself"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
-    </div>
-</div> 
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
