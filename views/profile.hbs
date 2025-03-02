@@ -1,0 +1,299 @@
+{{> navbar logged=logged }}
+
+
+<div class="container">
+    <div class="col-12" id="profile">
+        <div class="card user-bio-div">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">LuisDaBeast</h3>
+                    </a>
+                </div>
+
+                <p class="card-text post-body-text" id="bioContent">
+                    I’ve always believed that if you’re going to do something, you should aim to be the best at
+                    it—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered
+                    the details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or
+                    luck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.
+                </p>
+
+                <div class="container user-bio-bottom-div">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        Change picture
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm mx-3"
+                    data-bs-toggle="modal" data-bs-target="#editBioModal" onclick="updateBio()">
+                        Edit Bio
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='home-unlogged.html';">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="posts-comments-div">
+            <div id="profileposts-posts-div">
+                <a href="profile-posts.html" class="text-decoration-none text-reset" target="_blank">
+                    Posts
+                </a>
+
+            </div>
+
+            <div id="profileposts-comments-div">
+                <a href="profile-comments-logged.html" class="text-decoration-none text-reset">
+                    Comments
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container user-profile-posts">
+
+    <!--Posts-->
+    <div class="col-10" id="posts">
+
+
+        {{#each posts}}
+        <!-- Post i -->
+        <div class="profile card post">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">{{user}}</h3>
+                    </a>
+                </div>
+                <h2 class="post-title">
+                    <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                        {{title}}
+                    </a>
+                </h2>
+
+                <p class="card-text post-body-text">
+                    {{postContent}}
+                </p>
+
+
+                <div class="col post-actions-div">
+                    <div class="score-count-div">
+                        <p class="score-count upvote-count">{{upCount}}</p>
+                    </div>
+                    <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                    <div class="score-count-div">
+                        <p class="score-count downvote-count">{{downCount}}</p>
+                    </div>
+                    <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        {{/each}}
+
+        <!-- Post 2-->
+
+        {{!-- <div class="profile card post">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">LuisDaBeast</h3>
+                    </a>
+                </div>
+                <h2 class="post-title">
+                    <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                        Midnight Snack Regrets
+                    </a>
+                </h2>
+
+                <p class="card-text post-body-text">
+                    Why do snacks taste better at midnight, 
+                    but as soon as I finish eating while in the bed laying, the regret hits hard?
+                    
+                </p>
+
+
+                <div class="col post-actions-div">
+                    <div class="score-count-div">
+                        <p class="score-count upvote-count">420</p>
+                    </div>
+                    <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                    <div class="score-count-div">
+                        <p class="score-count downvote-count">69</p>
+                    </div>
+                    <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                </div>
+            </div>
+
+        </div> --}}
+
+        <!-- Post 3 -->
+
+        {{!-- <div class="profile card post">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">LuisDaBeast</h3>
+                    </a>
+                </div>
+                <h2 class="post-title">
+                    <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                        The Art of Procrastination
+                    </a>
+                </h2>
+
+                <p class="card-text post-body-text">
+                    I was supposed to clean my room. Instead, 
+                    I spent two hours watching videos on how to organize a room, and I still haven't started cleaning it.
+                    Productivity? Debatable.
+                </p>
+
+
+                <div class="col post-actions-div">
+                    <div class="score-count-div">
+                        <p class="score-count upvote-count">420</p>
+                    </div>
+                    <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                    <div class="score-count-div">
+                        <p class="score-count downvote-count">69</p>
+                    </div>
+                    <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                </div>
+            </div>
+
+        </div> --}}
+        
+        <!-- Post 4 -->
+
+        {{!-- <div class="profile card post">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">LuisDaBeast</h3>
+                    </a>
+                </div>
+                <h2 class="post-title">
+                    <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                        Caffeine: My Toxic Relationship
+                    </a>
+                </h2>
+
+                <p class="card-text post-body-text">
+
+                    I wanna drink less coffee because it harms me, but I get migraines when I don't. Hmmmmmmmmmmmm
+                    
+                </p>
+
+
+                <div class="col post-actions-div">
+                    <div class="score-count-div">
+                        <p class="score-count upvote-count">420</p>
+                    </div>
+                    <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                    <div class="score-count-div">
+                        <p class="score-count downvote-count">69</p>
+                    </div>
+                    <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                </div>
+            </div>
+
+        </div> --}}
+
+        <!-- Post 5 -->
+        {{!-- <div class="profile card post">
+            <div class="card-body">
+                <div class="container post-body-top-div">
+                    <div class="dp-div">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                            alt="">
+                    </div>
+                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                        <h3 class="post-username">LuisDaBeast</h3>
+                    </a>
+                </div>
+                <h2 class="post-title">
+                    <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                        Shower Thoughts at 2 AM
+                    </a>
+                </h2>
+
+                <p class="card-text post-body-text">
+
+                    Why is it that when I’m trying to sleep, my brain suddenly decides to hit me with the most random thoughts? Like, who invented the first clock? 
+                    How did they know what time it was to set it? What if our concept of time is just slightly off because some guy 500 years ago miscounted?
+                    And don’t even get me started on the fact that every odd number has an ‘e’ in it. Think about it. One, three, five, seven, nine… You’re welcome.
+                    
+                </p>
+
+
+                <div class="col post-actions-div">
+                    <div class="score-count-div">
+                        <p class="score-count upvote-count">420</p>
+                    </div>
+                    <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                    <div class="score-count-div">
+                        <p class="score-count downvote-count">69</p>
+                    </div>
+                    <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                </div>
+            </div>
+
+        </div> --}}
+
+
+
+    </div>
+</div>
+
+    <!-- Modal -->
+<div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
+            placeholder="Describe yourself"></textarea>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+<script src="card.js"></script>
+<script src="write.js"></script>
+<script src="bio.js"></script>

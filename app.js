@@ -49,6 +49,21 @@ server.get('/home-:isLogged', async function (req, resp) {
     });
 })
 
+server.get('/profile-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    const postsCollection = await dbo.collection("posts").find().toArray();
+    const filteredPosts = postsCollection.filter(post => post.user === "LuisDaBeast"); // Filter posts
+
+    let isLogged = (req.params.isLogged === "logged");
+    resp.render('profile', {
+        layout: 'index',
+        title: 'AskAway - Profile',
+        logged: true, // testing islogged here
+        posts: filteredPosts
+    });
+});
+
+
 server.get('/login', function (req, resp) {
     resp.render('login', {
         layout: 'index',
