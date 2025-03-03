@@ -30,8 +30,8 @@
                         <button type="button" class="btn btn-primary btn-sm">
                             Change picture
                         </button>
-                        <button type="button" class="btn btn-primary btn-sm mx-3" data-bs-toggle="modal"
-                            data-bs-target="#editBioModal" onclick="updateBio()">
+                        <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-bio-btn" data-bs-toggle="modal"
+                            data-bs-target="#editBioModal">
                             Edit Bio
                         </button>
                         <button type="button" class="btn btn-primary btn-sm"
@@ -183,7 +183,7 @@
         </div>
     </div>
 
-    <!-- Edit io modal -->
+    <!-- Edit bio modal -->
     <div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -193,8 +193,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
-                        placeholder="Describe yourself"></textarea>
+                    <textarea name="text-field" id="bio-text-area" class="form-control" 
+                    rows="10"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
