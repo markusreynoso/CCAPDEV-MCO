@@ -104,11 +104,19 @@ server.get('/login', function (req, resp) {
     })
 })
 
+server.post('/login', async function (req, resp) {
+    return resp.redirect('/home-logged');
+})
+
 server.get('/register', function (req, resp) {
     resp.render('register', {
         layout: 'index',
         title: 'AskAway - Register',
     })
+})
+
+server.post('/register', async function (req, resp) {
+    return resp.redirect('/home-logged');
 })
 
 server.get('/post-:isLogged', async function (req, resp) {

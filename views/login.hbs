@@ -3,7 +3,7 @@
         <div class="login-register-title">
             <h1>Login</h1><br />
         </div>
-        <form>
+        <form method="post" action="/login">
             <label for="username-field">
                 <p>Username:</p>
             </label><br>
@@ -12,9 +12,10 @@
                 <p>Password:</p>
             </label><br>
             <input type="password" class="registration-field" id="password-field" name="fname"><br>
+            <div class="registration-bottom-div">
+                <button type="submit" class="btn btn-primary btn-sm" >Login</button>
+            </div>
         </form>
-        <div class="registration-bottom-div">
-            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/home-logged'">Login</button>
-        </div>
+        
     </div>
 </div>
