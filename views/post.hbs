@@ -10,7 +10,7 @@
                             <div class="dp-div">
                                 <img src="{{commentsCollection.dpUrl}}" alt="">
                             </div>
-                            <a href="/profile-logged" class="text-decoration-none">
+                            <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none">
                                 <h3 class="post-username">{{{commentsCollection.postUser}}}</h3>
                             </a>
                             {{#if isEdited}}
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <h2 class="post-title">
-                        <a href="post-logged.html" class="text-decoration-none text-reset">
+                        <a href="/post-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset">
                             {{commentsCollection.title}}
                         </a>
                     </h2>
@@ -79,7 +79,7 @@
                                             <div class="dp-div">
                                                 <img src="{{dpUrl}}" alt="">
                                             </div>
-                                            <a href="/profile-logged" class="text-decoration-none">
+                                            <a href="/profile-posts-logged" class="text-decoration-none">
                                                 <h3 class="post-username">{{user}}</h3>
                                             </a>
                                             {{#if isEdited}}
@@ -129,7 +129,7 @@
                                                         <div class="dp-div">
                                                             <img src="{{dpUrl}}" alt="">
                                                         </div>
-                                                        <a href="/profile-logged" class="text-decoration-none">
+                                                        <a href="/profile-posts-logged" class="text-decoration-none">
                                                             <h3 class="post-username">{{user}}</h3>
                                                         </a>
                                                     </div>
@@ -137,7 +137,7 @@
                                                 </div>
                                                 <p class="card-text post-body-text">
                                                     <span class="reply-tag">
-                                                        <a href="/profile-logged">
+                                                        <a href="/profile-posts-logged">
                                                             {{repliedTo}}
                                                         </a>
                                                     </span>
@@ -189,7 +189,7 @@
                                             <div class="dp-div">
                                                 <img src="{{dpUrl}}" alt="">
                                             </div>
-                                            <a href="/profile-logged" class="text-decoration-none">
+                                            <a href="/profile-posts-unlogged" class="text-decoration-none">
                                                 <h3 class="post-username">{{user}}</h3>
                                             </a>
                                             {{#if isEdited}}
@@ -229,7 +229,7 @@
                                                         <div class="dp-div">
                                                             <img src="{{dpUrl}}" alt="">
                                                         </div>
-                                                        <a href="/profile-logged" class="text-decoration-none">
+                                                        <a href="/profile-posts-unlogged" class="text-decoration-none">
                                                             <h3 class="post-username">{{user}}</h3>
                                                         </a>
                                                     </div>
@@ -237,7 +237,7 @@
                                                 </div>
                                                 <p class="card-text post-body-text">
                                                     <span class="reply-tag">
-                                                        <a href="/profile-logged">
+                                                        <a href="/profile-posts-unlogged">
                                                             {{repliedTo}}
                                                         </a>
                                                     </span>
