@@ -46,14 +46,16 @@
 
             <div id="posts-comments-div">
                 <div id="profileposts-posts-div">
-                    <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset" target="_blank">
+                    <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
+                        class="text-decoration-none text-reset" target="_blank">
                         Posts
                     </a>
 
                 </div>
 
                 <div id="profileposts-comments-div">
-                    <a href="/profile-comments-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset">
+                    <a href="/profile-comments-{{#if logged}}logged{{else}}unlogged{{/if}}"
+                        class="text-decoration-none text-reset">
                         Comments
                     </a>
                 </div>
@@ -69,113 +71,113 @@
         <div class="col-10" id="posts">
 
             {{#if logged}}
-                {{#each posts}}
+            {{#each posts}}
 
-                    {{#if (eq user "LuisDaBeast")}}
-                    <!-- Post i -->
-                    <div class="profile card post">
-                        <div class="card-body">
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                            alt="">
-                                    </div>
-                                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
-                                        <h3 class="post-username">{{user}}</h3>
-                                    </a>
-                                </div>
-
+            {{#if (eq user "LuisDaBeast")}}
+            <!-- Post i -->
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                    alt="">
                             </div>
-                            <h2 class="post-title">
-                                <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
-                                    {{title}}
-                                </a>
-                            </h2>
-
-                            <p class="card-text post-body-text">
-                                {{postContent}}
-                            </p>
-
-
-                            <div class="col post-actions-div">
-                                <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
-                                <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-
-                                
-                                <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
-                                    <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
-                                </a>
-
-                                <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
-                                    <i class="bi bi-trash post-icon h5 ms-4"></i>
-                                </a>
-                                
-
-                            </div>
+                            <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                                <h3 class="post-username">{{user}}</h3>
+                            </a>
                         </div>
 
                     </div>
-                    {{/if}}
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            {{title}}
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        {{postContent}}
+                    </p>
 
 
-                {{/each}}
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">{{upCount}}</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">{{downCount}}</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+
+
+                        <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                        </a>
+
+                        <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                            <i class="bi bi-trash post-icon h5 ms-4"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+
+            </div>
+            {{/if}}
+
+
+            {{/each}}
 
             {{else}}
-                {{#each posts}}
+            {{#each posts}}
 
-                    {{#if (eq user "LuisDaBeast")}}
-                    <!-- Post i -->
-                    <div class="profile card post">
-                        <div class="card-body">
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                            alt="">
-                                    </div>
-                                    <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
-                                        <h3 class="post-username">{{user}}</h3>
-                                    </a>
-                                </div>
-
+            {{#if (eq user "LuisDaBeast")}}
+            <!-- Post i -->
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                    alt="">
                             </div>
-                            <h2 class="post-title">
-                                <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
-                                    {{title}}
-                                </a>
-                            </h2>
-
-                            <p class="card-text post-body-text">
-                                {{postContent}}
-                            </p>
-
-
-                            <div class="col post-actions-div">
-                                <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
-                                <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
-                                
-
-                            </div>
+                            <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                                <h3 class="post-username">{{user}}</h3>
+                            </a>
                         </div>
 
                     </div>
-                    {{/if}}
+                    <h2 class="post-title">
+                        <a href="post-logged.html" class="text-decoration-none text-reset" target="_blank">
+                            {{title}}
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        {{postContent}}
+                    </p>
 
 
-                {{/each}}
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count">{{upCount}}</p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">{{downCount}}</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+
+
+                    </div>
+                </div>
+
+            </div>
+            {{/if}}
+
+
+            {{/each}}
             {{/if}}
 
         </div>
@@ -211,16 +213,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="edit-post-modal">Edit Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <textarea name="text-field" id="edit-post-title-area" class="form-control"
-                        rows="1"></textarea>
+                    <textarea name="text-field" id="edit-post-title-area" class="form-control" rows="1"></textarea>
                 </div>
                 <div class="modal-body">
-                    <textarea name="text-field" id="edit-post-text-area" class="form-control"
-                        rows="10"></textarea>
+                    <textarea name="text-field" id="edit-post-text-area" class="form-control" rows="10"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -234,14 +233,13 @@
 
 <!-- Marker Post delete modal -->
 <form action="">
-    <div class="modal fade modal-md" id="delete-post-modal" tabindex="-1"
-        aria-labelledby="editBioModalLabel" aria-hidden="true">
+    <div class="modal fade modal-md" id="delete-post-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="edit-post-modal">Delete Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Are you sure?
