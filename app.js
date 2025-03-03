@@ -7,11 +7,30 @@ const bodyParser = require('body-parser')
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+// const handlebars = require('express-handlebars');
+// server.set('view engine', 'hbs');
+// server.engine('hbs', handlebars.engine({
+//     extname: 'hbs'
+// }));
+
+
+
 const handlebars = require('express-handlebars');
+// Create Handlebars instance with helpers
+const hbs = handlebars.create({
+    extname: 'hbs',
+    helpers: {
+        eq: function (a, b) {
+            return a === b;
+        }
+    }
+});
+
+// Set up Handlebars with Express
+server.engine('hbs', hbs.engine);
 server.set('view engine', 'hbs');
-server.engine('hbs', handlebars.engine({
-    extname: 'hbs'
-}));
+
+
 
 server.use(express.static('public'));
 
@@ -49,17 +68,31 @@ server.get('/home-:isLogged', async function (req, resp) {
     });
 })
 
-server.get('/profile-:isLogged', async function (req, resp) {
+server.get('/profile-posts-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     const postsCollection = await dbo.collection("posts").find().toArray();
-    const filteredPosts = postsCollection.filter(post => post.user === "LuisDaBeast"); // Filter posts
+    // const filteredPosts = postsCollection.filter(post => post.user === "LuisDaBeast"); // Filter posts
 
     let isLogged = (req.params.isLogged === "logged");
-    resp.render('profile', {
+    resp.render('profile-posts', {
         layout: 'index',
         title: 'AskAway - Profile',
-        logged: true, // testing islogged here
-        posts: filteredPosts
+        logged: isLogged, 
+        posts: postsCollection
+    });
+});
+
+server.get('/profile-comments-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    const commentsCollection = await dbo.collection("comments").find().toArray();
+
+    let isLogged = (req.params.isLogged === "logged");
+
+    resp.render('profile-comments', {
+        layout: 'index',
+        title: 'AskAway - Profile',
+        logged: isLogged, 
+        commentsCollection : commentsCollection[0]
     });
 });
 

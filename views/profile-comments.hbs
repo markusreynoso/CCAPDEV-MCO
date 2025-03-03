@@ -1,0 +1,194 @@
+{{> navbar logged=logged }}
+
+<div class="margin-top-wrapper">
+    <div class="container">
+        <div class="col-12" id="profile">
+            <div class="card user-bio-div">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                    alt="">
+                            </div>
+                            <a href="profile-posts-logged.html" class="text-decoration-none" target="_blank">
+                                <h3 class="post-username">LuisDaBeast</h3>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <p class="card-text post-body-text" id="bioContent">
+                        I’ve always believed that if you’re going to do something, you should aim to be the best at
+                        it—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered
+                        the details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or
+                        luck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.
+                    </p>
+
+                    {{#if logged}}
+                    <div class="container user-bio-bottom-div">
+                        <button type="button" class="btn btn-primary btn-sm">
+                            Change picture
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm mx-3" data-bs-toggle="modal"
+                            data-bs-target="#editBioModal" onclick="updateBio()">
+                            Edit Bio
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm"
+                            onclick="window.location.href='/home-unlogged'">
+                            Logout
+                        </button>
+                    </div>
+                    {{/if}}
+
+                </div>
+            </div>
+
+
+            <div id="posts-comments-div">
+                <div id="profilecomments-posts-div">
+                    <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset">
+                        Posts
+                    </a>
+
+                </div>
+
+                <div id="profilecomments-comments-div">
+                    <a href="/profile-comments-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset">
+                        Comments
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+        <div class="container user-profile-posts">
+
+        <!--Comments-->
+        <div class="col-10" id="comments">
+
+            <!-- dapat maglagay ng for loop dito kapag multiple na yung posts with comments-->
+            <!-- Comment i -->
+
+            <div class="profile card post">
+                <div class="card-body">
+
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src={{commentsCollection.dpUrl}}
+                                    alt="">
+                            </div>
+                            <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none" target="_blank">
+                                <h3 class="post-username">{{commentsCollection.postUser}}</h3>
+                            </a>
+                        </div>
+                        
+                    </div>
+                    
+
+                    <h2 class="post-title">
+                        <a href="/post-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none text-reset" target="_blank">
+                            {{commentsCollection.title}}
+                        </a>
+                    </h2>
+
+                    <div class="replies">
+
+                        <div class="card post reply">
+                            {{#each commentsCollection.comments}}
+
+                            
+                                {{#if (eq user "LuisDaBeast")}}
+
+                                    <div class="card-body">
+                                        <p class="card-text post-body-text">
+                                            {{commentContent}}
+                                        </p>
+                                    </div>
+                                    
+
+                                {{/if}}
+
+                                {{#each replies}}
+
+                                    {{#if (eq user "LuisDaBeast")}}
+
+                                        <div class="card-body">
+                                            <p class="card-text post-body-text">
+                                                {{repliedTo}} {{replyContent}}
+                                            </p>
+
+                                            <!-- <div class="col post-actions-div">
+                                                <div class="score-count-div">
+                                                    <p class="score-count upvote-count">{{upCount}}</p>
+                                                </div>
+                                                <i class="bi bi-arrow-up-short post-icon h1" onclick="updateScores(this, 'upvote')"></i>
+                                                <div class="score-count-div">
+                                                    <p class="score-count downvote-count">{{downCount}}</p>
+                                                </div>
+                                                <i class="bi bi-arrow-down-short post-icon h1" onclick="updateScores(this, 'downvote')"></i>
+                                            </div> -->
+
+                                        </div>
+
+                                    {{/if}}
+
+                                {{/each}}
+                                    
+                                
+                            {{/each}}
+
+                        </div>
+                        
+
+                    </div>
+                    
+
+                    
+
+                </div>
+
+            </div>
+            
+
+          
+
+        </div>
+        
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
+                        placeholder="Describe yourself"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+<script src="card.js"></script>
+<script src="write.js"></script>
+<script src="bio.js"></script>

@@ -41,12 +41,16 @@
                             <p class="score-count downvote-count">{{commentsCollection.postDownCount}}</p>
                         </div>
                         <i class="bi bi-arrow-down-short post-icon h1"></i>
+
+                        {{#if logged}}
                         <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
                         </a>
                         <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
                             <i class="bi bi-trash post-icon h5 ms-4"></i>
                         </a>
+                        {{/if}}
+
                     </div>
                 </div>
 
@@ -66,45 +70,9 @@
 
 
                 <div id="comments">
-                    {{#each commentsCollection.comments}}
-                    <div class="card post">
-                        <div class="card-body">
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="{{dpUrl}}" alt="">
-                                    </div>
-                                    <a href="/profile-logged" class="text-decoration-none">
-                                        <h3 class="post-username">{{user}}</h3>
-                                    </a>
-                                    {{#if isEdited}}
-                                    <p class="edit-indicator">Edited</p>
-                                    {{/if}}
-                                </div>
-
-                            </div>
-                            <p class="card-text post-body-text">
-                                {{commentContent}}
-                            </p>
-                            <div class="col post-actions-div">
-                                <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-up-short post-icon h1"></i>
-                                <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-down-short post-icon h1"></i>
-                                <a data-bs-toggle="modal" data-bs-target="#reply-modal">
-                                    <i class="bi bi-reply post-icon h3"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        {{#if replies.length}}
-                        <div class="replies">
-                            <div class="card post reply">
-                                {{#each replies}}
+                    {{#if logged}}
+                        {{#each commentsCollection.comments}}
+                            <div class="card post">
                                 <div class="card-body">
                                     <div class="container post-body-top-div">
                                         <div class="group">
@@ -114,16 +82,14 @@
                                             <a href="/profile-logged" class="text-decoration-none">
                                                 <h3 class="post-username">{{user}}</h3>
                                             </a>
+                                            {{#if isEdited}}
+                                            <p class="edit-indicator">Edited</p>
+                                            {{/if}}
                                         </div>
 
                                     </div>
                                     <p class="card-text post-body-text">
-                                        <span class="reply-tag">
-                                            <a href="/profile-logged">
-                                                {{repliedTo}}
-                                            </a>
-                                        </span>
-                                        {{replyContent}}
+                                        {{commentContent}}
                                     </p>
                                     <div class="col post-actions-div">
                                         <div class="score-count-div">
@@ -134,19 +100,175 @@
                                             <p class="score-count downvote-count">{{downCount}}</p>
                                         </div>
                                         <i class="bi bi-arrow-down-short post-icon h1"></i>
-                                        <div>
-                                        </div>
+                                        
                                         <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
+                                        
+
+                                        {{#if (eq user "LuisDaBeast")}}
+                                            <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                                                <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                                            </a>
+
+                                            <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                                                <i class="bi bi-trash post-icon h5 ms-4"></i>
+                                            </a>
+                                        {{/if}}
+
                                     </div>
                                 </div>
-                                {{/each}}
+
+                                {{#if replies.length}}
+                                    <div class="replies">
+                                        <div class="card post reply">
+                                            {{#each replies}}
+                                            <div class="card-body">
+                                                <div class="container post-body-top-div">
+                                                    <div class="group">
+                                                        <div class="dp-div">
+                                                            <img src="{{dpUrl}}" alt="">
+                                                        </div>
+                                                        <a href="/profile-logged" class="text-decoration-none">
+                                                            <h3 class="post-username">{{user}}</h3>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <p class="card-text post-body-text">
+                                                    <span class="reply-tag">
+                                                        <a href="/profile-logged">
+                                                            {{repliedTo}}
+                                                        </a>
+                                                    </span>
+                                                    {{replyContent}}
+                                                </p>
+                                                <div class="col post-actions-div">
+                                                    <div class="score-count-div">
+                                                        <p class="score-count upvote-count">{{upCount}}</p>
+                                                    </div>
+                                                    <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                                    <div class="score-count-div">
+                                                        <p class="score-count downvote-count">{{downCount}}</p>
+                                                    </div>
+                                                    <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                                    <div>
+                                                    </div>
+                                                    
+                                                    <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                                        <i class="bi bi-reply post-icon h3"></i>
+                                                    </a>
+
+                                                    {{#if (eq user "LuisDaBeast")}}
+                                                        <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                                                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                                                        </a>
+
+                                                        <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                                                            <i class="bi bi-trash post-icon h5 ms-4"></i>
+                                                        </a>
+                                                    {{/if}}
+
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                {{/if}}
                             </div>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/each}}
+                        {{/each}}
+
+
+                    {{else}}
+
+                        {{#each commentsCollection.comments}}
+                            <div class="card post">
+                                <div class="card-body">
+                                    <div class="container post-body-top-div">
+                                        <div class="group">
+                                            <div class="dp-div">
+                                                <img src="{{dpUrl}}" alt="">
+                                            </div>
+                                            <a href="/profile-logged" class="text-decoration-none">
+                                                <h3 class="post-username">{{user}}</h3>
+                                            </a>
+                                            {{#if isEdited}}
+                                            <p class="edit-indicator">Edited</p>
+                                            {{/if}}
+                                        </div>
+
+                                    </div>
+                                    <p class="card-text post-body-text">
+                                        {{commentContent}}
+                                    </p>
+                                    <div class="col post-actions-div">
+                                        <div class="score-count-div">
+                                            <p class="score-count upvote-count">{{upCount}}</p>
+                                        </div>
+                                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                        <div class="score-count-div">
+                                            <p class="score-count downvote-count">{{downCount}}</p>
+                                        </div>
+                                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                        {{#if logged}}
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
+                                        {{/if}}
+
+                                    </div>
+                                </div>
+
+                                {{#if replies.length}}
+                                    <div class="replies">
+                                        <div class="card post reply">
+                                            {{#each replies}}
+                                            <div class="card-body">
+                                                <div class="container post-body-top-div">
+                                                    <div class="group">
+                                                        <div class="dp-div">
+                                                            <img src="{{dpUrl}}" alt="">
+                                                        </div>
+                                                        <a href="/profile-logged" class="text-decoration-none">
+                                                            <h3 class="post-username">{{user}}</h3>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <p class="card-text post-body-text">
+                                                    <span class="reply-tag">
+                                                        <a href="/profile-logged">
+                                                            {{repliedTo}}
+                                                        </a>
+                                                    </span>
+                                                    {{replyContent}}
+                                                </p>
+                                                <div class="col post-actions-div">
+                                                    <div class="score-count-div">
+                                                        <p class="score-count upvote-count">{{upCount}}</p>
+                                                    </div>
+                                                    <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                                    <div class="score-count-div">
+                                                        <p class="score-count downvote-count">{{downCount}}</p>
+                                                    </div>
+                                                    <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                                    <div>
+                                                    </div>
+                                                    {{#if logged}}
+                                                    <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                                        <i class="bi bi-reply post-icon h3"></i>
+                                                    </a>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        {{/each}}
+
+                    {{/if}}
                 </div>
             </div>
 
