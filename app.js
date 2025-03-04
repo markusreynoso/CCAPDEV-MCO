@@ -105,6 +105,9 @@ server.get('/login', function (req, resp) {
 })
 
 server.post('/login', async function (req, resp) {
+    console.log("For demonstration")
+    console.log(req.body.username);
+    console.log(req.body.password);
     return resp.redirect('/home-logged');
 })
 
@@ -116,6 +119,10 @@ server.get('/register', function (req, resp) {
 })
 
 server.post('/register', async function (req, resp) {
+    console.log("For demonstration")
+    console.log(req.body.username);
+    console.log(req.body.password);
+    console.log(req.body.confirmPassword);
     return resp.redirect('/home-logged');
 })
 
