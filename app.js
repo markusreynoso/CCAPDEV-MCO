@@ -77,7 +77,7 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
     resp.render('profile-posts', {
         layout: 'index',
         title: 'AskAway - Profile',
-        logged: isLogged, 
+        logged: isLogged,
         posts: postsCollection
     });
 });
@@ -91,33 +91,35 @@ server.get('/profile-comments-:isLogged', async function (req, resp) {
     resp.render('profile-comments', {
         layout: 'index',
         title: 'AskAway - Profile',
-        logged: isLogged, 
-        commentsCollection : commentsCollection[0]
+        logged: isLogged,
+        commentsCollection: commentsCollection[0]
     });
 });
-
 
 server.get('/login', function (req, resp) {
     resp.render('login', {
         layout: 'index',
         title: 'AskAway - Login',
     })
-})
-
-server.post('/login', async function (req, resp) {
-    return resp.redirect('/home-logged');
-})
+});
 
 server.get('/register', function (req, resp) {
     resp.render('register', {
         layout: 'index',
         title: 'AskAway - Register',
     })
+});
+
+server.post('/home-logged', async function (req, resp) {
+    // Just to demonstrate functionality; obviously we don't do this for the real thing
+    if (req.body.username !== undefined) console.log(req.body.username);
+    if (req.body.password !== undefined) console.log(req.body.password);
+    if (req.body.confirmPassword !== undefined) console.log(req.body.confirmPassword);
+
+    // Since validation is not yet required, simply redirect
+    resp.redirect('/home-logged');
 })
 
-server.post('/register', async function (req, resp) {
-    return resp.redirect('/home-logged');
-})
 
 server.get('/post-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
@@ -132,11 +134,11 @@ server.get('/post-:isLogged', async function (req, resp) {
 })
 
 // TODO ideas
-    // collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
-    // current user is luisthebeast. Can be derived from the session/token MCO3
-    // Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-    // Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-    // Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
+// current user is luisthebeast. Can be derived from the session/token MCO3
+// Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
 
 
 const port = 3000;
