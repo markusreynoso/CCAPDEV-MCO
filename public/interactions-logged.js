@@ -100,7 +100,7 @@ $(document).ready(function () {
     });
 
     $("#edit-bio-btn").click(function() {
-        let bio = $('#bioContent').text().trim();
+        let bio = $('#bioContent').text().trim().replace(/\s+/g, ' ');
         $("#bio-text-area").html(bio);
 
     });
