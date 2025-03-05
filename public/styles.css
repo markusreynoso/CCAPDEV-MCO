@@ -115,11 +115,12 @@ form.d-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 
 .write-box {
     background-color: var(--dark);
-    height: 270px;
+    height: 100%;
     padding: 20px;
 }
 
@@ -137,14 +138,14 @@ form.d-flex {
 }
 
 .write-titlearea {
-    height: 20%;
+    height: 45px;
     font-weight: 700;
     overflow-y: hidden;
 }
 
 
 .write-textarea {
-    height: 80%;
+    height: 200px;
 }
 
 .write-textarea:focus,
