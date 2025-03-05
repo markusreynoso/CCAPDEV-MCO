@@ -1,3 +1,5 @@
+// Express boilerplates
+
 const express = require('express');
 const server = express();
 
@@ -5,36 +7,144 @@ const bodyParser = require('body-parser')
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+// const handlebars = require('express-handlebars');
+// server.set('view engine', 'hbs');
+// server.engine('hbs', handlebars.engine({
+//     extname: 'hbs'
+// }));
+
+
+
 const handlebars = require('express-handlebars');
+// Create Handlebars instance with helpers
+const hbs = handlebars.create({
+    extname: 'hbs',
+    helpers: {
+        eq: function (a, b) {
+            return a === b;
+        }
+    }
+});
+
+// Set up Handlebars with Express
+server.engine('hbs', hbs.engine);
 server.set('view engine', 'hbs');
-server.engine('hbs', handlebars.engine({
-    extname: 'hbs'
-}));
+
+
 
 server.use(express.static('public'));
 
-server.get('/', function(req, resp){
+// MongoDB boilerplates
+
+const { MongoClient } = require('mongodb');
+const databaseURL = "mongodb://127.0.0.1:27017/";
+const mongoClient = new MongoClient(databaseURL);
+
+// Main
+
+const databaseName = "MCO";
+
+async function initialConnection() {
+    let con = await mongoClient.connect();
+    const dbo = mongoClient.db(databaseName);
+}
+
+initialConnection();
+
+
+server.get('/', function (req, resp) {
+    resp.redirect('/home-unlogged');
+})
+
+server.get('/home-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    const postsCollection = await dbo.collection("posts").find().toArray();
+    let isLogged = (req.params.isLogged === "logged");
     resp.render('home', {
         layout: 'index',
         title: 'AskAway - Home',
-        logged: false
-    })
+        logged: isLogged,
+        posts: postsCollection
+    });
 })
 
-server.get('/home-logged', function(req, resp){
-    resp.render('home', {
+server.get('/profile-posts-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    const postsCollection = await dbo.collection("posts").find().toArray();
+    // const filteredPosts = postsCollection.filter(post => post.user === "LuisDaBeast"); // Filter posts
+
+    let isLogged = (req.params.isLogged === "logged");
+    resp.render('profile-posts', {
         layout: 'index',
-        title: 'AskAway - Home',
-        logged: true
-    })
-})
+        title: 'AskAway - Profile',
+        logged: isLogged, 
+        posts: postsCollection
+    });
+});
 
-server.get('/login', function(req, resp){
+server.get('/profile-comments-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    const commentsCollection = await dbo.collection("comments").find().toArray();
+
+    let isLogged = (req.params.isLogged === "logged");
+
+    resp.render('profile-comments', {
+        layout: 'index',
+        title: 'AskAway - Profile',
+        logged: isLogged, 
+        commentsCollection : commentsCollection[0]
+    });
+});
+
+
+server.get('/login', function (req, resp) {
     resp.render('login', {
         layout: 'index',
         title: 'AskAway - Login',
     })
 })
+
+server.post('/login', async function (req, resp) {
+    console.log("For demonstration")
+    console.log(req.body.username);
+    console.log(req.body.password);
+    return resp.redirect('/home-logged');
+})
+
+server.get('/register', function (req, resp) {
+    resp.render('register', {
+        layout: 'index',
+        title: 'AskAway - Register',
+    })
+})
+
+server.post('/register', async function (req, resp) {
+    console.log("For demonstration")
+    console.log(req.body.username);
+    console.log(req.body.password);
+    console.log(req.body.confirmPassword);
+    return resp.redirect('/home-logged');
+})
+
+server.get('/post-:isLogged', async function (req, resp) {
+    const dbo = mongoClient.db(databaseName);
+    let isLogged = (req.params.isLogged === "logged");
+    const commentsCollection = await dbo.collection("comments").find().toArray();
+    resp.render('post', {
+        layout: 'index',
+        title: 'View Post',
+        logged: isLogged,
+        commentsCollection: commentsCollection[0]
+    })
+})
+
+// TODO ideas
+    // collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
+    // current user is luisthebeast. Can be derived from the session/token MCO3
+    // Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+    // Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+    // Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+
 
 const port = 3000;
 server.listen(port, function () {

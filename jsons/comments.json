@@ -1,0 +1,147 @@
+[
+  {
+    "_id": {
+      "$oid": "67bc87de16350e278a7a0938"
+    },
+    "comments": [
+      {
+        "_id": "67bc87de16350e278a7aaaaa",
+        "user": "intrusive_thoughts",
+        "isEdited": false,
+        "commentContent": "Wow, that's amazing!",
+        "upCount": 420,
+        "downCount": 69,
+        "dpUrl": "https://i1.sndcdn.com/artworks-000480365457-2t079z-t1080x1080.jpg",
+        "hasReplies": true,
+        "replies": [
+          {
+            "_id": "67bc87de16350e278a7aaaaa-e79ce0fa614d44e4ac91d657d3ba7e4d",
+            "user": "dantesssss",
+            "isEdited": false,
+            "repliedTo": "@intrusive_thoughts",
+            "replyContent": "I shall follow your footsteps my idol Beast.",
+            "upCount": 420,
+            "downCount": 69,
+            "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
+          },
+          
+          {
+            "_id": "67bc87de16350e278a7aaaaa-e79ce0fa614d44e4ac91d657d3ba7e4e",
+            "user": "LuisDaBeast",
+            "isEdited": false,
+            "repliedTo": "@dantesssss",
+            "replyContent": "Thank you guys for reading my story, I will continue beasting.",
+            "upCount": 420,
+            "downCount": 69,
+            "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+          }
+        ]
+      },
+      {
+        "_id": "67bc87de16350e278a7aaaab",
+        "user": "therockobama",
+        "isEdited": false,
+        "commentContent": "I have to say that I was a wrestler, then I became the president of the U.S. Your story inspired me to pursue different careers: astronaut, doctor, mechanic, fireman, and more hehe!",
+        "upCount": 420,
+        "downCount": 69,
+        "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
+        "hasReplies": true,
+        "replies": [
+          {
+            "_id": "67bc87de16350e278a7aaaab-e79ce0fa614d44e4ac91d657d3ba7e4d",
+            "user": "dantesss",
+            "isEdited": false,
+            "repliedTo": "@therockobama",
+            "replyContent": "Woah, that's amazing my idol! I have to say that I am motivated to improve myself every day and hopefully one day become like you, good sir!",
+            "upCount": 420,
+            "downCount": 69,
+            "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
+          },
+          {
+            "_id": "67bc87de16350e278a7aaaab-e79ce0fa614d44e4ac91d657d3ba7e4e",
+            "user": "LuisDaBeast",
+            "isEdited": false,
+            "repliedTo": "@intrusive_thoughts",
+            "replyContent": "Yes guys, pursue them all!",
+            "upCount": 420,
+            "downCount": 69,
+            "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+          }
+        ]
+      },
+      {
+        "_id": "67bc87de16350e278a7aaaac",
+        "user": "Thomas_morato",
+        "isEdited": false,
+        "commentContent": "Ok haha",
+        "upCount": 130,
+        "downCount": 32,
+        "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
+        "hasReplies": "true",
+        "replies": [
+          {
+            "_id": "67bc87de16350e278a7aaaac-e79ce0fa614d44e4ac91d657d3ba7e4d",
+            "user": "dantesssss",
+            "isEdited": false,
+            "repliedTo": "@Thomas_morato",
+            "replyContent": "wew",
+            "upCount": 123,
+            "downCount": 3,
+            "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
+          }
+        ]
+      },
+      {
+        "_id": "67bc87de16350e278a7aaaad",
+        "user": "LuisDaBeast",
+        "isEdited": true,
+        "commentContent": "I'm so amazing!",
+        "upCount": 12,
+        "downCount": 123,
+        "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+        "hasReplies": true,
+        "replies": [
+          {
+            "_id": "67bc87de16350e278a7aaaad-e79ce0fa614d44e4ac91d657d3ba7e4d",
+            "user": "mark_henryy",
+            "isEdited": false,
+            "repliedTo": "@LuisDaBeast",
+            "replyContent": "Ah hindi naman masyado",
+            "upCount": 123,
+            "downCount": 1233,
+            "dpUrl": "https://m.media-amazon.com/images/M/MV5BOTg3MTIyOTY0M15BMl5BanBnXkFtZTgwNzE1Nzc5MjE@._V1_FMjpg_UX1000_.jpg"
+          }
+        ]
+      },
+      {
+        "_id": "67bc87de16350e278a7aaaae",
+        "user": "mark_henryy",
+        "isEdited": false,
+        "commentContent": "I don't care hahaha",
+        "upCount": 1,
+        "downCount": 3,
+        "dpUrl": "https://m.media-amazon.com/images/M/MV5BOTg3MTIyOTY0M15BMl5BanBnXkFtZTgwNzE1Nzc5MjE@._V1_FMjpg_UX1000_.jpg",
+        "hasReplies": true,
+        "replies": [
+          {
+            "_id": "67bc87de16350e278a7aaaae-e79ce0fa614d44e4ac91d657d3ba7e4d",
+            "user": "optimumpride",
+            "isEdited": false,
+            "repliedTo": "@mark_henryy",
+            "replyContent": "then why are u here -_-",
+            "upCount": 33,
+            "downCount": 12,
+            "dpUrl": "https://pbs.twimg.com/profile_images/1455515084998934536/oOC2B0x0_400x400.jpg"
+          }
+        ]
+      }
+    ],
+    "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+    "hasReplies": true,
+    "postBody": "I’ve always believed that if you’re going to do something, you should aim to be the best at it—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered the details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or luck. To me, it’s about discipline, focus, and a willingness to outwork everyone else. It hasn’t been easy. There were times when I doubted myself or felt like I wasn’t making progress, but I kept pushing through. I learned that success isn’t about talent alone; it’s about staying committed when others quit. Whether it’s refining my skills, staying up-to-date with trends, or analyzing where I can improve, I never stop grinding. Now, I’m at a point where I can confidently say I’m at the top of my game. It’s not just the results that prove it, but the respect I’ve earned from others in my field. It’s an amazing feeling knowing the effort I’ve put in has paid off, but I’m not stopping here. If there’s one thing I’ve learned, it’s that there’s always room to grow. Excellence isn’t a destination; it’s a mindset. What about you? How do you keep striving to be the best in what you do? Let’s share ideas and push each other even further.",
+    "postDownCount": 69,
+    "postUpCount": 420,
+    "postUser": "LuisDaBeast",
+    "title": "My experiences in living as a beast"
+  }
+]
