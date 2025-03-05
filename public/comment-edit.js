@@ -18,9 +18,5 @@ $(document).ready(function() {
         $("#edit-comment-text-area").html(content);
     });
 
-    $("#edit-bio-btn").click(function() {
-        let bio = $('#bioContent').text().trim().replace(/\s+/g, ' ');
-        $("#bio-text-area").html(bio);
-
-    });
+    
 })
