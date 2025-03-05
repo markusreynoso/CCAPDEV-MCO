@@ -101,14 +101,21 @@ server.get('/login', function (req, resp) {
     resp.render('login', {
         layout: 'index',
         title: 'AskAway - Login',
+        error: false
     })
 })
 
 server.post('/login', async function (req, resp) {
-    console.log("For demonstration")
-    console.log(req.body.username);
-    console.log(req.body.password);
-    return resp.redirect('/home-logged');
+    credentialsAreCorrect = true // This is hardcoded for now
+    if (credentialsAreCorrect){
+        return resp.redirect('/home-logged');
+    } else{
+        return resp.render('login', {
+            layout: 'index',
+            title: 'AskAway - Login',
+            error: true
+        })
+    }
 })
 
 server.get('/register', function (req, resp) {
