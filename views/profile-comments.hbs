@@ -27,11 +27,12 @@
 
                     {{#if logged}}
                     <div class="container user-bio-bottom-div">
-                        <button type="button" class="btn btn-primary btn-sm">
+                        <button type="button" id="change-pic-btn" class="btn btn-primary btn-sm">
                             Change picture
                         </button>
-                        <button type="button" class="btn btn-primary btn-sm mx-3" data-bs-toggle="modal"
-                            data-bs-target="#editBioModal" onclick="updateBio()">
+                        <input type="file" id="img-input" name="img" accept="image/*" style="display: none;">
+                        <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-bio-btn"
+                            data-bs-toggle="modal" data-bs-target="#editBioModal">
                             Edit Bio
                         </button>
                         <button type="button" class="btn btn-primary btn-sm"
