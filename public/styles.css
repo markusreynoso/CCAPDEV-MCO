@@ -493,6 +493,7 @@ a.login-redirect {
 }
 
 #edit-post-text-area,
+#edit-post-tag-area,
 #edit-post-title-area {
     resize: none !important;
 }
