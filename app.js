@@ -56,6 +56,7 @@ server.get('/', function (req, resp) {
     resp.redirect('/home-unlogged');
 })
 
+
 server.get('/home-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     const postsCollection = await dbo.collection("posts").find().toArray();
@@ -154,6 +155,13 @@ server.get('/post-:isLogged', async function (req, resp) {
         title: 'View Post',
         logged: isLogged,
         commentsCollection: commentsCollection[0]
+    })
+})
+
+server.get('/about', async function (req, resp) {
+    resp.render('about', {
+        layout: 'index',
+        title: 'About page',
     })
 })
 
