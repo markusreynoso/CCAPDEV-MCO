@@ -10,6 +10,7 @@
     --light: #D4C8C8;
     --blue: #4da1a9;
     --purple: #8367C7;
+    --raspberry: #d81e5b;
 }
 
 /* General */
@@ -228,7 +229,7 @@ form.d-flex {
 }
 
 div.tag {
-    background-color: tomato;
+    background-color: var(--raspberry);
     padding: 0 8px;
     border-radius: 12px;
 }
