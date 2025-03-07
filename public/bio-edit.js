@@ -8,4 +8,9 @@ $(document).ready(function () {
     $("#change-pic-btn").click(function () {
         $("#img-input").click();
     })
+
+    $("#edit-username-btn").click(function () {
+        let currUsername = $("h3.post-username").first().text()
+        $("#username-text-area").val(currUsername)
+    })
 })

@@ -27,8 +27,12 @@
 
                     {{#if logged}}
                     <div class="container user-bio-bottom-div">
+                        <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-username-btn"
+                            data-bs-toggle="modal" data-bs-target="#editUsernameModal">
+                            Edit username
+                        </button>
                         <button type="button" id="change-pic-btn" class="btn btn-primary btn-sm">
-                            Change picture
+                            Edit picture
                         </button>
                         <input type="file" id="img-input" name="img" accept="image/*" style="display: none;">
                         <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-bio-btn"
@@ -125,29 +129,13 @@
                                     {{repliedTo}} {{replyContent}}
                                 </p>
                             </div>
-
                             {{/if}}
-
                             {{/each}}
-
-
                             {{/each}}
-
                         </div>
-
-
                     </div>
-
-
-
-
                 </div>
-
             </div>
-
-
-
-
         </div>
 
     </div>
@@ -166,6 +154,26 @@
                 <div class="modal-body">
                     <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"
                         placeholder="Describe yourself"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-lg" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="text-field" id="username-text-area" class="form-control" rows="1"
+                        placeholder="What should we call you?"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
