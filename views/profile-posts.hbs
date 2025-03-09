@@ -11,7 +11,8 @@
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                     alt="">
                             </div>
-                            <a href="profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none" target="_blank">
+                            <a href="profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
+                                class="text-decoration-none">
                                 <h3 class="post-username">LuisDaBeast</h3>
                             </a>
                         </div>
@@ -52,7 +53,7 @@
             <div id="posts-comments-div">
                 <div id="profileposts-posts-div">
                     <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
-                        class="text-decoration-none text-reset" target="_blank">
+                        class="text-decoration-none text-reset">
                         Posts
                     </a>
 
@@ -76,42 +77,7 @@
         <div class="col-10" id="posts">
 
             {{#if logged}}
-                {{#each posts}}
-
-                    {{#if (eq user "LuisDaBeast")}}
-                    <!-- Post i -->
-                    <div class="profile card post">
-                        <div class="card-body">
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                            alt="">
-                                    </div>
-                                    <a href="/post-logged" class="text-decoration-none" target="_blank">
-                                        <h3 class="post-username">{{user}}</h3>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <h2 class="post-title">
-                                <a href="/post-logged" class="text-decoration-none text-reset" target="_blank">
-                                    {{title}}
-                                </a>
-                            </h2>
-
-                    <p class="card-text post-body-text mb-4">
-                        {{postContent}}
-                    </p>
-
-                        </div>
-
-                    </div>
-                    {{/if}}
-                {{/each}}
-
-            {{else}}
-                {{#each posts}}
+            {{#each posts}}
 
             {{#if (eq user "LuisDaBeast")}}
             <!-- Post i -->
@@ -123,14 +89,49 @@
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                     alt="">
                             </div>
-                            <a href="/profile-posts-unlogged" class="text-decoration-none" target="_blank">
+                            <a href="/post-logged" class="text-decoration-none">
                                 <h3 class="post-username">{{user}}</h3>
                             </a>
                         </div>
 
                     </div>
                     <h2 class="post-title">
-                        <a href="/post-unlogged" class="text-decoration-none text-reset" target="_blank">
+                        <a href="/post-logged" class="text-decoration-none text-reset">
+                            {{title}}
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text mb-4">
+                        {{postContent}}
+                    </p>
+
+                </div>
+
+            </div>
+            {{/if}}
+            {{/each}}
+
+            {{else}}
+            {{#each posts}}
+
+            {{#if (eq user "LuisDaBeast")}}
+            <!-- Post i -->
+            <div class="profile card post">
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
+                                    alt="">
+                            </div>
+                            <a href="/profile-posts-unlogged" class="text-decoration-none">
+                                <h3 class="post-username">{{user}}</h3>
+                            </a>
+                        </div>
+
+                    </div>
+                    <h2 class="post-title">
+                        <a href="/post-unlogged" class="text-decoration-none text-reset">
                             {{title}}
                         </a>
                     </h2>
@@ -152,10 +153,10 @@
                     </div> --}}
                 </div>
 
-                    </div>
-                    {{/if}}
+            </div>
+            {{/if}}
 
-                {{/each}}
+            {{/each}}
             {{/if}}
 
         </div>

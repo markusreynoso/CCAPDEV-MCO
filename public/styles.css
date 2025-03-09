@@ -528,3 +528,8 @@ div.modal-body {
 .limit-text-10 {
     -webkit-line-clamp: 10;
 }
+
+.actions-form{
+    display: flex;
+    flex-direction: row;
+}
