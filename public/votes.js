@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-    // Logic for updating scores when upvoting and downvoting
     for (let voteType of ["up", "down"]) {
         $(`.bi-arrow-${voteType}-short`).click(function () {
             let $parent = $(this).parent();
@@ -58,50 +56,4 @@ $(document).ready(function () {
             }
         })
     };
-
-    // Post editing logic
-    $(".bi-pencil").click(function(){
-        let parent = $(this).closest(".post");
-        let postContent = parent.find("p.post-body-text").text().trim();
-        let postTitle = parent.find("h2.post-title").text().trim();
-        
-        if ($(this).hasClass("post-edit-flag")){
-            $("#edit-post-text-area").val(postContent);
-            $("#edit-post-title-area").val(postTitle);
-        }
-    });
-
-    // Replying logic
-    $(".bi-reply").click(function(){
-        let parent = $(this).closest(".card-body");
-        let replyingTo = parent.find("h3.post-username").text();
-        
-        $("#edit-reply-comment-text-area").val(`@${replyingTo} `)
-    });
-
-    // edit comment logic
-    $(".post-edit-flag").click(function() {
-        let id = $(this).attr("value");
-        let element = $(".card-body[value='" + id + "']") // $(".card-body[value='67bc87de16350e278a7aaaad']")
-                        .find('p.post-body-text');
-
-        let isComment = element.children().length === 0;
-        let content;
-        if (isComment) {
-            content = element.html().trim();
-        }
-
-        else {
-            let mention = element.children().find("a").html().trim();
-            content = mention + " " + element.clone().children().remove().end().text().trim();
-        }
-        
-        $("#edit-comment-text-area").html(content);
-    });
-
-    $("#edit-bio-btn").click(function() {
-        let bio = $('#bioContent').text().trim().replace(/\s+/g, ' ');
-        $("#bio-text-area").html(bio);
-
-    });
 })

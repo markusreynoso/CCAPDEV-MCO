@@ -56,6 +56,7 @@ server.get('/', function (req, resp) {
     resp.redirect('/home-unlogged');
 })
 
+
 server.get('/home-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     const postsCollection = await dbo.collection("posts").find().toArray();
@@ -77,7 +78,7 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
     resp.render('profile-posts', {
         layout: 'index',
         title: 'AskAway - Profile',
-        logged: isLogged, 
+        logged: isLogged,
         posts: postsCollection
     });
 });
@@ -91,24 +92,43 @@ server.get('/profile-comments-:isLogged', async function (req, resp) {
     resp.render('profile-comments', {
         layout: 'index',
         title: 'AskAway - Profile',
-        logged: isLogged, 
-        commentsCollection : commentsCollection[0]
+        logged: isLogged,
+        commentsCollection: commentsCollection[0]
     });
 });
 
 
-server.get('/login', function (req, resp) {
+server.get('/login', async function (req, resp) {
     resp.render('login', {
         layout: 'index',
         title: 'AskAway - Login',
+        error: false
     })
 })
 
 server.post('/login', async function (req, resp) {
-    console.log("For demonstration")
-    console.log(req.body.username);
-    console.log(req.body.password);
-    return resp.redirect('/home-logged');
+    const inputtedUsername = req.body.username;
+    const inputtedPassword = req.body.password;
+
+    const dbo = mongoClient.db(databaseName);
+    const match = await dbo.collection("users").findOne({ "username": inputtedUsername });
+
+    if (match == null) {
+        return resp.render('login', {
+            layout: 'index',
+            title: 'AskAway - Login',
+            error: true
+        })
+    }
+    if (match.password != inputtedPassword) {
+        return resp.render('login', {
+            layout: 'index',
+            title: 'AskAway - Login',
+            error: true
+        })
+    } else {
+        return resp.redirect('/home-logged');
+    }
 })
 
 server.get('/register', function (req, resp) {
@@ -119,10 +139,6 @@ server.get('/register', function (req, resp) {
 })
 
 server.post('/register', async function (req, resp) {
-    console.log("For demonstration")
-    console.log(req.body.username);
-    console.log(req.body.password);
-    console.log(req.body.confirmPassword);
     return resp.redirect('/home-logged');
 })
 
@@ -138,12 +154,19 @@ server.get('/post-:isLogged', async function (req, resp) {
     })
 })
 
+server.get('/about', async function (req, resp) {
+    resp.render('about', {
+        layout: 'index',
+        title: 'About page',
+    })
+})
+
 // TODO ideas
-    // collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
-    // current user is luisthebeast. Can be derived from the session/token MCO3
-    // Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-    // Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-    // Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
+// current user is luisthebeast. Can be derived from the session/token MCO3
+// Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
+// Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
 
 
 const port = 3000;

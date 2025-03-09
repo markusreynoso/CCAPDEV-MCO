@@ -16,6 +16,8 @@
                 <button type="submit" class="btn btn-primary btn-sm" >Login</button>
             </div>
         </form>
-        
+        {{#if error}}
+        <p>Incorrect username or password</p>
+        {{/if}}
     </div>
 </div>
