@@ -85,7 +85,7 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
 
 server.get('/profile-comments-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
-    const commentsCollection = await dbo.collection("comments").find().toArray();
+    const postsCollection = await dbo.collection("posts").find().toArray();
 
     let isLogged = (req.params.isLogged === "logged");
 
@@ -93,7 +93,7 @@ server.get('/profile-comments-:isLogged', async function (req, resp) {
         layout: 'index',
         title: 'AskAway - Profile',
         logged: isLogged,
-        commentsCollection: commentsCollection[0]
+        posts: postsCollection
     });
 });
 
@@ -145,12 +145,12 @@ server.post('/register', async function (req, resp) {
 server.get('/post-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     let isLogged = (req.params.isLogged === "logged");
-    const commentsCollection = await dbo.collection("comments").find().toArray();
+    const postsCollection = await dbo.collection("posts").find().toArray();
     resp.render('post', {
         layout: 'index',
         title: 'View Post',
         logged: isLogged,
-        commentsCollection: commentsCollection[0]
+        posts: postsCollection
     })
 })
 
