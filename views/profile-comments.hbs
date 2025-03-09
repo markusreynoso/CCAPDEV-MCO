@@ -11,7 +11,7 @@
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
                                     alt="">
                             </div>
-                            <a href="/post-logged" class="text-decoration-none" target="_blank">
+                            <a href="/post-{{#if logged}}logged{{else}}unlogged{{/if}}" class="text-decoration-none">
                                 <h3 class="post-username">LuisDaBeast</h3>
                             </a>
                         </div>
@@ -79,17 +79,22 @@
             <!-- dapat maglagay ng for loop dito kapag multiple na yung posts with comments-->
             <!-- Comment i -->
 
+            {{#if logged}}
+
+            {{#each posts}}
+
+            {{#if (eq user "LuisDaBeast")}}
+            {{#if hasReplies}}
             <div class="profile card post">
                 <div class="card-body">
 
                     <div class="container post-body-top-div">
                         <div class="group">
                             <div class="dp-div">
-                                <img src={{commentsCollection.dpUrl}} alt="">
+                                <img src={{dpUrl}} alt="">
                             </div>
-                            <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
-                                class="text-decoration-none" target="_blank">
-                                <h3 class="post-username">{{commentsCollection.postUser}}</h3>
+                            <a href="/profile-posts-logged" class="text-decoration-none">
+                                <h3 class="post-username">{{user}}</h3>
                             </a>
                         </div>
 
@@ -97,17 +102,15 @@
 
 
                     <h2 class="post-title">
-                        <a href="/post-{{#if logged}}logged{{else}}unlogged{{/if}}"
-                            class="text-decoration-none text-reset" target="_blank">
-                            {{commentsCollection.title}}
+                        <a href="/post-logged" class="text-decoration-none text-reset">
+                            {{title}}
                         </a>
                     </h2>
 
                     <div class="replies">
 
                         <div class="card post reply">
-                            {{#each commentsCollection.comments}}
-
+                            {{#each comments}}
 
                             {{#if (eq user "LuisDaBeast")}}
 
@@ -116,7 +119,6 @@
                                     {{commentContent}}
                                 </p>
                             </div>
-
 
                             {{/if}}
 
@@ -129,13 +131,87 @@
                                     {{repliedTo}} {{replyContent}}
                                 </p>
                             </div>
+
                             {{/if}}
+
                             {{/each}}
+
                             {{/each}}
                         </div>
                     </div>
                 </div>
             </div>
+            {{/if}}
+            {{/if}}
+
+            {{/each}}
+
+            {{else}}
+
+            {{#each posts}}
+
+            {{#if (eq user "LuisDaBeast")}}
+            {{#if hasReplies}}
+            <div class="profile card post">
+                <div class="card-body">
+
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src={{dpUrl}} alt="">
+                            </div>
+                            <a href="/profile-posts-unlogged" class="text-decoration-none">
+                                <h3 class="post-username">{{user}}</h3>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <h2 class="post-title">
+                        <a href="/post-unlogged" class="text-decoration-none text-reset">
+                            {{title}}
+                        </a>
+                    </h2>
+
+                    <div class="replies">
+
+                        <div class="card post reply">
+                            {{#each comments}}
+
+                            {{#if (eq user "LuisDaBeast")}}
+
+                            <div class="card-body">
+                                <p class="card-text post-body-text">
+                                    {{commentContent}}
+                                </p>
+                            </div>
+
+                            {{/if}}
+
+                            {{#each replies}}
+
+                            {{#if (eq user "LuisDaBeast")}}
+
+                            <div class="card-body">
+                                <p class="card-text post-body-text">
+                                    {{repliedTo}} {{replyContent}}
+                                </p>
+                            </div>
+
+                            {{/if}}
+
+                            {{/each}}
+
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/each}}
+            {{/if}}
         </div>
 
     </div>
