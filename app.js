@@ -36,7 +36,7 @@ server.use(express.static('public'));
 
 // MongoDB boilerplates
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const databaseURL = "mongodb://127.0.0.1:27017/";
 const mongoClient = new MongoClient(databaseURL);
 
@@ -59,7 +59,7 @@ server.get('/', function (req, resp) {
 
 server.get('/home-:isLogged', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
-    const postsCollection = await dbo.collection("posts").find().toArray();
+    const postsCollection = (await dbo.collection("posts").find().toArray()).reverse();
     let isLogged = (req.params.isLogged === "logged");
     resp.render('home', {
         layout: 'index',
@@ -67,6 +67,28 @@ server.get('/home-:isLogged', async function (req, resp) {
         logged: isLogged,
         posts: postsCollection
     });
+})
+
+server.post('/posts', async function(req, resp) {
+    req.body.user = "LuisDaBeast";
+    req.body.upCount = 0;
+    req.body.downCount = 0;
+    req.body.isEdited = false;
+    req.body.dpUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s";
+    req.body.comments = [];
+
+    const dbo = mongoClient.db(databaseName);
+    dbo.collection("posts").insertOne(
+        req.body,
+        function(err, res){
+            if (err) console.log(err);
+            
+        }
+    )
+
+    // resp.json(req.body);
+
+    resp.redirect("/home-logged");
 })
 
 server.get('/profile-posts-:isLogged', async function (req, resp) {
@@ -142,10 +164,11 @@ server.post('/register', async function (req, resp) {
     return resp.redirect('/home-logged');
 })
 
-server.get('/post-:isLogged', async function (req, resp) {
+server.get('/post-:isLogged/:id', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
+    let oid = getOid(req.params.id);
     let isLogged = (req.params.isLogged === "logged");
-    const postsCollection = await dbo.collection("posts").find().toArray();
+    const postsCollection = await dbo.collection("posts").find({_id : oid}).toArray();
     resp.render('post', {
         layout: 'index',
         title: 'View Post',
@@ -173,4 +196,14 @@ const port = 3000;
 server.listen(port, function () {
     console.log('Listening at port ' + port);
 });
+
+function getOid(oid){
+    let tester = /[0-9A-Fa-f]{6}/g;
+
+    if (tester.test(oid)){
+        return new ObjectId(oid + "");
+    }
+
+    return oid;
+}
 

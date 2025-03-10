@@ -2,9 +2,10 @@
 
 {{#if logged}}
 
+{{!-- Nag fofor loop ako pero isa lang laman ng posts --}}
 {{#each posts}}
 
-{{#if (eq idString "67cd4bebc25aba022227115a")}}
+
 <div class="margin-top-wrapper">
     <div class="container">
         <div class="col-12" id="posts">
@@ -23,7 +24,7 @@
                             {{/if}}
                         </div>
                         <div class="tag">
-                            <p>Motivation</p>
+                            <p>{{tag}}</p>
                         </div>
                     </div>
                     <h2 class="post-title">
@@ -354,7 +355,7 @@
 
     </div>
 </div>
-{{/if}}
+
 
 {{/each}}
 
@@ -363,7 +364,7 @@
 
 {{#each posts}}
 
-{{#if (eq idString "67cd4bebc25aba022227115a")}}
+
 <div class="margin-top-wrapper">
     <div class="container">
         <div class="col-12" id="posts">
@@ -667,7 +668,7 @@
 
     </div>
 </div>
-{{/if}}
+
 
 {{/each}}
 {{/if}}
