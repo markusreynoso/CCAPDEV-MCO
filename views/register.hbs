@@ -15,10 +15,12 @@
             <label for="confirmation-field" >
                 <p>Confirm Password:</p>
             </label><br>
-            <input type="password" class="registration-field" id="confirmation-field" name="confirmPassword" required><br>
+            <input type="password" class="registration-field" id="confirmation-field" required><br>
             
             <p id="register-warning">Check requirements</p>
-
+            {{#if error}}
+                <p>{{errorMessage}}</p>
+            {{/if}}
             <p>
             Already have an account? <span><a href="/login" class="login-redirect">Login</a></span>
             </p>

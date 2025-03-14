@@ -86,6 +86,7 @@ server.post('/posts', async function(req, resp) {
         }
     )
 
+
     // resp.json(req.body);
 
     resp.redirect("/home-logged");
@@ -161,7 +162,47 @@ server.get('/register', function (req, resp) {
 })
 
 server.post('/register', async function (req, resp) {
-    return resp.redirect('/home-logged');
+
+    const dbo = mongoClient.db(databaseName);
+
+    const userCollection = dbo.collection("users");
+    let username = req.body.username;
+    let password = req.body.password;
+
+    var user = {
+        username: username,
+        password: password
+    }
+
+    var isNew = await userCollection.findOne({"username": username}) == null;
+
+    if (isNew){
+
+        userCollection.insertOne(
+            user,
+            function(err, res){
+                if (err)
+                    resp.render('register', {
+                        layout: 'index',
+                        title: 'AskAway - Register',
+                        error: true,
+                        errorMessage: "Unexpected error occurred"
+                    });
+            }
+        )
+        return resp.redirect('/home-logged');
+    }
+
+    else {
+        resp.render('register', {
+            layout: 'index',
+            title: 'AskAway - Register',
+            error: true,
+            errorMessage: "Username already exists"
+        });
+    }
+
+    
 })
 
 server.get('/post-:isLogged/:id', async function (req, resp) {

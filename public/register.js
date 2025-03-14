@@ -15,8 +15,8 @@ $(document).ready(function() {
             $('#register-warning').hide();
         } else {
             $("#register-warning").show();
+            return false;
         }
-        return isValid;
     })
 })
 
@@ -38,7 +38,7 @@ function validateUsername(username){
         isValid = true;
     }
 
-    alert("Username: " + isValid)
+  
     return isValid;
 }
 
@@ -66,6 +66,5 @@ function validatePassword(pass1, pass2){
     let regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
     isValid = regex.test(pass1);
     
-    alert("password:" + isValid);
     return isValid;
 }
