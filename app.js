@@ -168,7 +168,7 @@ server.get('/post-:isLogged/:id', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     let oid = getOid(req.params.id);
     let isLogged = (req.params.isLogged === "logged");
-    const postsCollection = await dbo.collection("posts").find({_id : oid}).toArray();
+    const postsCollection = await dbo.collection("posts").find({_id : oid}).toArray(); // TODO: refactor because find by id is a single element, does not need an array
     resp.render('post', {
         layout: 'index',
         title: 'View Post',
@@ -177,6 +177,13 @@ server.get('/post-:isLogged/:id', async function (req, resp) {
     })
 })
 
+server.delete('/post-:isLogged/:id', async function(req, res) {
+    const dbo = mongoClient.db(databaseName);
+    let oid = getOid(req.params.id);
+    await dbo.collection("posts").deleteOne({_id : oid});
+
+    res.sendStatus(200);
+})
 server.get('/about', async function (req, resp) {
     resp.render('about', {
         layout: 'index',
