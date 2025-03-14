@@ -1,12 +1,14 @@
-<form action="/posts" method="post">
+<form id="create-post-form" action="/posts" method="post">
     <div class="container write-box-container">
         <div class="col-md-8 col-10 write-box">
             <textarea name="title" id="write-title-area" class="write-titlearea"
-                placeholder="Give your post a title"></textarea>
+                placeholder="Give your post a title (max 60 characters)" required></textarea>
             <textarea name="tag" id="tag-text-area" class="write-titlearea"
-                placeholder="Specify a tag"></textarea>
+                placeholder="Specify a tag (max 12 characters)" required></textarea>
             <textarea name="postContent" id="write-text-area" class="write-textarea"
-                placeholder="What's on your mind?"></textarea>
+                placeholder="What's on your mind?" required></textarea>
+
+            <p id="char-limit" hidden>Exceeded character limit</p>
             
         </div>
 
