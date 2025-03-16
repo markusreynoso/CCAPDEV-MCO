@@ -5,8 +5,10 @@ $(document).ready(function () {
 
     });
 
-    $("#change-pic-btn").click(function () {
-        $("#img-input").click();
+    $(".btn-select-dp").click(function(){
+        const imgUrl = $(this).attr('data-img-url');
+        //ToDo: Add logic here
+        // Send put http put request
     })
 
     $("#edit-username-btn").click(function () {
