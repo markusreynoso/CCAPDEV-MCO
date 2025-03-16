@@ -41,16 +41,58 @@ const databaseURL = "mongodb://127.0.0.1:27017/";
 const mongoClient = new MongoClient(databaseURL);
 
 // Main
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://127.0.0.1:27017/MCO");
 
-const databaseName = "MCO";
 
-async function initialConnection() {
-    let con = await mongoClient.connect();
-    const dbo = mongoClient.db(databaseName);
-}
+const userSchema = new mongoose.Schema({
+    username: { type: String },
+    password: { type: String }
+})
 
-initialConnection();
+const replySchema = new mongoose.Schema(
+    {
+        user: { type: String, required: true },
+        isEdited: { type: Boolean, default: false },
+        repliedTo: { type: String, required: true },
+        replyContent: { type: String, required: true },
+        upCount: { type: Number, default: 0 },
+        downCount: { type: Number, default: 0 },
+        dpUrl: { type: String }
+    },
+    { versionKey: false });
 
+const commentSchema = new mongoose.Schema(
+    {
+        user: { type: String, required: true },
+        isEdited: { type: Boolean, default: false },
+        commentContent: { type: String, required: true },
+        upCount: { type: Number, default: 0 },
+        downCount: { type: Number, default: 0 },
+        dpUrl: { type: String },
+        hasReplies: { type: Boolean, default: false },
+        replies: [replySchema]
+    },
+    { versionKey: false });
+
+const postSchema = new mongoose.Schema(
+    {
+        user: { type: String, required: true },
+        postContent: { type: String, required: true },
+        upCount: { type: Number, default: 0 },
+        downCount: { type: Number, default: 0 },
+        isEdited: { type: Boolean, default: false },
+        title: { type: String, required: true },
+        dpUrl: { type: String },
+        tag: { type: String },
+        hasReplies: { type: Boolean, default: false },
+        comments: [commentSchema],
+        idString: { type: String }
+    },
+    { versionKey: false });
+
+const postModel = mongoose.model('post', postSchema);
+const userModel = mongoose.model('user', userSchema);
 
 server.get('/', function (req, resp) {
     resp.redirect('/home-unlogged');
@@ -58,8 +100,7 @@ server.get('/', function (req, resp) {
 
 
 server.get('/home-:isLogged', async function (req, resp) {
-    const dbo = mongoClient.db(databaseName);
-    const postsCollection = (await dbo.collection("posts").find().toArray()).reverse();
+    const postsCollection = await postModel.find({}).lean();
     let isLogged = (req.params.isLogged === "logged");
     resp.render('home', {
         layout: 'index',
@@ -69,7 +110,7 @@ server.get('/home-:isLogged', async function (req, resp) {
     });
 })
 
-server.post('/posts', async function(req, resp) {
+server.post('/posts', async function (req, resp) {
     req.body.user = "LuisDaBeast";
     req.body.upCount = 0;
     req.body.downCount = 0;
@@ -80,9 +121,9 @@ server.post('/posts', async function(req, resp) {
     const dbo = mongoClient.db(databaseName);
     dbo.collection("posts").insertOne(
         req.body,
-        function(err, res){
+        function (err, res) {
             if (err) console.log(err);
-            
+
         }
     )
 
@@ -93,9 +134,7 @@ server.post('/posts', async function(req, resp) {
 })
 
 server.get('/profile-posts-:isLogged', async function (req, resp) {
-    const dbo = mongoClient.db(databaseName);
-    const postsCollection = await dbo.collection("posts").find().toArray();
-    // const filteredPosts = postsCollection.filter(post => post.user === "LuisDaBeast"); // Filter posts
+    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
 
     let isLogged = (req.params.isLogged === "logged");
     resp.render('profile-posts', {
@@ -133,8 +172,7 @@ server.post('/login', async function (req, resp) {
     const inputtedUsername = req.body.username;
     const inputtedPassword = req.body.password;
 
-    const dbo = mongoClient.db(databaseName);
-    const match = await dbo.collection("users").findOne({ "username": inputtedUsername });
+    const match = await userModel.findOne({ username: inputtedUsername, password: inputtedPassword }).lean();
 
     if (match == null) {
         return resp.render('login', {
@@ -162,35 +200,30 @@ server.get('/register', function (req, resp) {
 })
 
 server.post('/register', async function (req, resp) {
+    const username = req.body.username;
+    const password = req.body.password;
 
-    const dbo = mongoClient.db(databaseName);
-
-    const userCollection = dbo.collection("users");
-    let username = req.body.username;
-    let password = req.body.password;
-
-    var user = {
+    const user = {
         username: username,
         password: password
     }
 
-    var isNew = await userCollection.findOne({"username": username}) == null;
+    const isNew = await userModel.findOne({ "username": username }) == null;
 
-    if (isNew){
-
-        userCollection.insertOne(
-            user,
-            function(err, res){
-                if (err)
-                    resp.render('register', {
-                        layout: 'index',
-                        title: 'AskAway - Register',
-                        error: true,
-                        errorMessage: "Unexpected error occurred"
-                    });
-            }
-        )
-        return resp.redirect('/home-logged');
+    if (isNew) {
+        try {
+            let newUserInstance = await userModel(user);
+            await newUserInstance.save();
+            return resp.redirect('/home-logged');
+        }
+        catch (error) {
+            resp.render('register', {
+                layout: 'index',
+                title: 'AskAway - Register',
+                error: true,
+                errorMessage: "Unexpected error occurred"
+            });
+        }
     }
 
     else {
@@ -202,14 +235,14 @@ server.post('/register', async function (req, resp) {
         });
     }
 
-    
+
 })
 
 server.get('/post-:isLogged/:id', async function (req, resp) {
     const dbo = mongoClient.db(databaseName);
     let oid = getOid(req.params.id);
     let isLogged = (req.params.isLogged === "logged");
-    const postsCollection = await dbo.collection("posts").find({_id : oid}).toArray(); // TODO: refactor because find by id is a single element, does not need an array
+    const postsCollection = await dbo.collection("posts").find({ _id: oid }).toArray(); // TODO: refactor because find by id is a single element, does not need an array
     resp.render('post', {
         layout: 'index',
         title: 'View Post',
@@ -218,10 +251,10 @@ server.get('/post-:isLogged/:id', async function (req, resp) {
     })
 })
 
-server.delete('/post-:isLogged/:id', async function(req, res) {
+server.delete('/post-:isLogged/:id', async function (req, res) {
     const dbo = mongoClient.db(databaseName);
     let oid = getOid(req.params.id);
-    await dbo.collection("posts").deleteOne({_id : oid});
+    await dbo.collection("posts").deleteOne({ _id: oid });
 
     res.sendStatus(200);
 })
@@ -245,10 +278,10 @@ server.listen(port, function () {
     console.log('Listening at port ' + port);
 });
 
-function getOid(oid){
+function getOid(oid) {
     let tester = /[0-9A-Fa-f]{6}/g;
 
-    if (tester.test(oid)){
+    if (tester.test(oid)) {
         return new ObjectId(oid + "");
     }
 
