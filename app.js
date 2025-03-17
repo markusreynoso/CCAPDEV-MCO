@@ -29,9 +29,6 @@ const hbs = handlebars.create({
 // Set up Handlebars with Express
 server.engine('hbs', hbs.engine);
 server.set('view engine', 'hbs');
-
-
-
 server.use(express.static('public'));
 
 // MongoDB boilerplates
@@ -94,14 +91,31 @@ const postSchema = new mongoose.Schema(
 const postModel = mongoose.model('post', postSchema);
 const userModel = mongoose.model('user', userSchema);
 
+
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+
+server.use(session({
+    secret: 'a secret fruit',
+    saveUninitialized: true,
+    resave: false,
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://127.0.0.1:27017/MCO',
+        collectionName: 'mySession',
+        ttl: 60 * 60 // 1 hour in seconds
+    })
+}));
+
 server.get('/', function (req, resp) {
-    resp.redirect('/home-unlogged');
+    resp.redirect('/home');
 })
 
 
-server.get('/home-:isLogged', async function (req, resp) {
+server.get('/home', async function (req, resp) {
+    console.log(req.session.currUser);
     const postsCollection = await postModel.find({}).lean();
-    let isLogged = (req.params.isLogged === "logged");
+    let isLogged = (req.session.currUser != null);
     resp.render('home', {
         layout: 'index',
         title: 'AskAway - Home',
@@ -130,10 +144,11 @@ server.post('/posts', async function (req, resp) {
 
     // resp.json(req.body);
 
-    resp.redirect("/home-logged");
+    resp.redirect("/home");
 })
 
 server.get('/profile-posts-:isLogged', async function (req, resp) {
+    
     const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
 
     let isLogged = (req.params.isLogged === "logged");
@@ -176,21 +191,15 @@ server.post('/login', async function (req, resp) {
 
     const match = await userModel.findOne({ username: inputtedUsername, password: inputtedPassword }).lean();
 
-    if (match == null) {
+    if (!match) {
         return resp.render('login', {
             layout: 'index',
             title: 'AskAway - Login',
             error: true
-        })
-    }
-    if (match.password != inputtedPassword) {
-        return resp.render('login', {
-            layout: 'index',
-            title: 'AskAway - Login',
-            error: true
-        })
+        });
     } else {
-        return resp.redirect('/home-logged');
+        req.session.currUser = inputtedUsername;
+        return resp.redirect('/home');
     }
 })
 
