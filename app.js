@@ -1,5 +1,4 @@
-// Express boilerplates
-
+// Express ========================================================================================================================
 const express = require('express');
 const server = express();
 
@@ -7,15 +6,13 @@ const bodyParser = require('body-parser')
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-// const handlebars = require('express-handlebars');
-// server.set('view engine', 'hbs');
-// server.engine('hbs', handlebars.engine({
-//     extname: 'hbs'
-// }));
 
-
+// Handlebars =====================================================================================================================
 const handlebars = require('express-handlebars');
-// Create Handlebars instance with helpers
+server.engine('hbs', hbs.engine);
+server.set('view engine', 'hbs');
+server.use(express.static('public'));
+
 const hbs = handlebars.create({
     extname: 'hbs',
     helpers: {
@@ -25,18 +22,14 @@ const hbs = handlebars.create({
     }
 });
 
-// Set up Handlebars with Express
-server.engine('hbs', hbs.engine);
-server.set('view engine', 'hbs');
-server.use(express.static('public'));
 
-// MongoDB boilerplates
-
+// MongoDB =======================================================================================================================
 const { MongoClient, ObjectId } = require('mongodb');
 const databaseURL = "mongodb://127.0.0.1:27017/";
 const mongoClient = new MongoClient(databaseURL);
 
-// Main
+
+// Mongoose ======================================================================================================================
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://127.0.0.1:27017/MCO");
 
@@ -90,9 +83,10 @@ const postSchema = new mongoose.Schema(
 const postModel = mongoose.model('post', postSchema);
 const userModel = mongoose.model('user', userSchema);
 
+
+// Sessions ===================================================================================================================
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
 
 server.use(session({
     secret: 'a secret fruit',
@@ -101,14 +95,18 @@ server.use(session({
     store: MongoStore.create({
         mongoUrl: 'mongodb://127.0.0.1:27017/MCO',
         collectionName: 'mySession',
-        ttl: 60 * 60 // 1 hour in seconds
+        ttl: 60 * 60
     })
 }));
 
+
+// Main =======================================================================================================================
+
+
+// GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET-GET
 server.get('/', function (req, resp) {
     resp.redirect('/home');
 })
-
 
 server.get('/home', async function (req, resp) {
     const postsCollection = await postModel.find({}).lean();
@@ -160,6 +158,12 @@ server.get('/login', async function (req, resp) {
     })
 })
 
+server.get('/register', function (req, resp) {
+    resp.render('register', {
+        layout: 'index',
+        title: 'AskAway - Register',
+    })
+})
 
 server.get('/posts/:id', async function (req, resp) {
     let currUser = req.session.currUser
@@ -183,6 +187,8 @@ server.get('/about', async function (req, resp) {
     })
 })
 
+
+// POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST
 server.post('/posts', async function (req, resp) {
     req.body.user = "LuisDaBeast";
     req.body.upCount = 0;
@@ -221,12 +227,7 @@ server.post('/login', async function (req, resp) {
     }
 })
 
-server.get('/register', function (req, resp) {
-    resp.render('register', {
-        layout: 'index',
-        title: 'AskAway - Register',
-    })
-})
+
 
 server.post('/register', async function (req, resp) {
     const username = req.body.username;
@@ -268,7 +269,7 @@ server.post('/register', async function (req, resp) {
 })
 
 
-
+// DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/post-:isLogged/:id', async function (req, res) {
     const dbo = mongoClient.db(databaseName);
     let oid = getOid(req.params.id);
@@ -277,6 +278,18 @@ server.delete('/post-:isLogged/:id', async function (req, res) {
     res.sendStatus(200);
 })
 
+
+// End ========================================================================================================================
+
+function finalClose() {
+    console.log('Close connection at the end!');
+    mongoose.connection.close();
+    process.exit();
+}
+
+process.on('SIGTERM', finalClose);
+process.on('SIGINT', finalClose);
+process.on('SIGQUIT', finalClose);
 
 const port = 3000;
 server.listen(port, function () {
