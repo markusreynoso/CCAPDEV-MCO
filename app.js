@@ -14,7 +14,6 @@ server.use(express.urlencoded({ extended: true }));
 // }));
 
 
-
 const handlebars = require('express-handlebars');
 // Create Handlebars instance with helpers
 const hbs = handlebars.create({
@@ -91,7 +90,6 @@ const postSchema = new mongoose.Schema(
 const postModel = mongoose.model('post', postSchema);
 const userModel = mongoose.model('user', userSchema);
 
-
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
@@ -113,9 +111,8 @@ server.get('/', function (req, resp) {
 
 
 server.get('/home', async function (req, resp) {
-    console.log(req.session.currUser);
     const postsCollection = await postModel.find({}).lean();
-    let isLogged = (req.session.currUser != null);
+    let isLogged = (req.session.currUser != undefined);
     resp.render('home', {
         layout: 'index',
         title: 'AskAway - Home',
@@ -124,31 +121,8 @@ server.get('/home', async function (req, resp) {
     });
 })
 
-server.post('/posts', async function (req, resp) {
-    req.body.user = "LuisDaBeast";
-    req.body.upCount = 0;
-    req.body.downCount = 0;
-    req.body.isEdited = false;
-    req.body.dpUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s";
-    req.body.comments = [];
-
-    const dbo = mongoClient.db(databaseName);
-    dbo.collection("posts").insertOne(
-        req.body,
-        function (err, res) {
-            if (err) console.log(err);
-
-        }
-    )
-
-
-    // resp.json(req.body);
-
-    resp.redirect("/home");
-})
-
 server.get('/profile-posts-:isLogged', async function (req, resp) {
-    
+
     const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
 
     let isLogged = (req.params.isLogged === "logged");
@@ -159,6 +133,7 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
         posts: postsCollection
     });
 });
+
 
 server.get('/profile-comments-:isLogged', async function (req, resp) {
     // const dbo = mongoClient.db(databaseName);
@@ -184,6 +159,49 @@ server.get('/login', async function (req, resp) {
         error: false
     })
 })
+
+
+server.get('/posts/:id', async function (req, resp) {
+    let currUser = req.session.currUser
+    let isLogged = (currUser != undefined);
+    const thePost = await postModel.findById(req.params.id).lean();
+
+    resp.render('post', {
+        layout: 'index',
+        title: 'View Post',
+        logged: isLogged,
+        thePost: thePost,
+        currUser: currUser
+    })
+})
+
+
+server.get('/about', async function (req, resp) {
+    resp.render('about', {
+        layout: 'index',
+        title: 'About page',
+    })
+})
+
+server.post('/posts', async function (req, resp) {
+    req.body.user = "LuisDaBeast";
+    req.body.upCount = 0;
+    req.body.downCount = 0;
+    req.body.isEdited = false;
+    req.body.dpUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s";
+    req.body.comments = [];
+
+    const dbo = mongoClient.db(databaseName);
+    dbo.collection("posts").insertOne(
+        req.body,
+        function (err, res) {
+            if (err) console.log(err);
+
+        }
+    )
+    resp.redirect("/home");
+})
+
 
 server.post('/login', async function (req, resp) {
     const inputtedUsername = req.body.username;
@@ -249,18 +267,7 @@ server.post('/register', async function (req, resp) {
 
 })
 
-server.get('/post-:isLogged/:id', async function (req, resp) {
-    const dbo = mongoClient.db(databaseName);
-    let oid = getOid(req.params.id);
-    let isLogged = (req.params.isLogged === "logged");
-    const postsCollection = await dbo.collection("posts").find({ _id: oid }).toArray(); // TODO: refactor because find by id is a single element, does not need an array
-    resp.render('post', {
-        layout: 'index',
-        title: 'View Post',
-        logged: isLogged,
-        posts: postsCollection
-    })
-})
+
 
 server.delete('/post-:isLogged/:id', async function (req, res) {
     const dbo = mongoClient.db(databaseName);
@@ -270,12 +277,6 @@ server.delete('/post-:isLogged/:id', async function (req, res) {
     res.sendStatus(200);
 })
 
-server.get('/about', async function (req, resp) {
-    resp.render('about', {
-        layout: 'index',
-        title: 'About page',
-    })
-})
 
 const port = 3000;
 server.listen(port, function () {

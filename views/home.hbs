@@ -12,7 +12,7 @@
 
             {{#if logged}}
                 {{#each posts}}
-                    <div class="card post">
+                    <div class="card post" value={{idString}}>
                         <div class="card-body">
                             <div class="container post-body-top-div">
                                 <div class="group">
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <h2 class="post-title">
-                                <a href="/post-logged/{{_id}}" class="text-decoration-none text-reset">
+                                <a href="/posts/{{_id}}" class="text-decoration-none text-reset">
                                     {{title}}
                                 </a>
                             </h2>
@@ -60,7 +60,7 @@
 
             {{else}}
             {{#each posts}}
-            <div class="card post">
+            <div class="card post" value={{idString}}>
                 <div class="card-body">
                     <div class="container post-body-top-div">
                         <div class="group">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <h2 class="post-title">
-                        <a href="/post-unlogged/{{_id}}" class="text-decoration-none text-reset">
+                        <a href="/posts/{{idString}}" class="text-decoration-none text-reset">
                             {{title}}
                         </a>
                     </h2>
