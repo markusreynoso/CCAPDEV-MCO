@@ -146,8 +146,10 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
 });
 
 server.get('/profile-comments-:isLogged', async function (req, resp) {
-    const dbo = mongoClient.db(databaseName);
-    const postsCollection = await dbo.collection("posts").find().toArray();
+    // const dbo = mongoClient.db(databaseName);
+    // const postsCollection = await dbo.collection("posts").find().toArray();
+    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
+
 
     let isLogged = (req.params.isLogged === "logged");
 
@@ -258,20 +260,13 @@ server.delete('/post-:isLogged/:id', async function (req, res) {
 
     res.sendStatus(200);
 })
+
 server.get('/about', async function (req, resp) {
     resp.render('about', {
         layout: 'index',
         title: 'About page',
     })
 })
-
-// TODO ideas
-// collection =  mongodb get a post given user id (luis) -> returns post object, has comments, whose comments have replies
-// current user is luisthebeast. Can be derived from the session/token MCO3
-// Step 1. Evaluate main post. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-// Step 2. Evaluate all comments. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-// Step 2.1 Evaluate all replies to one comment. Is author == luisthebeast. If true, add new field isEditable = true, add new field isDeletable = true
-
 
 const port = 3000;
 server.listen(port, function () {
