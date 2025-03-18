@@ -9,10 +9,6 @@ server.use(express.urlencoded({ extended: true }));
 
 // Handlebars =====================================================================================================================
 const handlebars = require('express-handlebars');
-server.engine('hbs', hbs.engine);
-server.set('view engine', 'hbs');
-server.use(express.static('public'));
-
 const hbs = handlebars.create({
     extname: 'hbs',
     helpers: {
@@ -22,6 +18,9 @@ const hbs = handlebars.create({
     }
 });
 
+server.engine('hbs', hbs.engine);
+server.set('view engine', 'hbs');
+server.use(express.static('public'));
 
 // MongoDB =======================================================================================================================
 const { MongoClient, ObjectId } = require('mongodb');
@@ -111,12 +110,25 @@ server.get('/', function (req, resp) {
 server.get('/home', async function (req, resp) {
     const postsCollection = await postModel.find({}).lean();
     let isLogged = (req.session.currUser != undefined);
-    resp.render('home', {
-        layout: 'index',
-        title: 'AskAway - Home',
-        logged: isLogged,
-        posts: postsCollection
-    });
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean()
+    if (currUserObject != null) {
+        resp.render('home', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: postsCollection,
+            currUserDpUrl: currUserObject.dpUrl,
+            currUserUsername: currUserObject.username
+        });
+    } else {
+        resp.render('home', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: postsCollection,
+        });
+    }
+
 })
 
 server.get('/profile-posts-:isLogged', async function (req, resp) {
@@ -131,6 +143,29 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
         posts: postsCollection
     });
 });
+
+server.get('/users/:username/posts', async function(req, resp){
+    const allPosts = await postModel.find({'user': req.session.currUser}).lean();
+    let isLogged = (req.session.currUser != undefined);
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    if (currUserObject != null) {
+        resp.render('user-posts', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: allPosts,
+            currUserDpUrl: currUserObject.dpUrl,
+            currUserUsername: currUserObject.username
+        });
+    } else {
+        resp.render('user-posts', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: allPosts
+        });
+    }
+})
 
 
 server.get('/profile-comments-:isLogged', async function (req, resp) {
@@ -227,6 +262,15 @@ server.post('/login', async function (req, resp) {
     }
 })
 
+server.post('/logout', function (req, resp) {
+    req.session.destroy(function (err) {
+        if (err) {
+            console.error(err);
+            return resp.status(500).send('Error logging out');
+        }
+        resp.redirect('/home');
+    });
+});
 
 
 server.post('/register', async function (req, resp) {
