@@ -8,9 +8,6 @@
     <div class="container">
         <div class="col-12" id="posts">
 
-            <!---->
-
-            {{#if logged}}
                 {{#each posts}}
                     <div class="card post" value={{idString}}>
                         <div class="card-body">
@@ -20,7 +17,7 @@
                                         <img src="{{dpUrl}}" alt="">
                                     </div>
 
-                                    <a href="/profile-posts-logged" class="text-decoration-none">
+                                    <a href="/users/{{user}}/posts" class="text-decoration-none">
                                         <h3 class="post-username">{{user}}</h3>
                                     </a>
 
@@ -58,56 +55,6 @@
                     </div>
                 {{/each}}
 
-            {{else}}
-            {{#each posts}}
-            <div class="card post" value={{idString}}>
-                <div class="card-body">
-                    <div class="container post-body-top-div">
-                        <div class="group">
-                            <div class="dp-div">
-                                <img src="{{dpUrl}}" alt="">
-                            </div>
-
-                            <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                <h3 class="post-username">{{user}}</h3>
-                            </a>
-
-                            {{#if isEdited}}
-                            <p class="edit-indicator">Edited</p>
-                            {{/if}}
-                        </div>
-
-                        <div class="tag">
-                            <p>{{tag}}</p>
-                        </div>
-                    </div>
-                    <h2 class="post-title">
-                        <a href="/posts/{{idString}}" class="text-decoration-none text-reset">
-                            {{title}}
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        {{postContent}}
-                    </p>
-
-
-                    <form action="" method="post">
-                        <div class="col post-actions-div">
-                            <div class="score-count-div">
-                                <p class="score-count upvote-count">{{upCount}}</p>
-                            </div>
-                            <i class="bi bi-arrow-up-short post-icon h1"></i>
-                            <div class="score-count-div">
-                                <p class="score-count downvote-count">{{downCount}}</p>
-                            </div>
-                            <i class="bi bi-arrow-down-short post-icon h1"></i>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {{/each}}
-            {{/if}}
         </div>
     </div>
 </div>
