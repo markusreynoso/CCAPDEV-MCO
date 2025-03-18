@@ -1,4 +1,4 @@
-{{> navbar logged=logged }}
+{{> navbar logged=logged currUserObject=currUserObject}}
 
 <div class="margin-top-wrapper">
     <div class="container">
@@ -45,7 +45,7 @@
                             <i class="bi bi-arrow-down-short post-icon h1"></i>
                         </form>
 
-                        {{#if (eq thePost.user currUser)}}
+                        {{#if (eq thePost.user currUserObject.username)}}
                         {{!-- Put --}}
                         <form action="" method="put" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">

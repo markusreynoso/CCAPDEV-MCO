@@ -1,4 +1,4 @@
-{{> navbar logged=logged }}
+{{> navbar logged=logged currUserObject=currUserObject}}
 
 <div class="margin-top-wrapper">
     <div class="container">
@@ -8,25 +8,20 @@
                     <div class="container post-body-top-div">
                         <div class="group">
                             <div class="dp-div">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                    alt="">
+                                <img src="{{viewedUserObject.dpUrl}}" alt="">
                             </div>
-                            <a href="profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
-                                class="text-decoration-none">
-                                <h3 class="post-username">LuisDaBeast</h3>
+                            <a href="users/{{viewedUserObject.username}}/posts" class="text-decoration-none">
+                                <h3 class="post-username">{{viewedUserObject.username}}</h3>
                             </a>
                         </div>
 
                     </div>
 
                     <p class="card-text post-body-text" id="bioContent">
-                        I’ve always believed that if you’re going to do something, you should aim to be the best at
-                        it—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered
-                        the details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or
-                        luck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.
+                        {{viewedUserObject.bio}}
                     </p>
 
-                    {{#if logged}}
+                    {{#if (eq currUserObject.username viewedUserObject.username)}}
                     <div class="container user-bio-bottom-div">
                         <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-username-btn"
                             data-bs-toggle="modal" data-bs-target="#editUsernameModal">

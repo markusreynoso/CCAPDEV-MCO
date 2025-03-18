@@ -3,12 +3,43 @@
     "$oid": "67c8568462d562bbdc6765d4"
   },
   "username": "LuisDaBeast",
-  "password": "pass1"
+  "password": "1",
+  "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+  "bio": "I am Beast"
 },
 {
   "_id": {
-    "$oid": "67c856a362d562bbdc6765d5"
+    "$oid": "67d93ac2f66ccac1f0bfa5aa"
   },
-  "username": "LuisDaBeast2",
-  "password": "pass2"
+  "username": "therockobama",
+  "password": "1",
+  "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
+  "bio": "Can you smell"
+},
+{
+  "_id": {
+    "$oid": "67d94c6ef969f3f0d5d1fc3d"
+  },
+  "username": "Thomas_morato",
+  "password": "1",
+  "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
+  "bio": "Where Jerry"
+},
+{
+  "_id": {
+    "$oid": "67d94d56f969f3f0d5d1fc3f"
+  },
+  "username": "scaredofwomen3000",
+  "pasword": "1",
+  "dpUrl": "https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg",
+  "bio": "Dont tell tom im here"
+},
+{
+  "_id": {
+    "$oid": "67d94d96f969f3f0d5d1fc40"
+  },
+  "username": "mark_henryy",
+  "password": "1",
+  "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
+  "bio": "Strongest man"
 }]

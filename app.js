@@ -110,15 +110,14 @@ server.get('/', function (req, resp) {
 server.get('/home', async function (req, resp) {
     const postsCollection = await postModel.find({}).lean();
     let isLogged = (req.session.currUser != undefined);
-    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean()
-    if (currUserObject != null) {
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    if (isLogged) {
         resp.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: postsCollection,
-            currUserDpUrl: currUserObject.dpUrl,
-            currUserUsername: currUserObject.username
+            currUserObject: currUserObject,
         });
     } else {
         resp.render('home', {
@@ -148,21 +147,24 @@ server.get('/users/:username/posts', async function(req, resp){
     const allPosts = await postModel.find({'user': req.session.currUser}).lean();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
-    if (currUserObject != null) {
+    const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
+    console.log(viewedUserObject);
+    if (isLogged) {
         resp.render('user-posts', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: allPosts,
-            currUserDpUrl: currUserObject.dpUrl,
-            currUserUsername: currUserObject.username
+            currUserObject: currUserObject,
+            viewedUserObject: viewedUserObject
         });
     } else {
         resp.render('user-posts', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
-            posts: allPosts
+            posts: allPosts,
+            viewedUserObject: viewedUserObject
         });
     }
 })
@@ -201,8 +203,8 @@ server.get('/register', function (req, resp) {
 })
 
 server.get('/posts/:id', async function (req, resp) {
-    let currUser = req.session.currUser
-    let isLogged = (currUser != undefined);
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    let isLogged = (currUserObject != undefined);
     const thePost = await postModel.findById(req.params.id).lean();
 
     resp.render('post', {
@@ -210,7 +212,7 @@ server.get('/posts/:id', async function (req, resp) {
         title: 'View Post',
         logged: isLogged,
         thePost: thePost,
-        currUser: currUser
+        currUserObject: currUserObject
     })
 })
 

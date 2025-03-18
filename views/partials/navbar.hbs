@@ -21,9 +21,8 @@
                 {{#if logged}}
                 <li class="nav-item">
                     <div class="dp-div dp-nav">
-                        <a href="/users/{{currUserUsername}}/posts">
-                            <img src={{currUserDpUrl}}
-                                alt="">
+                        <a href="/users/{{currUserObject.username}}/posts">
+                            <img src="{{currUserObject.dpUrl}}" alt="">
                         </a>
                     </div>
                 </li>
