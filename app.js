@@ -35,7 +35,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/MCO");
 
 const userSchema = new mongoose.Schema({
     username: { type: String },
-    password: { type: String }
+    password: { type: String },
+    bio: {type: String},
+    dpUrl: {type: String}
 })
 
 const replySchema = new mongoose.Schema(
