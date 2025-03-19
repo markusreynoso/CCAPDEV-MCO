@@ -230,6 +230,51 @@ server.get('/about', async function (req, resp) {
     })
 })
 
+server.get('/search', async (req, res) => {
+    // print(req.query) = {query: 'hello'}
+    // print(req.query.query) = 'hello'
+    const searchQuery = req.query.query.toLowerCase();
+
+
+    const postsCollection = await postModel.find(
+        { "$or": [ 
+            { "title": { "$regex": searchQuery, "$options": "i" } }, 
+            { "postContent": { "$regex": searchQuery, "$options": "i" } } 
+        ] }).lean();
+    
+    // for (let i = 0; i < postsCollection.length; i++){
+    //     console.log(postsCollection[i].user);
+    // }
+
+    let isLogged = (req.session.currUser != undefined);
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    if (isLogged) {
+        res.render('home', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: postsCollection,
+            currUserObject: currUserObject,
+            searchQuery: searchQuery,
+            
+        
+        });
+    } else {
+        res.render('home', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: postsCollection,
+            searchQuery: searchQuery,
+            
+        });
+    }
+    
+    
+
+    
+})
+
 
 // POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST
 server.post('/posts', async function (req, resp) {
