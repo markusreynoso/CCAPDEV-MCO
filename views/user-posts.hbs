@@ -87,8 +87,15 @@
                             <a href="/post-logged" class="text-decoration-none">
                                 <h3 class="post-username">{{../viewedUserObject.username}}</h3>
                             </a>
+
+                            {{#if isEdited}}
+                            <p class="edit-indicator">Edited</p>
+                            {{/if}}
                         </div>
 
+                        <div class="tag">
+                            <p>{{tag}}</p>
+                        </div>
                     </div>
                     <h2 class="post-title">
                         <a href="/post-logged" class="text-decoration-none text-reset">
