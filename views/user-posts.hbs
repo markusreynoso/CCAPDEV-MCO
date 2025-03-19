@@ -74,21 +74,18 @@
         <!--Posts-->
         <div class="col-10" id="posts">
 
-            {{#if logged}}
             {{#each posts}}
 
-            {{#if (eq user "LuisDaBeast")}}
             <!-- Post i -->
             <div class="profile card post">
                 <div class="card-body">
                     <div class="container post-body-top-div">
                         <div class="group">
                             <div class="dp-div">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                    alt="">
+                                <img src="{{../viewedUserObject.dpUrl}}" alt="">
                             </div>
                             <a href="/post-logged" class="text-decoration-none">
-                                <h3 class="post-username">{{user}}</h3>
+                                <h3 class="post-username">{{../viewedUserObject.username}}</h3>
                             </a>
                         </div>
 
@@ -106,56 +103,7 @@
                 </div>
 
             </div>
-            {{/if}}
             {{/each}}
-
-            {{else}}
-            {{#each posts}}
-
-            {{#if (eq user "LuisDaBeast")}}
-            <!-- Post i -->
-            <div class="profile card post">
-                <div class="card-body">
-                    <div class="container post-body-top-div">
-                        <div class="group">
-                            <div class="dp-div">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
-                                    alt="">
-                            </div>
-                            <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                <h3 class="post-username">{{user}}</h3>
-                            </a>
-                        </div>
-
-                    </div>
-                    <h2 class="post-title">
-                        <a href="/post-unlogged" class="text-decoration-none text-reset">
-                            {{title}}
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text mb-4">
-                        {{postContent}}
-                    </p>
-
-
-                    {{!-- <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">{{upCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">{{downCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1"></i>
-                    </div> --}}
-                </div>
-
-            </div>
-            {{/if}}
-
-            {{/each}}
-            {{/if}}
 
         </div>
     </div>

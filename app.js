@@ -144,11 +144,10 @@ server.get('/profile-posts-:isLogged', async function (req, resp) {
 });
 
 server.get('/users/:username/posts', async function(req, resp){
-    const allPosts = await postModel.find({'user': req.session.currUser}).lean();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
-    console.log(viewedUserObject);
+    let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
     if (isLogged) {
         resp.render('user-posts', {
             layout: 'index',
@@ -169,6 +168,11 @@ server.get('/users/:username/posts', async function(req, resp){
     }
 })
 
+
+server.get('/users/:username/comments', async function(req, resp){
+    let isLogged = (req.session.currUser != undefined);
+
+})
 
 server.get('/profile-comments-:isLogged', async function (req, resp) {
     // const dbo = mongoClient.db(databaseName);
