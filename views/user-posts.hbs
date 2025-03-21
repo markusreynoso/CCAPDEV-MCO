@@ -10,7 +10,7 @@
                             <div class="dp-div">
                                 <img src="{{viewedUserObject.dpUrl}}" alt="">
                             </div>
-                            <a href="users/{{viewedUserObject.username}}/posts" class="text-decoration-none">
+                            <a href="/users/{{viewedUserObject.username}}/posts" class="text-decoration-none">
                                 <h3 class="post-username">{{viewedUserObject.username}}</h3>
                             </a>
                         </div>
@@ -50,8 +50,7 @@
 
             <div id="posts-comments-div">
                 <div id="profileposts-posts-div">
-                    <a href="/profile-posts-{{#if logged}}logged{{else}}unlogged{{/if}}"
-                        class="text-decoration-none text-reset">
+                    <a href="/users/{{viewedUserObject.username}}/posts" class="text-decoration-none text-reset">
                         Posts
                     </a>
 
@@ -82,10 +81,10 @@
                     <div class="container post-body-top-div">
                         <div class="group">
                             <div class="dp-div">
-                                <img src="{{../viewedUserObject.dpUrl}}" alt="">
+                                <img src="{{dpUrl}}" alt="">
                             </div>
-                            <a href="/post-logged" class="text-decoration-none">
-                                <h3 class="post-username">{{../viewedUserObject.username}}</h3>
+                            <a href="/users/{{user}}/posts" class="text-decoration-none">
+                                <h3 class="post-username">{{user}}</h3>
                             </a>
 
                             {{#if isEdited}}
@@ -98,7 +97,7 @@
                         </div>
                     </div>
                     <h2 class="post-title">
-                        <a href="/post-logged" class="text-decoration-none text-reset">
+                        <a href="/posts/{{idString}}" class="text-decoration-none text-reset">
                             {{title}}
                         </a>
                     </h2>
@@ -158,8 +157,7 @@
 
 {{!-- Change dp modal --}}
 
-<div class="modal fade modal-xl" id="editDpModal" tabindex="-1" aria-labelledby="editDpModalLabel"
-    aria-hidden="true">
+<div class="modal fade modal-xl" id="editDpModal" tabindex="-1" aria-labelledby="editDpModalLabel" aria-hidden="true">
     <div class="modal-dialog w-25">
         <div class="modal-content">
             <div class="modal-header">
