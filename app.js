@@ -111,6 +111,38 @@ server.get('/', function (req, resp) {
 
 server.get('/home', async function (req, resp) {
     const postsCollection = await postModel.find({}).lean();
+    // const usersCollection = await userModel.find({}).lean();
+
+    const postsWithDp = await postModel.aggregate([
+        {// lookup is basically joining postModel and userModel
+            $lookup: {
+                from: "users", // users.json
+                localField: "user", // "username" local field in posts.json
+                foreignField: "username", // "user" foreign field, users.json
+                as: "userDetails" // output array that will store the matched user data
+            }   
+        },
+
+        {
+            $unwind: "$userDetails" // convert userDetails array into an object
+        },
+
+        {
+            $project: {
+                _id: 1,
+                user: 1,
+                postContent: 1,
+                upCount: 1,
+                downCount: 1,
+                isEdited: 1,
+                title: 1,
+                tag: 1,
+                hasReplies: 1,
+                comments: 1,
+                "userDetails.dpUrl": 1
+            }
+        }
+    ])
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     if (isLogged) {
@@ -118,7 +150,7 @@ server.get('/home', async function (req, resp) {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
-            posts: postsCollection,
+            posts: postsWithDp,
             currUserObject: currUserObject,
         });
     } else {
@@ -126,7 +158,7 @@ server.get('/home', async function (req, resp) {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
-            posts: postsCollection,
+            posts: postsWithDp,
         });
     }
 
