@@ -396,6 +396,38 @@ server.put('/change-dp', async function (req, res) {
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 
+server.put('/change-username', async function (req, res) {
+    const newUsername = req.body.username;
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+
+    
+
+    const isNew = await userModel.findOne({ "username": newUsername }) == null;
+
+    if (isNew) {
+        try {
+            
+            await userModel.findOneAndUpdate( 
+                { "username": currUserObject.username }, 
+                { "$set": {"username": newUsername} },
+                {new: true}
+            );
+            
+            
+            return res.redirect('/users' + newUsername + '/posts');
+        }
+        catch (error) {
+
+        }
+    }
+
+    else {
+        
+    }
+
+    res.sendStatus(200);
+
+})
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/post-:isLogged/:id', async function (req, res) {
     const dbo = mongoClient.db(databaseName);

@@ -135,26 +135,29 @@
     </div>
 </div>
 
-<div class="modal fade modal-lg" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <textarea name="text-field" id="username-text-area" class="form-control" rows="1"
-                    placeholder="What should we call you?"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Change username modal -->
+
+<form action="">
+    <div class="modal fade modal-lg" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="text-field" id="username-text-area" class="form-control" rows="1"
+                        placeholder="What should we call you?"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="confirm-new-username" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</form>
 {{!-- Change dp modal --}}
 
 <div class="modal fade modal-xl" id="editDpModal" tabindex="-1" aria-labelledby="editDpModalLabel" aria-hidden="true">
@@ -262,3 +265,4 @@
 </form>
 
 <script src="/change-dp.js"></script>
+<script src="/change-username.js"></script>
