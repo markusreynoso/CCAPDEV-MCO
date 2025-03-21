@@ -380,7 +380,19 @@ server.put('/change-dp', async function (req, res) {
         { "user": currUserObject.username }, 
         { "$set": {"dpUrl": newDpUrl} },
     );
-    
+
+    await postModel.updateMany(
+        {"comments.user": currUserObject.username },
+        { "$set": {"comments.$[commentElem].dpUrl": newDpUrl} },
+        { arrayFilters: [{ "commentElem.user": currUserObject.username }] }
+    );
+
+    await postModel.updateMany(
+        {"comments.replies.user": currUserObject.username },
+        { "$set": {"comments.$[].replies.$[replyElem].dpUrl": newDpUrl} },
+        { arrayFilters: [{ "replyElem.user": currUserObject.username }] }
+    )
+
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 
