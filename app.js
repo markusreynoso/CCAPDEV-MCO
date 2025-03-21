@@ -363,6 +363,23 @@ server.post('/register', async function (req, resp) {
 
 })
 
+// UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
+
+server.put('/change-dp', async function (req, res) {
+    
+    const dpUrl = req.body.selectedDp;
+    
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    const currId = currUserObject._id.toString();
+
+    await userModel.findOneAndUpdate( 
+        { "_id": currId }, 
+        { "$set": {"dpUrl": dpUrl} },
+        {new: true}
+    );
+    
+    res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
+});
 
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/post-:isLogged/:id', async function (req, res) {
@@ -371,10 +388,11 @@ server.delete('/post-:isLogged/:id', async function (req, res) {
     await dbo.collection("posts").deleteOne({ _id: oid });
 
     res.sendStatus(200);
-})
+});
 
 
 // End ========================================================================================================================
+
 
 function finalClose() {
     console.log('Close connection at the end!');
