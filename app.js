@@ -239,7 +239,8 @@ server.get('/search', async (req, res) => {
     const postsCollection = await postModel.find(
         { "$or": [ 
             { "title": { "$regex": searchQuery, "$options": "i" } }, 
-            { "postContent": { "$regex": searchQuery, "$options": "i" } } 
+            { "postContent": { "$regex": searchQuery, "$options": "i" } },
+            { "tag": { "$regex": searchQuery, "$options": "i" } } 
         ] }).lean();
     
     // for (let i = 0; i < postsCollection.length; i++){
@@ -256,8 +257,6 @@ server.get('/search', async (req, res) => {
             posts: postsCollection,
             currUserObject: currUserObject,
             searchQuery: searchQuery,
-            
-        
         });
     } else {
         res.render('home', {
@@ -266,7 +265,6 @@ server.get('/search', async (req, res) => {
             logged: isLogged,
             posts: postsCollection,
             searchQuery: searchQuery,
-            
         });
     }
     
