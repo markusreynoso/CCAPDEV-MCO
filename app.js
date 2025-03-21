@@ -366,16 +366,19 @@ server.post('/register', async function (req, resp) {
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
 server.put('/change-dp', async function (req, res) {
-    
-    const dpUrl = req.body.selectedDp;
-    
+    const newDpUrl = req.body.selectedDp;
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
-    const currId = currUserObject._id.toString();
 
     await userModel.findOneAndUpdate( 
-        { "_id": currId }, 
-        { "$set": {"dpUrl": dpUrl} },
+        { "username": currUserObject.username }, 
+        { "$set": {"dpUrl": newDpUrl} },
         {new: true}
+    );
+
+
+    await postModel.updateMany( 
+        { "user": currUserObject.username }, 
+        { "$set": {"dpUrl": newDpUrl} },
     );
     
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
