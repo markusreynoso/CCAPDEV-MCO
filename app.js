@@ -9,14 +9,25 @@ server.use(express.urlencoded({ extended: true }));
 
 // Handlebars =====================================================================================================================
 const handlebars = require('express-handlebars');
+
+// Helpers
 const hbs = handlebars.create({
     extname: 'hbs',
     helpers: {
         eq: function (a, b) {
             return a === b;
+        },
+
+        removeAt: function (username) {
+            if (username.startsWith("@")) {
+                return username.substring(1);
+            }
+            
+            return username;
         }
     }
 });
+
 
 server.engine('hbs', hbs.engine);
 server.set('view engine', 'hbs');
@@ -149,8 +160,16 @@ server.get('/users/:username/posts', async function(req, resp){
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
+    
+
+    if (!viewedUserObject) {
+        return resp.status(404).send("User not found"); 
+    }
+    
 
     let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
+    
+    
     if (isLogged) {
         resp.render('user-posts', {
             layout: 'index',
