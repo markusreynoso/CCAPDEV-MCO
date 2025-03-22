@@ -149,6 +149,7 @@ server.get('/users/:username/posts', async function(req, resp){
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
+
     let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
     if (isLogged) {
         resp.render('user-posts', {
@@ -365,6 +366,63 @@ server.post('/register', async function (req, resp) {
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
+server.put('/change-username', async function (req, res) {
+    try {
+        
+        let newUsername = req.body.newUsername;
+        console.log(newUsername)
+        
+        const existingUser = await userModel.findOne({ username: newUsername });
+
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "Username already taken" });
+        }
+        
+        const currUserObject = await userModel.findOne({"username": req.session.currUser}).lean();
+        let currUsername = currUserObject.username;
+       
+        await userModel.findOneAndUpdate(
+            { "username" : currUsername },
+            { "$set": {"username": newUsername} },
+            {new: true}
+        );
+
+        await postModel.updateMany( 
+            { "user": currUsername },
+            { "$set": {"user": newUsername} }
+        );
+
+        await postModel.updateMany( 
+            { "comments": {$exists: true}, "comments.user" : currUsername },
+            { "$set" : { "comments.$[comUserElem].user": newUsername } },
+            { arrayFilters: [{"comUserElem.user": currUsername}]}
+        )
+
+        await postModel.updateMany(
+            { "comments.replies": {$exists: true}, "comments.replies.user" : currUsername},
+            { "$set" : { "comments.$[].replies.$[repUserElem].user": newUsername } },
+            { arrayFilters: [{"repUserElem.user": currUsername}]}
+        )
+
+        await postModel.updateMany(
+            { "comments.replies": {$exists: true}, "comments.replies.repliedTo" : "@"+ currUsername},
+            { "$set" : { "comments.$[].replies.$[repToUserElem].repliedTo": "@"+newUsername } },
+            { arrayFilters: [{"repToUserElem.repliedTo": "@"+ currUsername}]}
+        )
+
+        req.session.currUser = newUsername;
+
+
+        await req.session.save();
+        res.json({ success: true, message: "Username succesfully changed!", redirectUrl: `/users/${newUsername}/posts` });
+    
+    } catch (error) {
+        console.error("Error updating username:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+    
+})
+
 server.put('/change-dp', async function (req, res) {
     const newDpUrl = req.body.selectedDp;
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
@@ -395,6 +453,8 @@ server.put('/change-dp', async function (req, res) {
 
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
+
+
 
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/post-:isLogged/:id', async function (req, res) {
