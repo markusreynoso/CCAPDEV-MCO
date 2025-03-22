@@ -11,7 +11,7 @@
                                 <img src="{{thePost.dpUrl}}" alt="">
                             </div>
                             <a href="/profile-posts-logged" class="text-decoration-none">
-                                <h3 class="post-username">{{{thePost.user}}}</h3>
+                                <h3 class="post-username">{{{thePost.username}}}</h3>
                             </a>
                             {{#if thePost.isEdited}}
                             <p class="edit-indicator">Edited</p>
@@ -45,7 +45,7 @@
                             <i class="bi bi-arrow-down-short post-icon h1"></i>
                         </form>
 
-                        {{#if (eq thePost.user currUserObject.username)}}
+                        {{#if (eq thePost.username currUserObject.username)}}
                         {{!-- Put --}}
                         <form action="" method="put" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
@@ -77,7 +77,7 @@
                 {{/if}}
                 <div id="comments">
 
-                    {{#each thePost.comments}}
+                    {{#each comments}}
                     <div class="card post">
                         <div class="card-body" value={{_id}}>
                             <div class="container post-body-top-div">
@@ -85,8 +85,8 @@
                                     <div class="dp-div">
                                         <img src="{{dpUrl}}" alt="">
                                     </div>
-                                    <a href="/profile-posts-logged" class="text-decoration-none">
-                                        <h3 class="post-username">{{user}}</h3>
+                                    <a href="/users/{{username}}/posts" class="text-decoration-none">
+                                        <h3 class="post-username">{{username}}</h3>
                                     </a>
                                     {{#if isEdited}}
                                     <p class="edit-indicator">Edited</p>
@@ -112,7 +112,7 @@
                                 </a>
 
 
-                                {{#if (eq user ../currUser)}}
+                                {{#if (eq username ../currUserObject.username)}}
                                 <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
                                     <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                         value={{_id}}></i>
@@ -136,19 +136,19 @@
                                             <div class="dp-div">
                                                 <img src="{{dpUrl}}" alt="">
                                             </div>
-                                            <a href="/profile-posts-logged" class="text-decoration-none">
-                                                <h3 class="post-username">{{user}}</h3>
+                                            <a href="/users/{{username}}/posts" class="text-decoration-none">
+                                                <h3 class="post-username">{{username}}</h3>
                                             </a>
                                         </div>
 
                                     </div>
                                     <p class="card-text post-body-text">
                                         <span class="reply-tag">
-                                            <a href="/profile-posts-logged">
+                                            <a href="/users/{{repliedTo}}/posts">
                                                 {{repliedTo}}
                                             </a>
                                         </span>
-                                        {{replyContent}}
+                                        {{commentContent}}
                                     </p>
                                     <div class="col post-actions-div">
                                         <div class="score-count-div">
@@ -166,7 +166,7 @@
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
 
-                                        {{#if (eq user ../../currUser)}}
+                                        {{#if (eq username ../../currUserObject.username)}}
                                         <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>

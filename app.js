@@ -36,53 +36,52 @@ mongoose.connect("mongodb://127.0.0.1:27017/MCO");
 const userSchema = new mongoose.Schema({
     username: { type: String },
     password: { type: String },
-    bio: {type: String},
-    dpUrl: {type: String}
+    bio: { type: String },
+    dpUrl: { type: String }
 })
-
-const replySchema = new mongoose.Schema(
-    {
-        user: { type: String, required: true },
-        isEdited: { type: Boolean, default: false },
-        repliedTo: { type: String, required: true },
-        replyContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
-        dpUrl: { type: String }
-    },
-    { versionKey: false });
 
 const commentSchema = new mongoose.Schema(
     {
-        user: { type: String, required: true },
+        username: { type: String, required: true },
+        dpUrl: { type: String },
         isEdited: { type: Boolean, default: false },
         commentContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
-        dpUrl: { type: String },
-        hasReplies: { type: Boolean, default: false },
-        replies: [replySchema]
+        upCount: { type: Number, required: true },
+        downCount: { type: Number, required: true },
+        parentPostId: { type: String, required: true },
+        parentCommentId: { type: String, required: false },
+        repliedTo: { type: String }
     },
     { versionKey: false });
 
 const postSchema = new mongoose.Schema(
     {
-        user: { type: String, required: true },
+        username: { type: String, required: true },
         postContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
         isEdited: { type: Boolean, default: false },
         title: { type: String, required: true },
         dpUrl: { type: String },
         tag: { type: String },
-        hasReplies: { type: Boolean, default: false },
-        comments: [commentSchema],
-        idString: { type: String }
+        upCount: { type: Number, required: true },
+        downCount: { type: Number, required: true },
     },
     { versionKey: false });
 
+
+const votesSchema = new mongoose.Schema(
+    {
+        username: { type: String, required: true },
+        targetId: { type: String, required: true },
+        targetType: { type: String },
+        voteType: { type: Number, required: true }
+    },
+    { versionKey: false }
+)
+
 const postModel = mongoose.model('post', postSchema);
 const userModel = mongoose.model('user', userSchema);
+const voteModel = mongoose.model('vote', votesSchema);
+const commentModel = mongoose.model('comment', commentSchema);
 
 
 // Sessions ===================================================================================================================
@@ -132,24 +131,11 @@ server.get('/home', async function (req, resp) {
 
 })
 
-server.get('/profile-posts-:isLogged', async function (req, resp) {
-
-    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
-
-    let isLogged = (req.params.isLogged === "logged");
-    resp.render('profile-posts', {
-        layout: 'index',
-        title: 'AskAway - Profile',
-        logged: isLogged,
-        posts: postsCollection
-    });
-});
-
-server.get('/users/:username/posts', async function(req, resp){
+server.get('/users/:username/posts', async function (req, resp) {
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
-    let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
+    let allPosts = await postModel.find({ "username": viewedUserObject.username }).lean();
     if (isLogged) {
         resp.render('user-posts', {
             layout: 'index',
@@ -171,27 +157,10 @@ server.get('/users/:username/posts', async function(req, resp){
 })
 
 
-server.get('/users/:username/comments', async function(req, resp){
+server.get('/users/:username/comments', async function (req, resp) {
     let isLogged = (req.session.currUser != undefined);
 
 })
-
-server.get('/profile-comments-:isLogged', async function (req, resp) {
-    // const dbo = mongoClient.db(databaseName);
-    // const postsCollection = await dbo.collection("posts").find().toArray();
-    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
-
-
-    let isLogged = (req.params.isLogged === "logged");
-
-    resp.render('profile-comments', {
-        layout: 'index',
-        title: 'AskAway - Profile',
-        logged: isLogged,
-        posts: postsCollection
-    });
-});
-
 
 server.get('/login', async function (req, resp) {
     resp.render('login', {
@@ -213,12 +182,37 @@ server.get('/posts/:id', async function (req, resp) {
     let isLogged = (currUserObject != undefined);
     const thePost = await postModel.findById(req.params.id).lean();
 
+    let topLevelComments = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $eq: null } }).lean();
+    let replies = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $ne: null } }).lean();
+    console.log(topLevelComments);
+    for (commentObject of topLevelComments) {
+        const voteByCurrUser = await voteModel.findOne({ "targetId": commentObject._id.toString() }).lean();
+        if (voteByCurrUser != null) {
+            commentObject.voteType = voteByCurrUser;
+        }
+    }
+
+    for (replyObject of replies) {
+        const voteByCurrUser = await voteModel.findOne({ "targetId": replyObject._id.toString() }).lean();
+        if (voteByCurrUser != null) {
+            replyObject.voteType = voteByCurrUser;
+        }
+    }
+
+    for (commentObject of topLevelComments) {
+        let repliesArray = replies.filter(reply => reply.parentCommentId == commentObject._id.toString());
+        commentObject.replies = repliesArray;
+    }
+
+
+
     resp.render('post', {
         layout: 'index',
         title: 'View Post',
         logged: isLogged,
         thePost: thePost,
-        currUserObject: currUserObject
+        currUserObject: currUserObject,
+        comments: topLevelComments
     })
 })
 
@@ -231,21 +225,17 @@ server.get('/about', async function (req, resp) {
 })
 
 server.get('/search', async (req, res) => {
-    // print(req.query) = {query: 'hello'}
-    // print(req.query.query) = 'hello'
     const searchQuery = req.query.query.toLowerCase();
 
 
     const postsCollection = await postModel.find(
-        { "$or": [ 
-            { "title": { "$regex": searchQuery, "$options": "i" } }, 
-            { "postContent": { "$regex": searchQuery, "$options": "i" } },
-            { "tag": { "$regex": searchQuery, "$options": "i" } } 
-        ] }).lean();
-    
-    // for (let i = 0; i < postsCollection.length; i++){
-    //     console.log(postsCollection[i].user);
-    // }
+        {
+            "$or": [
+                { "title": { "$regex": searchQuery, "$options": "i" } },
+                { "postContent": { "$regex": searchQuery, "$options": "i" } },
+                { "tag": { "$regex": searchQuery, "$options": "i" } }
+            ]
+        }).lean();
 
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
@@ -267,10 +257,6 @@ server.get('/search', async (req, res) => {
             searchQuery: searchQuery,
         });
     }
-    
-    
-
-    
 })
 
 
@@ -369,18 +355,18 @@ server.put('/change-dp', async function (req, res) {
     const newDpUrl = req.body.selectedDp;
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
 
-    await userModel.findOneAndUpdate( 
-        { "username": currUserObject.username }, 
-        { "$set": {"dpUrl": newDpUrl} },
-        {new: true}
+    await userModel.findOneAndUpdate(
+        { "username": currUserObject.username },
+        { "$set": { "dpUrl": newDpUrl } },
+        { new: true }
     );
 
 
-    await postModel.updateMany( 
-        { "user": currUserObject.username }, 
-        { "$set": {"dpUrl": newDpUrl} },
+    await postModel.updateMany(
+        { "user": currUserObject.username },
+        { "$set": { "dpUrl": newDpUrl } },
     );
-    
+
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 

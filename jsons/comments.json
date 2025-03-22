@@ -1,0 +1,29 @@
+[
+    {
+        "_id": {
+            "$oid": "67dedca580d70a7246880874"
+        },
+        "username": "LuisDaBeast",
+        "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+        "parentPostId": "67cd4bebc25aba022227115a",
+        "parentCommentId": null,
+        "commentContent": "Testing",
+        "isEdited": false,
+        "upCount": 0,
+        "downCount": 0
+    },
+    {
+        "_id": {
+            "$oid": "67dedca580d70a7246880875"
+        },
+        "username": "mark_henryy",
+        "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
+        "parentPostId": "67cd4bebc25aba022227115a",
+        "parentCommentId": "67dedca580d70a7246880874",
+        "commentContent": "Testing",
+        "isEdited": false,
+        "upCount": 0,
+        "downCount": 0,
+        "repliedTo": "LuisDaBeast"
+    }
+]
