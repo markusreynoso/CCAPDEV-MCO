@@ -87,8 +87,8 @@ const postSchema = new mongoose.Schema(
         dpUrl: { type: String },
         tag: { type: String },
         hasReplies: { type: Boolean, default: false },
-        comments: [commentSchema],
-        idString: { type: String }
+        comments: [commentSchema]
+       
     },
     { versionKey: false });
 
@@ -121,7 +121,7 @@ server.get('/', function (req, resp) {
 })
 
 server.get('/home', async function (req, resp) {
-    const postsCollection = await postModel.find({}).lean();
+    const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     if (isLogged) {
@@ -143,18 +143,7 @@ server.get('/home', async function (req, resp) {
 
 })
 
-server.get('/profile-posts-:isLogged', async function (req, resp) {
 
-    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
-
-    let isLogged = (req.params.isLogged === "logged");
-    resp.render('profile-posts', {
-        layout: 'index',
-        title: 'AskAway - Profile',
-        logged: isLogged,
-        posts: postsCollection
-    });
-});
 
 server.get('/users/:username/posts', async function(req, resp){
     let isLogged = (req.session.currUser != undefined);
@@ -225,21 +214,7 @@ server.get('/users/:username/comments', async function(req, resp){
 
 })
 
-server.get('/profile-comments-:isLogged', async function (req, resp) {
-    // const dbo = mongoClient.db(databaseName);
-    // const postsCollection = await dbo.collection("posts").find().toArray();
-    const postsCollection = await postModel.find({ 'user': "LuisDaBeast" }).lean();
-
-
-    let isLogged = (req.params.isLogged === "logged");
-
-    resp.render('profile-comments', {
-        layout: 'index',
-        title: 'AskAway - Profile',
-        logged: isLogged,
-        posts: postsCollection
-    });
-});
+// will delete this
 
 
 server.get('/login', async function (req, resp) {
@@ -325,22 +300,36 @@ server.get('/search', async (req, res) => {
 
 // POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST-POST
 server.post('/posts', async function (req, resp) {
-    req.body.user = "LuisDaBeast";
-    req.body.upCount = 0;
-    req.body.downCount = 0;
-    req.body.isEdited = false;
-    req.body.dpUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s";
-    req.body.comments = [];
 
-    const dbo = mongoClient.db(databaseName);
-    dbo.collection("posts").insertOne(
-        req.body,
-        function (err, res) {
-            if (err) console.log(err);
-
+    try {
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+        
+        if (!currUserObject) {
+            return resp.status(400).send("User not found.");
         }
-    )
-    resp.redirect("/home");
+
+        await postModel.create({ 
+
+            user: currUserObject.username,
+            postContent: req.body.postContent,
+            upCount: 0,
+            downCount: 0,
+            isEdited: false,
+            title: req.body.title,
+            dpUrl: currUserObject.dpUrl,
+            tag: req.body.tag,
+            hasReplies: false,
+            comments: []
+        
+        });
+
+        resp.redirect("/home");
+        
+    } catch (error) {
+        console.error("Error creating post: ", error);
+        resp.status(500).send("Unexpected error occured while creating the post. ")
+    }
+    
 })
 
 
@@ -481,7 +470,6 @@ server.put('/change-dp', async function (req, res) {
         {new: true}
     );
 
-
     await postModel.updateMany( 
         { "user": currUserObject.username }, 
         { "$set": {"dpUrl": newDpUrl} },
@@ -505,12 +493,20 @@ server.put('/change-dp', async function (req, res) {
 
 
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
-server.delete('/post-:isLogged/:id', async function (req, res) {
-    const dbo = mongoClient.db(databaseName);
-    let oid = getOid(req.params.id);
-    await dbo.collection("posts").deleteOne({ _id: oid });
+server.delete('/posts/:id', async function (req, res) {
+    // const dbo = mongoClient.db(databaseName);
 
-    res.sendStatus(200);
+    try {
+
+        let oid = getOid(req.params.id);
+        await postModel.deleteOne( {_id: oid});
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).send("Unexpected error deleting post. ")
+    }
+    
 });
 
 

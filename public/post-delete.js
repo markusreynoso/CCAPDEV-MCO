@@ -7,7 +7,7 @@ $(document).ready(function() {
             type: 'DELETE',
             data: null,
             complete: function(result) {
-                window.location.href='/home-logged'
+                window.location.href='/home'
             }
         })
     })
