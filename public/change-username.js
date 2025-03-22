@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#change-username").click(function(event) {
+    $("#change-username-save-changes-btn").click(function(event) {
         event.preventDefault();
 
         let newUsername = $("#username-text-area").val();

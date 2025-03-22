@@ -114,22 +114,24 @@
         </div>
     </div>
 
-    <!-- Edit bio modal -->
-    <div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+    
+</div>
+
+<!-- Edit bio modal -->
+<div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="edit-bio-save-changes-btn"class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -150,7 +152,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="change-username" class="btn btn-primary">Save changes</button>
+                <button type="button" id="change-username-save-changes-btn" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -262,5 +264,3 @@
     </div>
 </form>
 
-<script src="/change-dp.js"></script>
-<script src="/change-username.js"></script>

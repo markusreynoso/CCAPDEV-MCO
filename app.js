@@ -403,11 +403,29 @@ server.post('/register', async function (req, resp) {
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
+server.put('/change-bio', async function (req, res) {
+    try {
+        
+        let newBio = req.body.newBio;
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        const currUsername = currUserObject.username;
+        await userModel.updateOne(
+            { "username" :  currUsername },
+            { "$set" : { "bio": newBio }}
+        );
+        // req.session.currUser = newBio;
+        // await req.session.save();
+
+        res.json({ success: true, message: "Bio succesfully changed!", redirectUrl: `/users/${currUserObject.username}/posts`});
+    } catch (error) {
+        
+    }
+})
+
 server.put('/change-username', async function (req, res) {
     try {
         
         let newUsername = req.body.newUsername;
-        
         
         const existingUser = await userModel.findOne({ username: newUsername });
 
@@ -448,8 +466,6 @@ server.put('/change-username', async function (req, res) {
         )
 
         req.session.currUser = newUsername;
-
-
         await req.session.save();
         res.json({ success: true, message: "Username succesfully changed!", redirectUrl: `/users/${newUsername}/posts` });
     
@@ -459,6 +475,8 @@ server.put('/change-username', async function (req, res) {
     }
     
 })
+
+
 
 server.put('/change-dp', async function (req, res) {
     const newDpUrl = req.body.selectedDp;
