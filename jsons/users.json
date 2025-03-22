@@ -2,10 +2,10 @@
   "_id": {
     "$oid": "67c8568462d562bbdc6765d4"
   },
-  "username": "LuisDaBeast",
+  "username": "LuisDaBeast1",
   "password": "1",
-  "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
-  "bio": "I am Beast"
+  "dpUrl": "https://i.kym-cdn.com/entries/icons/facebook/000/007/270/MYPEIN.jpg",
+  "bio": "Have a solid mindset—true mastery comes from relentless effort and continuous learning. I push myself by staying curious and adaptable. I break down complex topics, experiment with new approaches, and seek feedback to refine my skills. Also, I make sure to stay challenged—whether that means tackling tougher problems, improving efficiency, or learning from top performers in different fields."
 },
 {
   "_id": {
@@ -42,4 +42,31 @@
   "password": "1",
   "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
   "bio": "Strongest man"
+},
+{
+  "_id": {
+    "$oid": "67de75cb52fe49b9a80f01b5"
+  },
+  "username": "intrusive_thoughts",
+  "password": "1",
+  "dpUrl": "https://i1.sndcdn.com/artworks-000480365457-2t079z-t1080x1080.jpg",
+  "bio": "I am intrusive_thoughts"
+},
+{
+  "_id": {
+    "$oid": "67de760d52fe49b9a80f01b6"
+  },
+  "username": "dantesssss",
+  "password": "1",
+  "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84",
+  "bio": "I am dingdong"
+},
+{
+  "_id": {
+    "$oid": "67de765552fe49b9a80f01b7"
+  },
+  "username": "optimumpride",
+  "password": "1",
+  "dpUrl": "https://pbs.twimg.com/profile_images/1455515084998934536/oOC2B0x0_400x400.jpg",
+  "bio": "ru er EH er"
 }]
