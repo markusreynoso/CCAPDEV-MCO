@@ -49,14 +49,14 @@
             </div>
 
             <div id="posts-comments-div">
-                <div id="profileposts-posts-div">
+                <div id="profilecomments-posts-div">
                     <a href="/users/{{viewedUserObject.username}}/posts" class="text-decoration-none text-reset">
                         Posts
                     </a>
 
                 </div>
 
-                <div id="profileposts-comments-div">
+                <div id="profilecomments-comments-div">
                     <a href="/users/{{viewedUserObject.username}}/comments"
                         class="text-decoration-none text-reset">
                         Comments
@@ -70,12 +70,12 @@
 
     <div class="container user-profile-posts">
 
-        <!--Posts-->
+        <!--comments -->
         <div class="col-10" id="posts">
-
+              
             {{#each posts}}
-
-            <!-- Post i -->
+                
+            <!-- Comment i -->
             <div class="profile card post">
                 <div class="card-body">
                     <div class="container post-body-top-div">
@@ -85,26 +85,49 @@
                             </div>
                             <a href="/users/{{user}}/posts" class="text-decoration-none">
                                 <h3 class="post-username">{{user}}</h3>
-                            </a>
-
-                            {{#if isEdited}}
-                            <p class="edit-indicator">Edited</p>
-                            {{/if}}
+                            </a>  
                         </div>
 
-                        <div class="tag">
-                            <p>{{tag}}</p>
-                        </div>
                     </div>
                     <h2 class="post-title">
                         <a href="/posts/{{idString}}" class="text-decoration-none text-reset">
                             {{title}}
                         </a>
                     </h2>
+                    
 
-                    <p class="card-text post-body-text mb-4">
-                        {{postContent}}
-                    </p>
+                    <div class="card post reply">
+                            
+                            {{#each comments}}
+                                {{!-- <p>{{../../viewedUserObject.username}}</p> --}}
+                                
+
+                                {{#if ( eq user ../../viewedUserObject.username )}}
+
+                                <div class="card-body">
+                                    <p class="card-text post-body-text">
+                                        {{commentContent}}
+                                    </p>
+                                </div>
+
+                                {{/if}}
+
+                                {{#each replies}}
+
+                                    {{#if ( eq user ../../../viewedUserObject.username )}}
+
+                                    <div class="card-body">
+                                        <p class="card-text post-body-text">
+                                            {{repliedTo}} {{replyContent}}
+                                        </p>
+                                    </div>
+
+                                    {{/if}}
+
+                                {{/each}}
+
+                            {{/each}}
+                        </div>
 
                 </div>
 

@@ -174,6 +174,35 @@ server.get('/users/:username/posts', async function(req, resp){
 
 server.get('/users/:username/comments', async function(req, resp){
     let isLogged = (req.session.currUser != undefined);
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
+
+    let allComments = await postModel.find({
+        $or: [
+            { "comments.user": viewedUserObject.username },
+            { "comments.replies.user": viewedUserObject.username }
+        ]
+    }).lean();
+
+    
+    if (isLogged) {
+        resp.render('user-comments', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: allComments,
+            currUserObject: currUserObject,
+            viewedUserObject: viewedUserObject
+        });
+    } else {
+        resp.render('user-comments', {
+            layout: 'index',
+            title: 'AskAway - Home',
+            logged: isLogged,
+            posts: allComments,
+            viewedUserObject: viewedUserObject
+        });
+    }
 
 })
 
@@ -370,7 +399,7 @@ server.put('/change-username', async function (req, res) {
     try {
         
         let newUsername = req.body.newUsername;
-        console.log(newUsername)
+        
         
         const existingUser = await userModel.findOne({ username: newUsername });
 
