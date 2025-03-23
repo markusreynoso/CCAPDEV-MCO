@@ -53,6 +53,54 @@ $(document).ready(function () {
 
         })
     });
+
+    $(".comment-upvote-button").click(function () {
+        let commentId = $(this).data("comment-id");
+        
+        $.ajax({
+            url: "/upvote-comment",
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ commentId: commentId }),
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                    console.log("Comment upvoted!", response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error upvoting comment:", error);
+                alert("Failed to upvote the comment.");
+            }
+        });
+
+
+    })
+
+    $(".comment-downvote-button").click(function () {
+        let commentId = $(this).data("comment-id");
+        
+        $.ajax({
+            url: "/downvote-comment",
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ commentId: commentId }),
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                    console.log("Comment downvoted!", response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error downvoting comment:", error);
+                alert("Failed to downvote the comment.");
+            }
+        });
+
+
+    })
+
+
     // for (let voteType of ["up", "down"]) {
     //     $(`.bi-arrow-${voteType}-short`).click(function () {
     //         let $parent = $(this).parent();

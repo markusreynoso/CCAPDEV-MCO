@@ -414,7 +414,7 @@ server.put('/upvote', async function (req, res) {
     try {
         
         let postId = req.body.postId;
-
+    
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
 
@@ -489,6 +489,95 @@ server.put('/downvote', async function (req, res) {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 }) 
+
+server.put('/upvote-comment', async function (req, res) {
+    try {
+        
+        let commentId = req.body.commentId;
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+        
+        let thePost = await postModel.findOne({
+            comments: { 
+              $elemMatch: { _id: getOid(commentId) } 
+            }
+          });
+
+        let theComment = thePost.comments.find(c => c._id.toString() === commentId);
+
+        // If upCount does not contain the userId yet
+        if ( !theComment.upCount.some(id => id.equals(currOid)) ){
+
+            // If user has downvoted originally, remove from downvotes and add to upvotes
+            if ( theComment.downCount.some(id => id.equals(currOid)) ){
+                theComment.downCount = theComment.downCount.filter(id => !id.equals(currOid)); 
+                theComment.upCount.push(currOid);
+            }
+
+            // Otherwise, just normally add an upcount
+            else {
+                theComment.upCount.push(currOid);
+            }
+        }
+        // If user has already upvoted, just remove the upvote
+        else {
+            theComment.upCount = theComment.upCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
+
+server.put('/downvote-comment', async function (req, res) {
+    try {
+        
+        let commentId = req.body.commentId;
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+        
+        let thePost = await postModel.findOne({
+            comments: { 
+              $elemMatch: { _id: getOid(commentId) } 
+            }
+          });
+
+        let theComment = thePost.comments.find(c => c._id.toString() === commentId);
+        
+        // If downCount does not contain the userId yet
+        if ( !theComment.downCount.some(id => id.equals(currOid)) ){
+            
+            // If user has upvoted originally, remove from upvotes and add in downvotes
+            if ( theComment.upCount.some(id => id.equals(currOid)) ) {
+                theComment.upCount = theComment.upCount.filter(id => !id.equals(currOid)); 
+                theComment.downCount.push(currOid);
+            }
+
+            else {
+                theComment.downCount.push(currOid);
+            }
+            
+        }
+
+        // if user has already downvoted, just remove the downvote upon click
+        else {
+            theComment.downCount = theComment.downCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
+
+        
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
 
 server.put('/change-bio', async function (req, res) {
     try {
