@@ -184,7 +184,6 @@ server.get('/posts/:id', async function (req, resp) {
 
     let topLevelComments = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $eq: null } }).lean();
     let replies = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $ne: null } }).lean();
-    console.log(topLevelComments);
     for (commentObject of topLevelComments) {
         const voteByCurrUser = await voteModel.findOne({ "targetId": commentObject._id.toString() }).lean();
         if (voteByCurrUser != null) {
@@ -363,7 +362,12 @@ server.put('/change-dp', async function (req, res) {
 
 
     await postModel.updateMany(
-        { "user": currUserObject.username },
+        { "username": currUserObject.username },
+        { "$set": { "dpUrl": newDpUrl } },
+    );
+
+    await commentModel.updateMany(
+        { "username": currUserObject.username },
         { "$set": { "dpUrl": newDpUrl } },
     );
 
