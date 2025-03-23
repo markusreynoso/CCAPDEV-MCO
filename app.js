@@ -124,6 +124,7 @@ server.get('/home', async function (req, resp) {
     const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    
     if (isLogged) {
         resp.render('home', {
             layout: 'index',
