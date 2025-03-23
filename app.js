@@ -24,6 +24,14 @@ const hbs = handlebars.create({
             }
             
             return username;
+        },
+
+        hasVoted: function (upVoteArray, currentUserId) {
+
+            if (!Array.isArray(upVoteArray) || !currentUserId) {
+                return false; // Default to false if missing data
+            }
+            return upVoteArray.some(id => id.toString() === currentUserId.toString())
         }
     }
 });
@@ -57,8 +65,8 @@ const replySchema = new mongoose.Schema(
         isEdited: { type: Boolean, default: false },
         repliedTo: { type: String, required: true },
         replyContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
+        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         dpUrl: { type: String }
     },
     { versionKey: false });
@@ -68,8 +76,8 @@ const commentSchema = new mongoose.Schema(
         user: { type: String, required: true },
         isEdited: { type: Boolean, default: false },
         commentContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
+        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         dpUrl: { type: String },
         hasReplies: { type: Boolean, default: false },
         replies: [replySchema]
@@ -80,8 +88,8 @@ const postSchema = new mongoose.Schema(
     {
         user: { type: String, required: true },
         postContent: { type: String, required: true },
-        upCount: { type: Number, default: 0 },
-        downCount: { type: Number, default: 0 },
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
+        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         isEdited: { type: Boolean, default: false },
         title: { type: String, required: true },
         dpUrl: { type: String },
@@ -143,8 +151,6 @@ server.get('/home', async function (req, resp) {
     }
 
 })
-
-
 
 server.get('/users/:username/posts', async function(req, resp){
     let isLogged = (req.session.currUser != undefined);
@@ -403,6 +409,86 @@ server.post('/register', async function (req, resp) {
 })
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
+
+server.put('/upvote', async function (req, res) {
+    try {
+        
+        let postId = req.body.postId;
+
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+
+        let thePost = await postModel.findById(postId);
+
+        // If upCount does not contain the userId yet
+        if ( !thePost.upCount.some(id => id.equals(currOid)) ){
+
+            // If user has downvoted originally, remove from downvotes and add to upvotes
+            if ( thePost.downCount.some(id => id.equals(currOid)) ){
+                thePost.downCount = thePost.downCount.filter(id => !id.equals(currOid)); 
+                thePost.upCount.push(currOid);
+            }
+
+            // Otherwise, just normally add an upcount
+            else {
+                thePost.upCount.push(currOid);
+            }
+        }
+
+        // If user has already upvoted, just remove the upvote
+        else {
+            thePost.upCount = thePost.upCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
+        
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}) 
+
+
+server.put('/downvote', async function (req, res) {
+    try {
+        
+        let postId = req.body.postId;
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+
+        let thePost = await postModel.findById(postId);
+
+        // If downCount does not contain the userId yet
+        if ( !thePost.downCount.some(id => id.equals(currOid)) ){
+            
+            // If user has upvoted originally, remove from upvotes and add in downvotes
+            if ( thePost.upCount.some(id => id.equals(currOid)) ) {
+                thePost.upCount = thePost.upCount.filter(id => !id.equals(currOid)); 
+                thePost.downCount.push(currOid);
+            }
+
+            else {
+                thePost.downCount.push(currOid);
+            }
+            
+        }
+
+        // if user has already downvoted, just remove the downvote upon click
+        else {
+            thePost.downCount = thePost.downCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
+        
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}) 
 
 server.put('/change-bio', async function (req, res) {
     try {

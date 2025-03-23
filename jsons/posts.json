@@ -1,17 +1,13 @@
 [{
   "_id": {
-    "$oid": "67cd4bebc25aba022227115a"
+    "$oid": "67cd4c2bc25aba022227115a"
   },
   "user": "LuisDaBeast",
   "postContent": "I’ve always believed that if you’re going to do something, you should aim to be the best at\nit—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered\nthe details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or\nluck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.\n\nIt hasn’t been easy. There were times when I doubted myself or felt like I wasn’t making\nprogress, but I kept pushing through. I learned that success isn’t about talent alone; it’s\nabout staying committed when others quit. Whether it’s refining my skills, staying up-to-date\nwith trends, or analyzing where I can improve, I never stop grinding.\n\nNow, I’m at a point where I can confidently say I’m at the top of my game. It’s not just the\nresults that prove it, but the respect I’ve earned from others in my field. It’s an amazing\nfeeling knowing the effort I’ve put in has paid off, but I’m not stopping here.\n\nIf there’s one thing I’ve learned, it’s that there’s always room to grow. Excellence isn’t a\ndestination; it’s a mindset. What about you? How do you keep striving to be the best in what you\ndo? Let’s share ideas and push each other even further.",
-  "upCount": [
-    "67c8568462d562bbdc6765d4"
-  ],
-  "downCount": [
-    "67d93ac2f66ccac1f0bfa5aa"
-  ],
+  "downCount": [],
   "isEdited": false,
   "title": "My experiences in living as a beast",
+  "upCount": [],
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
   "tag": "Motivation",
   "hasReplies": true,
@@ -27,7 +23,7 @@
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaaa-e79ce0fa614d44e4ac91d657d3ba7e4d",
+          "_id": "67bc87de16350e278a7aaaab",
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@intrusive_thoughts",
@@ -37,7 +33,7 @@
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         },
         {
-          "_id": "67bc87de16350e278a7aaaaa-e79ce0fa614d44e4ac91d657d3ba7e4e",
+          "_id": "67bc87de16350e278a7aaaac",
           "user": "LuisDaBeast",
           "isEdited": false,
           "repliedTo": "@dantesssss",
@@ -49,7 +45,7 @@
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaaab",
+      "_id": "67bc87de16350e278a7aaabb",
       "user": "therockobama",
       "isEdited": false,
       "commentContent": "I have to say that I was a wrestler, then I became the president of the U.S. Your story inspired me to pursue different careers: astronaut, doctor, mechanic, fireman, and more hehe!",
@@ -59,7 +55,7 @@
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaab-e79ce0fa614d44e4ac91d657d3ba7e4d",
+          "_id": "67bc87de16350e278a7aabbc",
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@therockobama",
@@ -69,7 +65,7 @@
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         },
         {
-          "_id": "67bc87de16350e278a7aaaab-e79ce0fa614d44e4ac91d657d3ba7e4e",
+          "_id": "67bc87de16350e278a7aabbd",
           "user": "LuisDaBeast",
           "isEdited": false,
           "repliedTo": "@intrusive_thoughts",
@@ -81,7 +77,7 @@
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaaac",
+      "_id": "67bc87de16350e278a7aabcc",
       "user": "Thomas_morato",
       "isEdited": false,
       "commentContent": "Ok haha",
@@ -91,7 +87,7 @@
       "hasReplies": "true",
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaac-e79ce0fa614d44e4ac91d657d3ba7e4d",
+          "_id": "67bc87de16350e278a7aabcd",
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@Thomas_morato",
@@ -103,7 +99,7 @@
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaaad",
+      "_id": "67bc87de16350e278a7aaddd",
       "user": "LuisDaBeast",
       "isEdited": true,
       "commentContent": "I'm so amazing!",
@@ -113,7 +109,7 @@
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaad-e79ce0fa614d44e4ac91d657d3ba7e4d",
+          "_id": "67bc87de16350e278a7aadde",
           "user": "mark_henryy",
           "isEdited": false,
           "repliedTo": "@LuisDaBeast",
@@ -125,7 +121,7 @@
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaaae",
+      "_id": "67bc87de16350e278a7aaeee",
       "user": "mark_henryy",
       "isEdited": false,
       "commentContent": "I don't care hahaha",
@@ -135,7 +131,7 @@
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaae-e79ce0fa614d44e4ac91d657d3ba7e4d",
+          "_id": "67bc87de16350e278a7aaeef",
           "user": "optimumpride",
           "isEdited": false,
           "repliedTo": "@mark_henryy",
@@ -157,10 +153,15 @@
   "downCount": [],
   "isEdited": false,
   "title": "Midnight Snack Regrets",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    }
+  ],
   "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
   "tag": "Random",
-  "hasReplies": false
+  "hasReplies": false,
+  "comments": []
 },
 {
   "_id": {
@@ -174,7 +175,8 @@
   "upCount": [],
   "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
   "tag": "Self-Improvement",
-  "hasReplies": false
+  "hasReplies": false,
+  "comments": []
 },
 {
   "_id": {
@@ -188,7 +190,8 @@
   "upCount": [],
   "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
   "tag": "Math",
-  "hasReplies": false
+  "hasReplies": false,
+  "comments": []
 },
 {
   "_id": {
@@ -202,7 +205,8 @@
   "upCount": [],
   "dpUrl": "https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg",
   "tag": "Self-Improvement",
-  "hasReplies": false
+  "hasReplies": false,
+  "comments": []
 },
 {
   "_id": {
@@ -210,11 +214,16 @@
   },
   "user": "LuisDaBeast",
   "postContent": "I have died about 50 times already, is there a way to dodge the roll??? It is so fast, I tried getting behind a pillar it just breaks through it, and sometimes it goes around it. I tried rolling and rolling, but it catches up to me always, and there are two of them! Help pls!",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67d94d56f969f3f0d5d1fc3f"
+    }
+  ],
   "downCount": [],
   "isEdited": false,
   "title": "Help me beat the Godskin Duo in Elden Ring",
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
   "tag": "Elden Ring",
-  "hasReplies": false
+  "hasReplies": false,
+  "comments": []
 }]

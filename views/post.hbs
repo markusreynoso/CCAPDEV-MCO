@@ -36,11 +36,11 @@
                         {{!-- Post --}}
                         <form action="" method="post" class="actions-form">
                             <div class="score-count-div">
-                                <p class="score-count upvote-count">{{thePost.upCount}}</p>
+                                <p class="score-count upvote-count {{#if (hasVoted thePost.upCount currUserObject._id)}}active-up{{/if}}">{{thePost.upCount.length}}</p>
                             </div>
                             <i class="bi bi-arrow-up-short post-icon h1"></i>
                             <div class="score-count-div">
-                                <p class="score-count downvote-count">{{thePost.downCount}}</p>
+                                <p class="score-count downvote-count {{#if (hasVoted thePost.downCount currUserObject._id)}}active-up{{/if}}">{{thePost.downCount.length}}</p>
                             </div>
                             <i class="bi bi-arrow-down-short post-icon h1"></i>
                         </form>
@@ -99,11 +99,11 @@
                             </p>
                             <div class="col post-actions-div">
                                 <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
+                                    <p class="score-count upvote-count">{{upCount.length}}</p>
                                 </div>
                                 <i class="bi bi-arrow-up-short post-icon h1"></i>
                                 <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
+                                    <p class="score-count downvote-count">{{downCount.length}}</p>
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1"></i>
 
@@ -152,11 +152,11 @@
                                     </p>
                                     <div class="col post-actions-div">
                                         <div class="score-count-div">
-                                            <p class="score-count upvote-count">{{upCount}}</p>
+                                            <p class="score-count upvote-count">{{upCount.length}}</p>
                                         </div>
                                         <i class="bi bi-arrow-up-short post-icon h1"></i>
                                         <div class="score-count-div">
-                                            <p class="score-count downvote-count">{{downCount}}</p>
+                                            <p class="score-count downvote-count">{{downCount.length}}</p>
                                         </div>
                                         <i class="bi bi-arrow-down-short post-icon h1"></i>
                                         <div>

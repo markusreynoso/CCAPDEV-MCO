@@ -6,9 +6,7 @@ $(document).ready(function() {
             url: "/change-dp",
             type: "PUT",
             contentType: "application/json",
-            data: JSON.stringify({
-                selectedDp: selectedDpUrl
-                }),
+            data: JSON.stringify({ selectedDp: selectedDpUrl }),
 
             success: function (response) {
             if (response.success) {
