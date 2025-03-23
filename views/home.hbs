@@ -9,63 +9,64 @@
 
         {{#if searchQuery}}
 
-            {{#if posts}}
-                <h2 class="post-title"> Search Results for: "{{searchQuery}}"</h2>
-            {{else}}
-                <h2 class="post-title"> No Search Results for: "{{searchQuery}}"</h2>
-            {{/if}}
+        {{#if posts}}
+        <h2 class="post-title"> Search Results for: "{{searchQuery}}"</h2>
+        {{else}}
+        <h2 class="post-title"> No Search Results for: "{{searchQuery}}"</h2>
+        {{/if}}
 
         {{/if}}
 
-        
+
         <div class="col-12" id="posts">
 
-                {{#each posts}}
-                    <div class="card post" value={{idString}}>
-                        <div class="card-body">
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="{{dpUrl}}" alt="">
-                                    </div>
-
-                                    <a href="/users/{{username}}/posts" class="text-decoration-none">
-                                        <h3 class="post-username">{{username}}</h3>
-                                    </a>
-
-                                    {{#if isEdited}}
-                                    <p class="edit-indicator">Edited</p>
-                                    {{/if}}
-                                </div>
-
-                                <div class="tag">
-                                    <p>{{tag}}</p>
-                                </div>
+            {{#each posts}}
+            <div class="card post" value={{idString}}>
+                <div class="card-body">
+                    <div class="container post-body-top-div">
+                        <div class="group">
+                            <div class="dp-div">
+                                <img src="{{dpUrl}}" alt="">
                             </div>
-                            <h2 class="post-title">
-                                <a href="/posts/{{_id}}" class="text-decoration-none text-reset">
-                                    {{title}}
-                                </a>
-                            </h2>
 
-                            <p class="card-text post-body-text">
-                                {{postContent}}
-                            </p>
+                            <a href="/users/{{username}}/posts" class="text-decoration-none">
+                                <h3 class="post-username">{{username}}</h3>
+                            </a>
 
+                            {{#if isEdited}}
+                            <p class="edit-indicator">Edited</p>
+                            {{/if}}
+                        </div>
 
-                            <div class="col post-actions-div">
-                                <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-up-short post-icon h1"></i>
-                                <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-down-short post-icon h1"></i>
-                            </div>
+                        <div class="tag">
+                            <p>{{tag}}</p>
                         </div>
                     </div>
-                {{/each}}
+                    <h2 class="post-title">
+                        <a href="/posts/{{_id}}" class="text-decoration-none text-reset">
+                            {{title}}
+                        </a>
+                    </h2>
+
+                    <p class="card-text post-body-text">
+                        {{postContent}}
+                    </p>
+
+
+                    <div class="col post-actions-div">
+                        <div class="score-count-div">
+                            <p class="score-count upvote-count {{#if (eq voteType "up")}}active-up{{/if}}">{{upCount}}
+                            </p>
+                        </div>
+                        <i class="bi bi-arrow-up-short post-icon h1 {{#if (eq voteType "up")}}active-up{{/if}}"></i>
+                        <div class="score-count-div">
+                            <p class="score-count downvote-count">{{downCount}}</p>
+                        </div>
+                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
 
         </div>
     </div>

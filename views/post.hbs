@@ -33,9 +33,23 @@
 
 
                     <div class="col post-actions-div">
-                        {{!-- Post --}}
-                        <form action="" method="post" class="actions-form">
+                        {{#if (eq thePost.username currUserObject.username)}}
                             <div class="score-count-div">
+                                <p class="score-count upvote-count {{#if (eq voteTypeOfCurrUserOnThePost "up")}} active-up {{/if}}">{{thePost.upCount}}</p>
+                            </div>
+                            <i class="bi bi-arrow-up-short post-icon h1 {{#if (eq voteTypeOfCurrUserOnThePost "up")}} active-up {{/if}}"></i>
+                            <div class="score-count-div">
+                                <p class="score-count downvote-count {{#if (eq voteTypeOfCurrUserOnThePost "down")}} active-down {{/if}}">{{thePost.downCount}}</p>
+                            </div>
+                            <i class="bi bi-arrow-down-short post-icon h1 {{#if (eq voteTypeOfCurrUserOnThePost "down")}} active-down {{/if}}"></i>
+                            <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
+                                <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
+                            </a>
+                            <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
+                                <i class="bi bi-trash post-icon h5 ms-4"></i>
+                            </a>
+                        {{else}}
+                             <div class="score-count-div">
                                 <p class="score-count upvote-count">{{thePost.upCount}}</p>
                             </div>
                             <i class="bi bi-arrow-up-short post-icon h1"></i>
@@ -43,23 +57,12 @@
                                 <p class="score-count downvote-count">{{thePost.downCount}}</p>
                             </div>
                             <i class="bi bi-arrow-down-short post-icon h1"></i>
-                        </form>
-
-                        {{#if (eq thePost.username currUserObject.username)}}
-                        {{!-- Put --}}
-                        <form action="" method="put" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
                                 <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
                             </a>
-                        </form>
-
-
-                        {{!-- Delete --}}
-                        <form action="" method="delete" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
                                 <i class="bi bi-trash post-icon h5 ms-4"></i>
                             </a>
-                        </form>
                         {{/if}}
                     </div>
 
@@ -77,6 +80,10 @@
                 {{/if}}
                 <div id="comments">
 
+                    {{#if (eq comments.length 0)}}
+                    {{> empty-comments}}
+                    {{/if}}
+                    
                     {{#each comments}}
                     <div class="card post">
                         <div class="card-body" value={{_id}}>
@@ -168,6 +175,32 @@
                                         {{commentContent}}
                                     </p>
                                     <div class="col post-actions-div">
+                                        {{#if (eq username ../../currUserObject.username)}}
+                                        <div class="score-count-div">
+                                            <p class="score-count upvote-count {{#if (eq voteType "up")}}active-up{{/if}}">{{upCount}}</p>
+                                        </div>
+                                        <i class="bi bi-arrow-up-short post-icon h1 {{#if (eq voteType "up")}}active-up{{/if}}"></i>
+                                        <div class="score-count-div">
+                                            <p class="score-count downvote-count {{#if (eq voteType "down")}} active-down {{/if}}">{{downCount}}</p>
+                                        </div>
+                                        <i class="bi bi-arrow-down-short post-icon h1 {{#if (eq voteType "down")}} active-down {{/if}}"></i>
+                                        <div>
+                                        </div>
+
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                            <i class="bi bi-reply post-icon h3"></i>
+                                        </a>
+
+                                        
+                                        <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
+                                            <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
+                                                value={{_id}}></i>
+                                        </a>
+
+                                        <a data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                            <i class="bi bi-trash post-icon h5 ms-4"></i>
+                                        </a>
+                                        {{else}}
                                         <div class="score-count-div">
                                             <p class="score-count upvote-count">{{upCount}}</p>
                                         </div>
@@ -183,7 +216,7 @@
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
 
-                                        {{#if (eq username ../../currUserObject.username)}}
+                                        
                                         <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>

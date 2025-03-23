@@ -551,3 +551,7 @@ div.dp-option {
     height: 300px;
     overflow-y: auto;
 }
+
+.no-comments-div{
+    margin: 10rem 0;
+}

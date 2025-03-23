@@ -115,7 +115,16 @@ server.get('/home', async function (req, resp) {
     const postsCollection = await postModel.find({}).lean();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+
     if (isLogged) {
+        for (post of postsCollection) {
+            let vote = await voteModel.findOne({ "username": currUserObject.username, "targetId": post._id.toString() }).lean();
+            if (vote != null) {
+                post.voteType = vote.voteType;
+            } else {
+                post.voteType = "no vote";
+            }
+        }
         resp.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
@@ -139,7 +148,7 @@ server.get('/users/:username/posts', async function (req, resp) {
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
     let allPosts = await postModel.find({ "username": viewedUserObject.username }).lean();
-    for (post of allPosts){
+    for (post of allPosts) {
         post._id = post._id.toString();
     }
     if (isLogged) {
@@ -188,6 +197,14 @@ server.get('/posts/:id', async function (req, resp) {
     let isLogged = (currUserObject != undefined);
     const thePost = await postModel.findById(req.params.id).lean();
 
+    let voteTypeOfCurrUserOnThePost;
+    if (isLogged) {
+        voteTypeOfCurrUserOnThePost = await voteModel.findOne({ 'username': currUserObject.username, "targetId": req.params.id }).lean();
+        if (voteTypeOfCurrUserOnThePost != null) {
+            voteTypeOfCurrUserOnThePost = voteTypeOfCurrUserOnThePost.voteType;
+        }
+    }
+
     let topLevelComments = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $eq: null } }).lean();
     let replies = await commentModel.find({ "parentPostId": req.params.id, "parentCommentId": { $ne: null } }).lean();
     for (commentObject of topLevelComments) {
@@ -216,7 +233,8 @@ server.get('/posts/:id', async function (req, resp) {
         logged: isLogged,
         thePost: thePost,
         currUserObject: currUserObject,
-        comments: topLevelComments
+        comments: topLevelComments,
+        voteTypeOfCurrUserOnThePost: voteTypeOfCurrUserOnThePost
     })
 })
 
@@ -382,7 +400,6 @@ server.put('/change-dp', async function (req, res) {
 server.put('/change-bio', async function (req, res) {
     const newBio = req.body.newBio;
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
-    console.log(newBio)
     let update = await userModel.findOneAndUpdate(
         { "username": currUserObject.username },
         { "$set": { "bio": newBio } },
