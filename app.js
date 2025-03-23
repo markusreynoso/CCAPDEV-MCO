@@ -377,6 +377,21 @@ server.put('/change-dp', async function (req, res) {
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 
+server.put('/change-bio', async function (req, res) {
+    const newBio = req.body.newBio;
+    const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    console.log(newBio)
+    let update = await userModel.findOneAndUpdate(
+        { "username": currUserObject.username },
+        { "$set": { "bio": newBio } },
+        { new: true }
+    );
+
+    update.save();
+
+    res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
+});
+
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/post-:isLogged/:id', async function (req, res) {
     const dbo = mongoClient.db(databaseName);
