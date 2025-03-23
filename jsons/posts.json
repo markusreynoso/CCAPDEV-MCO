@@ -7,136 +7,228 @@
   "downCount": [],
   "isEdited": false,
   "title": "My experiences in living as a beast",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    },
+    {
+      "$oid": "67d93ac2f66ccac1f0bfa5aa"
+    }
+  ],
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
   "tag": "Motivation",
   "hasReplies": true,
   "comments": [
     {
-      "_id": "67bc87de16350e278a7aaaaa",
+      "_id": {
+        "$oid": "67bc87de16350e278a7aaaaa"
+      },
       "user": "intrusive_thoughts",
       "isEdited": false,
       "commentContent": "Wow, that's amazing!",
-      "upCount": [],
+      "upCount": [
+        {
+          "$oid": "67c8568462d562bbdc6765d4"
+        },
+        {
+          "$oid": "67d93ac2f66ccac1f0bfa5aa"
+        }
+      ],
       "downCount": [],
       "dpUrl": "https://i1.sndcdn.com/artworks-000480365457-2t079z-t1080x1080.jpg",
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaaab",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aaaab"
+          },
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@intrusive_thoughts",
           "replyContent": "I shall follow your footsteps my idol Beast.",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         },
         {
-          "_id": "67bc87de16350e278a7aaaac",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aaaac"
+          },
           "user": "LuisDaBeast",
           "isEdited": false,
           "repliedTo": "@dantesssss",
           "replyContent": "Thank you guys for reading my story, I will continue beasting.",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
         }
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaabb",
+      "_id": {
+        "$oid": "67bc87de16350e278a7aaabb"
+      },
       "user": "therockobama",
       "isEdited": false,
       "commentContent": "I have to say that I was a wrestler, then I became the president of the U.S. Your story inspired me to pursue different careers: astronaut, doctor, mechanic, fireman, and more hehe!",
-      "upCount": [],
+      "upCount": [
+        {
+          "$oid": "67c8568462d562bbdc6765d4"
+        },
+        {
+          "$oid": "67d93ac2f66ccac1f0bfa5aa"
+        }
+      ],
       "downCount": [],
       "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aabbc",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aabbc"
+          },
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@therockobama",
           "replyContent": "Woah, that's amazing my idol! I have to say that I am motivated to improve myself every day and hopefully one day become like you, good sir!",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         },
         {
-          "_id": "67bc87de16350e278a7aabbd",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aabbd"
+          },
           "user": "LuisDaBeast",
           "isEdited": false,
           "repliedTo": "@intrusive_thoughts",
           "replyContent": "Yes guys, pursue them all!",
           "upCount": [],
-          "downCount": [],
+          "downCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s"
         }
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aabcc",
+      "_id": {
+        "$oid": "67bc87de16350e278a7aabcc"
+      },
       "user": "Thomas_morato",
       "isEdited": false,
       "commentContent": "Ok haha",
-      "upCount": [],
-      "downCount": [],
+      "upCount": [
+        {
+          "$oid": "67c8568462d562bbdc6765d4"
+        }
+      ],
+      "downCount": [
+        {
+          "$oid": "67d93ac2f66ccac1f0bfa5aa"
+        }
+      ],
       "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
       "hasReplies": "true",
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aabcd",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aabcd"
+          },
           "user": "dantesssss",
           "isEdited": false,
           "repliedTo": "@Thomas_morato",
           "replyContent": "wew",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         }
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaddd",
+      "_id": {
+        "$oid": "67bc87de16350e278a7aaddd"
+      },
       "user": "LuisDaBeast",
       "isEdited": true,
       "commentContent": "I'm so amazing!",
-      "upCount": [],
+      "upCount": [
+        {
+          "$oid": "67c8568462d562bbdc6765d4"
+        }
+      ],
       "downCount": [],
       "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aadde",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aadde"
+          },
           "user": "mark_henryy",
           "isEdited": false,
           "repliedTo": "@LuisDaBeast",
           "replyContent": "Ah hindi naman masyado",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg"
         }
       ]
     },
     {
-      "_id": "67bc87de16350e278a7aaeee",
+      "_id": {
+        "$oid": "67bc87de16350e278a7aaeee"
+      },
       "user": "mark_henryy",
       "isEdited": false,
       "commentContent": "I don't care hahaha",
-      "upCount": [],
+      "upCount": [
+        {
+          "$oid": "67c8568462d562bbdc6765d4"
+        },
+        {
+          "$oid": "67d93ac2f66ccac1f0bfa5aa"
+        }
+      ],
       "downCount": [],
       "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
       "hasReplies": true,
       "replies": [
         {
-          "_id": "67bc87de16350e278a7aaeef",
+          "_id": {
+            "$oid": "67bc87de16350e278a7aaeef"
+          },
           "user": "optimumpride",
           "isEdited": false,
           "repliedTo": "@mark_henryy",
           "replyContent": "then why are u here -_-",
-          "upCount": [],
+          "upCount": [
+            {
+              "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            }
+          ],
           "downCount": [],
           "dpUrl": "https://pbs.twimg.com/profile_images/1455515084998934536/oOC2B0x0_400x400.jpg"
         }
@@ -153,11 +245,7 @@
   "downCount": [],
   "isEdited": false,
   "title": "Midnight Snack Regrets",
-  "upCount": [
-    {
-      "$oid": "67c8568462d562bbdc6765d4"
-    }
-  ],
+  "upCount": [],
   "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
   "tag": "Random",
   "hasReplies": false,
@@ -202,7 +290,11 @@
   "downCount": [],
   "isEdited": false,
   "title": "How to Build Confidence: Advice Needed",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    }
+  ],
   "dpUrl": "https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg",
   "tag": "Self-Improvement",
   "hasReplies": false,
@@ -217,6 +309,12 @@
   "upCount": [
     {
       "$oid": "67d94d56f969f3f0d5d1fc3f"
+    },
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    },
+    {
+      "$oid": "67d93ac2f66ccac1f0bfa5aa"
     }
   ],
   "downCount": [],

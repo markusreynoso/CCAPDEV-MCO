@@ -100,6 +100,48 @@ $(document).ready(function () {
 
     })
 
+    $(".reply-upvote-button").click(function () {
+        let replyId = $(this).data("reply-id");
+
+        $.ajax({
+            url: "/upvote-reply",
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ replyId: replyId }),
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                    console.log("Reply upvoted!", response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error upvoting reply:", error);
+                alert("Failed to upvote the reply.");
+            }
+        });
+    })
+
+    $(".reply-downvote-button").click(function () {
+        let replyId = $(this).data("reply-id");
+
+        $.ajax({
+            url: "/downvote-reply",
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify({ replyId: replyId }),
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                    console.log("Reply downvoted!", response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error downvoting reply:", error);
+                alert("Failed to upvote the reply.");
+            }
+        });
+    })
+
 
     // for (let voteType of ["up", "down"]) {
     //     $(`.bi-arrow-${voteType}-short`).click(function () {

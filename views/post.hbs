@@ -154,11 +154,11 @@
                                         <div class="score-count-div">
                                             <p class="score-count upvote-count">{{upCount.length}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                        <i class="bi bi-arrow-up-short post-icon h1 reply-upvote-button {{#if (hasVoted upCount ../../currUserObject._id)}}active-up{{/if}}" data-reply-id="{{_id}}"></i>
                                         <div class="score-count-div">
                                             <p class="score-count downvote-count">{{downCount.length}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                        <i class="bi bi-arrow-down-short post-icon h1 reply-downvote-button {{#if (hasVoted downCount ../../currUserObject._id)}}active-up{{/if}}" data-reply-id="{{_id}}"></i>
                                         <div>
                                         </div>
 

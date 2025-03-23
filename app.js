@@ -498,10 +498,8 @@ server.put('/upvote-comment', async function (req, res) {
         let currOid = getOid(currUserObject._id);
         
         let thePost = await postModel.findOne({
-            comments: { 
-              $elemMatch: { _id: getOid(commentId) } 
-            }
-          });
+            "comments._id": getOid(commentId)
+        });
 
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
 
@@ -541,10 +539,8 @@ server.put('/downvote-comment', async function (req, res) {
         let currOid = getOid(currUserObject._id);
         
         let thePost = await postModel.findOne({
-            comments: { 
-              $elemMatch: { _id: getOid(commentId) } 
-            }
-          });
+            "comments._id": getOid(commentId)
+        });
 
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
         
@@ -577,6 +573,86 @@ server.put('/downvote-comment', async function (req, res) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
+})
+
+
+server.put('/upvote-reply', async function (req, res) {
+    let replyId = req.body.replyId;
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+        
+        
+        let thePost = await postModel.findOne({
+            "comments.replies._id": getOid(replyId)
+        });
+
+        let theComment = thePost.comments.find(comment => 
+            comment.replies.some(reply => reply._id.toString() === replyId)
+        ); // the comment that contains thereply
+
+        let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
+
+        // If upCount does not contain the userId yet
+        if ( !theReply.upCount.some(id => id.equals(currOid)) ){
+
+            // If user has downvoted originally, remove from downvotes and add to upvotes
+            if ( theReply.downCount.some(id => id.equals(currOid)) ){
+                theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid)); 
+                theReply.upCount.push(currOid);
+            }
+
+            // Otherwise, just normally add an upcount
+            else {
+                theReply.upCount.push(currOid);
+            }
+        }
+        // If user has already upvoted, just remove the upvote
+        else {
+            theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
+})
+
+server.put('/downvote-reply', async function (req, res) {
+    let replyId = req.body.replyId;
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+        let currOid = getOid(currUserObject._id);
+        
+        
+        let thePost = await postModel.findOne({
+            "comments.replies._id": getOid(replyId)
+        });
+
+        let theComment = thePost.comments.find(comment => 
+            comment.replies.some(reply => reply._id.toString() === replyId)
+        ); // the comment that contains thereply
+
+        let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
+
+        // If downCount does not contain the userId yet
+        if ( !theReply.downCount.some(id => id.equals(currOid)) ){
+            
+            // If user has upvoted originally, remove from upvotes and add in downvotes
+            if ( theReply.upCount.some(id => id.equals(currOid)) ) {
+                theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid)); 
+                theReply.downCount.push(currOid);
+            }
+
+            else {
+                theReply.downCount.push(currOid);
+            }
+            
+        }
+
+        // if user has already downvoted, just remove the downvote upon click
+        else {
+            theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid));
+        }
+
+        await thePost.save();
+        res.json({ success: true });
 })
 
 server.put('/change-bio', async function (req, res) {
