@@ -136,6 +136,9 @@ server.get('/users/:username/posts', async function (req, resp) {
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
     let allPosts = await postModel.find({ "username": viewedUserObject.username }).lean();
+    for (post of allPosts){
+        post._id = post._id.toString();
+    }
     if (isLogged) {
         resp.render('user-posts', {
             layout: 'index',
