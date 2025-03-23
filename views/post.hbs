@@ -36,13 +36,13 @@
                         {{!-- Post --}}
                         <form action="" method="post" class="actions-form">
                             <div class="score-count-div">
-                                <p class="score-count upvote-count {{#if (hasVoted thePost.upCount currUserObject._id)}}active-up{{/if}}">{{thePost.upCount.length}}</p>
+                                <p class="score-count upvote-count">{{thePost.upCount.length}}</p>
                             </div>
-                            <i class="bi bi-arrow-up-short post-icon h1"></i>
+                            <i class="bi bi-arrow-up-short post-icon h1 upvote-button {{#if (hasVoted thePost.upCount currUserObject._id)}}active-up{{/if}}" data-post-id="{{thePost._id}}"></i>
                             <div class="score-count-div">
-                                <p class="score-count downvote-count {{#if (hasVoted thePost.downCount currUserObject._id)}}active-up{{/if}}">{{thePost.downCount.length}}</p>
+                                <p class="score-count downvote-count">{{thePost.downCount.length}}</p>
                             </div>
-                            <i class="bi bi-arrow-down-short post-icon h1"></i>
+                            <i class="bi bi-arrow-down-short post-icon h1 downvote-button {{#if (hasVoted thePost.downCount currUserObject._id)}}active-up{{/if}}" data-post-id="{{thePost._id}}"></i>
                         </form>
 
                         {{#if (eq thePost.user currUserObject.username)}}
