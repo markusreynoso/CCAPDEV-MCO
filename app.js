@@ -14,6 +14,9 @@ const hbs = handlebars.create({
     helpers: {
         eq: function (a, b) {
             return a === b;
+        },
+        and: function (a, b) {
+            return a && b;
         }
     }
 });
@@ -190,14 +193,14 @@ server.get('/posts/:id', async function (req, resp) {
     for (commentObject of topLevelComments) {
         const voteByCurrUser = await voteModel.findOne({ "targetId": commentObject._id.toString() }).lean();
         if (voteByCurrUser != null) {
-            commentObject.voteType = voteByCurrUser;
+            commentObject.voteType = voteByCurrUser.voteType;
         }
     }
 
     for (replyObject of replies) {
         const voteByCurrUser = await voteModel.findOne({ "targetId": replyObject._id.toString() }).lean();
         if (voteByCurrUser != null) {
-            replyObject.voteType = voteByCurrUser;
+            replyObject.voteType = voteByCurrUser.voteType;
         }
     }
 
@@ -205,7 +208,6 @@ server.get('/posts/:id', async function (req, resp) {
         let repliesArray = replies.filter(reply => reply.parentCommentId == commentObject._id.toString());
         commentObject.replies = repliesArray;
     }
-
 
 
     resp.render('post', {

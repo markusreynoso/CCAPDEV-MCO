@@ -1,1 +1,9 @@
-[]
+[{
+  "_id": {
+    "$oid": "67df5f65f9abb391a50256d7"
+  },
+  "username": "LuisDaBeast",
+  "targetId": "67dedca580d70a7246880874",
+  "targetType": "comment",
+  "voteType": "up"
+}]
