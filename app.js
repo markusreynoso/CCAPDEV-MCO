@@ -566,8 +566,6 @@ server.put('/downvote-comment', async function (req, res) {
 
         await thePost.save();
         res.json({ success: true });
-
-        
         
     } catch (error) {
         console.error(error);
