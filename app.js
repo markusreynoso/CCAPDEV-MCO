@@ -380,11 +380,13 @@ server.post('/register', async function (req, resp) {
 
     const isNew = await userModel.findOne({ "username": username }) == null;
 
+    
     if (isNew) {
         try {
             let newUserInstance = await userModel(user);
             await newUserInstance.save();
-            return resp.redirect('/home-logged');
+            req.session.currUser = username;
+            return resp.redirect('/home');
         }
         catch (error) {
             resp.render('register', {

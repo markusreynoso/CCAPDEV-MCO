@@ -1,15 +1,17 @@
 $(document).ready(function () {
     $("#register-warning").hide();
+
     $("#register-form").submit(function (event) {
         let username = $("#username-field").val();
         let pass1 = $("#password-field").val();
         let pass2 = $("#confirmation-field").val();
 
-        // let userValid = validateUsername(username);
-        // let passValid = validatePassword(pass1, pass2);
+        let userValid = validateUsername(username);
+        let passValid = validatePassword(pass1, pass2);
 
-        let userValid = true;
-        let passValid = true;
+        // console.log("Is Uservalid? " + userValid);
+        // console.log("Is passValid? " + passValid);
+       
 
         if (userValid && passValid) {
             $('#register-warning').hide();
