@@ -428,6 +428,46 @@ server.post('/register', async function (req, resp) {
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
+server.put('/comments', async function (req, resp) {
+    try {
+        const currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
+        let postId = req.body.postId;
+        let commentContent = req.body.commentContent;
+
+        let commentObject = {
+            _id: new mongoose.Types.ObjectId(),
+            user: currUserObject.username,
+            isEdited: false,
+            commentContent: commentContent,
+            upCount: [],
+            downCount: [],
+            dpUrl: currUserObject.dpUrl,
+            hasReplies: false,
+            replies: []
+        }
+
+        if (!currUserObject) {
+            return resp.status(400).send("User not found.");
+        }
+
+        let thePost = await postModel.findById(postId);
+        
+
+        
+        if (!thePost) {
+            return resp.status(400).send("Post not found.");
+        }
+
+        thePost.comments.push(commentObject);
+        await thePost.save();
+        resp.json({ success: true, message: "Username succesfully changed!", redirectUrl: `/posts/${postId}` });
+
+    } catch (error) {
+        console.error(error);
+        resp.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
+
 server.put('/upvote', async function (req, res) {
     try {
         

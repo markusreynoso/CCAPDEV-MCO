@@ -112,7 +112,7 @@
                                 </a>
 
 
-                                {{#if (eq user ../currUser)}}
+                                {{#if (eq user ../currUserObject.username)}}
                                 <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
                                     <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                         value={{_id}}></i>
@@ -165,8 +165,8 @@
                                         <a data-bs-toggle="modal" data-bs-target="#reply-modal">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
-
-                                        {{#if (eq user ../../currUser)}}
+                                        
+                                        {{#if (eq user ../../currUserObject.username)}}
                                         <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>

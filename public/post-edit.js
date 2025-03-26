@@ -22,9 +22,6 @@ $(document).ready(function() {
         let newContent = $("#edit-post-text-area").val();
         let postId = $(this).data("post-id");
         
-
-       
-
         $.ajax({
             url: "/change-post",
             type: "PUT",
