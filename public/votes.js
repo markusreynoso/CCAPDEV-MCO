@@ -7,10 +7,11 @@ $(document).ready(function () {
         let postId = $(this).data("post-id");
 
         let $upButton = $(this);
-        let $downButton = $upButton.next().find(".downvote-button");
+        let $postContainer = $upButton.closest(".post-actions-div");
+        let $downButton = $postContainer.find(".downvote-button");
 
-        let $upCount = $upButton.prev().find(".upvote-count");
-        let $downCount = $upButton.next().find(".downvote-count");
+        let $upCount = $postContainer.find(".upvote-count");
+        let $downCount = $postContainer.find(".downvote-count");
         
         $.ajax({
             url: "/upvote",
@@ -28,13 +29,10 @@ $(document).ready(function () {
                     $downCount.text(response.downCount.length);
                     }
 
-                    // If upCount does not contain the userId yet
-                    if ( !thePost.upCount.some(id => id.equals(currOid)) ){
-
+                    // If user has upvoted
+                    if (response.hasUpvoted) {
                         $upButton.addClass("active-up");
                         $downButton.removeClass("active-up");
-                        
-
                     } else {
                         $upButton.removeClass("active-up");
                     }
@@ -53,6 +51,12 @@ $(document).ready(function () {
     $(".downvote-button").click(function () {
         
         let postId = $(this).data("post-id");
+        let $downButton = $(this);
+        let $postContainer = $downButton.closest(".post-actions-div");
+        let $upButton = $postContainer.find(".upvote-button");
+
+        let $upCount = $postContainer.find(".upvote-count");
+        let $downCount = $postContainer.find(".downvote-count");
         
         $.ajax({
             url: "/downvote",
@@ -62,11 +66,24 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Downvote successful!", response);
+
+                    console.log("Update successful!", response);
+
+                    $upCount.text(response.upCount.length);
+                    
+                    $downCount.text(response.downCount.length);
+                    }
+
+                    // If downCount does not contain the userId yet
+                    if (response.hasDownvoted) {
+                        $downButton.addClass("active-up");
+                        $upButton.removeClass("active-up");
+                    } else {
+                        $downButton.removeClass("active-up");
                     }
     
                 },
+
             error: function (xhr, status, error) {
                     console.error("Error downvoting:", error);
                     alert("Failed to downvote the post.");

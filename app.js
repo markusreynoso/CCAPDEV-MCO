@@ -504,7 +504,8 @@ server.put('/upvote', async function (req, res) {
             success: true,
             upCount: thePost.upCount,
             downCount: thePost.downCount,
-            currOid: currOid
+            hasUpvoted: thePost.upCount.some(id => id.equals(currOid)),
+            hasDownvoted: thePost.downCount.some(id => id.equals(currOid))
         });
         
 
@@ -545,7 +546,13 @@ server.put('/downvote', async function (req, res) {
         }
 
         await thePost.save();
-        res.json({ success: true });
+        res.json({
+            success: true,
+            upCount: thePost.upCount,
+            downCount: thePost.downCount,
+            hasUpvoted: thePost.upCount.some(id => id.equals(currOid)),
+            hasDownvoted: thePost.downCount.some(id => id.equals(currOid))
+        });
         
 
     } catch (error) {
