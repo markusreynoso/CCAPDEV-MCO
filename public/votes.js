@@ -5,6 +5,12 @@ $(document).ready(function () {
     $(".upvote-button").click(function () {
         
         let postId = $(this).data("post-id");
+
+        let $upButton = $(this);
+        let $downButton = $upButton.next().find(".downvote-button");
+
+        let $upCount = $upButton.prev().find(".upvote-count");
+        let $downCount = $upButton.next().find(".downvote-count");
         
         $.ajax({
             url: "/upvote",
@@ -14,11 +20,27 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Upvote successful!", response);
+                    
+                    console.log("Update successful!", response);
+
+                    $upCount.text(response.upCount.length);
+                    
+                    $downCount.text(response.downCount.length);
+                    }
+
+                    // If upCount does not contain the userId yet
+                    if ( !thePost.upCount.some(id => id.equals(currOid)) ){
+
+                        $upButton.addClass("active-up");
+                        $downButton.removeClass("active-up");
+                        
+
+                    } else {
+                        $upButton.removeClass("active-up");
                     }
     
                 },
+
             error: function (xhr, status, error) {
                     console.error("Error upvoting:", error);
                     alert("Failed to upvote the post.");

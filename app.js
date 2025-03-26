@@ -499,7 +499,13 @@ server.put('/upvote', async function (req, res) {
         }
 
         await thePost.save();
-        res.json({ success: true });
+
+        res.json({
+            success: true,
+            upCount: thePost.upCount,
+            downCount: thePost.downCount,
+            currOid: currOid
+        });
         
 
     } catch (error) {
@@ -783,7 +789,6 @@ server.put('/change-username', async function (req, res) {
     }
     
 })
-
 
 server.put('/change-post', async  function (req, res) {
     const postId = req.body.postId;
