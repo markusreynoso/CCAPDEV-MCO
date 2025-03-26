@@ -745,6 +745,24 @@ server.put('/change-username', async function (req, res) {
 })
 
 
+server.put('/change-post', async  function (req, res) {
+    const postId = req.body.postId;
+    const newTitle = req.body.newTitle;
+    const newTag = req.body.newTag;
+    const newContent = req.body.newContent;
+
+
+    await postModel.findOneAndUpdate(
+        { "_id": postId },
+        { "$set": {
+            "title": newTitle,
+            "isEdited": true,
+            "postContent": newContent,
+            "tag": newTag}}
+    )
+
+    res.json({ success: true, redirectUrl: "/posts/" + postId });
+})  
 
 server.put('/change-dp', async function (req, res) {
     const newDpUrl = req.body.selectedDp;
