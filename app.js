@@ -51,6 +51,9 @@ const mongoClient = new MongoClient(databaseURL);
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://127.0.0.1:27017/MCO");
 
+// Hashing ======================================================================================================================
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
     username: { type: String },
@@ -319,8 +322,8 @@ server.post('/posts', async function (req, resp) {
 
             user: currUserObject.username,
             postContent: req.body.postContent,
-            upCount: 0,
-            downCount: 0,
+            upCount: [],
+            downCount: [],
             isEdited: false,
             title: req.body.title,
             dpUrl: currUserObject.dpUrl,
@@ -344,19 +347,29 @@ server.post('/login', async function (req, resp) {
     const inputtedUsername = req.body.username;
     const inputtedPassword = req.body.password;
 
-    const match = await userModel.findOne({ username: inputtedUsername, password: inputtedPassword }).lean();
+    const user = await userModel.findOne({ username: inputtedUsername }).lean();
 
-    if (!match) {
+    if (!user) {
         return resp.render('login', {
             layout: 'index',
             title: 'AskAway - Login',
             error: true
         });
-    } else {
-        req.session.currUser = inputtedUsername;
-        return resp.redirect('/home');
     }
-})
+
+    const isMatch = await bcrypt.compare(inputtedPassword, user.password);
+
+    if (!isMatch) {
+        return resp.render('login', {
+            layout: 'index',
+            title: 'AskAway - Login',
+            error: true
+        });
+    }
+
+    req.session.currUser = inputtedUsername;
+    return resp.redirect('/home');
+});
 
 server.post('/logout', function (req, resp) {
     req.session.destroy(function (err) {
@@ -373,31 +386,12 @@ server.post('/register', async function (req, resp) {
     const username = req.body.username;
     const password = req.body.password;
 
-    const user = {
-        username: username,
-        password: password
-    }
+    const defaultDpUrl = "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg";
 
-    const isNew = await userModel.findOne({ "username": username }) == null;
+    const existingUser = await userModel.findOne({ username });
 
-    if (isNew) {
-        try {
-            let newUserInstance = await userModel(user);
-            await newUserInstance.save();
-            return resp.redirect('/home-logged');
-        }
-        catch (error) {
-            resp.render('register', {
-                layout: 'index',
-                title: 'AskAway - Register',
-                error: true,
-                errorMessage: "Unexpected error occurred"
-            });
-        }
-    }
-
-    else {
-        resp.render('register', {
+    if (existingUser) {
+        return resp.render('register', {
             layout: 'index',
             title: 'AskAway - Register',
             error: true,
@@ -405,8 +399,26 @@ server.post('/register', async function (req, resp) {
         });
     }
 
+    try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-})
+        const newUser = new userModel({
+            username: username,
+            password: hashedPassword,
+            dpUrl: defaultDpUrl
+        });
+
+        await newUser.save();
+        return resp.redirect('/home');
+    } catch (error) {
+        return resp.render('register', {
+            layout: 'index',
+            title: 'AskAway - Register',
+            error: true,
+            errorMessage: "Unexpected error occurred"
+        });
+    }
+});
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
