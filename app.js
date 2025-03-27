@@ -452,20 +452,68 @@ server.put('/comments', async function (req, resp) {
 
         let thePost = await postModel.findById(postId);
         
-
-        
         if (!thePost) {
             return resp.status(400).send("Post not found.");
         }
 
         thePost.comments.push(commentObject);
         await thePost.save();
-        resp.json({ success: true, message: "Username succesfully changed!", redirectUrl: `/posts/${postId}` });
+        resp.json({ success: true, message: "Succesfully commented", redirectUrl: `/posts/${postId}` });
 
     } catch (error) {
         console.error(error);
         resp.status(500).json({ success: false, message: "Internal server error" });
     }
+})
+
+server.put("/replies", async function(req, res) {
+
+    try {
+        let postId = req.body.postId;
+        let commentId = req.body.commentId;
+        let newReply = req.body.newReply;
+
+        let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
+        
+        let newReplyArray = splitAtFirstSpace(newReply);
+
+        let repliedTo = newReplyArray[0];
+        let replyContent = newReplyArray[1];
+
+        let replyObject = {
+            _id: new mongoose.Types.ObjectId(),
+            user: currUserObject.username,
+            isEdited: false,
+            repliedTo: repliedTo,
+            replyContent: replyContent,
+            upCount: [],
+            downCount: [],
+            dpUrl: currUserObject.dpUrl
+        }
+
+        let thePost = await postModel.findById(postId);
+        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
+
+        // find the comment by commentid
+        let theComment = thePost.comments.find(c => c._id.toString() === commentId);
+        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
+        
+        theComment.replies.push(replyObject);
+        await thePost.save();
+
+        res.json({ success: true, message: "Succesfully replied", redirectUrl: `/posts/${postId}` });
+        
+        await postModel.updateOne(
+            {_id: postId, "comments._id": commentId },
+            {$set: {"comments.$.hasReplies": true}}
+        )
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+    
+
 })
 
 server.put('/upvote', async function (req, res) {
@@ -843,8 +891,6 @@ server.put('/change-comment', async function (req, res) {
         res.status(500).json({ success: false, message: "Failed to update comment" });
 
     }
-    
-
 
 })
 
@@ -943,5 +989,11 @@ function getOid(oid) {
     }
 
     return oid;
+}
+
+function splitAtFirstSpace(str) {
+    let index = str.indexOf(" ");
+    if (index === -1) return [str, ""]; 
+    return [str.substring(0, index), str.substring(index + 1)];
 }
 

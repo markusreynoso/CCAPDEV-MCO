@@ -19,11 +19,12 @@ $(document).ready(function() {
     });
     
     $(document).on("click", ".edit-comment-button", function () {
-        let commentId = $(this).data("comment-id"); // Get the commentId from the clicked button
-        $("#edit-comment-save-changes").data("comment-id", commentId); // Store it in the save button
+        let commentId = $(this).data("comment-id"); 
+        $("#edit-comment-save-changes").data("comment-id", commentId); 
     });
 
     $("#edit-comment-save-changes").click(function(event) {
+        event.preventDefault();
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
         let newComment = $("#edit-comment-text-area").val();
