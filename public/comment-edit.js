@@ -17,6 +17,40 @@ $(document).ready(function() {
         
         $("#edit-comment-text-area").html(content);
     });
+    
+    $(document).on("click", ".edit-comment-button", function () {
+        let commentId = $(this).data("comment-id"); // Get the commentId from the clicked button
+        $("#edit-comment-save-changes").data("comment-id", commentId); // Store it in the save button
+    });
+
+    $("#edit-comment-save-changes").click(function(event) {
+        let postId = $(this).data("post-id");
+        let commentId = $(this).data("comment-id");
+        let newComment = $("#edit-comment-text-area").val();
+
+        
+        $.ajax({
+            url: "/change-comment",
+            type: "PUT",
+            data: JSON.stringify({
+                postId: postId,
+                commentId: commentId,
+                newComment: newComment
+            }),
+            contentType: "application/json",
+            success: function( response ) {
+                if (response.success) {
+                    window.location.href = response.redirectUrl;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error editing comment", error);
+                alert("Failed to edit comment.")
+            }
+
+        })
+        
+    })
 
     
 })

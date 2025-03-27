@@ -659,7 +659,7 @@ server.put('/downvote-comment', async function (req, res) {
 
 
 server.put('/upvote-reply', async function (req, res) {
-    let replyId = req.body.replyId;
+        let replyId = req.body.replyId;
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
         
@@ -820,6 +820,32 @@ server.put('/change-username', async function (req, res) {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
     
+})
+
+server.put('/change-comment', async function (req, res) {
+    const postId = req.body.postId;
+    const newComment = req.body.newComment;
+    const commentId = req.body.commentId;
+
+    console.log(newComment);
+
+    try {
+
+        await postModel.updateOne(
+            {_id: postId, "comments._id": commentId },
+            {$set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
+        );
+
+        res.json({ success: true, redirectUrl: "/posts/" + postId });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Failed to update comment" });
+
+    }
+    
+
+
 })
 
 server.put('/change-post', async  function (req, res) {
