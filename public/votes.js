@@ -10,8 +10,8 @@ $(document).ready(function () {
         let $postContainer = $upButton.closest(".post-actions-div");
         let $downButton = $postContainer.find(".downvote-button");
 
-        let $upCount = $postContainer.find(".upvote-count");
-        let $downCount = $postContainer.find(".downvote-count");
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
         
         $.ajax({
             url: "/upvote",
@@ -24,9 +24,9 @@ $(document).ready(function () {
                     
                     console.log("Update successful!", response);
 
-                    $upCount.text(response.upCount.length);
+                    $upCountHolder.text(response.upCount.length);
                     
-                    $downCount.text(response.downCount.length);
+                    $downCountHolder.text(response.downCount.length);
                     }
 
                     // If user has upvoted
@@ -55,8 +55,8 @@ $(document).ready(function () {
         let $postContainer = $downButton.closest(".post-actions-div");
         let $upButton = $postContainer.find(".upvote-button");
 
-        let $upCount = $postContainer.find(".upvote-count");
-        let $downCount = $postContainer.find(".downvote-count");
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
         
         $.ajax({
             url: "/downvote",
@@ -69,10 +69,10 @@ $(document).ready(function () {
 
                     console.log("Update successful!", response);
 
-                    $upCount.text(response.upCount.length);
+                    $upCountHolder.text(response.upCount.length);
                     
-                    $downCount.text(response.downCount.length);
-                    }
+                    $downCountHolder.text(response.downCount.length);
+                    
 
                     // If downCount does not contain the userId yet
                     if (response.hasDownvoted) {
@@ -81,7 +81,7 @@ $(document).ready(function () {
                     } else {
                         $downButton.removeClass("active-up");
                     }
-    
+                }
                 },
 
             error: function (xhr, status, error) {
@@ -96,6 +96,13 @@ $(document).ready(function () {
     $(".comment-upvote-button").click(function () {
         let commentId = $(this).data("comment-id");
         
+        let $upButton = $(this);
+        let $postContainer = $upButton.closest(".post-actions-div");
+        let $downButton = $postContainer.find(".comment-downvote-button");
+
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
+
         $.ajax({
             url: "/upvote-comment",
             type: "PUT",
@@ -103,22 +110,42 @@ $(document).ready(function () {
             data: JSON.stringify({ commentId: commentId }),
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Comment upvoted!", response);
+                    
+                    console.log("Update successful!", response);
+
+                    $upCountHolder.text(response.upCount.length);
+                    $downCountHolder.text(response.downCount.length);
+
+                    // If upCount does not contain the userId yet
+                    if (response.hasUpvoted) {
+                        $upButton.addClass("active-up");
+                        $downButton.removeClass("active-up");
+                    } else {
+                        $upButton.removeClass("active-up");
+                    }
                 }
+
+                
             },
+
             error: function (xhr, status, error) {
                 console.error("Error upvoting comment:", error);
                 alert("Failed to upvote the comment.");
             }
         });
 
-
     })
 
     $(".comment-downvote-button").click(function () {
         let commentId = $(this).data("comment-id");
         
+        let $downButton = $(this);
+        let $postContainer = $downButton.closest(".post-actions-div");
+        let $upButton = $postContainer.find(".comment-upvote-button");
+
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
+
         $.ajax({
             url: "/downvote-comment",
             type: "PUT",
@@ -126,8 +153,20 @@ $(document).ready(function () {
             data: JSON.stringify({ commentId: commentId }),
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Comment downvoted!", response);
+
+                    console.log("Update successful!", response);
+
+                    $upCountHolder.text(response.upCount.length);
+                    
+                    $downCountHolder.text(response.downCount.length);
+
+                    // If downCount does not contain the userId yet
+                    if (response.hasDownvoted) {
+                        $downButton.addClass("active-up");
+                        $upButton.removeClass("active-up");
+                    } else {
+                        $downButton.removeClass("active-up");
+                    }
                 }
             },
             error: function (xhr, status, error) {

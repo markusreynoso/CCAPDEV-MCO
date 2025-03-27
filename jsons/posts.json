@@ -4,15 +4,16 @@
   },
   "user": "LuisDaBeast",
   "postContent": "I’ve always believed that if you’re going to do something, you should aim to be the best at\nit—and I’ve worked relentlessly to get there. Over the years, I’ve put in the hours, mastered\nthe details, and stayed consistent, even when things got tough. I don’t believe in shortcuts or\nluck. To me, it’s about discipline, focus, and a willingness to outwork everyone else.\n\nIt hasn’t been easy. There were times when I doubted myself or felt like I wasn’t making\nprogress, but I kept pushing through. I learned that success isn’t about talent alone; it’s\nabout staying committed when others quit. Whether it’s refining my skills, staying up-to-date\nwith trends, or analyzing where I can improve, I never stop grinding.\n\nNow, I’m at a point where I can confidently say I’m at the top of my game. It’s not just the\nresults that prove it, but the respect I’ve earned from others in my field. It’s an amazing\nfeeling knowing the effort I’ve put in has paid off, but I’m not stopping here.\n\nIf there’s one thing I’ve learned, it’s that there’s always room to grow. Excellence isn’t a\ndestination; it’s a mindset. What about you? How do you keep striving to be the best in what you\ndo? Let’s share ideas and push each other even further.",
-  "downCount": [],
+  "downCount": [
+    {
+      "$oid": "67d93ac2f66ccac1f0bfa5aa"
+    }
+  ],
   "isEdited": false,
   "title": "My experiences in living as a beast",
   "upCount": [
     {
       "$oid": "67c8568462d562bbdc6765d4"
-    },
-    {
-      "$oid": "67d93ac2f66ccac1f0bfa5aa"
     }
   ],
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
@@ -51,7 +52,11 @@
               "$oid": "67d93ac2f66ccac1f0bfa5aa"
             }
           ],
-          "downCount": [],
+          "downCount": [
+            {
+              "$oid": "67c8568462d562bbdc6765d4"
+            }
+          ],
           "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84"
         },
         {
@@ -65,6 +70,9 @@
           "upCount": [
             {
               "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            },
+            {
+              "$oid": "67c8568462d562bbdc6765d4"
             }
           ],
           "downCount": [],
@@ -88,7 +96,7 @@
         }
       ],
       "downCount": [],
-      "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
+      "dpUrl": "https://i.imgflip.com/6lj6g7.jpg",
       "hasReplies": true,
       "replies": [
         {
@@ -227,6 +235,9 @@
           "upCount": [
             {
               "$oid": "67d93ac2f66ccac1f0bfa5aa"
+            },
+            {
+              "$oid": "67c8568462d562bbdc6765d4"
             }
           ],
           "downCount": [],
@@ -245,7 +256,11 @@
   "downCount": [],
   "isEdited": false,
   "title": "Midnight Snack Regrets",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    }
+  ],
   "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
   "tag": "Random",
   "hasReplies": false,
@@ -260,7 +275,11 @@
   "downCount": [],
   "isEdited": false,
   "title": "The Art of Procrastination",
-  "upCount": [],
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    }
+  ],
   "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
   "tag": "Self-Improvement",
   "hasReplies": false,
@@ -276,7 +295,7 @@
   "isEdited": true,
   "title": "Help Understanding Eigenvalues in Real-Life Contexts",
   "upCount": [],
-  "dpUrl": "https://s.yimg.com/ny/api/res/1.2/UYqTdDwHJ8XvxYHrNTB36A--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTExMzY-/http://41.media.tumblr.com/4aa3e21bff84025f5c44a58dbe6cd371/tumblr_inline_o3497bJbKp1twign1_540.png",
+  "dpUrl": "https://i.imgflip.com/6lj6g7.jpg",
   "tag": "Math",
   "hasReplies": false,
   "comments": []
@@ -291,6 +310,9 @@
   "isEdited": false,
   "title": "How to Build Confidence: Advice Needed",
   "upCount": [
+    {
+      "$oid": "67d93ac2f66ccac1f0bfa5aa"
+    },
     {
       "$oid": "67c8568462d562bbdc6765d4"
     }
@@ -311,17 +333,102 @@
       "$oid": "67d94d56f969f3f0d5d1fc3f"
     },
     {
-      "$oid": "67c8568462d562bbdc6765d4"
+      "$oid": "67d93ac2f66ccac1f0bfa5aa"
     },
     {
-      "$oid": "67d93ac2f66ccac1f0bfa5aa"
+      "$oid": "67c8568462d562bbdc6765d4"
     }
   ],
   "downCount": [],
-  "isEdited": false,
+  "isEdited": true,
   "title": "Help me beat the Godskin Duo in Elden Ring",
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
   "tag": "Elden Ring",
   "hasReplies": false,
   "comments": []
+},
+{
+  "_id": {
+    "$oid": "67e3c3301a3eec116f98a8d3"
+  },
+  "user": "LuisDaBeast",
+  "postContent": "Hello world jim",
+  "upCount": [
+    {
+      "$oid": "67c8568462d562bbdc6765d4"
+    }
+  ],
+  "downCount": [],
+  "isEdited": true,
+  "title": "Newpost",
+  "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+  "tag": "Test",
+  "hasReplies": false,
+  "comments": [
+    {
+      "user": "LuisDaBeast",
+      "isEdited": false,
+      "commentContent": "Jermbol",
+      "upCount": [],
+      "downCount": [],
+      "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+      "hasReplies": false,
+      "replies": [],
+      "_id": {
+        "$oid": "67e3ccb0e85205ee987ab056"
+      }
+    },
+    {
+      "user": "LuisDaBeast",
+      "isEdited": false,
+      "commentContent": "asd",
+      "upCount": [],
+      "downCount": [],
+      "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+      "hasReplies": false,
+      "replies": [],
+      "_id": {
+        "$oid": "67e3cda65c030b125dcc3cf3"
+      }
+    },
+    {
+      "user": "LuisDaBeast",
+      "isEdited": false,
+      "commentContent": "asdasd",
+      "upCount": [],
+      "downCount": [],
+      "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+      "hasReplies": false,
+      "replies": [],
+      "_id": {
+        "$oid": "67e3ce2889a4b7fdbb3dda9a"
+      }
+    },
+    {
+      "user": "LuisDaBeast",
+      "isEdited": false,
+      "commentContent": "Jamal crawford",
+      "upCount": [],
+      "downCount": [],
+      "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+      "hasReplies": false,
+      "replies": [],
+      "_id": {
+        "$oid": "67e3ce3889a4b7fdbb3ddaa5"
+      }
+    },
+    {
+      "user": "LuisDaBeast",
+      "isEdited": false,
+      "commentContent": "Javla",
+      "upCount": [],
+      "downCount": [],
+      "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
+      "hasReplies": false,
+      "replies": [],
+      "_id": {
+        "$oid": "67e3cf8598a80f9fc9af0faf"
+      }
+    }
+  ]
 }]
