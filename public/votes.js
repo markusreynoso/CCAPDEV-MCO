@@ -181,6 +181,13 @@ $(document).ready(function () {
     $(".reply-upvote-button").click(function () {
         let replyId = $(this).data("reply-id");
 
+        let $upButton = $(this);
+        let $postContainer = $upButton.closest(".post-actions-div");
+        let $downButton = $postContainer.find(".reply-downvote-button");
+
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
+
         $.ajax({
             url: "/upvote-reply",
             type: "PUT",
@@ -188,8 +195,19 @@ $(document).ready(function () {
             data: JSON.stringify({ replyId: replyId }),
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Reply upvoted!", response);
+                    console.log("Update successful!", response);
+
+                    $upCountHolder.text(response.upCount.length);
+                    
+                    $downCountHolder.text(response.downCount.length);
+
+                    // If upCount does not contain the userId yet
+                    if (response.hasUpvoted) {
+                        $upButton.addClass("active-up");
+                        $downButton.removeClass("active-up");
+                    } else {
+                        $upButton.removeClass("active-up");
+                    }
                 }
             },
             error: function (xhr, status, error) {
@@ -202,6 +220,12 @@ $(document).ready(function () {
     $(".reply-downvote-button").click(function () {
         let replyId = $(this).data("reply-id");
 
+        let $downButton = $(this);
+        let $postContainer = $downButton.closest(".post-actions-div");
+        let $upButton = $postContainer.find(".reply-upvote-button");
+
+        let $upCountHolder = $postContainer.find(".upvote-count");
+        let $downCountHolder = $postContainer.find(".downvote-count");
         $.ajax({
             url: "/downvote-reply",
             type: "PUT",
@@ -209,8 +233,20 @@ $(document).ready(function () {
             data: JSON.stringify({ replyId: replyId }),
             success: function (response) {
                 if (response.success) {
-                    location.reload();
-                    console.log("Reply downvoted!", response);
+                    
+                    console.log("Update successful!", response);
+
+                    $upCountHolder.text(response.upCount.length);
+                    
+                    $downCountHolder.text(response.downCount.length);
+
+                    // If downCount does not contain the userId yet
+                    if (response.hasDownvoted) {
+                        $downButton.addClass("active-up");
+                        $upButton.removeClass("active-up");
+                    } else {
+                        $downButton.removeClass("active-up");
+                    }
                 }
             },
             error: function (xhr, status, error) {

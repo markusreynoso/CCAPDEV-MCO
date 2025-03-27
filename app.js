@@ -694,7 +694,13 @@ server.put('/upvote-reply', async function (req, res) {
         }
 
         await thePost.save();
-        res.json({ success: true });
+        res.json({
+            success: true,
+            upCount: theReply.upCount,
+            downCount: theReply.downCount,
+            hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
+            hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
+        });
 })
 
 server.put('/downvote-reply', async function (req, res) {
@@ -734,7 +740,13 @@ server.put('/downvote-reply', async function (req, res) {
         }
 
         await thePost.save();
-        res.json({ success: true });
+        res.json({
+            success: true,
+            upCount: theReply.upCount,
+            downCount: theReply.downCount,
+            hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
+            hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
+        });
 })
 
 server.put('/change-bio', async function (req, res) {
