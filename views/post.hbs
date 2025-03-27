@@ -107,7 +107,7 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1 comment-downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
 
-                                <a data-bs-toggle="modal" data-bs-target="#reply-modal" class="reply-comment-button" data-comment-id="{{_id}}">
+                                <a data-bs-toggle="modal" data-bs-target="#reply-comment-modal" class="reply-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
 
@@ -162,7 +162,7 @@
                                         <div>
                                         </div>
 
-                                        <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-reply-id="{{_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
                                         
@@ -221,9 +221,9 @@
             </div>
             
 
-            <!-- Marker Reply modal -->
+            <!-- Marker Reply to Comment modal -->
             
-            <div class="modal fade modal-xl" id="reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+            <div class="modal fade modal-xl" id="reply-comment-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -238,12 +238,34 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" id="create-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
+                            <button type="button" id="create-comment-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Marker Reply to Reply modal -->
             
+            <div class="modal fade modal-xl" id="reply-reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="reply-comment-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="create-reply-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Edit comment modal -->
             

@@ -7,7 +7,6 @@ $(document).ready(function () {
         let postId = $(this).data("post-id");
         let commentContent = $("#write-text-area").val();
 
-
         $.ajax({
             url: "/comments",
             type: "PUT",

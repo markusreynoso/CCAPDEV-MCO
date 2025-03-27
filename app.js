@@ -466,7 +466,7 @@ server.put('/comments', async function (req, resp) {
     }
 })
 
-server.put("/replies", async function(req, res) {
+server.put("/comment-replies", async function(req, res) {
 
     try {
         let postId = req.body.postId;
@@ -875,7 +875,6 @@ server.put('/change-comment', async function (req, res) {
     const newComment = req.body.newComment;
     const commentId = req.body.commentId;
 
-    console.log(newComment);
 
     try {
 
