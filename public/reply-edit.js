@@ -31,12 +31,7 @@ $(document).ready(function() {
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
         let replyId = $(this).data("reply-id");
-        let newReply = $("#edit-reply-text-area").val();
-
-        // alert(postId);
-        // alert(commentId);
-        // alert(replyId);
-       
+        let newReply = $("#edit-reply-text-area").val();   
 
         $.ajax({
             url: "/change-reply",

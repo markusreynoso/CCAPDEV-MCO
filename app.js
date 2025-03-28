@@ -1039,7 +1039,24 @@ server.put('/delete-comment', async function(req, res) {
     }
 })
 
+server.put('/delete-reply', async function(req, res) {
+    try {
+        let postId = req.body.postId;
+        let commentId = req.body.commentId;
+        let replyId = req.body.replyId;
 
+        await postModel.updateOne(
+            { _id: postId, "comments._id": commentId }, 
+            { $pull: { "comments.$.replies": { _id: replyId } } } 
+        );
+
+        res.json({success: true})
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).send("Unexpected error deleting reply. ")
+    }
+})
 
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/posts/:id', async function (req, res) {

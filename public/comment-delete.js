@@ -4,7 +4,7 @@ $(document).ready(function() {
         $("#delete-comment").data("comment-id", commentId); 
     });
 
-    $("#delete-comment").click(function(event) {
+    $("#delete-comment").click(function() {
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
 
