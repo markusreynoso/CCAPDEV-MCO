@@ -140,6 +140,9 @@
                                             <a href="/users/{{user}}/posts" class="text-decoration-none">
                                                 <h3 class="post-username">{{user}}</h3>
                                             </a>
+                                            {{#if isEdited}}
+                                                <p class="edit-indicator">Edited</p>
+                                            {{/if}}
                                         </div>
 
                                     </div>
@@ -163,12 +166,12 @@
                                         <div>
                                         </div>
 
-                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
                                         
                                         {{#if (eq user ../../currUserObject.username)}}
-                                        <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
+                                        <a data-bs-toggle="modal" data-bs-target="#edit-reply-modal" class="edit-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>
                                         </a>
@@ -270,26 +273,49 @@
 
             <!-- Edit comment modal -->
             
-                <div class="modal fade modal-xl" id="edit-comment-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit comment</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" id="edit-comment-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
-                            </div>
+            <div class="modal fade modal-xl" id="edit-comment-modal" tabindex="-1"
+                aria-labelledby="editBioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit comment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="edit-comment-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="edit-comment-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Edit reply modal -->
+            
+            <div class="modal fade modal-xl" id="edit-reply-modal" tabindex="-1"
+                aria-labelledby="editBioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit reply</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="edit-reply-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="edit-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             <!-- Marker Post delete modal -->

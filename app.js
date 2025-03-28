@@ -917,6 +917,36 @@ server.put('/change-username', async function (req, res) {
     
 })
 
+server.put('/change-reply', async function(req, res) {
+    const postId = req.body.postId;
+    const commentId = req.body.commentId;
+    const replyId = req.body.replyId;
+    const newReply = req.body.newReply
+
+    const newReplyContent = splitAtFirstSpace(newReply)[1];
+
+    try {
+
+        await postModel.updateOne(
+            {_id: postId, "comments._id": commentId },
+            {
+                $set: { 
+                    "comments.$.replies.$[reply].replyContent": newReplyContent, 
+                    "comments.$.replies.$[reply].isEdited": true 
+                } 
+            },
+            { arrayFilters: [{ "reply._id": replyId }] }
+
+        );
+
+        res.json({ success: true, redirectUrl: "/posts/" + postId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Failed to update reply" });
+    }
+    
+})
+
 server.put('/change-comment', async function (req, res) {
     const postId = req.body.postId;
     const newComment = req.body.newComment;
