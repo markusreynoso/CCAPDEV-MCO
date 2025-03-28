@@ -466,6 +466,52 @@ server.put('/comments', async function (req, resp) {
     }
 })
 
+server.put("/reply-replies", async function(req, res) {
+    try {
+        
+        let postId = req.body.postId;
+        
+        let commentId = req.body.commentId;
+        let replyId = req.body.replyId; // di nga pala kelangan to dahil technically magkapatid lang replies
+        let newReply = req.body.newReply;
+
+        let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
+        
+        // Will change this later since you want the user to have no choice in @user
+        let newReplyArray = splitAtFirstSpace(newReply);
+
+        let repliedTo = newReplyArray[0];
+        let replyContent = newReplyArray[1];
+
+        let replyObject = {
+            _id: new mongoose.Types.ObjectId(),
+            user: currUserObject.username,
+            isEdited: false,
+            repliedTo: repliedTo,
+            replyContent: replyContent,
+            upCount: [],
+            downCount: [],
+            dpUrl: currUserObject.dpUrl
+        }
+
+        let thePost = await postModel.findById(postId);
+        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
+
+        // find the comment by commentid
+        let theComment = thePost.comments.find(c => c._id.toString() === commentId);
+        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
+        
+        theComment.replies.push(replyObject);
+        await thePost.save();
+
+        res.json({ success: true, message: "Succesfully replied", redirectUrl: `/posts/${postId}` });
+        
+    
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
 server.put("/comment-replies", async function(req, res) {
 
     try {
@@ -475,6 +521,7 @@ server.put("/comment-replies", async function(req, res) {
 
         let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
         
+        // Will change this later since you want the user to have no choice in @user
         let newReplyArray = splitAtFirstSpace(newReply);
 
         let repliedTo = newReplyArray[0];

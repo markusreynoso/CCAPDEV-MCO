@@ -39,8 +39,18 @@ $(document).ready(function() {
         })
     });
 
+    $(".bi-reply").click(function(){
+        let parent = $(this).closest(".card-body");
+        let replyingTo = parent.find("h3.post-username").text();
+        
+        $("#reply-reply-text-area").val(`@${replyingTo} `)
+    });
+
     $(document).on("click", ".reply-reply-button", function () {
+        let commentId = $(this).data("comment-id");
         let replyId = $(this).data("reply-id"); 
+
+        $("#create-reply-reply-save-changes").data("comment-id", commentId); 
         $("#create-reply-reply-save-changes").data("reply-id", replyId); 
     });
 
@@ -48,7 +58,30 @@ $(document).ready(function() {
         event.preventDefault();
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
-        let newReply = $("#reply-comment-text-area").val();
+        let replyId = $(this).data("reply-id")
+        let newReply = $("#reply-reply-text-area").val();
+
+        $.ajax({
+            url: "/reply-replies",
+            type: "PUT",
+            data: JSON.stringify({
+                postId: postId,
+                commentId: commentId,
+                replyId: replyId,
+                newReply: newReply
+            }),
+            contentType: "application/json",
+            success: function( response ) {
+                if (response.success) {
+                    window.location.href = response.redirectUrl;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error replying to the reply", error);
+                alert("Failed to reply.")
+            }
+        })
+       
     })
     
 })

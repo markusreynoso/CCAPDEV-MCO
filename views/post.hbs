@@ -130,6 +130,7 @@
                         <div class="replies">
                             <div class="card post reply">
                                 {{#each replies}}
+                                
                                 <div class="card-body" value={{_id}}>
                                     <div class="container post-body-top-div">
                                         <div class="group">
@@ -162,7 +163,7 @@
                                         <div>
                                         </div>
 
-                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-reply-id="{{_id}}">
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
                                         
@@ -256,7 +257,7 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <textarea name="text-field" id="reply-comment-text-area" class="form-control"
+                            <textarea name="text-field" id="reply-reply-text-area" class="form-control"
                                 rows="10"></textarea>
                         </div>
                         <div class="modal-footer">
