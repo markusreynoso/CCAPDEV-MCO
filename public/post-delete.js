@@ -7,6 +7,7 @@ $(document).ready(function() {
             type: 'DELETE',
             data: null,
             complete: function(result) {
+                console.log("Success deleting post! " + result)
                 window.location.href='/home'
             }
         })

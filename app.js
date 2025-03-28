@@ -1019,6 +1019,26 @@ server.put('/change-dp', async function (req, res) {
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 
+server.put('/delete-comment', async function(req, res) {
+    try {
+        let postId = req.body.postId;
+        let commentId = req.body.commentId;
+
+        await postModel.updateOne(
+            { _id: postId }, 
+            { $pull: { comments: { _id: commentId } } } 
+        );
+
+        res.json({success: true})
+
+        // {_id: postId, "comments._id": commentId },
+        //{$set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
+    } catch (error) {
+        console.log(error);
+        resp.status(500).send("Unexpected error deleting comment. ")
+    }
+})
+
 
 
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
