@@ -204,6 +204,24 @@
                 placeholder="Confirm new password">
                 </br>
 
+                <div class="toast-container position-fixed top-50 start-50 translate-middle">
+                    <div id="passwordToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Password must be:
+                                <ul class="mb-0">
+                                    <li>10-20 characters</li>
+                                    <li>1 uppercase letter</li>
+                                    <li>1 lowercase letter</li>
+                                    <li>1 number</li>
+                                    <li>1 symbol</li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -7,7 +7,7 @@ $(document).ready(function() {
         let confirmNewPassword = $("#new-password-confirm-text-area").val()
 
         let passValid = validatePassword(newPassword);
-
+        
         if (newPassword != confirmNewPassword){
             showToast("New password mismatch to confirm new password");
             return;
@@ -63,18 +63,12 @@ function showToast(message, type = "danger") {
     } else {
         toastElement.css("background-color", "var(--raspberry)");
     }
-    
-    
+   
     toastElement.find(".toast-body").html(message);
 
-   
-    let existingToast = bootstrap.Toast.getInstance(toastElement[0]);
-    if (existingToast) {
-        existingToast.dispose();
-    }
 
-    let toast = new bootstrap.Toast(toastElement[0]);
-    toastElement.addClass("show"); 
+    let toast = new bootstrap.Toast(toastElement[0], { autohide: false });
+    toastElement.addClass("show");
     toast.show();
 
 }
