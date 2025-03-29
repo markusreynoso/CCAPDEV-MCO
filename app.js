@@ -1047,6 +1047,31 @@ server.put('/delete-reply', async function(req, res) {
     }
 })
 
+server.put('/change-password', async function(req, res) {
+    try {
+        let oldPassword = req.body.oldPassword;
+        let newPassword = req.body.newPassword;
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+        const currUsername = currUserObject.username;
+
+        const isMatch = await bcrypt.compare(oldPassword, currUserObject.password);
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+        if (!isMatch) {
+            return res.status(400).json({ success: false, message: "Incorrect old password." });
+        }
+
+        await userModel.updateOne(
+            { "username" :  currUsername },
+            { "$set" : { "password": hashedPassword }}
+        );
+
+        res.json({success: true})
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).send("Unexpected error changing password. ")
+    }
+})
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/posts/:id', async function (req, res) {
     // const dbo = mongoClient.db(databaseName);

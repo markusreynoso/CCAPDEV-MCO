@@ -13,6 +13,13 @@
     --raspberry: #d81e5b;
 }
 
+.custom-toast{
+    
+    color: white !important;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
 /* General */
 .margin-top-wrapper {
     margin-top: 150px;
