@@ -135,7 +135,7 @@ server.get('/home', async function (req, resp) {
     const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
-    
+    const notSearching = true;
     if (isLogged) {
         resp.render('home', {
             layout: 'index',
@@ -143,6 +143,7 @@ server.get('/home', async function (req, resp) {
             logged: isLogged,
             posts: postsCollection,
             currUserObject: currUserObject,
+            notSearching: notSearching
         });
     } else {
         resp.render('home', {
@@ -280,6 +281,8 @@ server.get('/search', async (req, res) => {
     // for (let i = 0; i < postsCollection.length; i++){
     //     console.log(postsCollection[i].user);
     // }
+    
+    const notSearching = false;
 
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
@@ -291,6 +294,7 @@ server.get('/search', async (req, res) => {
             posts: postsCollection,
             currUserObject: currUserObject,
             searchQuery: searchQuery,
+            notSearching: notSearching
         });
     } else {
         res.render('home', {

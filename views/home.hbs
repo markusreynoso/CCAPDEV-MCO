@@ -1,8 +1,11 @@
 {{> navbar logged=logged currUserObject=currUserObject}}
 
 <div class="margin-top-wrapper">
+
     {{#if logged}}
-    {{> post-box}}
+        {{#if notSearching}}
+            {{> post-box}}
+        {{/if}}
     {{/if}}
 
     <div class="container">
