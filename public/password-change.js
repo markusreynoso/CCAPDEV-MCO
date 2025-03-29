@@ -68,7 +68,6 @@ function showToast(message, type = "danger") {
 
 
     let toast = new bootstrap.Toast(toastElement[0], { autohide: false });
-    toastElement.addClass("show");
     toast.show();
 
 }

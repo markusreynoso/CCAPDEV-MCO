@@ -14,10 +14,14 @@
 }
 
 .custom-toast{
-    
+    background-color: var(--raspberry);
     color: white !important;
     font-weight: bold;
     border-radius: 10px;
+}
+.toast-container-username {
+    top: 27.5% !important; /* Moves the toast slightly upward */
+    transform: translate(-50%, -50%);
 }
 
 /* General */

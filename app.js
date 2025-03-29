@@ -867,6 +867,8 @@ server.put('/change-username', async function (req, res) {
         
         const currUserObject = await userModel.findOne({"username": req.session.currUser}).lean();
         let currUsername = currUserObject.username;
+
+        
        
         await userModel.findOneAndUpdate(
             { "username" : currUsername },
