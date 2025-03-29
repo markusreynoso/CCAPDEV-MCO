@@ -43,7 +43,7 @@ server.use(express.static('public'));
 
 // MongoDB =======================================================================================================================
 const { MongoClient, ObjectId } = require('mongodb');
-const databaseURL = "mongodb+srv://luisdabeast:<db_password>@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const databaseURL = "mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const mongoClient = new MongoClient(databaseURL);
 
 
