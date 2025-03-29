@@ -107,10 +107,11 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1 comment-downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
 
+                                {{#if ../logged}}
                                 <a data-bs-toggle="modal" data-bs-target="#reply-comment-modal" class="reply-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
-
+                                {{/if}}
 
                                 {{#if (eq user ../currUserObject.username)}}
                                 <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal" class="edit-comment-button" data-comment-id="{{_id}}">
@@ -166,10 +167,12 @@
                                         <div>
                                         </div>
 
+                                        {{#if ../../logged}}
                                         <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
-                                        
+                                        {{/if}}
+
                                         {{#if (eq user ../../currUserObject.username)}}
                                         <a data-bs-toggle="modal" data-bs-target="#edit-reply-modal" class="edit-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
