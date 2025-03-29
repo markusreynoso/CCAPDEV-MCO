@@ -1,4 +1,22 @@
 $(document).ready(function() {
+
+    function showToastComment(message, type = "danger") {
+        let toastElement = $("#reply-to-comment-toast");
+
+        toastElement.removeClass("text-bg-danger text-bg-success").addClass("custom-toast");
+        
+        if (type === "success") {
+            toastElement.css("background-color", "var(--blue)");
+        } else {
+            toastElement.css("background-color", "var(--raspberry)");
+        }
+
+        toastElement.find(".toast-body").text(message);
+        
+        let toast = new bootstrap.Toast(toastElement[0], { autohide: true, delay: 3000 });
+        toast.show();
+    }
+
     $(".bi-reply").click(function(){
         let parent = $(this).closest(".card-body");
         let replyingTo = parent.find("h3.post-username").text();
@@ -23,7 +41,7 @@ $(document).ready(function() {
         let newReply = $("#reply-comment-text-area").val();
         
         if (!newReply) {
-            alert("Reply must be nonempty.");
+            showToastComment("Reply must be nonempty.");
             return;
         }
         $.ajax({
@@ -38,15 +56,35 @@ $(document).ready(function() {
             contentType: "application/json",
             success: function( response ) {
                 if (response.success) {
-                    window.location.href = response.redirectUrl;
+                    showToastComment("Reply Successfully Posted!", "success");  
+                    setTimeout(() => {
+                        window.location.href = response.redirectUrl;
+                    }, 1000);
                 }
             },
             error: function (xhr, status, error) {
                 console.error("Error replying to the reply", error);
-                alert("Failed to reply.");
+                showToastComment("Failed to reply.");
             }
         })
     });
+
+    function showToastReply(message, type = "danger") {
+        let toastElement = $("#reply-to-reply-toast");
+
+        toastElement.removeClass("text-bg-danger text-bg-success").addClass("custom-toast");
+        
+        if (type === "success") {
+            toastElement.css("background-color", "var(--blue)");
+        } else {
+            toastElement.css("background-color", "var(--raspberry)");
+        }
+
+        toastElement.find(".toast-body").text(message);
+        
+        let toast = new bootstrap.Toast(toastElement[0], { autohide: true, delay: 3000 });
+        toast.show();
+    }
 
     $(".bi-reply").click(function(){
         let parent = $(this).closest(".card-body");
@@ -76,7 +114,7 @@ $(document).ready(function() {
 
 
         if (!newReply) {
-            alert("Reply must be nonempty.");
+            showToastReply("Reply must be nonempty.");
             return;
         }
 
@@ -93,12 +131,15 @@ $(document).ready(function() {
             contentType: "application/json",
             success: function( response ) {
                 if (response.success) {
-                    window.location.href = response.redirectUrl;
+                    showToastReply("Reply Successful!", "success");  
+                    setTimeout(() => {
+                        window.location.href = response.redirectUrl;
+                    }, 1000);
                 }
             },
             error: function (xhr, status, error) {
                 console.error("Error replying to the reply", error);
-                alert("Failed to reply.")
+                showToastReply("Failed to reply.")
             }
         })
        

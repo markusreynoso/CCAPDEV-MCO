@@ -15,14 +15,22 @@
 
 /* Toasts */
 
+.toast-container-reply-to-comment {
+    top: 47% !important; 
+    transform: translate(-50%, -50%);
+}
+
+
 
 .toast-container-comment-fixed {
-    position: absolute; /* Stays in place relative to the page */
+    position: absolute; 
     top: 79%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1050;
 }
+
+
 
 .custom-toast{
     background-color: var(--raspberry);
@@ -31,17 +39,17 @@
     border-radius: 10px;
 }
 .toast-container-username {
-    top: 27.5% !important; /* Moves the toast slightly upward */
+    top: 27.5% !important; 
     transform: translate(-50%, -50%);
 }
 
 .toast-container-bio {
-    top: 52% !important; /* Moves the toast slightly upward */
+    top: 52% !important; 
     transform: translate(-50%, -50%);
 }
 
 .toast-container-post-edit {
-    top: 67% !important; /* Moves the toast slightly upward */
+    top: 67% !important; 
     transform: translate(-50%, -50%);
 }
 
