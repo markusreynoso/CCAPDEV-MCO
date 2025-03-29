@@ -15,28 +15,32 @@ $(document).ready(function() {
             content = mention + " " + element.clone().children().remove().end().text().trim();
         }
         
-        $("#edit-comment-text-area").html(content);
-    });
-    
-    $(document).on("click", ".edit-comment-button", function () {
-        let commentId = $(this).data("comment-id"); 
-        $("#edit-comment-save-changes").data("comment-id", commentId); 
+        $("#edit-reply-text-area").html(content);
     });
 
-    $("#edit-comment-save-changes").click(function(event) {
+    $(document).on("click", ".edit-reply-button", function () {
+        let commentId = $(this).data("comment-id"); 
+        let replyId = $(this).data("reply-id"); 
+        $("#edit-reply-save-changes").data("comment-id", commentId); 
+        $("#edit-reply-save-changes").data("reply-id", replyId); 
+    });
+
+    $("#edit-reply-save-changes").click(function(event) {
         event.preventDefault();
+
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
-        let newComment = $("#edit-comment-text-area").val();
+        let replyId = $(this).data("reply-id");
+        let newReply = $("#edit-reply-text-area").val();   
 
-        
         $.ajax({
-            url: "/change-comment",
+            url: "/change-reply",
             type: "PUT",
             data: JSON.stringify({
                 postId: postId,
                 commentId: commentId,
-                newComment: newComment
+                replyId: replyId,
+                newReply: newReply
             }),
             contentType: "application/json",
             success: function( response ) {
@@ -45,13 +49,10 @@ $(document).ready(function() {
                 }
             },
             error: function (xhr, status, error) {
-                console.error("Error editing comment", error);
-                alert("Failed to edit comment.")
+                console.error("Error editing reply", error);
+                alert("Failed to edit reply.")
             }
 
         })
-        
     })
-
-    
 })

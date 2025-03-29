@@ -1,4 +1,4 @@
-{{> navbar logged=logged }}
+{{> navbar logged=logged currUserObject=currUserObject}}
 
 <div class="margin-top-wrapper">
     {{#if logged}}
@@ -6,108 +6,67 @@
     {{/if}}
 
     <div class="container">
+
+        {{#if searchQuery}}
+
+            {{#if posts}}
+                <h2 class="post-title"> Search Results for: "{{searchQuery}}"</h2>
+            {{else}}
+                <h2 class="post-title"> No Search Results for: "{{searchQuery}}"</h2>
+            {{/if}}
+
+        {{/if}}
+
+        
         <div class="col-12" id="posts">
 
-            <!---->
+                {{#each posts}}
+                    <div class="card post" value={{idString}}>
+                        <div class="card-body">
+                            <div class="container post-body-top-div">
+                                <div class="group">
+                                    <div class="dp-div">
+                                        <img src="{{dpUrl}}" alt="">
+                                    </div>
 
-            {{#if logged}}
-            {{#each posts}}
-            <div class="card post">
-                <div class="card-body">
-                    <div class="container post-body-top-div">
-                        <div class="group">
-                            <div class="dp-div">
-                                <img src="{{dpUrl}}" alt="">
+                                    <a href="/users/{{user}}/posts" class="text-decoration-none">
+                                        <h3 class="post-username">{{user}}</h3>
+                                    </a>
+
+                                    {{#if isEdited}}
+                                    <p class="edit-indicator">Edited</p>
+                                    {{/if}}
+                                </div>
+
+                                <div class="tag">
+                                    <p>{{tag}}</p>
+                                </div>
                             </div>
+                            <h2 class="post-title">
+                                <a href="/posts/{{_id}}" class="text-decoration-none text-reset">
+                                    {{title}}
+                                </a>
+                            </h2>
 
-                            <a href="/profile-posts-logged" class="text-decoration-none">
-                                <h3 class="post-username">{{user}}</h3>
-                            </a>
+                            <p class="card-text post-body-text">
+                                {{postContent}}
+                            </p>
 
-                            {{#if isEdited}}
-                            <p class="edit-indicator">Edited</p>
-                            {{/if}}
-                        </div>
-
-                        <div class="tag">
-                            <p>{{tag}}</p>
+                            
+                            <div class="col post-actions-div">
+                                <div class="score-count-div">
+                                    <p class="score-count upvote-count">{{upCount.length}}</p>
+                                </div>
+                                <i id="try" class="bi bi-arrow-up-short post-icon h1 upvote-button {{#if (hasVoted upCount ../currUserObject._id)}}active-up{{/if}}" data-post-id="{{_id}}"></i>
+                                <div class="score-count-div">
+                                    <p class="score-count downvote-count">{{downCount.length}}</p>
+                                </div>
+                                <i class="bi bi-arrow-down-short post-icon h1 downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-post-id="{{_id}}"></i>
+                            </div>
                         </div>
                     </div>
-                    <h2 class="post-title">
-                        <a href="/post-logged" class="text-decoration-none text-reset">
-                            {{title}}
-                        </a>
-                    </h2>
+                {{/each}}
 
-                    <p class="card-text post-body-text">
-                        {{postContent}}
-                    </p>
-
-
-                    <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">{{upCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">{{downCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1"></i>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-
-            {{else}}
-            {{#each posts}}
-            <div class="card post">
-                <div class="card-body">
-                    <div class="container post-body-top-div">
-                        <div class="group">
-                            <div class="dp-div">
-                                <img src="{{dpUrl}}" alt="">
-                            </div>
-
-                            <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                <h3 class="post-username">{{user}}</h3>
-                            </a>
-
-                            {{#if isEdited}}
-                            <p class="edit-indicator">Edited</p>
-                            {{/if}}
-                        </div>
-
-                        <div class="tag">
-                            <p>{{tag}}</p>
-                        </div>
-                    </div>
-                    <h2 class="post-title">
-                        <a href="/post-unlogged" class="text-decoration-none text-reset">
-                            {{title}}
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        {{postContent}}
-                    </p>
-
-
-                    <form action="" method="post">
-                        <div class="col post-actions-div">
-                            <div class="score-count-div">
-                                <p class="score-count upvote-count">{{upCount}}</p>
-                            </div>
-                            <i class="bi bi-arrow-up-short post-icon h1"></i>
-                            <div class="score-count-div">
-                                <p class="score-count downvote-count">{{downCount}}</p>
-                            </div>
-                            <i class="bi bi-arrow-down-short post-icon h1"></i>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {{/each}}
-            {{/if}}
         </div>
     </div>
 </div>

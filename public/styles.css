@@ -529,7 +529,25 @@ div.modal-body {
     -webkit-line-clamp: 10;
 }
 
-.actions-form{
+.actions-form {
     display: flex;
     flex-direction: row;
+}
+
+div.dp-options {
+    display: flex;
+    flex-direction: column;
+}
+
+div.dp-option {
+    display: flex;
+    flex: row;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fix-height-modal {
+    height: 300px;
+    overflow-y: auto;
 }

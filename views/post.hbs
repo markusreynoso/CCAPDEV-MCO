@@ -1,10 +1,5 @@
-{{> navbar logged=logged }}
+{{> navbar logged=logged currUserObject=currUserObject}}
 
-{{#if logged}}
-
-{{#each posts}}
-
-{{#if (eq idString "67cd4bebc25aba022227115a")}}
 <div class="margin-top-wrapper">
     <div class="container">
         <div class="col-12" id="posts">
@@ -13,27 +8,27 @@
                     <div class="container post-body-top-div">
                         <div class="group">
                             <div class="dp-div">
-                                <img src="{{dpUrl}}" alt="">
+                                <img src="{{thePost.dpUrl}}" alt="">
                             </div>
-                            <a href="/profile-posts-logged" class="text-decoration-none">
-                                <h3 class="post-username">{{{user}}}</h3>
+                            <a href="/users/{{thePost.user}}/posts" class="text-decoration-none">
+                                <h3 class="post-username">{{thePost.user}}</h3>
                             </a>
-                            {{#if isEdited}}
+                            {{#if thePost.isEdited}}
                             <p class="edit-indicator">Edited</p>
                             {{/if}}
                         </div>
                         <div class="tag">
-                            <p>Motivation</p>
+                            <p>{{thePost.tag}}</p>
                         </div>
                     </div>
                     <h2 class="post-title">
-                        <a href="/post-logged" class="text-decoration-none text-reset">
-                            {{title}}
+                        <a href="/posts/{{thePost._id}}" class="text-decoration-none text-reset">
+                            {{thePost.title}}
                         </a>
                     </h2>
 
                     <p class="card-text post-body-text">
-                        {{postContent}}
+                        {{thePost.postContent}}
                     </p>
 
 
@@ -41,16 +36,16 @@
                         {{!-- Post --}}
                         <form action="" method="post" class="actions-form">
                             <div class="score-count-div">
-                                <p class="score-count upvote-count">{{upCount}}</p>
+                                <p class="score-count upvote-count">{{thePost.upCount.length}}</p>
                             </div>
-                            <i class="bi bi-arrow-up-short post-icon h1"></i>
+                            <i class="bi bi-arrow-up-short post-icon h1 upvote-button {{#if (hasVoted thePost.upCount currUserObject._id)}}active-up{{/if}}" data-post-id="{{thePost._id}}"></i>
                             <div class="score-count-div">
-                                <p class="score-count downvote-count">{{downCount}}</p>
+                                <p class="score-count downvote-count">{{thePost.downCount.length}}</p>
                             </div>
-                            <i class="bi bi-arrow-down-short post-icon h1"></i>
+                            <i class="bi bi-arrow-down-short post-icon h1 downvote-button {{#if (hasVoted thePost.downCount currUserObject._id)}}active-up{{/if}}" data-post-id="{{thePost._id}}"></i>
                         </form>
 
-
+                        {{#if (eq thePost.user currUserObject.username)}}
                         {{!-- Put --}}
                         <form action="" method="put" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
@@ -65,15 +60,11 @@
                                 <i class="bi bi-trash post-icon h5 ms-4"></i>
                             </a>
                         </form>
-
-
-
+                        {{/if}}
                     </div>
+
                 </div>
-
             </div>
-
-
         </div>
     </div>
 
@@ -81,19 +72,20 @@
         <div class="col-12">
             <div class="comment-section">
                 <h1 class="comment-section">Comments</h1>
+                {{#if logged}}
                 {{> comment-box}}
-
+                {{/if}}
                 <div id="comments">
 
-                    {{#each comments}}
-                    <div class="card post">
+                    {{#each thePost.comments}}
+                    <div class="card post comment">
                         <div class="card-body" value={{_id}}>
                             <div class="container post-body-top-div">
                                 <div class="group">
                                     <div class="dp-div">
                                         <img src="{{dpUrl}}" alt="">
                                     </div>
-                                    <a href="/profile-posts-logged" class="text-decoration-none">
+                                    <a href="/users/{{user}}/posts" class="text-decoration-none">
                                         <h3 class="post-username">{{user}}</h3>
                                     </a>
                                     {{#if isEdited}}
@@ -107,26 +99,26 @@
                             </p>
                             <div class="col post-actions-div">
                                 <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
+                                    <p class="score-count upvote-count">{{upCount.length}}</p>
                                 </div>
-                                <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                <i class="bi bi-arrow-up-short post-icon h1 comment-upvote-button {{#if (hasVoted upCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
                                 <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
+                                    <p class="score-count downvote-count">{{downCount.length}}</p>
                                 </div>
-                                <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                <i class="bi bi-arrow-down-short post-icon h1 comment-downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
 
-                                <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                <a data-bs-toggle="modal" data-bs-target="#reply-comment-modal" class="reply-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
 
 
-                                {{#if (eq user "LuisDaBeast")}}
-                                <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
+                                {{#if (eq user ../currUserObject.username)}}
+                                <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal" class="edit-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                         value={{_id}}></i>
                                 </a>
 
-                                <a data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                <a data-bs-toggle="modal" data-bs-target="#delete-comment-modal" class="delete-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-trash post-icon h5 ms-4"></i>
                                 </a>
                                 {{/if}}
@@ -138,21 +130,25 @@
                         <div class="replies">
                             <div class="card post reply">
                                 {{#each replies}}
+                                
                                 <div class="card-body" value={{_id}}>
                                     <div class="container post-body-top-div">
                                         <div class="group">
                                             <div class="dp-div">
                                                 <img src="{{dpUrl}}" alt="">
                                             </div>
-                                            <a href="/profile-posts-logged" class="text-decoration-none">
+                                            <a href="/users/{{user}}/posts" class="text-decoration-none">
                                                 <h3 class="post-username">{{user}}</h3>
                                             </a>
+                                            {{#if isEdited}}
+                                                <p class="edit-indicator">Edited</p>
+                                            {{/if}}
                                         </div>
 
                                     </div>
                                     <p class="card-text post-body-text">
                                         <span class="reply-tag">
-                                            <a href="/profile-posts-logged">
+                                            <a href="/users/{{removeAt repliedTo}}/posts">
                                                 {{repliedTo}}
                                             </a>
                                         </span>
@@ -160,27 +156,27 @@
                                     </p>
                                     <div class="col post-actions-div">
                                         <div class="score-count-div">
-                                            <p class="score-count upvote-count">{{upCount}}</p>
+                                            <p class="score-count upvote-count">{{upCount.length}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-up-short post-icon h1"></i>
+                                        <i class="bi bi-arrow-up-short post-icon h1 reply-upvote-button {{#if (hasVoted upCount ../../currUserObject._id)}}active-up{{/if}}" data-reply-id="{{_id}}"></i>
                                         <div class="score-count-div">
-                                            <p class="score-count downvote-count">{{downCount}}</p>
+                                            <p class="score-count downvote-count">{{downCount.length}}</p>
                                         </div>
-                                        <i class="bi bi-arrow-down-short post-icon h1"></i>
+                                        <i class="bi bi-arrow-down-short post-icon h1 reply-downvote-button {{#if (hasVoted downCount ../../currUserObject._id)}}active-up{{/if}}" data-reply-id="{{_id}}"></i>
                                         <div>
                                         </div>
 
-                                        <a data-bs-toggle="modal" data-bs-target="#reply-modal">
+                                        <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
-
-                                        {{#if (eq user "LuisDaBeast")}}
-                                        <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal">
+                                        
+                                        {{#if (eq user ../../currUserObject.username)}}
+                                        <a data-bs-toggle="modal" data-bs-target="#edit-reply-modal" class="edit-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>
                                         </a>
 
-                                        <a data-bs-toggle="modal" data-bs-target="#delete-reply-comment-modal">
+                                        <a data-bs-toggle="modal" data-bs-target="#delete-reply-modal" class="delete-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-trash post-icon h5 ms-4"></i>
                                         </a>
                                         {{/if}}
@@ -198,108 +194,128 @@
             </div>
 
             <!-- Marker Post edit modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="edit-post-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit Post</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="title-field" id="edit-post-title-area" class="form-control"
-                                    rows="1"></textarea>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="tag-field" id="edit-post-tag-area" class="form-control"
-                                    rows="1"></textarea>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="body-field" id="edit-post-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+            
+            <div class="modal fade modal-xl" id="edit-post-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="title-field" id="edit-post-title-area" class="form-control"
+                                rows="1"></textarea>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="tag-field" id="edit-post-tag-area" class="form-control"
+                                rows="1"></textarea>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="body-field" id="edit-post-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="edit-post-save-changes" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+            
 
-            <!-- Marker Reply modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Reply</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+            <!-- Marker Reply to Comment modal -->
+            
+            <div class="modal fade modal-xl" id="reply-comment-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="reply-comment-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="create-comment-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+
+            <!-- Marker Reply to Reply modal -->
+            
+            <div class="modal fade modal-xl" id="reply-reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="reply-reply-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="create-reply-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Edit comment modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="edit-comment-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit comment</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+            
+            <div class="modal fade modal-xl" id="edit-comment-modal" tabindex="-1"
+                aria-labelledby="editBioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit comment</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="edit-comment-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="edit-comment-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
 
-            <!-- Marker Comment/reply edit modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="edit-reply-comment-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+            <!-- Edit reply modal -->
+            
+            <div class="modal fade modal-xl" id="edit-reply-modal" tabindex="-1"
+                aria-labelledby="editBioModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="edit-post-modal">Edit reply</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea name="text-field" id="edit-reply-text-area" class="form-control"
+                                rows="10"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="edit-reply-save-changes" class="btn btn-primary" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
 
 
             <!-- Marker Post delete modal -->
@@ -318,7 +334,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
+                                <button type="button" class="btn btn-primary" id="delete-post">Confirm</button>
                             </div>
                         </div>
                     </div>
@@ -326,9 +342,9 @@
             </form>
 
 
-            <!-- Marker Comment and reply delete modal -->
+            <!-- Marker Comment Delete modal -->
             <form action="">
-                <div class="modal fade modal-md" id="delete-reply-comment-modal" tabindex="-1"
+                <div class="modal fade modal-md" id="delete-comment-modal" tabindex="-1"
                     aria-labelledby="editBioModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -342,287 +358,21 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
+                                <button type="button" class="btn btn-primary" id="delete-comment" data-post-id="{{thePost._id}}">Confirm</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
-
-
-
-    </div>
-</div>
-{{/if}}
-
-{{/each}}
-
-
-{{else}}
-
-{{#each posts}}
-
-{{#if (eq idString "67cd4bebc25aba022227115a")}}
-<div class="margin-top-wrapper">
-    <div class="container">
-        <div class="col-12" id="posts">
-            <div class="card post">
-                <div class="card-body">
-                    <div class="container post-body-top-div">
-                        <div class="group">
-                            <div class="dp-div">
-                                <img src="{{dpUrl}}" alt="">
-                            </div>
-                            <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                <h3 class="post-username">{{{user}}}</h3>
-                            </a>
-                            {{#if isEdited}}
-                            <p class="edit-indicator">Edited</p>
-                            {{/if}}
-                        </div>
-                        <div class="tag">
-                            <p>Motivation</p>
-                        </div>
-                    </div>
-                    <h2 class="post-title">
-                        <a href="/post-unlogged" class="text-decoration-none text-reset">
-                            {{title}}
-                        </a>
-                    </h2>
-
-                    <p class="card-text post-body-text">
-                        {{postContent}}
-                    </p>
-
-
-                    <div class="col post-actions-div">
-                        <div class="score-count-div">
-                            <p class="score-count upvote-count">{{upCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-up-short post-icon h1"></i>
-                        <div class="score-count-div">
-                            <p class="score-count downvote-count">{{downCount}}</p>
-                        </div>
-                        <i class="bi bi-arrow-down-short post-icon h1"></i>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="col-12">
-            <div class="comment-section">
-                <h1 class="comment-section">Comments</h1>
-
-                <div id="comments">
-
-                    {{#each comments}}
-                    <div class="card post">
-                        <div class="card-body" value={{_id}}>
-                            <div class="container post-body-top-div">
-                                <div class="group">
-                                    <div class="dp-div">
-                                        <img src="{{dpUrl}}" alt="">
-                                    </div>
-                                    <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                        <h3 class="post-username">{{user}}</h3>
-                                    </a>
-                                    {{#if isEdited}}
-                                    <p class="edit-indicator">Edited</p>
-                                    {{/if}}
-                                </div>
-
-                            </div>
-                            <p class="card-text post-body-text">
-                                {{commentContent}}
-                            </p>
-                            <div class="col post-actions-div">
-                                <div class="score-count-div">
-                                    <p class="score-count upvote-count">{{upCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-up-short post-icon h1"></i>
-                                <div class="score-count-div">
-                                    <p class="score-count downvote-count">{{downCount}}</p>
-                                </div>
-                                <i class="bi bi-arrow-down-short post-icon h1"></i>
-
-
-
-
-
-
-                            </div>
-                        </div>
-
-                        {{#if replies.length}}
-                        <div class="replies">
-                            <div class="card post reply">
-                                {{#each replies}}
-                                <div class="card-body" value={{_id}}>
-                                    <div class="container post-body-top-div">
-                                        <div class="group">
-                                            <div class="dp-div">
-                                                <img src="{{dpUrl}}" alt="">
-                                            </div>
-                                            <a href="/profile-posts-unlogged" class="text-decoration-none">
-                                                <h3 class="post-username">{{user}}</h3>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                    <p class="card-text post-body-text">
-                                        <span class="reply-tag">
-                                            <a href="/profile-posts-unlogged">
-                                                {{repliedTo}}
-                                            </a>
-                                        </span>
-                                        {{replyContent}}
-                                    </p>
-                                    <div class="col post-actions-div">
-                                        <div class="score-count-div">
-                                            <p class="score-count upvote-count">{{upCount}}</p>
-                                        </div>
-                                        <i class="bi bi-arrow-up-short post-icon h1"></i>
-                                        <div class="score-count-div">
-                                            <p class="score-count downvote-count">{{downCount}}</p>
-                                        </div>
-                                        <i class="bi bi-arrow-down-short post-icon h1"></i>
-                                        <div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-                                {{/each}}
-                            </div>
-                        </div>
-                        {{/if}}
-                    </div>
-                    {{/each}}
-
-                </div>
-            </div>
-
-            <!-- Marker Post edit modal -->
+        
+            <!-- Marker Reply delete modal -->
             <form action="">
-                <div class="modal fade modal-xl" id="edit-post-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit Post</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="title-field" id="edit-post-title-area" class="form-control"
-                                    rows="1"></textarea>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="tag-field" id="edit-post-tag-area" class="form-control"
-                                    rows="1"></textarea>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="body-field" id="edit-post-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Marker Reply modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="reply-modal" tabindex="-1" aria-labelledby="editBioModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Reply</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Edit comment modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="edit-comment-modal" tabindex="-1"
+                <div class="modal fade modal-md" id="delete-reply-modal" tabindex="-1"
                     aria-labelledby="editBioModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit comment</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Marker Comment/reply edit modal -->
-            <form action="">
-                <div class="modal fade modal-xl" id="edit-reply-comment-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Edit</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <textarea name="text-field" id="edit-reply-comment-text-area" class="form-control"
-                                    rows="10"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-
-            <!-- Marker Post delete modal -->
-            <form action="">
-                <div class="modal fade modal-md" id="delete-post-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Delete Post</h5>
+                                <h5 class="modal-title" id="edit-post-modal">Delete Reply</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -631,43 +381,16 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
+                                <button type="button" class="btn btn-primary" id="delete-reply" data-post-id="{{thePost._id}}">Confirm</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
 
-
-            <!-- Marker Comment and reply delete modal -->
-            <form action="">
-                <div class="modal fade modal-md" id="delete-reply-comment-modal" tabindex="-1"
-                    aria-labelledby="editBioModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="edit-post-modal">Delete Comment</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Confirm</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
 
 
 
     </div>
 </div>
-{{/if}}
-
-{{/each}}
-{{/if}}

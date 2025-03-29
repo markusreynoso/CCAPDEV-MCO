@@ -1,12 +1,13 @@
-<form action="/comment" method="post">
-    <div class="container comment-section write-box-container">
-        <div class="col-md-12 col-10 comment-section write-box">
-            <textarea name="postText" id="write-text-area" class="write-textarea"
-                placeholder="What's on your mind?"></textarea>
-        </div>
-        <div class="col-md-11 col-10 write-box-container-footer mt-3">
-            <input class="btn btn-primary mx-3" type="reset" value="Cancel">
-            <input class="btn btn-primary" type="submit" value="Post">
-        </div>
+
+<div class="container comment-section write-box-container">
+    <div class="col-md-12 col-10 comment-section write-box">
+        <textarea name="postText" id="write-text-area" class="write-textarea"
+            placeholder="What's on your mind?"></textarea>
     </div>
-</form>
+
+    {{!-- <p id="char-limit-comment">Enter at least one character</p> --}}
+    <div class="col-md-11 col-10 write-box-container-footer mt-3">
+        <input id="cancel-comment-btn" class="btn btn-primary mx-3" type="reset" value="Cancel">
+        <input id="post-comment-btn" class="btn btn-primary" type="submit" value="Post" data-post-id="{{thePost._id}}">
+    </div>
+</div>
