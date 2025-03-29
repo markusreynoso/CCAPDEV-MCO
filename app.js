@@ -42,7 +42,7 @@ server.set('view engine', 'hbs');
 server.use(express.static('public'));
 
 // MongoDB =======================================================================================================================
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -68,7 +68,7 @@ run().catch(console.dir);
 
 // Mongoose ======================================================================================================================
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect(uri);
 
 // Hashing ======================================================================================================================
 const bcrypt = require('bcrypt');
@@ -135,7 +135,7 @@ server.use(session({
     saveUninitialized: true,
     resave: false,
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+        mongoUrl: uri,
         collectionName: 'mySession',
         ttl: 60 * 60
     })
