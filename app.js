@@ -42,14 +42,33 @@ server.set('view engine', 'hbs');
 server.use(express.static('public'));
 
 // MongoDB =======================================================================================================================
-const { MongoClient, ObjectId } = require('mongodb');
-const databaseURL = "mongodb://127.0.0.1:27017/";
-const mongoClient = new MongoClient(databaseURL);
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 // Mongoose ======================================================================================================================
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/MCO");
+mongoose.connect("mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
 // Hashing ======================================================================================================================
 const bcrypt = require('bcrypt');
@@ -116,7 +135,7 @@ server.use(session({
     saveUninitialized: true,
     resave: false,
     store: MongoStore.create({
-        mongoUrl: 'mongodb://127.0.0.1:27017/MCO',
+        mongoUrl: 'mongodb+srv://luisdabeast:x1OApqtNB25fKEGu@cluster0.7juqojx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
         collectionName: 'mySession',
         ttl: 60 * 60
     })
