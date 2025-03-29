@@ -141,23 +141,32 @@
         </div>
     </div>
 
-    <!-- Edit bio modal -->
-    <div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+<!-- Edit bio modal -->
+<div class="modal fade modal-lg" id="editBioModal" tabindex="-1" aria-labelledby="editBioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBioModalLabel">Edit Bio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea name="text-field" id="bio-text-area" class="form-control" rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="edit-bio-save-changes-btn"class="btn btn-primary">Save changes</button>
+            </div>
+
+            <div class="toast-container-bio position-fixed top-50 start-50 translate-middle">
+                <div id="bioToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -179,9 +188,20 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="change-username-save-changes-btn" class="btn btn-primary">Save changes</button>
             </div>
+
+            <div class="toast-container-username position-fixed top-50 start-50 translate-middle">
+                <div id="usernameToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 {{!-- Change password modal --}}
 <div class="modal fade modal-lg" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel"
@@ -221,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
