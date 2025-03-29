@@ -13,6 +13,17 @@
     --raspberry: #d81e5b;
 }
 
+/* Toasts */
+
+
+.toast-container-comment-fixed {
+    position: absolute; /* Stays in place relative to the page */
+    top: 79%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+}
+
 .custom-toast{
     background-color: var(--raspberry);
     color: white !important;
@@ -33,6 +44,8 @@
     top: 67% !important; /* Moves the toast slightly upward */
     transform: translate(-50%, -50%);
 }
+
+/* Toasts end */
 
 /* General */
 .margin-top-wrapper {
