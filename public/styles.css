@@ -29,6 +29,11 @@
     transform: translate(-50%, -50%);
 }
 
+.toast-container-post-edit {
+    top: 67% !important; /* Moves the toast slightly upward */
+    transform: translate(-50%, -50%);
+}
+
 /* General */
 .margin-top-wrapper {
     margin-top: 150px;
