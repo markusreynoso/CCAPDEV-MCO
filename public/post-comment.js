@@ -7,6 +7,11 @@ $(document).ready(function () {
         let postId = $(this).data("post-id");
         let commentContent = $("#write-text-area").val();
 
+        if (!commentContent){
+            alert("Comment must be nonempty");
+            return;
+        }
+        
         $.ajax({
             url: "/comments",
             type: "PUT",

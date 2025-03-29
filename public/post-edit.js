@@ -21,6 +21,17 @@ $(document).ready(function() {
         let newTag = $("#edit-post-tag-area").val();
         let newContent = $("#edit-post-text-area").val();
         let postId = $(this).data("post-id");
+
+        if (!newTitle || !newTag || !newContent) {
+            alert("Title, Tag, and Content must be nonempty.");
+            return;
+        }
+
+        if (newTitle.length > 60 || newTag.length > 12){
+            alert("Title (Max 60 characters), Tag (Max 12 characters)");
+            return;
+        }
+
         
         $.ajax({
             url: "/change-post",

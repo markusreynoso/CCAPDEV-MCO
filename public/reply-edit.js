@@ -3,6 +3,7 @@ $(document).ready(function() {
         let id = $(this).attr("value");
         let element = $(".card-body[value='" + id + "']") // $(".card-body[value='67bc87de16350e278a7aaaad']")
                         .find('p.post-body-text');
+
         
         let isComment = element.children().length === 0;
         let content;
@@ -12,7 +13,9 @@ $(document).ready(function() {
 
         else {
             let mention = element.children().find("a").html().trim();
-            content = mention + " " + element.clone().children().remove().end().text().trim();
+
+            $("#edit-reply-modal-title").text(`Edit reply to ${mention}`)
+            content = element.clone().children().remove().end().text().trim();
         }
         
         $("#edit-reply-text-area").html(content);
@@ -21,6 +24,8 @@ $(document).ready(function() {
     $(document).on("click", ".edit-reply-button", function () {
         let commentId = $(this).data("comment-id"); 
         let replyId = $(this).data("reply-id"); 
+
+         
         $("#edit-reply-save-changes").data("comment-id", commentId); 
         $("#edit-reply-save-changes").data("reply-id", replyId); 
     });
@@ -31,8 +36,14 @@ $(document).ready(function() {
         let postId = $(this).data("post-id");
         let commentId = $(this).data("comment-id");
         let replyId = $(this).data("reply-id");
+        
         let newReply = $("#edit-reply-text-area").val();   
-
+        
+        if (!newReply) {
+            alert("Reply must be nonempty.");
+            return;
+        }
+        
         $.ajax({
             url: "/change-reply",
             type: "PUT",

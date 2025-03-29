@@ -912,9 +912,7 @@ server.put('/change-reply', async function(req, res) {
     const postId = req.body.postId;
     const commentId = req.body.commentId;
     const replyId = req.body.replyId;
-    const newReply = req.body.newReply
-
-    const newReplyContent = splitAtFirstSpace(newReply)[1];
+    const newReplyContent = req.body.newReply;
 
     try {
 

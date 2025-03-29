@@ -4,6 +4,11 @@ $(document).ready(function() {
 
         let newUsername = $("#username-text-area").val();
         
+        if (newUsername.length < 5 || newUsername.length > 10){
+            alert("Username must be 5 - 10 characters");
+            return;
+        }
+        
         $.ajax({
             url: "/change-username",
             type: "PUT",
