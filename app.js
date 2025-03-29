@@ -472,22 +472,18 @@ server.put("/reply-replies", async function(req, res) {
         let postId = req.body.postId;
         
         let commentId = req.body.commentId;
-        let replyId = req.body.replyId; // di nga pala kelangan to dahil technically magkapatid lang replies
-        let newReply = req.body.newReply;
+    
+        let replyingTo = req.body.replyingTo;
+        let replyContent = req.body.newReply;
 
         let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
         
-        // Will change this later since you want the user to have no choice in @user
-        let newReplyArray = splitAtFirstSpace(newReply);
-
-        let repliedTo = newReplyArray[0];
-        let replyContent = newReplyArray[1];
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
             user: currUserObject.username,
             isEdited: false,
-            repliedTo: repliedTo,
+            repliedTo: replyingTo,
             replyContent: replyContent,
             upCount: [],
             downCount: [],
@@ -517,21 +513,16 @@ server.put("/comment-replies", async function(req, res) {
     try {
         let postId = req.body.postId;
         let commentId = req.body.commentId;
-        let newReply = req.body.newReply;
+        let replyingTo = req.body.replyingTo;
+        let replyContent = req.body.newReply;
 
         let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
-        
-        // Will change this later since you want the user to have no choice in @user
-        let newReplyArray = splitAtFirstSpace(newReply);
-
-        let repliedTo = newReplyArray[0];
-        let replyContent = newReplyArray[1];
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
             user: currUserObject.username,
             isEdited: false,
-            repliedTo: repliedTo,
+            repliedTo: replyingTo,
             replyContent: replyContent,
             upCount: [],
             downCount: [],
