@@ -32,7 +32,7 @@ $(document).ready(function () {
                     // If user has upvoted
                     if (response.hasUpvoted) {
                         $upButton.addClass("active-up");
-                        $downButton.removeClass("active-up");
+                        $downButton.removeClass("active-down");
                     } else {
                         $upButton.removeClass("active-up");
                     }
@@ -76,10 +76,10 @@ $(document).ready(function () {
 
                     // If downCount does not contain the userId yet
                     if (response.hasDownvoted) {
-                        $downButton.addClass("active-up");
+                        $downButton.addClass("active-down");
                         $upButton.removeClass("active-up");
                     } else {
-                        $downButton.removeClass("active-up");
+                        $downButton.removeClass("active-down");
                     }
                 }
                 },
