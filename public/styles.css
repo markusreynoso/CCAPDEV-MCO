@@ -595,3 +595,10 @@ div.dp-option {
     height: 300px;
     overflow-y: auto;
 }
+
+div.no-comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 200px 0;
+}
