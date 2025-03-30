@@ -469,27 +469,6 @@ server.post('/register', async function (req, resp) {
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
-server.put('/sort-comments', async function (req, resp) {
-    try {
-
-        const thePostID = req.body.postId;
-
-        const thePost = await postModel.findOne({ _id: thePostID });
-
-        thePost.comments.reverse();
-
-        await thePost.save();
-
-        resp.json({ success: true, redirectUrl: `/posts/${thePostID}` });
-
-    } catch (error) {
-
-        console.error(error);
-        resp.status(500).json({ success: false, message: "Internal server error" });
-
-    }
-})
-
 server.put('/toggle-darkmode', async function (req, res) {
     try {
         let isLogged = (req.session.currUser != undefined);
