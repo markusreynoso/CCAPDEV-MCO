@@ -3,9 +3,10 @@
     "$oid": "67c8568462d562bbdc6765d4"
   },
   "username": "LuisDaBeast",
-  "password": "$2b$10$taEM0Hm5gzqIK6gh6P7ARuj1XAzj17XXLKK447GgtrVCnynKha53e",
+  "password": "$2b$10$pOvRkC27QuFJCuKWnyXuiuavLB5ZKPEzwqsP56NQj.qyWMENJGAY2",
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
-  "bio": "Have a solid mindset—true mastery comes from relentless effort and continuous learning. I push myself by staying curious and adaptable. I break down complex topics, experiment with new approaches, and seek feedback to refine my skills. Also, I make sure to stay challenged—whether that means tackling tougher problems, improving efficiency, or learning from top performers in different fields."
+  "bio": "Have a solid mindset—true mastery comes from relentless effort and continuous learning. I push myself by staying curious and adaptable. I break down complex topics, experiment with new approaches, and seek feedback to refine my skills. Also, I make sure to stay challenged—whether that means tackling tougher problems, improving efficiency, or learning from top performers in different fields. Have a solid mindset—true mastery comes from relentless effort and continuous learning.",
+  "darkModeYes": true
 },
 {
   "_id": {
@@ -85,7 +86,8 @@
   "username": "LuisDaBeast1",
   "password": "$2b$10$zN2CddX/.QgLXQ985wb0vuUjvL0YuggynOw9BYNZIRSf0ksHVvxda",
   "dpUrl": "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg",
-  "__v": 0
+  "__v": 0,
+  "darkModeYes": true
 },
 {
   "_id": {
@@ -94,5 +96,14 @@
   "username": "LuisDaBeast2",
   "password": "$2b$10$taEM0Hm5gzqIK6gh6P7ARuj1XAzj17XXLKK447GgtrVCnynKha53e",
   "dpUrl": "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e80ccd10ccd27bdcb089ba"
+  },
+  "username": "blemblog",
+  "password": "$2b$10$C0aYyiXTe8r6hxyQGKZ9I.gmqgm3OGigIINQ.B911.3W3a6hM3wWe",
+  "dpUrl": "https://pbs.twimg.com/profile_images/925313583998742528/BnSz8fxy_400x400.jpg",
   "__v": 0
 }]
