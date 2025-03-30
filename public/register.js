@@ -41,7 +41,6 @@ function validateUsername(username) {
         isValid = true;
     }
 
-
     return isValid;
 }
 

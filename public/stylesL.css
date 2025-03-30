@@ -5,12 +5,13 @@
 /* Colors */
 
 :root {
-    --vdark: #0E0A17;
-    --dark: #241b2b;
-    --light: #D4C8C8;
-    --blue: #4da1a9;
-    --purple: #8367C7;
-    --raspberry: #d81e5b;
+    --vdark: #DBDBDB;
+    --dark: #FFFFFF;
+    --light: #FFFFFF;
+    --blue: #17cddf;
+    --purple: #999999;
+    --raspberry: #ed0954;
+    --text-color: #000;
 }
 
 /* Toasts */
@@ -34,7 +35,7 @@
 
 .custom-toast{
     background-color: var(--raspberry);
-    color: white !important;
+    color: var(--text-color) !important;
     font-weight: bold;
     border-radius: 10px;
 }
@@ -62,14 +63,14 @@
 
 .modal-content {
     background-color: var(--dark);
-    color: var(--light);
+    color: var(--text-color);
     font-family: 'Poppins';
 }
 
 p,
 h1 {
     margin: 0;
-    color: var(--light);
+    color: var(--text-color);
     font-family: 'Poppins';
 }
 
@@ -99,12 +100,14 @@ body {
 
 .bi,
 .btn {
-    color: var(--light);
+    color: var(--text-color);
 }
 
 /* Navbar */
 .navbar {
     margin-bottom: 100px;
+
+    background-color: var(--dark) !important;
 }
 
 .bi-book-half {
@@ -112,7 +115,8 @@ body {
 }
 
 .navbar-dark {
-    color: var(--light);
+    color: var(--text-color);
+    background-color: var(--dark) !important;
 }
 
 .navbar-brand {
@@ -122,6 +126,7 @@ body {
 
 .nav-link {
     font-family: 'Poppins';
+    color: var(--text-color);
     font-weight: 300;
 }
 
@@ -141,7 +146,7 @@ form.d-flex {
 .form-control {
     background-color: var(--light);
     font-family: 'Poppins';
-    color: var(--vdark);
+    color: var(--text-color);
 }
 
 .form-control:focus,
@@ -177,7 +182,7 @@ form.d-flex {
     background-color: var(--light);
     outline: none;
     font-family: 'Poppins';
-    color: var(--dark);
+    color: var(--text-color);
 }
 
 .write-titlearea {
@@ -209,14 +214,16 @@ form.d-flex {
     justify-content: flex-end;
 }
 
+
 .btn-primary,
 .btn-secondary,
 .btn-outline-light {
     font-family: 'Poppins';
-    background-color: var(--vdark);
+    background-color: var(--dark);
     border-color: var(--blue);
     transition: background-color 0.5s ease;
 }
+
 
 .btn-primary:hover,
 .btn-primary:active:focus,
@@ -224,16 +231,20 @@ form.d-flex {
 .btn-secondary:active:focus,
 .btn-outline-light:hover,
 .btn-outline-light:active:focus {
-    color: var(--vdark);
+    color: var(--text-color);
     background-color: var(--blue);
     border-color: var(--blue);
 }
+
+ 
+
+
 
 .post-username {
     margin-bottom: 0;
     margin-right: 20px;
     user-select: none;
-    color: var(--light) !important;
+    color: var(--text-color) !important;
     font-family: 'Poppins';
     font-weight: 500;
     font-size: 1.2rem;
@@ -243,12 +254,12 @@ form.d-flex {
     user-select: none;
     font-family: 'Poppins';
     font-weight: 300;
-    color: var(--light);
+    color: var(--text-color);
     opacity: 50%;
 }
 
 .post-title {
-    color: var(--light) !important;
+    color: var(--text-color) !important;
     font-family: 'Poppins';
     font-weight: 700;
     margin-bottom: 3%;
@@ -278,6 +289,7 @@ div.tag {
 
 div.tag p {
     user-select: none;
+    color: var(--light);
 }
 
 .dp-div {
@@ -320,7 +332,7 @@ div.tag p {
 }
 
 .post-icon {
-    color: var(--light);
+    color: var(--text-color);
     margin: 0 0;
     margin-right: 30px;
     transition: color 0.3s ease;
@@ -392,7 +404,7 @@ div.tag p {
 /* Profile-Posts */
 #profileposts-posts-div {
     float: left;
-    color: var(--light);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -436,7 +448,7 @@ div.tag p {
 }
 
 #profilecomments-comments-div {
-    color: var(--light);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -451,7 +463,7 @@ div.tag p {
 #profile-username {
     margin-bottom: 0;
     user-select: none;
-    color: var(--light) !important;
+    color: var(--text-color) !important;
     font-family: 'Poppins';
     font-weight: 500;
     font-size: 30px;
@@ -493,7 +505,7 @@ a.login-redirect {
 
 .confirm-button {
     background-color: rgb(0, 181, 181);
-    color: var(--light);
+    color: var(--text-color);
     align-items: right;
     justify-content: right;
     border-radius: 10px;
@@ -514,7 +526,7 @@ a.login-redirect {
 }
 
 .comment-section {
-    color: var(--light);
+    color: var(--text-color);
     background-color: var(--vdark);
 }
 
@@ -525,7 +537,7 @@ a.login-redirect {
 .replies {
     padding: 0 0;
     margin-bottom: 50px;
-    color: var(--light);
+    color: var(--text-color);
     outline: 1px var(--vdark) solid;
 }
 

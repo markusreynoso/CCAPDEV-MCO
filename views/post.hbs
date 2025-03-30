@@ -75,8 +75,20 @@
                 {{#if logged}}
                 {{> comment-box}}
                 {{/if}}
-                <div id="comments">
 
+                <div class="d-flex justify-content-center gap-2">
+                    
+                    <button id="sort-comments" class="btn btn-primary" value="Reverse sort" data-post-id="{{thePost._id}}">
+                        <i class="bi bi-arrow-down-up"></i>
+                    </button>
+                    {{!-- <button id="sort-comments-descending" class="btn btn-primary" data-post-id="{{thePost._id}}">
+                        <i class="bi bi-sort-down"></i>
+                    </button> --}}
+
+                </div>
+
+                <div id="comments">
+                
                     {{#each thePost.comments}}
                     <div class="card post comment">
                         <div class="card-body" value={{_id}}>
@@ -107,10 +119,11 @@
                                 </div>
                                 <i class="bi bi-arrow-down-short post-icon h1 comment-downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
 
+                                {{#if ../logged}}
                                 <a data-bs-toggle="modal" data-bs-target="#reply-comment-modal" class="reply-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
-
+                                {{/if}}
 
                                 {{#if (eq user ../currUserObject.username)}}
                                 <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal" class="edit-comment-button" data-comment-id="{{_id}}">
@@ -166,10 +179,12 @@
                                         <div>
                                         </div>
 
+                                        {{#if ../../logged}}
                                         <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
-                                        
+                                        {{/if}}
+
                                         {{#if (eq user ../../currUserObject.username)}}
                                         <a data-bs-toggle="modal" data-bs-target="#edit-reply-modal" class="edit-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
@@ -220,6 +235,17 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary" id="edit-post-save-changes" data-post-id="{{thePost._id}}">Save changes</button>
                         </div>
+
+                        {{!-- Toast --}}
+                        <div class="toast-container-post-edit position-fixed top-50 start-50 translate-middle">
+                            <div id="posteditToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body"></div>
+                                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -232,7 +258,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                            <h5 class="modal-title" id="reply-comment-modal-title"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -246,6 +272,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="toast-container-reply-to-comment position-fixed top-50 start-50 translate-middle">
+                    <div id="reply-to-comment-toast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body"></div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Marker Reply to Reply modal -->
@@ -255,7 +291,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="edit-post-modal">Reply</h5>
+                            <h5 class="modal-title" id="reply-reply-modal-title"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -269,6 +305,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="toast-container-reply-to-comment position-fixed top-50 start-50 translate-middle">
+                    <div id="reply-to-reply-toast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body"></div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Edit comment modal -->
@@ -301,7 +347,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="edit-post-modal">Edit reply</h5>
+                            <h5 class="modal-title" id="edit-reply-modal-title"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

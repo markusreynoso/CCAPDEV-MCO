@@ -29,7 +29,11 @@ $(document).ready(function() {
         let commentId = $(this).data("comment-id");
         let newComment = $("#edit-comment-text-area").val();
 
-        
+        if (!newComment) {
+            alert("Edit must be nonempty.");
+            return;
+        }
+
         $.ajax({
             url: "/change-comment",
             type: "PUT",

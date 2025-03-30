@@ -1,5 +1,22 @@
 $(document).ready(function() {
 
+    function showToast(message, type = "danger") {
+        let toastElement = $("#posteditToast");
+
+        toastElement.removeClass("text-bg-danger text-bg-success").addClass("custom-toast");
+        
+        if (type === "success") {
+            toastElement.css("background-color", "var(--blue)");
+        } else {
+            toastElement.css("background-color", "var(--raspberry)");
+        }
+
+        toastElement.find(".toast-body").text(message);
+        
+        let toast = new bootstrap.Toast(toastElement[0], { autohide: true, delay: 3000 });
+        toast.show();
+    }
+
     $(".bi-pencil").click(function(){
         let parent = $(this).closest(".post");
         let postContent = parent.find("p.post-body-text").text().trim();
@@ -21,6 +38,33 @@ $(document).ready(function() {
         let newTag = $("#edit-post-tag-area").val();
         let newContent = $("#edit-post-text-area").val();
         let postId = $(this).data("post-id");
+
+        if (!newTitle) {
+            showToast("Title must be nonempty.");
+            return;
+        }
+
+        if (!newTag) {
+            showToast("Tag must be nonempty.");
+            return;
+        }
+
+        if (!newContent) {
+            showToast("Content must be nonempty.");
+            return;
+        }
+
+
+        if (newTag.length > 12){
+            showToast("Tag (Max 12 characters)");
+            return;
+        }
+
+        if (newTitle.length > 60){
+            showToast("Title (Max 60 characters)");
+            return;
+        }
+
         
         $.ajax({
             url: "/change-post",
@@ -33,12 +77,15 @@ $(document).ready(function() {
             contentType: "application/json",
             success: function( response ) {
                 if (response.success) {
-                    window.location.href = response.redirectUrl;
+                    showToast("Post Successfully Changed!", "success");  
+                    setTimeout(() => {
+                        window.location.href = response.redirectUrl;
+                    }, 1000);
                 }
             },
             error: function (xhr, status, error) {
                 console.error("Error editing post", error);
-                alert("Failed to edit post.")
+                showToast("Failed to edit post.")
             }
         })
        

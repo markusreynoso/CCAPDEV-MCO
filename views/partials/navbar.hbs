@@ -25,6 +25,14 @@
                         </a>
                     </div>
                 </li>
+                <button id="toggleDarkMode" class="btn btn-primary btn-sm">
+                    {{#if darkmode}}
+                        <i class="bi bi-sun-fill", title="Toggle Light Mode"></i>
+                    {{else}}
+                        <i class="bi bi-moon-fill", title="Toggle Dark Mode"></i>
+                    {{/if}}
+                </button>
+
                 {{else}}
                 <li class="nav-item">
                     <a href="/login" class="nav-link login-button" id="login-button">Login</a>

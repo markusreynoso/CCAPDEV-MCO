@@ -59,7 +59,8 @@ const userSchema = new mongoose.Schema({
     username: { type: String },
     password: { type: String },
     bio: {type: String},
-    dpUrl: {type: String}
+    dpUrl: {type: String},
+    darkModeYes: {type: Boolean}, // Might wanna change this to a String-Boolean map of users' preferences
 })
 
 const replySchema = new mongoose.Schema(
@@ -131,18 +132,26 @@ server.get('/', function (req, resp) {
     resp.redirect('/home');
 })
 
+ 
+
 server.get('/home', async function (req, resp) {
     const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+    const notSearching = true;
+    
+     
     
     if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: postsCollection,
             currUserObject: currUserObject,
+            notSearching: notSearching,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('home', {
@@ -169,14 +178,18 @@ server.get('/users/:username/posts', async function(req, resp){
     let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
     
     
+
     if (isLogged) {
+        // PREFERENCES
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('user-posts', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: allPosts,
             currUserObject: currUserObject,
-            viewedUserObject: viewedUserObject
+            viewedUserObject: viewedUserObject,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('user-posts', {
@@ -202,15 +215,19 @@ server.get('/users/:username/comments', async function(req, resp){
         ]
     }).lean();
 
+   
     
     if (isLogged) {
+        // PREFERENCES
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('user-comments', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: allComments,
             currUserObject: currUserObject,
-            viewedUserObject: viewedUserObject
+            viewedUserObject: viewedUserObject,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('user-comments', {
@@ -247,13 +264,26 @@ server.get('/posts/:id', async function (req, resp) {
     let isLogged = (currUserObject != undefined);
     const thePost = await postModel.findById(req.params.id).lean();
 
-    resp.render('post', {
-        layout: 'index',
-        title: 'View Post',
-        logged: isLogged,
-        thePost: thePost,
-        currUserObject: currUserObject
-    })
+    if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
+
+        resp.render('post', {
+            layout: 'index',
+            title: 'View Post',
+            logged: isLogged,
+            thePost: thePost,
+            currUserObject: currUserObject,
+            darkmode: darkmodebool
+        });
+    } else {
+        resp.render('post', {
+            layout: 'index',
+            title: 'View Post',
+            logged: isLogged,
+            thePost: thePost,
+            currUserObject: currUserObject
+        });
+    }
 })
 
 
@@ -280,10 +310,15 @@ server.get('/search', async (req, res) => {
     // for (let i = 0; i < postsCollection.length; i++){
     //     console.log(postsCollection[i].user);
     // }
+    
+    const notSearching = false;
 
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+
+  
     if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
         res.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
@@ -291,6 +326,8 @@ server.get('/search', async (req, res) => {
             posts: postsCollection,
             currUserObject: currUserObject,
             searchQuery: searchQuery,
+            notSearching: notSearching,
+            darkmode: darkmodebool
         });
     } else {
         res.render('home', {
@@ -381,7 +418,6 @@ server.post('/logout', function (req, resp) {
     });
 });
 
-
 server.post('/register', async function (req, resp) {
     const username = req.body.username;
     const password = req.body.password;
@@ -398,7 +434,8 @@ server.post('/register', async function (req, resp) {
             const newUser = new userModel({
                 username: username,
                 password: hashedPassword,
-                dpUrl: defaultDpUrl
+                dpUrl: defaultDpUrl,
+                darkModeYes: false
             });
 
             await newUser.save();
@@ -426,7 +463,48 @@ server.post('/register', async function (req, resp) {
 
 });
 
+ 
+
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
+
+server.put('/sort-comments', async function (req, resp) {
+    try {
+        
+        const thePostID = req.body.postId;
+
+        const thePost = await postModel.findOne({ _id : thePostID });
+
+        thePost.comments.reverse();
+        
+        await thePost.save();
+
+        resp.json({ success: true, redirectUrl: `/posts/${thePostID}` });
+
+    } catch (error) {
+
+        console.error(error);
+        resp.status(500).json({ success: false, message: "Internal server error" });
+    
+    }
+})
+
+server.put('/toggle-darkmode', async function (req, res) {
+    try {
+        let isLogged = (req.session.currUser != undefined);
+     
+        if (isLogged) {
+            const currUser = await userModel.findOne({ "username": req.session.currUser });
+            currUser.darkModeYes = !currUser.darkModeYes;
+            await currUser.save();
+            
+            res.status(200).json({ darkModeYes: currUser.darkModeYes });  
+        }
+    } catch (error) {
+        console.error("Error toggling dark mode:", error);
+        res.status(500).send("Server error");
+    }
+});
+
 
 server.put('/comments', async function (req, resp) {
     try {
@@ -472,22 +550,18 @@ server.put("/reply-replies", async function(req, res) {
         let postId = req.body.postId;
         
         let commentId = req.body.commentId;
-        let replyId = req.body.replyId; // di nga pala kelangan to dahil technically magkapatid lang replies
-        let newReply = req.body.newReply;
+    
+        let replyingTo = req.body.replyingTo;
+        let replyContent = req.body.newReply;
 
         let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
         
-        // Will change this later since you want the user to have no choice in @user
-        let newReplyArray = splitAtFirstSpace(newReply);
-
-        let repliedTo = newReplyArray[0];
-        let replyContent = newReplyArray[1];
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
             user: currUserObject.username,
             isEdited: false,
-            repliedTo: repliedTo,
+            repliedTo: replyingTo,
             replyContent: replyContent,
             upCount: [],
             downCount: [],
@@ -517,21 +591,16 @@ server.put("/comment-replies", async function(req, res) {
     try {
         let postId = req.body.postId;
         let commentId = req.body.commentId;
-        let newReply = req.body.newReply;
+        let replyingTo = req.body.replyingTo;
+        let replyContent = req.body.newReply;
 
         let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
-        
-        // Will change this later since you want the user to have no choice in @user
-        let newReplyArray = splitAtFirstSpace(newReply);
-
-        let repliedTo = newReplyArray[0];
-        let replyContent = newReplyArray[1];
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
             user: currUserObject.username,
             isEdited: false,
-            repliedTo: repliedTo,
+            repliedTo: replyingTo,
             replyContent: replyContent,
             upCount: [],
             downCount: [],
@@ -876,6 +945,8 @@ server.put('/change-username', async function (req, res) {
         
         const currUserObject = await userModel.findOne({"username": req.session.currUser}).lean();
         let currUsername = currUserObject.username;
+
+        
        
         await userModel.findOneAndUpdate(
             { "username" : currUsername },
@@ -921,9 +992,7 @@ server.put('/change-reply', async function(req, res) {
     const postId = req.body.postId;
     const commentId = req.body.commentId;
     const replyId = req.body.replyId;
-    const newReply = req.body.newReply
-
-    const newReplyContent = splitAtFirstSpace(newReply)[1];
+    const newReplyContent = req.body.newReply;
 
     try {
 
@@ -1058,6 +1127,31 @@ server.put('/delete-reply', async function(req, res) {
     }
 })
 
+server.put('/change-password', async function(req, res) {
+    try {
+        let oldPassword = req.body.oldPassword;
+        let newPassword = req.body.newPassword;
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+        const currUsername = currUserObject.username;
+
+        const isMatch = await bcrypt.compare(oldPassword, currUserObject.password);
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+        if (!isMatch) {
+            return res.status(400).json({ success: false, message: "Incorrect old password." });
+        }
+
+        await userModel.updateOne(
+            { "username" :  currUsername },
+            { "$set" : { "password": hashedPassword }}
+        );
+
+        res.json({success: true})
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).send("Unexpected error changing password. ")
+    }
+})
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/posts/:id', async function (req, res) {
     // const dbo = mongoClient.db(databaseName);

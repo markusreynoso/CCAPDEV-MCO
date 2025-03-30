@@ -23,10 +23,16 @@
 
                     {{#if (eq currUserObject.username viewedUserObject.username)}}
                     <div class="container user-bio-bottom-div">
-                        <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-username-btn"
+                        <button type="button" class="btn btn-primary btn-sm" id="edit-username-btn"
                             data-bs-toggle="modal" data-bs-target="#editUsernameModal">
                             Edit username
                         </button>
+
+                        <button type="button" class="btn btn-primary btn-sm mx-3" id="edit-password-btn"
+                            data-bs-toggle="modal" data-bs-target="#editPasswordModal">
+                            Change password
+                        </button>
+                        
                         <button type="button" id="change-pic-btn" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                             data-bs-target="#editDpModal">
                             Edit picture
@@ -133,6 +139,16 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="edit-bio-save-changes-btn"class="btn btn-primary">Save changes</button>
             </div>
+
+            <div class="toast-container-bio position-fixed top-50 start-50 translate-middle">
+                <div id="bioToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -153,6 +169,66 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="change-username-save-changes-btn" class="btn btn-primary">Save changes</button>
+            </div>
+
+            <div class="toast-container-username position-fixed top-50 start-50 translate-middle">
+                <div id="usernameToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{{!-- Change password modal --}}
+<div class="modal fade modal-lg" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPasswordModalLabel">Edit Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <input type="password" id="old-password-text-area" class="form-control" 
+                placeholder="Confirm new password">
+                </br>
+                <input type="password" id="new-password-text-area" class="form-control" 
+                placeholder="Confirm new password">
+                </br>
+                <input type="password" id="new-password-confirm-text-area" class="form-control" 
+                placeholder="Confirm new password">
+                </br>
+
+                <div class="toast-container position-fixed top-50 start-50 translate-middle">
+                    <div id="passwordToast" class="toast align-items-center custom-toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Password must be:
+                                <ul class="mb-0">
+                                    <li>10-20 characters</li>
+                                    <li>1 uppercase letter</li>
+                                    <li>1 lowercase letter</li>
+                                    <li>1 number</li>
+                                    <li>1 symbol</li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="change-password-save-changes-btn" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -197,11 +273,20 @@
                     </div>
                     <div class="dp-option">
                         <div class="dp-div">
-                            <img src="https://i.imgflip.com/6lj6g7.jpg" alt="">
+                            <img src="https://pbs.twimg.com/profile_images/925313583998742528/BnSz8fxy_400x400.jpg" alt="">
                         </div>
-                        <p>Tanjiro</p>
+                        <p>Megatron</p>
                         <button type="submit" class="btn btn-primary btn-select-dp"
-                            data-img-url="https://i.imgflip.com/6lj6g7.jpg">Select</button>
+                            data-img-url="https://pbs.twimg.com/profile_images/925313583998742528/BnSz8fxy_400x400.jpg">Select</button>
+                    </div>
+
+                    <div class="dp-option">
+                        <div class="dp-div">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpXI-wOhrPwLkVJuwBO0l_cwWdvI6h-iDbog&s" alt="">
+                        </div>
+                        <p>Let me know</p>
+                        <button type="submit" class="btn btn-primary btn-select-dp"
+                            data-img-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpXI-wOhrPwLkVJuwBO0l_cwWdvI6h-iDbog&s">Select</button>
                     </div>
 
                 </div>
