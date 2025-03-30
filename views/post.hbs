@@ -76,8 +76,8 @@
                 {{> comment-box}}
                 {{/if}}
 
+
                 <div class="d-flex justify-content-center gap-2">
-                    
                     <button id="sort-comments" class="btn btn-primary" value="Reverse sort" data-post-id="{{thePost._id}}">
                         <i class="bi bi-arrow-down-up"></i>
                     </button>
@@ -87,8 +87,12 @@
 
                 </div>
 
+                {{#if logged}}
+                {{#unless thePost.comments.length}}
+                {{>no-comments}}
+                {{/unless}}
+                {{/if}}
                 <div id="comments">
-                
                     {{#each thePost.comments}}
                     <div class="card post comment">
                         <div class="card-body" value={{_id}}>

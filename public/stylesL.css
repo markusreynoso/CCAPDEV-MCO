@@ -106,7 +106,6 @@ body {
 /* Navbar */
 .navbar {
     margin-bottom: 100px;
-
     background-color: var(--dark) !important;
 }
 
@@ -604,4 +603,11 @@ div.dp-option {
 .fix-height-modal {
     height: 300px;
     overflow-y: auto;
+}
+
+div.no-comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 200px 0;
 }
