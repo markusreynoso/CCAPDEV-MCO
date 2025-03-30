@@ -6,104 +6,16 @@
   "password": "$2b$10$pOvRkC27QuFJCuKWnyXuiuavLB5ZKPEzwqsP56NQj.qyWMENJGAY2",
   "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbQ3hl3GmlXklLXZQtNu5NNAbxYqVWz85ew&s",
   "bio": "Have a solid mindset—true mastery comes from relentless effort and continuous learning. I push myself by staying curious and adaptable. I break down complex topics, experiment with new approaches, and seek feedback to refine my skills. Also, I make sure to stay challenged—whether that means tackling tougher problems, improving efficiency, or learning from top performers in different fields. Have a solid mindset—true mastery comes from relentless effort and continuous learning.",
-  "darkModeYes": true
+  "darkModeYes": false
 },
 {
   "_id": {
-    "$oid": "67d93ac2f66ccac1f0bfa5aa"
+    "$oid": "67e9574b1feb35e73bddf83f"
   },
-  "username": "therockobama",
-  "password": "1",
-  "dpUrl": "https://i.imgflip.com/6lj6g7.jpg",
-  "bio": "Can you smell"
-},
-{
-  "_id": {
-    "$oid": "67d94c6ef969f3f0d5d1fc3d"
-  },
-  "username": "Thomas_morato",
-  "password": "1",
-  "dpUrl": "https://i.imgflip.com/2/2hojbr.jpg",
-  "bio": "Where Jerry"
-},
-{
-  "_id": {
-    "$oid": "67d94d56f969f3f0d5d1fc3f"
-  },
-  "username": "scaredofwomen3000",
-  "pasword": "1",
-  "dpUrl": "https://en.meming.world/images/en/7/7f/Polish_Jerry.jpg",
-  "bio": "Dont tell tom im here"
-},
-{
-  "_id": {
-    "$oid": "67d94d96f969f3f0d5d1fc40"
-  },
-  "username": "mark_henryy",
-  "password": "1",
-  "dpUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mark_Henry_%2851384364361%29.jpg/640px-Mark_Henry_%2851384364361%29.jpg",
-  "bio": "Strongest man"
-},
-{
-  "_id": {
-    "$oid": "67de75cb52fe49b9a80f01b5"
-  },
-  "username": "intrusive_thoughts",
-  "password": "1",
-  "dpUrl": "https://i1.sndcdn.com/artworks-000480365457-2t079z-t1080x1080.jpg",
-  "bio": "I am intrusive_thoughts"
-},
-{
-  "_id": {
-    "$oid": "67de760d52fe49b9a80f01b6"
-  },
-  "username": "dantesssss",
-  "password": "1",
-  "dpUrl": "https://pgmobile.puregold.com.ph/images/4800092330131.jpg?v=84",
-  "bio": "I am dingdong"
-},
-{
-  "_id": {
-    "$oid": "67de765552fe49b9a80f01b7"
-  },
-  "username": "optimumpride",
-  "password": "1",
-  "dpUrl": "https://pbs.twimg.com/profile_images/1455515084998934536/oOC2B0x0_400x400.jpg",
-  "bio": "ru er EH er"
-},
-{
-  "_id": {
-    "$oid": "67e25ce71c45687ad7e4eb16"
-  },
-  "username": "wowtik",
-  "password": "Password1!asd",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67e3987613132beef6bf42b0"
-  },
-  "username": "LuisDaBeast1",
-  "password": "$2b$10$zN2CddX/.QgLXQ985wb0vuUjvL0YuggynOw9BYNZIRSf0ksHVvxda",
+  "username": "chinitaLover3000",
+  "password": "$2b$10$35KW7OW10btuG.yk2HYlaeq8jzBZmGK5PuRA/72S4sgTV9y/eanXS",
   "dpUrl": "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg",
+  "darkModeYes": true,
   "__v": 0,
-  "darkModeYes": true
-},
-{
-  "_id": {
-    "$oid": "67e399c4820e3a809c05b029"
-  },
-  "username": "LuisDaBeast2",
-  "password": "$2b$10$taEM0Hm5gzqIK6gh6P7ARuj1XAzj17XXLKK447GgtrVCnynKha53e",
-  "dpUrl": "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67e80ccd10ccd27bdcb089ba"
-  },
-  "username": "blemblog",
-  "password": "$2b$10$C0aYyiXTe8r6hxyQGKZ9I.gmqgm3OGigIINQ.B911.3W3a6hM3wWe",
-  "dpUrl": "https://pbs.twimg.com/profile_images/925313583998742528/BnSz8fxy_400x400.jpg",
-  "__v": 0
+  "bio": "Someone talk 2 me pls"
 }]
