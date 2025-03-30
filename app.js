@@ -59,7 +59,8 @@ const userSchema = new mongoose.Schema({
     username: { type: String },
     password: { type: String },
     bio: {type: String},
-    dpUrl: {type: String}
+    dpUrl: {type: String},
+    darkModeYes: {type: Boolean}, // Might wanna change this to a String-Boolean map of users' preferences
 })
 
 const replySchema = new mongoose.Schema(
@@ -131,19 +132,26 @@ server.get('/', function (req, resp) {
     resp.redirect('/home');
 })
 
+ 
+
 server.get('/home', async function (req, resp) {
     const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const notSearching = true;
+    
+     
+    
     if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: postsCollection,
             currUserObject: currUserObject,
-            notSearching: notSearching
+            notSearching: notSearching,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('home', {
@@ -170,14 +178,18 @@ server.get('/users/:username/posts', async function(req, resp){
     let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
     
     
+
     if (isLogged) {
+        // PREFERENCES
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('user-posts', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: allPosts,
             currUserObject: currUserObject,
-            viewedUserObject: viewedUserObject
+            viewedUserObject: viewedUserObject,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('user-posts', {
@@ -203,15 +215,19 @@ server.get('/users/:username/comments', async function(req, resp){
         ]
     }).lean();
 
+   
     
     if (isLogged) {
+        // PREFERENCES
+        let darkmodebool = currUserObject.darkModeYes;
         resp.render('user-comments', {
             layout: 'index',
             title: 'AskAway - Home',
             logged: isLogged,
             posts: allComments,
             currUserObject: currUserObject,
-            viewedUserObject: viewedUserObject
+            viewedUserObject: viewedUserObject,
+            darkmode: darkmodebool
         });
     } else {
         resp.render('user-comments', {
@@ -248,13 +264,26 @@ server.get('/posts/:id', async function (req, resp) {
     let isLogged = (currUserObject != undefined);
     const thePost = await postModel.findById(req.params.id).lean();
 
-    resp.render('post', {
-        layout: 'index',
-        title: 'View Post',
-        logged: isLogged,
-        thePost: thePost,
-        currUserObject: currUserObject
-    })
+    if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
+
+        resp.render('post', {
+            layout: 'index',
+            title: 'View Post',
+            logged: isLogged,
+            thePost: thePost,
+            currUserObject: currUserObject,
+            darkmode: darkmodebool
+        });
+    } else {
+        resp.render('post', {
+            layout: 'index',
+            title: 'View Post',
+            logged: isLogged,
+            thePost: thePost,
+            currUserObject: currUserObject
+        });
+    }
 })
 
 
@@ -286,7 +315,10 @@ server.get('/search', async (req, res) => {
 
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+
+  
     if (isLogged) {
+        let darkmodebool = currUserObject.darkModeYes;
         res.render('home', {
             layout: 'index',
             title: 'AskAway - Home',
@@ -294,7 +326,8 @@ server.get('/search', async (req, res) => {
             posts: postsCollection,
             currUserObject: currUserObject,
             searchQuery: searchQuery,
-            notSearching: notSearching
+            notSearching: notSearching,
+            darkmode: darkmodebool
         });
     } else {
         res.render('home', {
@@ -385,7 +418,6 @@ server.post('/logout', function (req, resp) {
     });
 });
 
-
 server.post('/register', async function (req, resp) {
     const username = req.body.username;
     const password = req.body.password;
@@ -402,7 +434,8 @@ server.post('/register', async function (req, resp) {
             const newUser = new userModel({
                 username: username,
                 password: hashedPassword,
-                dpUrl: defaultDpUrl
+                dpUrl: defaultDpUrl,
+                darkModeYes: false
             });
 
             await newUser.save();
@@ -430,7 +463,27 @@ server.post('/register', async function (req, resp) {
 
 });
 
+ 
+
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
+
+server.put('/toggle-darkmode', async function (req, res) {
+    try {
+        let isLogged = (req.session.currUser != undefined);
+     
+        if (isLogged) {
+            const currUser = await userModel.findOne({ "username": req.session.currUser });
+            currUser.darkModeYes = !currUser.darkModeYes;
+            await currUser.save();
+            
+            res.status(200).json({ darkModeYes: currUser.darkModeYes });  
+        }
+    } catch (error) {
+        console.error("Error toggling dark mode:", error);
+        res.status(500).send("Server error");
+    }
+});
+
 
 server.put('/comments', async function (req, resp) {
     try {
