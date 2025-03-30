@@ -41,7 +41,7 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function( response ) {
                 if (response.success) {
-                    showToast("Password Successfully Changed!", "success");  
+                    showToast("Bio Successfully Changed!", "success");  
                     setTimeout(() => {
                         window.location.href = response.redirectUrl;
                     }, 1000);

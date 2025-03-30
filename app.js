@@ -22,7 +22,7 @@ const hbs = handlebars.create({
             if (username.startsWith("@")) {
                 return username.substring(1);
             }
-            
+
             return username;
         },
 
@@ -58,9 +58,9 @@ const saltRounds = 10;
 const userSchema = new mongoose.Schema({
     username: { type: String },
     password: { type: String },
-    bio: {type: String},
-    dpUrl: {type: String},
-    darkModeYes: {type: Boolean}, // Might wanna change this to a String-Boolean map of users' preferences
+    bio: { type: String },
+    dpUrl: { type: String },
+    darkModeYes: { type: Boolean }, // Might wanna change this to a String-Boolean map of users' preferences
 })
 
 const replySchema = new mongoose.Schema(
@@ -69,8 +69,8 @@ const replySchema = new mongoose.Schema(
         isEdited: { type: Boolean, default: false },
         repliedTo: { type: String, required: true },
         replyContent: { type: String, required: true },
-        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
-        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        downCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         dpUrl: { type: String }
     },
     { versionKey: false });
@@ -80,8 +80,8 @@ const commentSchema = new mongoose.Schema(
         user: { type: String, required: true },
         isEdited: { type: Boolean, default: false },
         commentContent: { type: String, required: true },
-        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
-        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        downCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         dpUrl: { type: String },
         hasReplies: { type: Boolean, default: false },
         replies: [replySchema]
@@ -92,15 +92,15 @@ const postSchema = new mongoose.Schema(
     {
         user: { type: String, required: true },
         postContent: { type: String, required: true },
-        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }]  ,
-        downCount:  [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        upCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+        downCount: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         isEdited: { type: Boolean, default: false },
         title: { type: String, required: true },
         dpUrl: { type: String },
         tag: { type: String },
         hasReplies: { type: Boolean, default: false },
+        lockedComments: { type: Boolean, default: false },
         comments: [commentSchema]
-       
     },
     { versionKey: false });
 
@@ -114,12 +114,12 @@ const MongoStore = require('connect-mongo');
 
 server.use(session({
     secret: 'a secret fruit',
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
     store: MongoStore.create({
         mongoUrl: databaseURL,
         collectionName: 'mySession',
-        ttl: 60 * 60
+        ttl: 60 * 60 * 24 * 14
     })
 }));
 
@@ -132,16 +132,16 @@ server.get('/', function (req, resp) {
     resp.redirect('/home');
 })
 
- 
+
 
 server.get('/home', async function (req, resp) {
     const postsCollection = (await postModel.find({}).lean()).reverse();
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const notSearching = true;
-    
-     
-    
+
+
+
     if (isLogged) {
         let darkmodebool = currUserObject.darkModeYes;
         resp.render('home', {
@@ -164,20 +164,20 @@ server.get('/home', async function (req, resp) {
 
 })
 
-server.get('/users/:username/posts', async function(req, resp){
+server.get('/users/:username/posts', async function (req, resp) {
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
-    
+
 
     if (!viewedUserObject) {
-        return resp.status(404).send("User not found"); 
+        return resp.status(404).send("User not found");
     }
-    
 
-    let allPosts = await postModel.find({"user": viewedUserObject.username}).lean();
-    
-    
+
+    let allPosts = await postModel.find({ "user": viewedUserObject.username }).lean();
+
+
 
     if (isLogged) {
         // PREFERENCES
@@ -203,7 +203,7 @@ server.get('/users/:username/posts', async function(req, resp){
 })
 
 
-server.get('/users/:username/comments', async function(req, resp){
+server.get('/users/:username/comments', async function (req, resp) {
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
     const viewedUserObject = await userModel.findOne({ "username": req.params.username }).lean();
@@ -215,8 +215,8 @@ server.get('/users/:username/comments', async function(req, resp){
         ]
     }).lean();
 
-   
-    
+
+
     if (isLogged) {
         // PREFERENCES
         let darkmodebool = currUserObject.darkModeYes;
@@ -301,22 +301,24 @@ server.get('/search', async (req, res) => {
 
 
     const postsCollection = await postModel.find(
-        { "$or": [ 
-            { "title": { "$regex": searchQuery, "$options": "i" } }, 
-            { "postContent": { "$regex": searchQuery, "$options": "i" } },
-            { "tag": { "$regex": searchQuery, "$options": "i" } } 
-        ] }).lean();
-    
+        {
+            "$or": [
+                { "title": { "$regex": searchQuery, "$options": "i" } },
+                { "postContent": { "$regex": searchQuery, "$options": "i" } },
+                { "tag": { "$regex": searchQuery, "$options": "i" } }
+            ]
+        }).lean();
+
     // for (let i = 0; i < postsCollection.length; i++){
     //     console.log(postsCollection[i].user);
     // }
-    
+
     const notSearching = false;
 
     let isLogged = (req.session.currUser != undefined);
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
 
-  
+
     if (isLogged) {
         let darkmodebool = currUserObject.darkModeYes;
         res.render('home', {
@@ -338,10 +340,10 @@ server.get('/search', async (req, res) => {
             searchQuery: searchQuery,
         });
     }
-    
-    
 
-    
+
+
+
 })
 
 
@@ -350,12 +352,12 @@ server.post('/posts', async function (req, resp) {
 
     try {
         const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
-        
+
         if (!currUserObject) {
             return resp.status(400).send("User not found.");
         }
 
-        await postModel.create({ 
+        await postModel.create({
 
             user: currUserObject.username,
             postContent: req.body.postContent,
@@ -367,16 +369,16 @@ server.post('/posts', async function (req, resp) {
             tag: req.body.tag,
             hasReplies: false,
             comments: []
-        
+
         });
 
         resp.redirect("/home");
-        
+
     } catch (error) {
         console.error("Error creating post: ", error);
         resp.status(500).send("Unexpected error occured while creating the post. ")
     }
-    
+
 })
 
 
@@ -423,9 +425,9 @@ server.post('/register', async function (req, resp) {
     const password = req.body.password;
     const defaultDpUrl = "https://upload.wikimedia.org/wikipedia/en/c/cc/Wojak_cropped.jpg";
 
-    
+
     const isNew = await userModel.findOne({ "username": username }) == null;
-    
+
     if (isNew) {
         try {
             // let newUserInstance = await userModel(user);
@@ -463,19 +465,19 @@ server.post('/register', async function (req, resp) {
 
 });
 
- 
+
 
 // UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE-UPDATE
 
 server.put('/sort-comments', async function (req, resp) {
     try {
-        
+
         const thePostID = req.body.postId;
 
-        const thePost = await postModel.findOne({ _id : thePostID });
+        const thePost = await postModel.findOne({ _id: thePostID });
 
         thePost.comments.reverse();
-        
+
         await thePost.save();
 
         resp.json({ success: true, redirectUrl: `/posts/${thePostID}` });
@@ -484,20 +486,20 @@ server.put('/sort-comments', async function (req, resp) {
 
         console.error(error);
         resp.status(500).json({ success: false, message: "Internal server error" });
-    
+
     }
 })
 
 server.put('/toggle-darkmode', async function (req, res) {
     try {
         let isLogged = (req.session.currUser != undefined);
-     
+
         if (isLogged) {
             const currUser = await userModel.findOne({ "username": req.session.currUser });
             currUser.darkModeYes = !currUser.darkModeYes;
             await currUser.save();
-            
-            res.status(200).json({ darkModeYes: currUser.darkModeYes });  
+
+            res.status(200).json({ darkModeYes: currUser.darkModeYes });
         }
     } catch (error) {
         console.error("Error toggling dark mode:", error);
@@ -508,7 +510,7 @@ server.put('/toggle-darkmode', async function (req, res) {
 
 server.put('/comments', async function (req, resp) {
     try {
-        const currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
         let postId = req.body.postId;
         let commentContent = req.body.commentContent;
 
@@ -529,7 +531,7 @@ server.put('/comments', async function (req, resp) {
         }
 
         let thePost = await postModel.findById(postId);
-        
+
         if (!thePost) {
             return resp.status(400).send("Post not found.");
         }
@@ -544,18 +546,18 @@ server.put('/comments', async function (req, resp) {
     }
 })
 
-server.put("/reply-replies", async function(req, res) {
+server.put("/reply-replies", async function (req, res) {
     try {
-        
+
         let postId = req.body.postId;
-        
+
         let commentId = req.body.commentId;
-    
+
         let replyingTo = req.body.replyingTo;
         let replyContent = req.body.newReply;
 
-        let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
-        
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
+
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
@@ -569,24 +571,24 @@ server.put("/reply-replies", async function(req, res) {
         }
 
         let thePost = await postModel.findById(postId);
-        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
+        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" }); if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
 
         // find the comment by commentid
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
-        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
-        
+        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" }); if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
+
         theComment.replies.push(replyObject);
         await thePost.save();
 
         res.json({ success: true, message: "Succesfully replied", redirectUrl: `/posts/${postId}` });
-        
-    
+
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 })
-server.put("/comment-replies", async function(req, res) {
+server.put("/comment-replies", async function (req, res) {
 
     try {
         let postId = req.body.postId;
@@ -594,7 +596,7 @@ server.put("/comment-replies", async function(req, res) {
         let replyingTo = req.body.replyingTo;
         let replyContent = req.body.newReply;
 
-        let currUserObject = await userModel.findOne({ "username" : req.session.currUser }).lean();
+        let currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
 
         let replyObject = {
             _id: new mongoose.Types.ObjectId(),
@@ -608,46 +610,46 @@ server.put("/comment-replies", async function(req, res) {
         }
 
         let thePost = await postModel.findById(postId);
-        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
+        if (!thePost) return res.status(404).json({ success: false, message: "Post not found" }); if (!thePost) return res.status(404).json({ success: false, message: "Post not found" });
 
         // find the comment by commentid
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
-        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
-        
+        if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" }); if (!theComment) return res.status(404).json({ success: false, message: "Comment not found" });
+
         theComment.replies.push(replyObject);
         await thePost.save();
 
         res.json({ success: true, message: "Succesfully replied", redirectUrl: `/posts/${postId}` });
-        
+
         await postModel.updateOne(
-            {_id: postId, "comments._id": commentId },
-            {$set: {"comments.$.hasReplies": true}}
+            { _id: postId, "comments._id": commentId },
+            { $set: { "comments.$.hasReplies": true } }
         )
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-    
+
 
 })
 
 server.put('/upvote', async function (req, res) {
     try {
-        
+
         let postId = req.body.postId;
-    
+
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
 
         let thePost = await postModel.findById(postId);
 
         // If upCount does not contain the userId yet
-        if ( !thePost.upCount.some(id => id.equals(currOid)) ){
+        if (!thePost.upCount.some(id => id.equals(currOid))) {
 
             // If user has downvoted originally, remove from downvotes and add to upvotes
-            if ( thePost.downCount.some(id => id.equals(currOid)) ){
-                thePost.downCount = thePost.downCount.filter(id => !id.equals(currOid)); 
+            if (thePost.downCount.some(id => id.equals(currOid))) {
+                thePost.downCount = thePost.downCount.filter(id => !id.equals(currOid));
                 thePost.upCount.push(currOid);
             }
 
@@ -671,18 +673,18 @@ server.put('/upvote', async function (req, res) {
             hasUpvoted: thePost.upCount.some(id => id.equals(currOid)),
             hasDownvoted: thePost.downCount.some(id => id.equals(currOid))
         });
-        
+
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-}) 
+})
 
 
 server.put('/downvote', async function (req, res) {
     try {
-        
+
         let postId = req.body.postId;
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
@@ -690,18 +692,18 @@ server.put('/downvote', async function (req, res) {
         let thePost = await postModel.findById(postId);
 
         // If downCount does not contain the userId yet
-        if ( !thePost.downCount.some(id => id.equals(currOid)) ){
-            
+        if (!thePost.downCount.some(id => id.equals(currOid))) {
+
             // If user has upvoted originally, remove from upvotes and add in downvotes
-            if ( thePost.upCount.some(id => id.equals(currOid)) ) {
-                thePost.upCount = thePost.upCount.filter(id => !id.equals(currOid)); 
+            if (thePost.upCount.some(id => id.equals(currOid))) {
+                thePost.upCount = thePost.upCount.filter(id => !id.equals(currOid));
                 thePost.downCount.push(currOid);
             }
 
             else {
                 thePost.downCount.push(currOid);
             }
-            
+
         }
 
         // if user has already downvoted, just remove the downvote upon click
@@ -717,21 +719,21 @@ server.put('/downvote', async function (req, res) {
             hasUpvoted: thePost.upCount.some(id => id.equals(currOid)),
             hasDownvoted: thePost.downCount.some(id => id.equals(currOid))
         });
-        
+
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-}) 
+})
 
 server.put('/upvote-comment', async function (req, res) {
     try {
-        
+
         let commentId = req.body.commentId;
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
-        
+
         let thePost = await postModel.findOne({
             "comments._id": getOid(commentId)
         });
@@ -739,11 +741,11 @@ server.put('/upvote-comment', async function (req, res) {
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
 
         // If upCount does not contain the userId yet
-        if ( !theComment.upCount.some(id => id.equals(currOid)) ){
+        if (!theComment.upCount.some(id => id.equals(currOid))) {
 
             // If user has downvoted originally, remove from downvotes and add to upvotes
-            if ( theComment.downCount.some(id => id.equals(currOid)) ){
-                theComment.downCount = theComment.downCount.filter(id => !id.equals(currOid)); 
+            if (theComment.downCount.some(id => id.equals(currOid))) {
+                theComment.downCount = theComment.downCount.filter(id => !id.equals(currOid));
                 theComment.upCount.push(currOid);
             }
 
@@ -758,7 +760,7 @@ server.put('/upvote-comment', async function (req, res) {
         }
 
         await thePost.save();
-        
+
         res.json({
             success: true,
             upCount: theComment.upCount,
@@ -766,7 +768,7 @@ server.put('/upvote-comment', async function (req, res) {
             hasUpvoted: theComment.upCount.some(id => id.equals(currOid)),
             hasDownvoted: theComment.downCount.some(id => id.equals(currOid))
         });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
@@ -775,30 +777,30 @@ server.put('/upvote-comment', async function (req, res) {
 
 server.put('/downvote-comment', async function (req, res) {
     try {
-        
+
         let commentId = req.body.commentId;
         let currUserObject = await userModel.findOne({ "username": req.session.currUser });
         let currOid = getOid(currUserObject._id);
-        
+
         let thePost = await postModel.findOne({
             "comments._id": getOid(commentId)
         });
 
         let theComment = thePost.comments.find(c => c._id.toString() === commentId);
-        
+
         // If downCount does not contain the userId yet
-        if ( !theComment.downCount.some(id => id.equals(currOid)) ){
-            
+        if (!theComment.downCount.some(id => id.equals(currOid))) {
+
             // If user has upvoted originally, remove from upvotes and add in downvotes
-            if ( theComment.upCount.some(id => id.equals(currOid)) ) {
-                theComment.upCount = theComment.upCount.filter(id => !id.equals(currOid)); 
+            if (theComment.upCount.some(id => id.equals(currOid))) {
+                theComment.upCount = theComment.upCount.filter(id => !id.equals(currOid));
                 theComment.downCount.push(currOid);
             }
 
             else {
                 theComment.downCount.push(currOid);
             }
-            
+
         }
 
         // if user has already downvoted, just remove the downvote upon click
@@ -814,7 +816,7 @@ server.put('/downvote-comment', async function (req, res) {
             hasUpvoted: theComment.upCount.some(id => id.equals(currOid)),
             hasDownvoted: theComment.downCount.some(id => id.equals(currOid))
         });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal server error" });
@@ -823,172 +825,172 @@ server.put('/downvote-comment', async function (req, res) {
 
 
 server.put('/upvote-reply', async function (req, res) {
-        let replyId = req.body.replyId;
-        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
-        let currOid = getOid(currUserObject._id);
-        
-        
-        let thePost = await postModel.findOne({
-            "comments.replies._id": getOid(replyId)
-        });
+    let replyId = req.body.replyId;
+    let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+    let currOid = getOid(currUserObject._id);
 
-        let theComment = thePost.comments.find(comment => 
-            comment.replies.some(reply => reply._id.toString() === replyId)
-        ); // the comment that contains thereply
 
-        let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
+    let thePost = await postModel.findOne({
+        "comments.replies._id": getOid(replyId)
+    });
 
-        // If upCount does not contain the userId yet
-        if ( !theReply.upCount.some(id => id.equals(currOid)) ){
+    let theComment = thePost.comments.find(comment =>
+        comment.replies.some(reply => reply._id.toString() === replyId)
+    ); // the comment that contains thereply
 
-            // If user has downvoted originally, remove from downvotes and add to upvotes
-            if ( theReply.downCount.some(id => id.equals(currOid)) ){
-                theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid)); 
-                theReply.upCount.push(currOid);
-            }
+    let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
 
-            // Otherwise, just normally add an upcount
-            else {
-                theReply.upCount.push(currOid);
-            }
+    // If upCount does not contain the userId yet
+    if (!theReply.upCount.some(id => id.equals(currOid))) {
+
+        // If user has downvoted originally, remove from downvotes and add to upvotes
+        if (theReply.downCount.some(id => id.equals(currOid))) {
+            theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid));
+            theReply.upCount.push(currOid);
         }
-        // If user has already upvoted, just remove the upvote
+
+        // Otherwise, just normally add an upcount
         else {
-            theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid));
+            theReply.upCount.push(currOid);
         }
+    }
+    // If user has already upvoted, just remove the upvote
+    else {
+        theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid));
+    }
 
-        await thePost.save();
-        res.json({
-            success: true,
-            upCount: theReply.upCount,
-            downCount: theReply.downCount,
-            hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
-            hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
-        });
+    await thePost.save();
+    res.json({
+        success: true,
+        upCount: theReply.upCount,
+        downCount: theReply.downCount,
+        hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
+        hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
+    });
 })
 
 server.put('/downvote-reply', async function (req, res) {
     let replyId = req.body.replyId;
-        let currUserObject = await userModel.findOne({ "username": req.session.currUser });
-        let currOid = getOid(currUserObject._id);
-        
-        
-        let thePost = await postModel.findOne({
-            "comments.replies._id": getOid(replyId)
-        });
+    let currUserObject = await userModel.findOne({ "username": req.session.currUser });
+    let currOid = getOid(currUserObject._id);
 
-        let theComment = thePost.comments.find(comment => 
-            comment.replies.some(reply => reply._id.toString() === replyId)
-        ); // the comment that contains thereply
 
-        let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
+    let thePost = await postModel.findOne({
+        "comments.replies._id": getOid(replyId)
+    });
 
-        // If downCount does not contain the userId yet
-        if ( !theReply.downCount.some(id => id.equals(currOid)) ){
-            
-            // If user has upvoted originally, remove from upvotes and add in downvotes
-            if ( theReply.upCount.some(id => id.equals(currOid)) ) {
-                theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid)); 
-                theReply.downCount.push(currOid);
-            }
+    let theComment = thePost.comments.find(comment =>
+        comment.replies.some(reply => reply._id.toString() === replyId)
+    ); // the comment that contains thereply
 
-            else {
-                theReply.downCount.push(currOid);
-            }
-            
+    let theReply = theComment.replies.find(reply => reply._id.toString() === replyId);
+
+    // If downCount does not contain the userId yet
+    if (!theReply.downCount.some(id => id.equals(currOid))) {
+
+        // If user has upvoted originally, remove from upvotes and add in downvotes
+        if (theReply.upCount.some(id => id.equals(currOid))) {
+            theReply.upCount = theReply.upCount.filter(id => !id.equals(currOid));
+            theReply.downCount.push(currOid);
         }
 
-        // if user has already downvoted, just remove the downvote upon click
         else {
-            theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid));
+            theReply.downCount.push(currOid);
         }
 
-        await thePost.save();
-        res.json({
-            success: true,
-            upCount: theReply.upCount,
-            downCount: theReply.downCount,
-            hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
-            hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
-        });
+    }
+
+    // if user has already downvoted, just remove the downvote upon click
+    else {
+        theReply.downCount = theReply.downCount.filter(id => !id.equals(currOid));
+    }
+
+    await thePost.save();
+    res.json({
+        success: true,
+        upCount: theReply.upCount,
+        downCount: theReply.downCount,
+        hasUpvoted: theReply.upCount.some(id => id.equals(currOid)),
+        hasDownvoted: theReply.downCount.some(id => id.equals(currOid))
+    });
 })
 
 server.put('/change-bio', async function (req, res) {
     try {
-        
+
         let newBio = req.body.newBio;
         const currUserObject = await userModel.findOne({ "username": req.session.currUser });
         const currUsername = currUserObject.username;
         await userModel.updateOne(
-            { "username" :  currUsername },
-            { "$set" : { "bio": newBio }}
+            { "username": currUsername },
+            { "$set": { "bio": newBio } }
         );
         // req.session.currUser = newBio;
         // await req.session.save();
 
-        res.json({ success: true, message: "Bio succesfully changed!", redirectUrl: `/users/${currUserObject.username}/posts`});
+        res.json({ success: true, message: "Bio succesfully changed!", redirectUrl: `/users/${currUserObject.username}/posts` });
     } catch (error) {
-        
+
     }
 })
 
 server.put('/change-username', async function (req, res) {
     try {
-        
+
         let newUsername = req.body.newUsername;
-        
+
         const existingUser = await userModel.findOne({ username: newUsername });
 
         if (existingUser) {
             return res.status(400).json({ success: false, message: "Username already taken" });
         }
-        
-        const currUserObject = await userModel.findOne({"username": req.session.currUser}).lean();
+
+        const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
         let currUsername = currUserObject.username;
 
-        
-       
+
+
         await userModel.findOneAndUpdate(
-            { "username" : currUsername },
-            { "$set": {"username": newUsername} },
-            {new: true}
+            { "username": currUsername },
+            { "$set": { "username": newUsername } },
+            { new: true }
         );
 
-        await postModel.updateMany( 
+        await postModel.updateMany(
             { "user": currUsername },
-            { "$set": {"user": newUsername} }
+            { "$set": { "user": newUsername } }
         );
 
-        await postModel.updateMany( 
-            { "comments": {$exists: true}, "comments.user" : currUsername },
-            { "$set" : { "comments.$[comUserElem].user": newUsername } },
-            { arrayFilters: [{"comUserElem.user": currUsername}]}
+        await postModel.updateMany(
+            { "comments": { $exists: true }, "comments.user": currUsername },
+            { "$set": { "comments.$[comUserElem].user": newUsername } },
+            { arrayFilters: [{ "comUserElem.user": currUsername }] }
         )
 
         await postModel.updateMany(
-            { "comments.replies": {$exists: true}, "comments.replies.user" : currUsername},
-            { "$set" : { "comments.$[].replies.$[repUserElem].user": newUsername } },
-            { arrayFilters: [{"repUserElem.user": currUsername}]}
+            { "comments.replies": { $exists: true }, "comments.replies.user": currUsername },
+            { "$set": { "comments.$[].replies.$[repUserElem].user": newUsername } },
+            { arrayFilters: [{ "repUserElem.user": currUsername }] }
         )
 
         await postModel.updateMany(
-            { "comments.replies": {$exists: true}, "comments.replies.repliedTo" : "@"+ currUsername},
-            { "$set" : { "comments.$[].replies.$[repToUserElem].repliedTo": "@"+newUsername } },
-            { arrayFilters: [{"repToUserElem.repliedTo": "@"+ currUsername}]}
+            { "comments.replies": { $exists: true }, "comments.replies.repliedTo": "@" + currUsername },
+            { "$set": { "comments.$[].replies.$[repToUserElem].repliedTo": "@" + newUsername } },
+            { arrayFilters: [{ "repToUserElem.repliedTo": "@" + currUsername }] }
         )
 
         req.session.currUser = newUsername;
         await req.session.save();
         res.json({ success: true, message: "Username succesfully changed!", redirectUrl: `/users/${newUsername}/posts` });
-    
+
     } catch (error) {
         console.error("Error updating username:", error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-    
+
 })
 
-server.put('/change-reply', async function(req, res) {
+server.put('/change-reply', async function (req, res) {
     const postId = req.body.postId;
     const commentId = req.body.commentId;
     const replyId = req.body.replyId;
@@ -997,12 +999,12 @@ server.put('/change-reply', async function(req, res) {
     try {
 
         await postModel.updateOne(
-            {_id: postId, "comments._id": commentId },
+            { _id: postId, "comments._id": commentId },
             {
-                $set: { 
-                    "comments.$.replies.$[reply].replyContent": newReplyContent, 
-                    "comments.$.replies.$[reply].isEdited": true 
-                } 
+                $set: {
+                    "comments.$.replies.$[reply].replyContent": newReplyContent,
+                    "comments.$.replies.$[reply].isEdited": true
+                }
             },
             { arrayFilters: [{ "reply._id": replyId }] }
 
@@ -1013,7 +1015,7 @@ server.put('/change-reply', async function(req, res) {
         console.error(error);
         res.status(500).json({ success: false, message: "Failed to update reply" });
     }
-    
+
 })
 
 server.put('/change-comment', async function (req, res) {
@@ -1025,8 +1027,8 @@ server.put('/change-comment', async function (req, res) {
     try {
 
         await postModel.updateOne(
-            {_id: postId, "comments._id": commentId },
-            {$set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
+            { _id: postId, "comments._id": commentId },
+            { $set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
         );
 
         res.json({ success: true, redirectUrl: "/posts/" + postId });
@@ -1039,7 +1041,7 @@ server.put('/change-comment', async function (req, res) {
 
 })
 
-server.put('/change-post', async  function (req, res) {
+server.put('/change-post', async function (req, res) {
     const postId = req.body.postId;
     const newTitle = req.body.newTitle;
     const newTag = req.body.newTag;
@@ -1048,57 +1050,60 @@ server.put('/change-post', async  function (req, res) {
 
     await postModel.findOneAndUpdate(
         { "_id": postId },
-        { "$set": {
-            "title": newTitle,
-            "isEdited": true,
-            "postContent": newContent,
-            "tag": newTag}}
+        {
+            "$set": {
+                "title": newTitle,
+                "isEdited": true,
+                "postContent": newContent,
+                "tag": newTag
+            }
+        }
     )
 
     res.json({ success: true, redirectUrl: "/posts/" + postId });
-})  
+})
 
 server.put('/change-dp', async function (req, res) {
     const newDpUrl = req.body.selectedDp;
     const currUserObject = await userModel.findOne({ "username": req.session.currUser }).lean();
 
-    await userModel.findOneAndUpdate( 
-        { "username": currUserObject.username }, 
-        { "$set": {"dpUrl": newDpUrl} },
-        {new: true}
-    );
-
-    await postModel.updateMany( 
-        { "user": currUserObject.username }, 
-        { "$set": {"dpUrl": newDpUrl} },
+    await userModel.findOneAndUpdate(
+        { "username": currUserObject.username },
+        { "$set": { "dpUrl": newDpUrl } },
+        { new: true }
     );
 
     await postModel.updateMany(
-        {"comments.user": currUserObject.username },
-        { "$set": {"comments.$[commentElem].dpUrl": newDpUrl} },
+        { "user": currUserObject.username },
+        { "$set": { "dpUrl": newDpUrl } },
+    );
+
+    await postModel.updateMany(
+        { "comments.user": currUserObject.username },
+        { "$set": { "comments.$[commentElem].dpUrl": newDpUrl } },
         { arrayFilters: [{ "commentElem.user": currUserObject.username }] }
     );
 
     await postModel.updateMany(
-        {"comments.replies.user": currUserObject.username },
-        { "$set": {"comments.$[].replies.$[replyElem].dpUrl": newDpUrl} },
+        { "comments.replies.user": currUserObject.username },
+        { "$set": { "comments.$[].replies.$[replyElem].dpUrl": newDpUrl } },
         { arrayFilters: [{ "replyElem.user": currUserObject.username }] }
     )
 
     res.json({ success: true, redirectUrl: `/users/${currUserObject.username}/posts` });
 });
 
-server.put('/delete-comment', async function(req, res) {
+server.put('/delete-comment', async function (req, res) {
     try {
         let postId = req.body.postId;
         let commentId = req.body.commentId;
 
         await postModel.updateOne(
-            { _id: postId }, 
-            { $pull: { comments: { _id: commentId } } } 
+            { _id: postId },
+            { $pull: { comments: { _id: commentId } } }
         );
 
-        res.json({success: true})
+        res.json({ success: true })
 
         // {_id: postId, "comments._id": commentId },
         //{$set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
@@ -1108,18 +1113,18 @@ server.put('/delete-comment', async function(req, res) {
     }
 })
 
-server.put('/delete-reply', async function(req, res) {
+server.put('/delete-reply', async function (req, res) {
     try {
         let postId = req.body.postId;
         let commentId = req.body.commentId;
         let replyId = req.body.replyId;
 
         await postModel.updateOne(
-            { _id: postId, "comments._id": commentId }, 
-            { $pull: { "comments.$.replies": { _id: replyId } } } 
+            { _id: postId, "comments._id": commentId },
+            { $pull: { "comments.$.replies": { _id: replyId } } }
         );
 
-        res.json({success: true})
+        res.json({ success: true })
 
     } catch (error) {
         console.log(error);
@@ -1127,7 +1132,7 @@ server.put('/delete-reply', async function(req, res) {
     }
 })
 
-server.put('/change-password', async function(req, res) {
+server.put('/change-password', async function (req, res) {
     try {
         let oldPassword = req.body.oldPassword;
         let newPassword = req.body.newPassword;
@@ -1141,17 +1146,28 @@ server.put('/change-password', async function(req, res) {
         }
 
         await userModel.updateOne(
-            { "username" :  currUsername },
-            { "$set" : { "password": hashedPassword }}
+            { "username": currUsername },
+            { "$set": { "password": hashedPassword } }
         );
 
-        res.json({success: true})
+        res.json({ success: true })
 
     } catch (error) {
         console.log(error);
         resp.status(500).send("Unexpected error changing password. ")
     }
 })
+
+server.put('/lock-comments', async function (req, resp) {
+    const postId = req.body.postId;
+    const currPost = await postModel.findById(postId);
+    let currPostLockedCommentsVal = currPost.lockedComments;
+    currPostLockedCommentsVal = !currPostLockedCommentsVal;
+    await postModel.findByIdAndUpdate(postId , { lockedComments: currPostLockedCommentsVal });
+
+    resp.json({ success: true })
+})
+
 // DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE-DELETE
 server.delete('/posts/:id', async function (req, res) {
     // const dbo = mongoClient.db(databaseName);
@@ -1159,14 +1175,14 @@ server.delete('/posts/:id', async function (req, res) {
     try {
 
         let oid = getOid(req.params.id);
-        await postModel.deleteOne( {_id: oid});
+        await postModel.deleteOne({ _id: oid });
         res.sendStatus(200);
 
     } catch (error) {
         console.log(error);
         resp.status(500).send("Unexpected error deleting post. ")
     }
-    
+
 });
 
 
@@ -1200,7 +1216,7 @@ function getOid(oid) {
 
 function splitAtFirstSpace(str) {
     let index = str.indexOf(" ");
-    if (index === -1) return [str, ""]; 
+    if (index === -1) return [str, ""];
     return [str.substring(0, index), str.substring(index + 1)];
 }
 
