@@ -34,7 +34,6 @@
 
                     <div class="col post-actions-div">
                         {{!-- Post --}}
-                        <form action="" method="post" class="actions-form">
                             <div class="score-count-div">
                                 <p class="score-count upvote-count">{{thePost.upCount.length}}</p>
                             </div>
@@ -43,23 +42,19 @@
                                 <p class="score-count downvote-count">{{thePost.downCount.length}}</p>
                             </div>
                             <i class="bi bi-arrow-down-short post-icon h1 downvote-button {{#if (hasVoted thePost.downCount currUserObject._id)}}active-up{{/if}}" data-post-id="{{thePost._id}}"></i>
-                        </form>
 
                         {{#if (eq thePost.user currUserObject.username)}}
-                        {{!-- Put --}}
-                        <form action="" method="put" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#edit-post-modal">
                                 <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"></i>
                             </a>
-                        </form>
 
-
-                        {{!-- Delete --}}
-                        <form action="" method="delete" class="actions-form">
                             <a data-bs-toggle="modal" data-bs-target="#delete-post-modal">
                                 <i class="bi bi-trash post-icon h5 ms-4"></i>
                             </a>
-                        </form>
+
+                            <a data-bs-toggle="modal" data-bs-target="#lock-comments-modal">
+                                <i class="bi bi-lock post-icon h5 ms-4"></i>
+                            </a>
                         {{/if}}
                     </div>
 
@@ -73,18 +68,16 @@
             <div class="comment-section">
                 <h1 class="comment-section">Comments</h1>
                 {{#if logged}}
+                {{#unless thePost.lockedComments}}
                 {{> comment-box}}
+                {{/unless}}
                 {{/if}}
 
-
-                <div class="d-flex justify-content-center gap-2">
+                <div class="d-flex flex-row align-items-center gap-2 my-5">
+                    <p class="post-text">Sort by:</p>
                     <button id="sort-comments" class="btn btn-primary" value="Reverse sort" data-post-id="{{thePost._id}}">
                         <i class="bi bi-arrow-down-up"></i>
                     </button>
-                    {{!-- <button id="sort-comments-descending" class="btn btn-primary" data-post-id="{{thePost._id}}">
-                        <i class="bi bi-sort-down"></i>
-                    </button> --}}
-
                 </div>
 
                 {{#if logged}}
@@ -124,12 +117,15 @@
                                 <i class="bi bi-arrow-down-short post-icon h1 comment-downvote-button {{#if (hasVoted downCount ../currUserObject._id)}}active-up{{/if}}" data-comment-id="{{_id}}"></i>
 
                                 {{#if ../logged}}
+                                {{#unless ../thePost.lockedComments}}
                                 <a data-bs-toggle="modal" data-bs-target="#reply-comment-modal" class="reply-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-reply post-icon h3"></i>
                                 </a>
+                                {{/unless}}
                                 {{/if}}
 
                                 {{#if (eq user ../currUserObject.username)}}
+                                {{#unless ../thePost.lockedComments}}
                                 <a data-bs-toggle="modal" data-bs-target="#edit-comment-modal" class="edit-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                         value={{_id}}></i>
@@ -138,6 +134,7 @@
                                 <a data-bs-toggle="modal" data-bs-target="#delete-comment-modal" class="delete-comment-button" data-comment-id="{{_id}}">
                                     <i class="bi bi-trash post-icon h5 ms-4"></i>
                                 </a>
+                                {{/unless}}
                                 {{/if}}
 
                             </div>
@@ -184,12 +181,15 @@
                                         </div>
 
                                         {{#if ../../logged}}
+                                        {{#unless ../../thePost.lockedComments}}
                                         <a data-bs-toggle="modal" data-bs-target="#reply-reply-modal" class="reply-reply-button" data-comment-id="{{../_id}}">
                                             <i class="bi bi-reply post-icon h3"></i>
                                         </a>
+                                        {{/unless}}
                                         {{/if}}
 
                                         {{#if (eq user ../../currUserObject.username)}}
+                                        {{#unless ../../thePost.lockedComments}}
                                         <a data-bs-toggle="modal" data-bs-target="#edit-reply-modal" class="edit-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-pencil edit-icon post-icon h5 ms-4 post-edit-flag"
                                                 value={{_id}}></i>
@@ -198,6 +198,7 @@
                                         <a data-bs-toggle="modal" data-bs-target="#delete-reply-modal" class="delete-reply-button" data-comment-id="{{../_id}}" data-reply-id="{{_id}}">
                                             <i class="bi bi-trash post-icon h5 ms-4"></i>
                                         </a>
+                                        {{/unless}}
                                         {{/if}}
 
                                     </div>
@@ -391,6 +392,25 @@
                 </div>
             </form>
 
+            <div class="modal fade modal-md" id="lock-comments-modal" tabindex="-1"
+                aria-labelledby="lockCommentsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="lock-comments-modal">Toggle Comment Lock</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="lock-comments-btn" data-post-id="{{thePost._id}}">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Marker Comment Delete modal -->
             <form action="">

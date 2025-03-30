@@ -16,14 +16,14 @@
 /* Toasts */
 
 .toast-container-reply-to-comment {
-    top: 47% !important; 
+    top: 47% !important;
     transform: translate(-50%, -50%);
 }
 
 
 
 .toast-container-comment-fixed {
-    position: absolute; 
+    position: absolute;
     top: 79%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -32,24 +32,25 @@
 
 
 
-.custom-toast{
+.custom-toast {
     background-color: var(--raspberry);
     color: white !important;
     font-weight: bold;
     border-radius: 10px;
 }
+
 .toast-container-username {
-    top: 27.5% !important; 
+    top: 27.5% !important;
     transform: translate(-50%, -50%);
 }
 
 .toast-container-bio {
-    top: 52% !important; 
+    top: 52% !important;
     transform: translate(-50%, -50%);
 }
 
 .toast-container-post-edit {
-    top: 67% !important; 
+    top: 67% !important;
     transform: translate(-50%, -50%);
 }
 
@@ -333,6 +334,7 @@ div.tag p {
     color: var(--blue);
 }
 
+.bi-lock:hover,
 .bi-arrow-down-short:hover,
 .bi-trash:hover {
     cursor: pointer;

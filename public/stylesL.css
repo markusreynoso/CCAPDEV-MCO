@@ -344,6 +344,7 @@ div.tag p {
     color: var(--blue);
 }
 
+.bi-lock:hover,
 .bi-arrow-down-short:hover,
 .bi-trash:hover {
     cursor: pointer;
