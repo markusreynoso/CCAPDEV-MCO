@@ -55,8 +55,8 @@ $(document).ready(function() {
         }
 
 
-        if (newTag.length > 12){
-            showToast("Tag (Max 12 characters)");
+        if (newTag.length > 20){
+            showToast("Tag (Max 20 characters)");
             return;
         }
 

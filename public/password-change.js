@@ -13,7 +13,7 @@ $(document).ready(function() {
             return;
         }
         if (!passValid){
-            showToast("Password must be:<br> • 10-20 characters<br> • 1 uppercase letter<br> • 1 lowercase letter<br> • 1 number<br> • 1 symbol");
+            showToast("Password must be:<br> • 10-20 characters<br> • 1 uppercase letter<br> • 1 lowercase letter<br> • 1 number<br> • 1 symbol<br> • no space");
             return;
         }
 
@@ -83,7 +83,7 @@ function validatePassword(pass1) {
     let passLen = getLength(pass1);
 
     // checks for whitespace
-    if (pass1.indexOf(' ') > 0) {
+    if (/\s/.test(pass1)) {
         return false;
     }
 

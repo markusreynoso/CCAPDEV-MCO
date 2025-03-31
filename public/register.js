@@ -37,9 +37,10 @@ function validateUsername(username) {
     }
 
     // whitespace checker
-    if (username.indexOf(' ') == 0) {
-        isValid = true;
+    if (/\s/.test(username)) { 
+        isValid = false;
     }
+
 
     return isValid;
 }
@@ -54,7 +55,7 @@ function validatePassword(pass1, pass2) {
     }
 
     // checks for whitespace
-    if (pass1.indexOf(' ') > 0) {
+    if (/\s/.test(pass1)) {
         return false;
     }
 

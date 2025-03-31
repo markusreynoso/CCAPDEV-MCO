@@ -6,7 +6,7 @@ $(document).ready(function() {
         let title = $("#write-title-area").val();
         let tag = $('#tag-text-area').val();
 
-        if (getLength(title) <= 60 && getLength(tag) <= 12){
+        if (getLength(title) <= 60 && getLength(tag) <= 20){
             isValid = true;
         }
 

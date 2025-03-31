@@ -26,6 +26,11 @@ $(document).ready(function() {
             showToast("Username must be 5 - 20 characters");
             return;
         }
+
+        if (/\s/.test(newUsername)) { 
+            showToast("There must be no whitespace");
+            return;
+        }
         
         $.ajax({
             url: "/change-username",
