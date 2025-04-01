@@ -241,7 +241,6 @@ server.get('/users/:username/comments', async function (req, resp) {
 
 })
 
-// will delete this
 
 
 server.get('/login', async function (req, resp) {
@@ -295,8 +294,7 @@ server.get('/about', async function (req, resp) {
 })
 
 server.get('/search', async (req, res) => {
-    // print(req.query) = {query: 'hello'}
-    // print(req.query.query) = 'hello'
+
     const searchQuery = req.query.query.toLowerCase();
 
 
@@ -309,9 +307,6 @@ server.get('/search', async (req, res) => {
             ]
         }).lean();
 
-    // for (let i = 0; i < postsCollection.length; i++){
-    //     console.log(postsCollection[i].user);
-    // }
 
     const notSearching = false;
 
@@ -430,7 +425,7 @@ server.post('/register', async function (req, resp) {
 
     if (isNew) {
         try {
-            // let newUserInstance = await userModel(user);
+        
 
             const hashedPassword = await bcrypt.hash(password, saltRounds);
             const newUser = new userModel({
@@ -1084,8 +1079,7 @@ server.put('/delete-comment', async function (req, res) {
 
         res.json({ success: true })
 
-        // {_id: postId, "comments._id": commentId },
-        //{$set: { "comments.$.commentContent": newComment, "comments.$.isEdited": true } }
+   
     } catch (error) {
         console.log(error);
         resp.status(500).send("Unexpected error deleting comment. ")

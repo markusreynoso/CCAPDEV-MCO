@@ -8,9 +8,6 @@ $(document).ready(function () {
 
         let userValid = validateUsername(username);
         let passValid = validatePassword(pass1, pass2);
-
-        // console.log("Is Uservalid? " + userValid);
-        // console.log("Is passValid? " + passValid);
        
 
         if (userValid && passValid) {

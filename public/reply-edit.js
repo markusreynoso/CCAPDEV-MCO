@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(".post-edit-flag").click(function() {
         let id = $(this).attr("value");
-        let element = $(".card-body[value='" + id + "']") // $(".card-body[value='67bc87de16350e278a7aaaad']")
+        let element = $(".card-body[value='" + id + "']") 
                         .find('p.post-body-text');
 
         
