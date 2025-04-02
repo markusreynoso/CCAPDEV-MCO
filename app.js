@@ -1,3 +1,7 @@
+//Install Command:
+//npm init -y
+//npm i express express-handlebars body-parser mongoose mongodb bcrypt express-session connect-mongo
+
 // Express ========================================================================================================================
 const express = require('express');
 const server = express();
