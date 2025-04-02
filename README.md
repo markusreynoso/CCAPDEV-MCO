@@ -18,8 +18,6 @@ npm init -y
 npm i express express-handlebars body-parser mongoose mongodb bcrypt
 - type "node app.js"
 
-### 2. Download the jsons under "jsons" folder and import in local MongoDb app.
-
 ### Navigating in the web application
 ### Start here Luis
 ## 3. After finishing the login or sign up, it will redirect to "home-logged.html"
