@@ -2,19 +2,26 @@
 # CCAPDEV-MCO
 The website is intuitive since it uses a similar layout to Reddit and Facebook, and the features are standard. But in any case, this is the flow of how the website goes and how each html file is used:
 
-  
-## 1. Start with load home-unlogged.html as starting point
+Two starting options:
+### First option
+## 1. Deploy the server
+- Open render.io using Luis's account, then click Ask-Away, then manual deploy.
 
-- home-unlogged.html is the interface for a "guest" or a user that has no account yet in the website.
+## 1.1. Open Atlas to check the database (optional)
 
-- The "guest" can view posts but cannot do any interactions with other users.
+### Second option
+## 1. Local access
+- After downloading the zipped file, simply open the project
+- Use these install commands
+Install Command:
+npm init -y
+npm i express express-handlebars body-parser mongoose mongodb bcrypt
+- type "node app.js"
 
-- The "guest" may visit a post, and a profile of another user but no interaction is allowed.
+## 2. Download the jsons under "jsons" folder and import in local MongoDb app.
 
-  
-
-## 2. The "guest" can either click login or sign up, then it will redirect to verify-login.html pr verify-register.html
-
+### Navigating in the web application
+## Start here Luis
 ## 3. After finishing the login or sign up, it will redirect to "home-logged.html"
 
 - The user can now interact with other users through posts and comments.
