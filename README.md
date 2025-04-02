@@ -3,14 +3,14 @@
 The website is intuitive since it uses a similar layout to Reddit and Facebook, and the features are standard. But in any case, this is the flow of how the website goes and how each html file is used:
 
 Two starting options:
-### First option
-## 1. Deploy the server
+## First option
+### 1. Deploy the server
 - Open render.io using Luis's account, then click Ask-Away, then manual deploy.
 
-## 1.1. Open Atlas to check the database (optional)
+### 1.1. Open Atlas to check the database (optional)
 
-### Second option
-## 1. Local access
+## Second option
+### 1. Local access
 - After downloading the zipped file, simply open the project
 - Use these install commands
 Install Command:
@@ -18,10 +18,10 @@ npm init -y
 npm i express express-handlebars body-parser mongoose mongodb bcrypt
 - type "node app.js"
 
-## 2. Download the jsons under "jsons" folder and import in local MongoDb app.
+### 2. Download the jsons under "jsons" folder and import in local MongoDb app.
 
 ### Navigating in the web application
-## Start here Luis
+### Start here Luis
 ## 3. After finishing the login or sign up, it will redirect to "home-logged.html"
 
 - The user can now interact with other users through posts and comments.
