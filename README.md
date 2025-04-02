@@ -15,7 +15,7 @@ Two starting options:
 - Use these install commands
 Install Command:
 npm init -y
-npm i express express-handlebars body-parser mongoose mongodb bcrypt
+npm i express express-handlebars body-parser mongoose mongodb bcrypt express-session connect-mongo
 - type "node app.js"
 
 ### Navigating in the web application
@@ -48,5 +48,11 @@ npm i express express-handlebars body-parser mongoose mongodb bcrypt
 	- The "Logout" button may also be found here
 - Clicking on the website's logo will direct the user to the home page 
 
-  
-```
+Additional Features:
+1. Darkmode and Lightmode Feature
+- Each user has a field called "darkModeYes" that is a boolean. The default is the light mode. If a user decides to use dark mode, the setting is dark mode for any page that the user navigates to. If the user logs out and  logs in back, dark mode stays.
+
+2. Lock Comments Feature
+- If a user decides to lock the comments of their post, nobody can post comments or replies to that post. But anyone can still upvote and downvote.
+
+To access the about page, change the url to https://ccapdev-mco-qm70.onrender.com/about.
