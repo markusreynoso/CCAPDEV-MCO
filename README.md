@@ -20,26 +20,33 @@ npm i express express-handlebars body-parser mongoose mongodb bcrypt
 
 ### Navigating in the web application
 ### Start here Luis
-## 3. After finishing the login or sign up, it will redirect to "home-logged.html"
+## 1. You will start by the unlogged home page
 
-- The user can now interact with other users through posts and comments.
-- The user can also now create posts.
+- The user can view posts.
+- They can also view its comments by clicking on the post title.
+- Searching the content of a post is also accessible by the search bar.
 
-## 4. Either the user clicks on
+## 2. Login or Register
 
-### 4a. the icon on the top right to view profile
-- It will redirect to profile-posts.html, and you are visiting your own account.
-- This contains your bio as well as your posts.
+### 2a. Login
+- The user can login to any of the following usernames:
+- ['LuisDaBeast','chinitaLover3000','manaloto','Thomas_morato','garybee69','cardi_dalisay','wowtik','zacktambucho','binilanggo','doracktheexplorer']
+- All accounts have the same password: Password1!asd
 
-### 4b. username of someone else that posted
-- It will redirect to profile-posts.html, and we note that we only have one user at this stage. But in the future, the directory should be the profile of whoever posted under that username.
-- It consists of the bio of the user, as well as the posts. By clicking "Comments", it will redirect to profile-comments.html.
-	- It contains all the comments of the user. You may go back to profile-posts.html by clicking "Posts".
-- To go back to the homepage, simply click "AskAway" that acts as the home button in this website.
-### 4c. the title of a post
-- If you are the "guest" them you cannot post comments on someone else's account after visiting a post, so the designated html is post-unlogged.html.
+### 2b. Register
+- The user should create a new username and password with the following requirements
+	- Username: 5-20 characters, unique
+	- Password: 10-20 characters, at least 1 uppercase, 1 lowercase, 1 number, and 1 symbol
+- It will also give the user the option to redirect into the login page if their account already exists 
+- After typing the confirmed password and clicking the "Register" button, it will automatically log into the newly created account
 
-- As a user, the html is post-logged.html.
+## 3. Home Page
+- The user now has full access to all features
+- They may now post, upvote, downvote, comment, and reply
+- Clicking on the profile picture will direct to your account's posts and comments
+	- They may also edit account features such as their username, password, profile picture, and bio
+	- The "Logout" button may also be found here
+- Clicking on the website's logo will direct the user to the home page 
 
   
 ```
